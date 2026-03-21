@@ -54,6 +54,7 @@
                 <ul class="nav-menu" id="navMenu">
                     <li><a href="#servicios" class="nav-link">Servicios</a></li>
                     <li><a href="#proceso" class="nav-link">Proceso</a></li>
+                    <li><a href="#proyectos" class="nav-link">Casos de Uso</a></li>
                     <li><a href="#ventajas" class="nav-link">Ventajas</a></li>
                     <li><a href="#contacto" class="nav-link">Contacto</a></li>
                 </ul>
@@ -171,52 +172,174 @@
     </section>
 
     <!-- ============================================
+         CLIENTES / TRUSTED BY
+         ============================================ -->
+    <section class="section section-light" id="clientes" style="padding-top: var(--spacing-xl); padding-bottom: var(--spacing-xl); border-bottom: 1px solid var(--color-gray-200); overflow: hidden;">
+        <div class="container" style="max-width: 100%;">
+            <p class="text-center text-muted" style="font-weight: 600; font-size: var(--font-size-sm); text-transform: uppercase; letter-spacing: 1px; margin-bottom: var(--spacing-lg);">
+                Ellos confiaron en nosotros
+            </p>
+            <div class="marquee-container" style="display: flex; overflow: hidden; width: 100%; position: relative;">
+                <div class="marquee-content" style="display: flex; gap: var(--spacing-3xl); opacity: 0.6; filter: grayscale(100%); transition: all 0.3s ease; white-space: nowrap;">
+                    <!-- Original Set -->
+                    <!-- Castells -->
+                    <div class="client-logo" style="font-size: 1.5rem; font-weight: 800; color: var(--color-gray-700); letter-spacing: -0.5px; display: flex; align-items: center; gap: 8px;">
+                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18M5 21V7l8-4 8 4v14M9 21v-4a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v4"/></svg>
+                        Castells
+                    </div>
+                    <!-- Blanco&Etcheverry -->
+                    <div class="client-logo" style="font-size: 1.5rem; font-weight: 800; color: var(--color-gray-700); letter-spacing: -0.5px; display: flex; align-items: center; gap: 8px;">
+                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 22h14a2 2 0 0 0 2-2V7.5L14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2z"></path><polyline points="14 2 14 8 20 8"></polyline></svg>
+                        Blanco&amp;Etcheverry
+                    </div>
+                    <!-- match Carrasco -->
+                    <div class="client-logo" style="font-size: 1.5rem; font-weight: 800; color: var(--color-gray-700); letter-spacing: -0.5px; display: flex; align-items: center; gap: 8px;">
+                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.2 7.8l-7.7 7.7-4-4-5.7 5.7"></path><path d="M15 7h6v6"></path></svg>
+                        match Carrasco
+                    </div>
+                    <!-- kopel sanchez -->
+                    <div class="client-logo" style="font-size: 1.5rem; font-weight: 800; color: var(--color-gray-700); letter-spacing: -0.5px; display: flex; align-items: center; gap: 8px;">
+                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><line x1="3" y1="9" x2="21" y2="9"></line><line x1="9" y1="21" x2="9" y2="9"></line></svg>
+                        kopel sanchez
+                    </div>
+                    <!-- Estudio G Pittaluga -->
+                    <div class="client-logo" style="font-size: 1.5rem; font-weight: 800; color: var(--color-gray-700); letter-spacing: -0.5px; display: flex; align-items: center; gap: 8px;">
+                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+                        Estudio G Pittaluga
+                    </div>
+                    <!-- HIKE -->
+                    <div class="client-logo" style="font-size: 1.5rem; font-weight: 800; color: var(--color-gray-700); letter-spacing: -0.5px; display: flex; align-items: center; gap: 8px;">
+                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13.22 19L21 6"></path><path d="M2.5 17L12 3l3.5 6"></path></svg>
+                        HIKE
+                    </div>
+                    <!-- Proz Recovery -->
+                    <div class="client-logo" style="font-size: 1.5rem; font-weight: 800; color: var(--color-gray-700); letter-spacing: -0.5px; display: flex; align-items: center; gap: 8px;">
+                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><path d="M12 6v6l4 2"></path></svg>
+                        Proz Recovery
+                    </div>
+
+                    <!-- Duplicate Set for infinite scrolling -->
+                    <!-- Castells -->
+                    <div class="client-logo" style="font-size: 1.5rem; font-weight: 800; color: var(--color-gray-700); letter-spacing: -0.5px; display: flex; align-items: center; gap: 8px;">
+                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18M5 21V7l8-4 8 4v14M9 21v-4a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v4"/></svg>
+                        Castells
+                    </div>
+                    <!-- Blanco&Etcheverry -->
+                    <div class="client-logo" style="font-size: 1.5rem; font-weight: 800; color: var(--color-gray-700); letter-spacing: -0.5px; display: flex; align-items: center; gap: 8px;">
+                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 22h14a2 2 0 0 0 2-2V7.5L14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2z"></path><polyline points="14 2 14 8 20 8"></polyline></svg>
+                        Blanco&amp;Etcheverry
+                    </div>
+                    <!-- match Carrasco -->
+                    <div class="client-logo" style="font-size: 1.5rem; font-weight: 800; color: var(--color-gray-700); letter-spacing: -0.5px; display: flex; align-items: center; gap: 8px;">
+                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.2 7.8l-7.7 7.7-4-4-5.7 5.7"></path><path d="M15 7h6v6"></path></svg>
+                        match Carrasco
+                    </div>
+                    <!-- kopel sanchez -->
+                    <div class="client-logo" style="font-size: 1.5rem; font-weight: 800; color: var(--color-gray-700); letter-spacing: -0.5px; display: flex; align-items: center; gap: 8px;">
+                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><line x1="3" y1="9" x2="21" y2="9"></line><line x1="9" y1="21" x2="9" y2="9"></line></svg>
+                        kopel sanchez
+                    </div>
+                    <!-- Estudio G Pittaluga -->
+                    <div class="client-logo" style="font-size: 1.5rem; font-weight: 800; color: var(--color-gray-700); letter-spacing: -0.5px; display: flex; align-items: center; gap: 8px;">
+                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+                        Estudio G Pittaluga
+                    </div>
+                    <!-- HIKE -->
+                    <div class="client-logo" style="font-size: 1.5rem; font-weight: 800; color: var(--color-gray-700); letter-spacing: -0.5px; display: flex; align-items: center; gap: 8px;">
+                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13.22 19L21 6"></path><path d="M2.5 17L12 3l3.5 6"></path></svg>
+                        HIKE
+                    </div>
+                    <!-- Proz Recovery -->
+                    <div class="client-logo" style="font-size: 1.5rem; font-weight: 800; color: var(--color-gray-700); letter-spacing: -0.5px; display: flex; align-items: center; gap: 8px;">
+                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><path d="M12 6v6l4 2"></path></svg>
+                        Proz Recovery
+                    </div>
+                </div>
+            </div>
+            <style>
+                .marquee-container {
+                    mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+                    -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+                }
+                .marquee-content {
+                    animation: scroll-marquee 25s linear infinite;
+                    padding-left: var(--spacing-3xl);
+                }
+                .marquee-content:hover {
+                    animation-play-state: paused;
+                    opacity: 1 !important;
+                    filter: grayscale(0%) !important;
+                }
+                @keyframes scroll-marquee {
+                    0% { transform: translateX(0); }
+                    100% { transform: translateX(calc(-50% - (var(--spacing-3xl) / 2))); }
+                }
+
+                .client-logo {
+                    transition: transform 0.3s ease, color 0.3s ease;
+                    cursor: default;
+                }
+                .client-logo:hover {
+                    transform: translateY(-3px);
+                    color: var(--color-primary) !important;
+                }
+            </style>
+        </div>
+    </section>
+
+    <!-- ============================================
          SERVICIOS
          ============================================ -->
     <section class="section" id="servicios">
         <div class="container">
             <div class="text-center mb-2xl">
-                <h2>Nuestros Servicios</h2>
+                <h2>Nuestra Tecnología</h2>
                 <p class="text-muted" style="max-width: 600px; margin: 0 auto;">
-                    Soluciones especializadas en procesos administrativos y contables que automatizan tu operación
-                    diaria
+                    Utilizamos herramientas de vanguardia, inteligencia y conectividad para construir ecosistemas que multiplican la escalabilidad de tu negocio
                 </p>
             </div>
 
             <div class="features-grid">
                 <div class="card animate-on-scroll">
-                    <div class="card-icon">📊</div>
+                    <div class="card-icon">⚡</div>
                     <div class="feature-number">01</div>
-                    <h3 class="card-title">Procesos Administrativos</h3>
+                    <h3 class="card-title">Automatización RPA</h3>
                     <p class="card-description">
-                        Asientos contables, conciliaciones bancarias, liquidaciones. Automatizamos tu gestión
-                        administrativa para que fluya sin interrupciones.
-                    </p>
-                </div>
-
-                <div class="card animate-on-scroll">
-                    <div class="card-icon">📈</div>
-                    <div class="feature-number">02</div>
-                    <h3 class="card-title">Datos & Analytics</h3>
-                    <p class="card-description">
-                        Manejo de Excel, bases de datos, scraping web y dashboards que transforman tus datos en
-                        decisiones estratégicas.
+                        Robots de software que imitan acciones humanas para ejecutar tareas repetitivas 24/7 de forma ininterrumpida y sin margen de error.
                     </p>
                     <ul class="card-features-list">
-                        <li>✓ Automatización de reportes</li>
-                        <li>✓ Dashboards en tiempo real</li>
-                        <li>✓ Integración de fuentes de datos</li>
+                        <li>✓ Extracción masiva de datos (Scraping)</li>
+                        <li>✓ Integración entre plataformas y APIs</li>
+                        <li>✓ Tareas programadas en background</li>
                     </ul>
                 </div>
 
                 <div class="card animate-on-scroll">
-                    <div class="card-icon">💬</div>
-                    <div class="feature-number">03</div>
-                    <h3 class="card-title">Flujos de Conversación</h3>
+                    <div class="card-icon">🧠</div>
+                    <div class="feature-number">02</div>
+                    <h3 class="card-title">Inteligencia Artificial</h3>
                     <p class="card-description">
-                        Chatbots inteligentes y flujos automatizados que mejoran la comunicación con tus clientes y
-                        optimizan respuestas.
+                        Procesamiento avanzado aplicado a tu empresa para clasificar información, generar insights clave y automatizar atención al nivel humano.
                     </p>
+                    <ul class="card-features-list">
+                        <li>✓ Agentes conversacionales cognitivos</li>
+                        <li>✓ Clasificación e ingesta de documentos</li>
+                        <li>✓ Predicción y motores de decisión</li>
+                    </ul>
+                </div>
+
+                <div class="card animate-on-scroll">
+                    <div class="card-icon">💻</div>
+                    <div class="feature-number">03</div>
+                    <h3 class="card-title">Desarrollo a Medida</h3>
+                    <p class="card-description">
+                        Construimos interfaces, plataformas en la nube y aplicaciones robustas diseñadas a medida para gobernar tu operativa.
+                    </p>
+                    <ul class="card-features-list">
+                        <li>✓ Portales empresariales interactivos</li>
+                        <li>✓ Dashboards BI en tiempo real</li>
+                        <li>✓ Sistemas funcionales core (ERP/CRM)</li>
+                    </ul>
                 </div>
             </div>
         </div>
@@ -276,6 +399,63 @@
                     </div>
                 </div>
             </div>
+        </div>
+    </section>
+
+    <!-- ============================================
+         SOLUCIONES IMPLEMENTADAS
+         ============================================ -->
+    <section class="section" id="proyectos">
+        <div class="container">
+            <div class="text-center mb-2xl">
+                <h2>Soluciones de Alto Impacto</h2>
+                <p class="text-muted" style="max-width: 700px; margin: 0 auto;">
+                    Sistemas robustos que ya están transformando la operativa de nuestros clientes, reduciendo costos y eliminando tareas manuales.
+                </p>
+            </div>
+
+            <div class="projects-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: var(--spacing-lg); margin-top: var(--spacing-xl);">
+                
+                <div class="card animate-on-scroll" style="padding: var(--spacing-lg); border: 1px solid var(--color-gray-200); border-radius: var(--radius-lg); background: white; transition: transform 0.3s ease, box-shadow 0.3s ease;">
+                    <div style="font-size: 2rem; margin-bottom: 1rem; color: var(--color-primary);">💼</div>
+                    <h3 style="font-size: 1.25rem; font-weight: 700; color: var(--color-gray-900); margin-bottom: 0.5rem;">Finanzas Automáticas</h3>
+                    <p style="color: var(--color-gray-600); font-size: 0.95rem; line-height: 1.6; margin-bottom: 1rem;">
+                        <strong>Conciliaciones bancarias, Generación de asientos y Liquidaciones.</strong> Eliminamos el error humano en el cierre contable con procesos 100% automatizados.
+                    </p>
+                </div>
+
+                <div class="card animate-on-scroll" style="padding: var(--spacing-lg); border: 1px solid var(--color-gray-200); border-radius: var(--radius-lg); background: white; transition: transform 0.3s ease, box-shadow 0.3s ease;">
+                    <div style="font-size: 2rem; margin-bottom: 1rem; color: var(--color-primary);">📈</div>
+                    <h3 style="font-size: 1.25rem; font-weight: 700; color: var(--color-gray-900); margin-bottom: 0.5rem;">Data & Business Intelligence</h3>
+                    <p style="color: var(--color-gray-600); font-size: 0.95rem; line-height: 1.6; margin-bottom: 1rem;">
+                        <strong>Dashboards directivos, Reportes de control y Análisis de negocio.</strong> Centralizamos tu información en tiempo real para decisiones estratégicas inmediatas.
+                    </p>
+                </div>
+
+                <div class="card animate-on-scroll" style="padding: var(--spacing-lg); border: 1px solid var(--color-gray-200); border-radius: var(--radius-lg); background: white; transition: transform 0.3s ease, box-shadow 0.3s ease;">
+                    <div style="font-size: 2rem; margin-bottom: 1rem; color: var(--color-primary);">🏢</div>
+                    <h3 style="font-size: 1.25rem; font-weight: 700; color: var(--color-gray-900); margin-bottom: 0.5rem;">Ecosistemas de Gestión</h3>
+                    <p style="color: var(--color-gray-600); font-size: 0.95rem; line-height: 1.6; margin-bottom: 1rem;">
+                        <strong>Sistemas integrales para Propiedades y Control de Horas.</strong> Soluciones a medida para digitalizar y monitorear operaciones de campo y activos inmobiliarios (PropTech).
+                    </p>
+                </div>
+
+                <div class="card animate-on-scroll" style="padding: var(--spacing-lg); border: 1px solid var(--color-gray-200); border-radius: var(--radius-lg); background: white; transition: transform 0.3s ease, box-shadow 0.3s ease;">
+                    <div style="font-size: 2rem; margin-bottom: 1rem; color: var(--color-primary);">🤖</div>
+                    <h3 style="font-size: 1.25rem; font-weight: 700; color: var(--color-gray-900); margin-bottom: 0.5rem;">Asistentes Cognitivos</h3>
+                    <p style="color: var(--color-gray-600); font-size: 0.95rem; line-height: 1.6; margin-bottom: 1rem;">
+                        <strong>Chatbots Inteligentes y Atención 24/7.</strong> Multiplicamos tu capacidad de respuesta mediante IA generativa para soporte, atención al cliente y captación de leads.
+                    </p>
+                </div>
+
+            </div>
+            <style>
+                .projects-grid .card:hover {
+                    transform: translateY(-5px);
+                    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+                    border-color: #BFDBFE; /* light blue border on hover */
+                }
+            </style>
         </div>
     </section>
 
@@ -542,7 +722,50 @@
         .float-element:nth-child(5) {
             animation-delay: 2s;
         }
+
+        /* Floating WhatsApp */
+        .floating-whatsapp {
+            position: fixed;
+            bottom: 24px;
+            right: 24px;
+            background-color: #25D366;
+            color: white;
+            padding: 14px 24px;
+            border-radius: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            font-weight: 600;
+            font-size: 16px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            z-index: 9999;
+            transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+            text-decoration: none;
+        }
+
+        .floating-whatsapp:hover {
+            transform: translateY(-5px) scale(1.02);
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+            background-color: #1ebe57;
+            color: white;
+        }
+        
+        .floating-whatsapp svg {
+            width: 24px;
+            height: 24px;
+            fill: currentColor;
+        }
     </style>
+
+    <!-- Floating WhatsApp Button -->
+    <a href="https://wa.me/59891315670?text=Hola,%20estoy%20interesado%20en%20vuestros%20servicios%20de%20automatizaci%C3%B3n%20con%20IA" 
+       class="floating-whatsapp" target="_blank" aria-label="Contactar por WhatsApp">
+        <svg viewBox="0 0 24 24">
+            <path d="M17.5 14.3c-.2-.1-1.3-.6-1.5-.7-.2-.1-.4-.1-.5.1-.2.2-.6.7-.7.9-.1.2-.3.2-.5.1-.2-.1-1-.4-1.8-1.1-.7-.6-1.1-1.4-1.2-1.6-.1-.2 0-.3.1-.4.1-.1.2-.2.3-.3.1-.1.2-.2.2-.4s0-.3-.1-.4c-.1-.1-.5-1.3-.7-1.8-.2-.5-.4-.4-.5-.4h-.4c-.2 0-.5.1-.7.2-.3.3-.9.9-.9 2.1s1 2.4 1.1 2.6c.1.2 1.7 2.7 4.2 3.7.6.2 1.1.4 1.4.5.6.2 1.1.2 1.5.1.5-.1 1.3-.5 1.5-1 .2-.5.2-.9.1-1zM12 20.3c-1.4 0-2.8-.4-4-1.1l-.3-.2-3 1 .8-2.9-.2-.3c-.8-1.2-1.2-2.7-1.2-4.1 0-4.6 3.7-8.3 8.3-8.3 4.6 0 8.3 3.7 8.3 8.3s-3.7 8.3-8.3 8.3zm8-16.7c-2.1-2.1-5-3.3-8-3.3-6.2 0-11.3 5-11.3 11.2 0 2 .5 3.9 1.5 5.6l-1.6 5.8 6-1.6c1.7 1 3.5 1.5 5.4 1.5 6.2 0 11.3-5 11.3-11.2 0-3-1.2-5.8-3.3-8z"/>
+        </svg>
+        <span>Contáctate con nosotros</span>
+    </a>
 
 </body>
 
