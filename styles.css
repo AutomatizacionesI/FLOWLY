@@ -1075,9 +1075,12 @@ p {
 
 .footer-content {
   display: grid;
-  grid-template-columns: 2fr 1fr 1fr 1fr;
-  gap: var(--spacing-2xl);
+  grid-template-columns: 1.5fr 1fr 1fr;
+  gap: var(--spacing-3xl);
   margin-bottom: var(--spacing-2xl);
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .footer-brand {
