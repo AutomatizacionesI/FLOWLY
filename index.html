@@ -2,798 +2,698 @@
 <html lang="es">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description"
-        content="LogisAI - Automatizaciones que fluyen en tu negocio. Optimización de procesos con RPA, IA y desarrollo a medida">
-    <meta name="keywords"
-        content="automatización, RPA, inteligencia artificial, procesos de negocio, optimización empresarial, logisai">
-    <title>LogisAI - Automatizaciones que fluyen en tu negocio</title>
-
-    <!-- Styles -->
-    <link rel="stylesheet" href="styles.css">
-
-    <!-- Favicon -->
-    <link rel="icon" type="image/svg+xml"
-        href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='0.9em' font-size='90'>⚡</text></svg>">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>synara.ai — Automatización Inteligente</title>
+  <meta name="description" content="synara.ai — Automatizamos y optimizamos procesos empresariales con RPA, Inteligencia Artificial y desarrollo a medida. Resultados reales desde el primer mes." />
+  <meta name="keywords" content="automatización, RPA, inteligencia artificial, desarrollo a medida, procesos, synara" />
+  <meta property="og:title" content="synara.ai — Automatización Inteligente" />
+  <meta property="og:description" content="Automatización inteligente para empresas que escalan. RPA, IA y desarrollo a medida." />
+  <meta property="og:type" content="website" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><defs><linearGradient id='g' x1='0%25' y1='0%25' x2='100%25' y2='100%25'><stop offset='0%25' stop-color='%237C3AED'/><stop offset='100%25' stop-color='%2306B6D4'/></linearGradient></defs><rect width='32' height='32' rx='8' fill='url(%23g)'/><text x='50%25' y='50%25' font-family='system-ui' font-weight='800' font-size='18' fill='white' text-anchor='middle' dominant-baseline='central'>S</text></svg>" />
+  <link rel="stylesheet" href="styles.css" />
 </head>
 
 <body>
 
-    <!-- ============================================
-         HEADER & NAVIGATION
-         ============================================ -->
-    <header class="header" id="header">
-        <div class="container">
-            <nav class="nav">
-                <a href="#" class="logo" style="display: flex; align-items: center; gap: 10px; text-decoration: none;">
-                    <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path
-                            d="M7 10C7 6.13401 10.134 3 14 3H22C23.6569 3 25 4.34315 25 6V10C25 13.866 21.866 17 18 17H10C8.34315 17 7 15.6569 7 14V10Z"
-                            fill="url(#logo_grad_1)" />
-                        <path
-                            d="M7 18C7 16.3431 8.34315 15 10 15H18C21.866 15 25 18.134 25 22V26C25 27.6569 23.6569 29 22 29H14C10.134 29 7 25.866 7 22V18Z"
-                            fill="url(#logo_grad_2)" />
-                        <defs>
-                            <linearGradient id="logo_grad_1" x1="7" y1="3" x2="25" y2="17"
-                                gradientUnits="userSpaceOnUse">
-                                <stop stop-color="#00D2FF" />
-                                <stop offset="1" stop-color="#3A7BD5" />
-                            </linearGradient>
-                            <linearGradient id="logo_grad_2" x1="7" y1="15" x2="25" y2="29"
-                                gradientUnits="userSpaceOnUse">
-                                <stop stop-color="#3A7BD5" />
-                                <stop offset="1" stop-color="#00D2FF" />
-                            </linearGradient>
-                        </defs>
-                    </svg>
-                    <span
-                        style="font-size: 24px; font-weight: 800; color: #2563EB; letter-spacing: -0.5px;">LogisAI</span>
-                </a>
+  <!-- ============================================================
+       CURSOR GLOW
+       ============================================================ -->
+  <div class="cursor-glow" id="cursorGlow"></div>
 
-                <ul class="nav-menu" id="navMenu">
-                    <li><a href="#servicios" class="nav-link">Servicios</a></li>
-                    <li><a href="#proceso" class="nav-link">Proceso</a></li>
-                    <li><a href="#proyectos" class="nav-link">Casos de Uso</a></li>
-                    <li><a href="#ventajas" class="nav-link">Ventajas</a></li>
-                    <li><a href="#contacto" class="nav-link">Contacto</a></li>
-                </ul>
+  <!-- ============================================================
+       HEADER
+       ============================================================ -->
+  <header class="header" id="header">
+    <div class="container header-inner">
 
-                <div class="mobile-toggle" id="mobileToggle">
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                </div>
-
-                <a href="#contacto" class="btn btn-primary">Comenzar</a>
-            </nav>
+      <a href="#inicio" class="logo" aria-label="synara.ai - Inicio">
+        <div class="logo-mark">
+          <svg viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <path d="M9 2L15 5.5V12.5L9 16L3 12.5V5.5L9 2Z" stroke="white" stroke-width="1.5" stroke-linejoin="round"/>
+            <circle cx="9" cy="9" r="2.5" fill="white"/>
+          </svg>
         </div>
-    </header>
+        <span class="logo-text">synara<span class="ai-suffix">.ai</span></span>
+      </a>
 
-    <!-- ============================================
-         HERO SECTION
-         ============================================ -->
-    <section class="hero" id="inicio">
-        <div class="container">
-            <div class="hero-content">
-                <div class="hero-text">
-                    <div class="hero-eyebrow">
-                        <span>⚡</span>
-                        <span>Automatizaciones que fluyen en tu negocio</span>
-                    </div>
+      <nav class="nav" id="mainNav" aria-label="Navegación principal">
+        <a href="#servicios" class="nav-link">Servicios</a>
+        <a href="#proceso" class="nav-link">Proceso</a>
+        <a href="#soluciones" class="nav-link">Soluciones</a>
+        <a href="#impacto" class="nav-link">Impacto</a>
+        <a href="#contacto" class="nav-link">Contacto</a>
+      </nav>
 
-                    <h1 class="hero-title">
-                        Optimizamos y <span class="text-gradient">automatizamos</span> procesos de negocio
-                    </h1>
+      <a href="#contacto" class="btn btn-primary header-cta" aria-label="Solicitar diagnóstico gratuito">
+        Diagnóstico Gratuito
+      </a>
 
-                    <p class="hero-description">
-                        Detectamos, diagnosticamos y disolvemos los cuellos de botella que frenan el crecimiento de tu
-                        empresa con RPA, IA y desarrollo personalizado.
-                    </p>
+      <button class="menu-toggle" id="menuToggle" aria-label="Abrir menú" aria-expanded="false">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
 
-                    <div class="hero-cta">
-                        <a href="#contacto" class="btn btn-primary btn-lg">Solicitar Diagnóstico</a>
-                        <a href="#proceso" class="btn btn-secondary btn-lg">Ver Proceso</a>
-                    </div>
-                </div>
+    </div>
+  </header>
 
-                <div class="hero-visual">
-                    <svg class="hero-illustration" viewBox="0 0 500 500" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <!-- Central Platform -->
-                        <g class="float-element" style="animation-delay: 0s;">
-                            <ellipse cx="250" cy="280" rx="100" ry="20" fill="url(#shadow)" opacity="0.2" />
-                            <circle cx="250" cy="250" r="80" fill="url(#primaryGradient)" />
-                            <circle cx="250" cy="250" r="65" fill="white" opacity="0.2" />
-                            <text x="250" y="265" font-size="48" font-weight="bold" fill="white"
-                                text-anchor="middle">⚡</text>
-                        </g>
+  <!-- ============================================================
+       HERO
+       ============================================================ -->
+  <section class="hero" id="inicio" aria-labelledby="hero-title">
 
-                        <!-- Floating Elements -->
-                        <g class="float-element" style="animation-delay: 0.5s;">
-                            <rect x="80" y="150" width="60" height="60" rx="12" fill="white"
-                                filter="url(#cardShadow)" />
-                            <text x="110" y="190" font-size="32" text-anchor="middle">📊</text>
-                        </g>
+    <div class="hero-bg" aria-hidden="true">
+      <div class="orb orb-1"></div>
+      <div class="orb orb-2"></div>
+      <div class="orb orb-3"></div>
+      <div class="hero-grid"></div>
+    </div>
 
-                        <g class="float-element" style="animation-delay: 1s;">
-                            <rect x="360" y="140" width="60" height="60" rx="12" fill="white"
-                                filter="url(#cardShadow)" />
-                            <text x="390" y="180" font-size="32" text-anchor="middle">🤖</text>
-                        </g>
+    <div class="container hero-content">
 
-                        <g class="float-element" style="animation-delay: 1.5s;">
-                            <rect x="120" y="320" width="60" height="60" rx="12" fill="white"
-                                filter="url(#cardShadow)" />
-                            <text x="150" y="360" font-size="32" text-anchor="middle">💡</text>
-                        </g>
-
-                        <g class="float-element" style="animation-delay: 2s;">
-                            <rect x="320" y="330" width="60" height="60" rx="12" fill="white"
-                                filter="url(#cardShadow)" />
-                            <text x="350" y="370" font-size="32" text-anchor="middle">⚙️</text>
-                        </g>
-
-                        <!-- Connection Lines -->
-                        <path d="M 140 180 Q 200 220 250 250" stroke="url(#primaryGradient)" stroke-width="2"
-                            stroke-dasharray="5,5" opacity="0.5" fill="none" />
-                        <path d="M 360 170 Q 300 210 250 250" stroke="url(#primaryGradient)" stroke-width="2"
-                            stroke-dasharray="5,5" opacity="0.5" fill="none" />
-                        <path d="M 180 350 Q 220 300 250 250" stroke="url(#primaryGradient)" stroke-width="2"
-                            stroke-dasharray="5,5" opacity="0.5" fill="none" />
-                        <path d="M 320 360 Q 280 300 250 250" stroke="url(#primaryGradient)" stroke-width="2"
-                            stroke-dasharray="5,5" opacity="0.5" fill="none" />
-
-                        <!-- Gradients & Filters -->
-                        <defs>
-                            <linearGradient id="primaryGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                                <stop offset="0%" style="stop-color:#2563EB;stop-opacity:1" />
-                                <stop offset="100%" style="stop-color:#3B82F6;stop-opacity:1" />
-                            </linearGradient>
-                            <filter id="cardShadow" x="-50%" y="-50%" width="200%" height="200%">
-                                <feGaussianBlur in="SourceAlpha" stdDeviation="10" />
-                                <feOffset dx="0" dy="5" result="offsetblur" />
-                                <feComponentTransfer>
-                                    <feFuncA type="linear" slope="0.3" />
-                                </feComponentTransfer>
-                                <feMerge>
-                                    <feMergeNode />
-                                    <feMergeNode in="SourceGraphic" />
-                                </feMerge>
-                            </filter>
-                            <radialGradient id="shadow">
-                                <stop offset="0%" style="stop-color:#000;stop-opacity:0.3" />
-                                <stop offset="100%" style="stop-color:#000;stop-opacity:0" />
-                            </radialGradient>
-                        </defs>
-                    </svg>
-                </div>
-            </div>
+      <div class="hero-text">
+        <div class="hero-badge">
+          <span class="hero-badge-dot"></span>
+          Automatización Inteligente
         </div>
-    </section>
 
-    <!-- ============================================
-         CLIENTES / TRUSTED BY
-         ============================================ -->
-    <section class="section section-light" id="clientes" style="padding-top: var(--spacing-xl); padding-bottom: var(--spacing-xl); border-bottom: 1px solid var(--color-gray-200); overflow: hidden;">
-        <div class="container" style="max-width: 100%;">
-            <p class="text-center text-muted" style="font-weight: 600; font-size: var(--font-size-sm); text-transform: uppercase; letter-spacing: 1px; margin-bottom: var(--spacing-lg);">
-                Ellos confiaron en nosotros
+        <h1 class="hero-title" id="hero-title">
+          Transformá tu negocio con<br>
+          <span class="highlight">Inteligencia Artificial</span>
+        </h1>
+
+        <p class="hero-desc">
+          Detectamos los cuellos de botella de tu operación y los eliminamos con RPA, IA y desarrollo a medida. Procesos más rápidos, menos errores, más crecimiento.
+        </p>
+
+        <div class="hero-actions">
+          <a href="#contacto" class="btn btn-primary btn-lg">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M8 1L13 8L8 15M3 8H13" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            Solicitar Diagnóstico
+          </a>
+          <a href="#proceso" class="btn btn-ghost btn-lg">
+            Ver Cómo Funciona
+          </a>
+        </div>
+
+        <div class="hero-trust">
+          <div class="hero-trust-avatars">
+            <div class="hero-trust-avatar">C</div>
+            <div class="hero-trust-avatar">B</div>
+            <div class="hero-trust-avatar">H</div>
+            <div class="hero-trust-avatar">+</div>
+          </div>
+          <p class="hero-trust-text">
+            <strong>+10 empresas</strong> ya automatizan con synara
+          </p>
+        </div>
+      </div>
+
+      <div class="hero-visual" aria-hidden="true">
+        <div class="hero-visual-inner">
+          <div class="hero-ring hero-ring-1"></div>
+          <div class="hero-ring hero-ring-2"></div>
+          <div class="hero-ring hero-ring-3"></div>
+          <div class="hero-center">
+            <span class="hero-center-icon">🧠</span>
+          </div>
+          <div class="hero-node">⚡</div>
+          <div class="hero-node">📊</div>
+          <div class="hero-node">🤖</div>
+          <div class="hero-node">💡</div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ============================================================
+       CLIENTES
+       ============================================================ -->
+  <section class="clients" aria-label="Empresas que confían en synara.ai">
+    <div class="container">
+      <p class="clients-label">Con la confianza de empresas líderes</p>
+    </div>
+    <div class="clients-track-wrap">
+      <div class="clients-track" id="clientsTrack">
+        <!-- Primer set -->
+        <div class="client-logo">
+          <div class="client-logo-icon">C</div>
+          <span class="client-logo-name">Castells</span>
+        </div>
+        <div class="client-logo">
+          <div class="client-logo-icon">B</div>
+          <span class="client-logo-name">Blanco &amp; Etcheverry</span>
+        </div>
+        <div class="client-logo">
+          <div class="client-logo-icon">M</div>
+          <span class="client-logo-name">Match Carrasco</span>
+        </div>
+        <div class="client-logo">
+          <div class="client-logo-icon">K</div>
+          <span class="client-logo-name">Kopel Sánchez</span>
+        </div>
+        <div class="client-logo">
+          <div class="client-logo-icon">G</div>
+          <span class="client-logo-name">Estudio G Pittaluga</span>
+        </div>
+        <div class="client-logo">
+          <div class="client-logo-icon">H</div>
+          <span class="client-logo-name">HIKE</span>
+        </div>
+        <div class="client-logo">
+          <div class="client-logo-icon">P</div>
+          <span class="client-logo-name">Proz Recovery</span>
+        </div>
+        <!-- Segundo set (duplicado para loop infinito) -->
+        <div class="client-logo" aria-hidden="true">
+          <div class="client-logo-icon">C</div>
+          <span class="client-logo-name">Castells</span>
+        </div>
+        <div class="client-logo" aria-hidden="true">
+          <div class="client-logo-icon">B</div>
+          <span class="client-logo-name">Blanco &amp; Etcheverry</span>
+        </div>
+        <div class="client-logo" aria-hidden="true">
+          <div class="client-logo-icon">M</div>
+          <span class="client-logo-name">Match Carrasco</span>
+        </div>
+        <div class="client-logo" aria-hidden="true">
+          <div class="client-logo-icon">K</div>
+          <span class="client-logo-name">Kopel Sánchez</span>
+        </div>
+        <div class="client-logo" aria-hidden="true">
+          <div class="client-logo-icon">G</div>
+          <span class="client-logo-name">Estudio G Pittaluga</span>
+        </div>
+        <div class="client-logo" aria-hidden="true">
+          <div class="client-logo-icon">H</div>
+          <span class="client-logo-name">HIKE</span>
+        </div>
+        <div class="client-logo" aria-hidden="true">
+          <div class="client-logo-icon">P</div>
+          <span class="client-logo-name">Proz Recovery</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       SERVICIOS
+       ============================================================ -->
+  <section class="services" id="servicios" aria-labelledby="servicios-title">
+    <div class="container">
+
+      <div class="section-header">
+        <span class="section-badge">⚙️ Nuestros servicios</span>
+        <h2 class="section-title" id="servicios-title">
+          Tecnología que transforma<br>
+          <span class="gradient-text">tu operación</span>
+        </h2>
+        <p class="section-subtitle">
+          Combinamos las herramientas más potentes del mercado para automatizar lo que te frena y potenciar lo que te hace crecer.
+        </p>
+      </div>
+
+      <div class="services-grid">
+
+        <article class="service-card animate-on-scroll">
+          <span class="service-number">01</span>
+          <div class="service-icon" aria-hidden="true">⚡</div>
+          <h3 class="service-title">Automatización RPA</h3>
+          <p class="service-desc">
+            Eliminamos las tareas manuales y repetitivas de tu equipo mediante robots de software que operan 24/7 sin errores ni pausas.
+          </p>
+          <ul class="service-features" aria-label="Características de Automatización RPA">
+            <li class="service-feature">
+              <span class="feature-check" aria-hidden="true">✓</span>
+              Bots para entrada y migración de datos
+            </li>
+            <li class="service-feature">
+              <span class="feature-check" aria-hidden="true">✓</span>
+              Automatización de reportes y facturación
+            </li>
+            <li class="service-feature">
+              <span class="feature-check" aria-hidden="true">✓</span>
+              Integración con ERP, CRM y sistemas legacy
+            </li>
+            <li class="service-feature">
+              <span class="feature-check" aria-hidden="true">✓</span>
+              Monitoreo y alertas en tiempo real
+            </li>
+          </ul>
+        </article>
+
+        <article class="service-card animate-on-scroll">
+          <span class="service-number">02</span>
+          <div class="service-icon" aria-hidden="true">🧠</div>
+          <h3 class="service-title">Inteligencia Artificial</h3>
+          <p class="service-desc">
+            Implementamos soluciones de IA que aprenden de tu negocio: desde agentes conversacionales hasta modelos predictivos y clasificación de documentos.
+          </p>
+          <ul class="service-features" aria-label="Características de Inteligencia Artificial">
+            <li class="service-feature">
+              <span class="feature-check" aria-hidden="true">✓</span>
+              Agentes y chatbots con IA generativa
+            </li>
+            <li class="service-feature">
+              <span class="feature-check" aria-hidden="true">✓</span>
+              Análisis predictivo y machine learning
+            </li>
+            <li class="service-feature">
+              <span class="feature-check" aria-hidden="true">✓</span>
+              Procesamiento inteligente de documentos
+            </li>
+            <li class="service-feature">
+              <span class="feature-check" aria-hidden="true">✓</span>
+              Dashboards de BI con insights automáticos
+            </li>
+          </ul>
+        </article>
+
+        <article class="service-card animate-on-scroll">
+          <span class="service-number">03</span>
+          <div class="service-icon" aria-hidden="true">💻</div>
+          <h3 class="service-title">Desarrollo a Medida</h3>
+          <p class="service-desc">
+            Construimos las herramientas exactas que tu operación necesita: plataformas internas, integraciones y sistemas que se adaptan a tu flujo de trabajo.
+          </p>
+          <ul class="service-features" aria-label="Características de Desarrollo a Medida">
+            <li class="service-feature">
+              <span class="feature-check" aria-hidden="true">✓</span>
+              Plataformas web y dashboards personalizados
+            </li>
+            <li class="service-feature">
+              <span class="feature-check" aria-hidden="true">✓</span>
+              Integraciones vía APIs y webhooks
+            </li>
+            <li class="service-feature">
+              <span class="feature-check" aria-hidden="true">✓</span>
+              Automatizaciones con n8n, Make y Zapier
+            </li>
+            <li class="service-feature">
+              <span class="feature-check" aria-hidden="true">✓</span>
+              Entrega iterativa con sprints cortos
+            </li>
+          </ul>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       METODOLOGÍA / PROCESO
+       ============================================================ -->
+  <section class="methodology" id="proceso" aria-labelledby="proceso-title">
+    <div class="container">
+
+      <div class="section-header">
+        <span class="section-badge">🔍 Nuestro proceso</span>
+        <h2 class="section-title" id="proceso-title">
+          De la idea al resultado<br>
+          <span class="gradient-text">en semanas, no meses</span>
+        </h2>
+        <p class="section-subtitle">
+          Un proceso probado que minimiza el riesgo y maximiza el impacto desde el primer entregable.
+        </p>
+      </div>
+
+      <div class="methodology-timeline" id="methodologyTimeline">
+        <div class="methodology-line">
+          <div class="methodology-line-fill" id="timelineFill"></div>
+        </div>
+
+        <div class="methodology-step animate-on-scroll">
+          <div class="methodology-step-card step-content-right">
+            <p class="step-tag">Análisis · Semana 1</p>
+            <h3 class="step-title">Diagnóstico</h3>
+            <p class="step-desc">
+              Mapeamos tus procesos actuales, identificamos los puntos de mayor fricción y definimos las oportunidades de automatización con mayor ROI potencial.
             </p>
-            <div class="marquee-container" style="display: flex; overflow: hidden; width: 100%; position: relative;">
-                <div class="marquee-content" style="display: flex; gap: var(--spacing-3xl); opacity: 0.6; filter: grayscale(100%); transition: all 0.3s ease; white-space: nowrap;">
-                    <!-- Original Set -->
-                    <!-- Castells -->
-                    <div class="client-logo" style="font-size: 1.5rem; font-weight: 800; color: var(--color-gray-700); letter-spacing: -0.5px; display: flex; align-items: center; gap: 8px;">
-                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18M5 21V7l8-4 8 4v14M9 21v-4a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v4"/></svg>
-                        Castells
-                    </div>
-                    <!-- Blanco&Etcheverry -->
-                    <div class="client-logo" style="font-size: 1.5rem; font-weight: 800; color: var(--color-gray-700); letter-spacing: -0.5px; display: flex; align-items: center; gap: 8px;">
-                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 22h14a2 2 0 0 0 2-2V7.5L14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2z"></path><polyline points="14 2 14 8 20 8"></polyline></svg>
-                        Blanco&amp;Etcheverry
-                    </div>
-                    <!-- match Carrasco -->
-                    <div class="client-logo" style="font-size: 1.5rem; font-weight: 800; color: var(--color-gray-700); letter-spacing: -0.5px; display: flex; align-items: center; gap: 8px;">
-                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.2 7.8l-7.7 7.7-4-4-5.7 5.7"></path><path d="M15 7h6v6"></path></svg>
-                        match Carrasco
-                    </div>
-                    <!-- kopel sanchez -->
-                    <div class="client-logo" style="font-size: 1.5rem; font-weight: 800; color: var(--color-gray-700); letter-spacing: -0.5px; display: flex; align-items: center; gap: 8px;">
-                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><line x1="3" y1="9" x2="21" y2="9"></line><line x1="9" y1="21" x2="9" y2="9"></line></svg>
-                        kopel sanchez
-                    </div>
-                    <!-- Estudio G Pittaluga -->
-                    <div class="client-logo" style="font-size: 1.5rem; font-weight: 800; color: var(--color-gray-700); letter-spacing: -0.5px; display: flex; align-items: center; gap: 8px;">
-                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
-                        Estudio G Pittaluga
-                    </div>
-                    <!-- HIKE -->
-                    <div class="client-logo" style="font-size: 1.5rem; font-weight: 800; color: var(--color-gray-700); letter-spacing: -0.5px; display: flex; align-items: center; gap: 8px;">
-                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13.22 19L21 6"></path><path d="M2.5 17L12 3l3.5 6"></path></svg>
-                        HIKE
-                    </div>
-                    <!-- Proz Recovery -->
-                    <div class="client-logo" style="font-size: 1.5rem; font-weight: 800; color: var(--color-gray-700); letter-spacing: -0.5px; display: flex; align-items: center; gap: 8px;">
-                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><path d="M12 6v6l4 2"></path></svg>
-                        Proz Recovery
-                    </div>
-
-                    <!-- Duplicate Set for infinite scrolling -->
-                    <!-- Castells -->
-                    <div class="client-logo" style="font-size: 1.5rem; font-weight: 800; color: var(--color-gray-700); letter-spacing: -0.5px; display: flex; align-items: center; gap: 8px;">
-                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18M5 21V7l8-4 8 4v14M9 21v-4a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v4"/></svg>
-                        Castells
-                    </div>
-                    <!-- Blanco&Etcheverry -->
-                    <div class="client-logo" style="font-size: 1.5rem; font-weight: 800; color: var(--color-gray-700); letter-spacing: -0.5px; display: flex; align-items: center; gap: 8px;">
-                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 22h14a2 2 0 0 0 2-2V7.5L14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2z"></path><polyline points="14 2 14 8 20 8"></polyline></svg>
-                        Blanco&amp;Etcheverry
-                    </div>
-                    <!-- match Carrasco -->
-                    <div class="client-logo" style="font-size: 1.5rem; font-weight: 800; color: var(--color-gray-700); letter-spacing: -0.5px; display: flex; align-items: center; gap: 8px;">
-                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.2 7.8l-7.7 7.7-4-4-5.7 5.7"></path><path d="M15 7h6v6"></path></svg>
-                        match Carrasco
-                    </div>
-                    <!-- kopel sanchez -->
-                    <div class="client-logo" style="font-size: 1.5rem; font-weight: 800; color: var(--color-gray-700); letter-spacing: -0.5px; display: flex; align-items: center; gap: 8px;">
-                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><line x1="3" y1="9" x2="21" y2="9"></line><line x1="9" y1="21" x2="9" y2="9"></line></svg>
-                        kopel sanchez
-                    </div>
-                    <!-- Estudio G Pittaluga -->
-                    <div class="client-logo" style="font-size: 1.5rem; font-weight: 800; color: var(--color-gray-700); letter-spacing: -0.5px; display: flex; align-items: center; gap: 8px;">
-                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
-                        Estudio G Pittaluga
-                    </div>
-                    <!-- HIKE -->
-                    <div class="client-logo" style="font-size: 1.5rem; font-weight: 800; color: var(--color-gray-700); letter-spacing: -0.5px; display: flex; align-items: center; gap: 8px;">
-                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13.22 19L21 6"></path><path d="M2.5 17L12 3l3.5 6"></path></svg>
-                        HIKE
-                    </div>
-                    <!-- Proz Recovery -->
-                    <div class="client-logo" style="font-size: 1.5rem; font-weight: 800; color: var(--color-gray-700); letter-spacing: -0.5px; display: flex; align-items: center; gap: 8px;">
-                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><path d="M12 6v6l4 2"></path></svg>
-                        Proz Recovery
-                    </div>
-                </div>
-            </div>
-            <style>
-                .marquee-container {
-                    mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
-                    -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
-                }
-                .marquee-content {
-                    animation: scroll-marquee 25s linear infinite;
-                    padding-left: var(--spacing-3xl);
-                }
-                .marquee-content:hover {
-                    animation-play-state: paused;
-                    opacity: 1 !important;
-                    filter: grayscale(0%) !important;
-                }
-                @keyframes scroll-marquee {
-                    0% { transform: translateX(0); }
-                    100% { transform: translateX(calc(-50% - (var(--spacing-3xl) / 2))); }
-                }
-
-                .client-logo {
-                    transition: transform 0.3s ease, color 0.3s ease;
-                    cursor: default;
-                }
-                .client-logo:hover {
-                    transform: translateY(-3px);
-                    color: var(--color-primary) !important;
-                }
-            </style>
+          </div>
+          <div class="methodology-dot">01</div>
+          <div class="step-spacer"></div>
         </div>
-    </section>
 
-    <!-- ============================================
-         SERVICIOS
-         ============================================ -->
-    <section class="section" id="servicios">
-        <div class="container">
-            <div class="text-center mb-2xl">
-                <h2>Nuestra Tecnología</h2>
-                <p class="text-muted" style="max-width: 600px; margin: 0 auto;">
-                    Utilizamos herramientas de vanguardia, inteligencia y conectividad para construir ecosistemas que multiplican la escalabilidad de tu negocio
-                </p>
-            </div>
-
-            <div class="features-grid">
-                <div class="card animate-on-scroll">
-                    <div class="card-icon">⚡</div>
-                    <div class="feature-number">01</div>
-                    <h3 class="card-title">Automatización RPA</h3>
-                    <p class="card-description">
-                        Robots de software que imitan acciones humanas para ejecutar tareas repetitivas 24/7 de forma ininterrumpida y sin margen de error.
-                    </p>
-                    <ul class="card-features-list">
-                        <li>✓ Extracción masiva de datos (Scraping)</li>
-                        <li>✓ Integración entre plataformas y APIs</li>
-                        <li>✓ Tareas programadas en background</li>
-                    </ul>
-                </div>
-
-                <div class="card animate-on-scroll">
-                    <div class="card-icon">🧠</div>
-                    <div class="feature-number">02</div>
-                    <h3 class="card-title">Inteligencia Artificial</h3>
-                    <p class="card-description">
-                        Procesamiento avanzado aplicado a tu empresa para clasificar información, generar insights clave y automatizar atención al nivel humano.
-                    </p>
-                    <ul class="card-features-list">
-                        <li>✓ Agentes conversacionales cognitivos</li>
-                        <li>✓ Clasificación e ingesta de documentos</li>
-                        <li>✓ Predicción y motores de decisión</li>
-                    </ul>
-                </div>
-
-                <div class="card animate-on-scroll">
-                    <div class="card-icon">💻</div>
-                    <div class="feature-number">03</div>
-                    <h3 class="card-title">Desarrollo a Medida</h3>
-                    <p class="card-description">
-                        Construimos interfaces, plataformas en la nube y aplicaciones robustas diseñadas a medida para gobernar tu operativa.
-                    </p>
-                    <ul class="card-features-list">
-                        <li>✓ Portales empresariales interactivos</li>
-                        <li>✓ Dashboards BI en tiempo real</li>
-                        <li>✓ Sistemas funcionales core (ERP/CRM)</li>
-                    </ul>
-                </div>
-            </div>
+        <div class="methodology-step active animate-on-scroll">
+          <div class="step-spacer"></div>
+          <div class="methodology-dot">02</div>
+          <div class="methodology-step-card step-content-left">
+            <p class="step-tag">MVP · Semana 2–3</p>
+            <h3 class="step-title">Prototipo Funcional</h3>
+            <p class="step-desc">
+              Construimos un prototipo real y funcional del proceso automatizado. Podés verlo en acción antes de comprometer recursos al despliegue completo.
+            </p>
+          </div>
         </div>
-    </section>
 
-    <!-- ============================================
-         PROCESO
-         ============================================ -->
-    <section class="section section-light" id="proceso">
-        <div class="container">
-            <div class="text-center mb-2xl">
-                <h2>Nuestra Metodología</h2>
-                <p class="text-muted" style="max-width: 700px; margin: 0 auto;">
-                    Trabajamos bajo un modelo de prototipado funcional que garantiza resultados antes de cualquier
-                    implementación masiva
-                </p>
-            </div>
-
-            <div class="methodology-timeline-system">
-                <div class="method-track"></div>
-
-                <!-- Step 1 -->
-                <div class="method-step left animate-on-scroll">
-                    <div class="method-dot">01</div>
-                    <div class="method-card">
-                        <div class="method-tag">Análisis</div>
-                        <h3 class="card-title">Diagnóstico</h3>
-                        <p class="method-text">
-                            Auditamos tu operativa actual para detectar fugas de eficiencia y cuellos de botella que
-                            limitan tu crecimiento.
-                        </p>
-                    </div>
-                </div>
-
-                <!-- Step 2 -->
-                <div class="method-step right animate-on-scroll">
-                    <div class="method-dot featured-dot">02</div>
-                    <div class="method-card active-card">
-                        <div class="method-tag tag-primary">MVP</div>
-                        <h3 class="card-title">Prototipo Funcional</h3>
-                        <p class="method-text">
-                            No esperamos meses. Desarrollamos una solución mínima viable para validar impacto en tiempo
-                            récord.
-                        </p>
-                    </div>
-                </div>
-
-                <!-- Step 3 -->
-                <div class="method-step left animate-on-scroll">
-                    <div class="method-dot">03</div>
-                    <div class="method-card">
-                        <div class="method-tag">Despliegue</div>
-                        <h3 class="card-title">Implementación</h3>
-                        <p class="method-text">
-                            Escalamos la solución a toda tu operación con acompañamiento técnico y soporte continuo.
-                        </p>
-                    </div>
-                </div>
-            </div>
+        <div class="methodology-step animate-on-scroll">
+          <div class="methodology-step-card step-content-right">
+            <p class="step-tag">Despliegue · Semana 4+</p>
+            <h3 class="step-title">Implementación</h3>
+            <p class="step-desc">
+              Desplegamos la solución en producción, capacitamos al equipo y establecemos monitoreo continuo para asegurar la estabilidad y evolución del sistema.
+            </p>
+          </div>
+          <div class="methodology-dot">03</div>
+          <div class="step-spacer"></div>
         </div>
-    </section>
 
-    <!-- ============================================
-         SOLUCIONES IMPLEMENTADAS
-         ============================================ -->
-    <section class="section" id="proyectos">
-        <div class="container">
-            <div class="text-center mb-2xl">
-                <h2>Soluciones de Alto Impacto</h2>
-                <p class="text-muted" style="max-width: 700px; margin: 0 auto;">
-                    Sistemas robustos que ya están transformando la operativa de nuestros clientes, reduciendo costos y eliminando tareas manuales.
-                </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       SOLUCIONES
+       ============================================================ -->
+  <section class="solutions" id="soluciones" aria-labelledby="soluciones-title">
+    <div class="container">
+
+      <div class="section-header">
+        <span class="section-badge">🚀 Casos de uso</span>
+        <h2 class="section-title" id="soluciones-title">
+          Soluciones de <span class="gradient-text">alto impacto</span>
+        </h2>
+        <p class="section-subtitle">
+          Aplicaciones concretas que ya están transformando la operación de empresas como la tuya.
+        </p>
+      </div>
+
+      <div class="solutions-grid">
+
+        <article class="solution-card animate-on-scroll">
+          <div class="solution-icon-wrap" aria-hidden="true">💼</div>
+          <div>
+            <h3 class="solution-title">Finanzas Automáticas</h3>
+            <p class="solution-desc">
+              Conciliación bancaria, generación de facturas, seguimiento de pagos y reportes financieros automatizados. Tu equipo contable enfocado en lo estratégico.
+            </p>
+          </div>
+        </article>
+
+        <article class="solution-card animate-on-scroll">
+          <div class="solution-icon-wrap" aria-hidden="true">📈</div>
+          <div>
+            <h3 class="solution-title">Data &amp; Business Intelligence</h3>
+            <p class="solution-desc">
+              Dashboards en tiempo real con KPIs de negocio, alertas automáticas por desvíos y reportes distribuidos sin intervención humana.
+            </p>
+          </div>
+        </article>
+
+        <article class="solution-card animate-on-scroll">
+          <div class="solution-icon-wrap" aria-hidden="true">🏢</div>
+          <div>
+            <h3 class="solution-title">Ecosistemas de Gestión</h3>
+            <p class="solution-desc">
+              Conectamos tus herramientas (CRM, ERP, e-commerce, soporte) en un flujo unificado. Datos consistentes, sin duplicados ni fricción entre áreas.
+            </p>
+          </div>
+        </article>
+
+        <article class="solution-card animate-on-scroll">
+          <div class="solution-icon-wrap" aria-hidden="true">🤖</div>
+          <div>
+            <h3 class="solution-title">Asistentes Cognitivos</h3>
+            <p class="solution-desc">
+              Agentes de IA que atienden consultas, califican leads, procesan solicitudes y derivan casos complejos a tu equipo. Disponibles 24/7.
+            </p>
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       IMPACTO (ANTES / DESPUÉS)
+       ============================================================ -->
+  <section class="impact" id="impacto" aria-labelledby="impacto-title">
+    <div class="container">
+
+      <div class="section-header">
+        <span class="section-badge">⚡ Ventajas reales</span>
+        <h2 class="section-title" id="impacto-title">
+          El antes y el después<br>
+          <span class="gradient-text">de automatizar</span>
+        </h2>
+        <p class="section-subtitle">
+          Resultados concretos y medibles que nuestros clientes experimentan en las primeras semanas.
+        </p>
+      </div>
+
+      <div class="impact-grid">
+
+        <div class="animate-on-scroll">
+          <div class="impact-col-header before">
+            <span class="impact-col-icon">⚠️</span>
+            <div class="impact-col-title">
+              Sin synara
+              <span>El estado actual de tu operación</span>
             </div>
-
-            <div class="projects-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: var(--spacing-lg); margin-top: var(--spacing-xl);">
-                
-                <div class="card animate-on-scroll" style="padding: var(--spacing-lg); border: 1px solid var(--color-gray-200); border-radius: var(--radius-lg); background: white; transition: transform 0.3s ease, box-shadow 0.3s ease;">
-                    <div style="font-size: 2rem; margin-bottom: 1rem; color: var(--color-primary);">💼</div>
-                    <h3 style="font-size: 1.25rem; font-weight: 700; color: var(--color-gray-900); margin-bottom: 0.5rem;">Finanzas Automáticas</h3>
-                    <p style="color: var(--color-gray-600); font-size: 0.95rem; line-height: 1.6; margin-bottom: 1rem;">
-                        <strong>Conciliaciones bancarias, Generación de asientos y Liquidaciones.</strong> Eliminamos el error humano en el cierre contable con procesos 100% automatizados.
-                    </p>
-                </div>
-
-                <div class="card animate-on-scroll" style="padding: var(--spacing-lg); border: 1px solid var(--color-gray-200); border-radius: var(--radius-lg); background: white; transition: transform 0.3s ease, box-shadow 0.3s ease;">
-                    <div style="font-size: 2rem; margin-bottom: 1rem; color: var(--color-primary);">📈</div>
-                    <h3 style="font-size: 1.25rem; font-weight: 700; color: var(--color-gray-900); margin-bottom: 0.5rem;">Data & Business Intelligence</h3>
-                    <p style="color: var(--color-gray-600); font-size: 0.95rem; line-height: 1.6; margin-bottom: 1rem;">
-                        <strong>Dashboards directivos, Reportes de control y Análisis de negocio.</strong> Centralizamos tu información en tiempo real para decisiones estratégicas inmediatas.
-                    </p>
-                </div>
-
-                <div class="card animate-on-scroll" style="padding: var(--spacing-lg); border: 1px solid var(--color-gray-200); border-radius: var(--radius-lg); background: white; transition: transform 0.3s ease, box-shadow 0.3s ease;">
-                    <div style="font-size: 2rem; margin-bottom: 1rem; color: var(--color-primary);">🏢</div>
-                    <h3 style="font-size: 1.25rem; font-weight: 700; color: var(--color-gray-900); margin-bottom: 0.5rem;">Ecosistemas de Gestión</h3>
-                    <p style="color: var(--color-gray-600); font-size: 0.95rem; line-height: 1.6; margin-bottom: 1rem;">
-                        <strong>Sistemas integrales para Propiedades y Control de Horas.</strong> Soluciones a medida para digitalizar y monitorear operaciones de campo y activos inmobiliarios (PropTech).
-                    </p>
-                </div>
-
-                <div class="card animate-on-scroll" style="padding: var(--spacing-lg); border: 1px solid var(--color-gray-200); border-radius: var(--radius-lg); background: white; transition: transform 0.3s ease, box-shadow 0.3s ease;">
-                    <div style="font-size: 2rem; margin-bottom: 1rem; color: var(--color-primary);">🤖</div>
-                    <h3 style="font-size: 1.25rem; font-weight: 700; color: var(--color-gray-900); margin-bottom: 0.5rem;">Asistentes Cognitivos</h3>
-                    <p style="color: var(--color-gray-600); font-size: 0.95rem; line-height: 1.6; margin-bottom: 1rem;">
-                        <strong>Chatbots Inteligentes y Atención 24/7.</strong> Multiplicamos tu capacidad de respuesta mediante IA generativa para soporte, atención al cliente y captación de leads.
-                    </p>
-                </div>
-
-            </div>
-            <style>
-                .projects-grid .card:hover {
-                    transform: translateY(-5px);
-                    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
-                    border-color: #BFDBFE; /* light blue border on hover */
-                }
-            </style>
+          </div>
+          <ul class="impact-list" aria-label="Problemas sin automatización">
+            <li class="impact-item before">
+              <span class="impact-item-icon">⏱️</span>
+              <div class="impact-item-text">
+                <strong>Horas perdidas cada semana</strong>
+                Tareas manuales y repetitivas que consumen el tiempo de tu equipo más valioso.
+              </div>
+            </li>
+            <li class="impact-item before">
+              <span class="impact-item-icon">⚠️</span>
+              <div class="impact-item-text">
+                <strong>Errores costosos y frecuentes</strong>
+                La intervención humana en procesos repetitivos garantiza inconsistencias y reprocesos.
+              </div>
+            </li>
+            <li class="impact-item before">
+              <span class="impact-item-icon">📊</span>
+              <div class="impact-item-text">
+                <strong>Información dispersa y tardía</strong>
+                Datos en planillas, correos y sistemas separados que nunca cuentan la misma historia.
+              </div>
+            </li>
+            <li class="impact-item before">
+              <span class="impact-item-icon">🔥</span>
+              <div class="impact-item-text">
+                <strong>Cuello de botella operativo</strong>
+                El crecimiento del negocio choca contra la capacidad operativa de tu equipo.
+              </div>
+            </li>
+          </ul>
         </div>
-    </section>
 
-    <!-- ============================================
-         EL IMPACTO - DARK SECTION
-         ============================================ -->
-    <section class="section section-dark" id="ventajas">
-        <div class="container">
-            <div class="text-center mb-2xl">
-                <h2 style="color: white;">El Impacto</h2>
-                <p style="color: rgba(255, 255, 255, 0.8); max-width: 700px; margin: 0 auto;">
-                    Así transformamos tu operación: de caos manual a flujo automatizado
-                </p>
+        <div class="animate-on-scroll">
+          <div class="impact-col-header after">
+            <span class="impact-col-icon">✅</span>
+            <div class="impact-col-title">
+              Con synara.ai
+              <span>Tu operación transformada</span>
             </div>
-
-            <!-- Timeline Container -->
-            <div class="impact-timeline">
-                <!-- ANTES Column -->
-                <div class="timeline-column animate-on-scroll">
-                    <div class="timeline-header"
-                        style="background: rgba(239, 68, 68, 0.1); border-left: 4px solid #EF4444;">
-                        <h3 style="color: #EF4444; margin: 0;">Antes</h3>
-                        <p style="color: rgba(255, 255, 255, 0.7); font-size: 0.9rem; margin: 0.5rem 0 0 0;">Sin
-                            automatización</p>
-                    </div>
-
-                    <div class="timeline-items">
-                        <div class="timeline-item">
-                            <div class="timeline-icon" style="background: rgba(239, 68, 68, 0.2);">⏱️</div>
-                            <div class="timeline-content">
-                                <h4>Horas perdidas en tareas manuales</h4>
-                                <p>Tu equipo dedica 60% del tiempo a ingresar datos, conciliar cuentas y copiar
-                                    información entre sistemas</p>
-                            </div>
-                        </div>
-
-                        <div class="timeline-item">
-                            <div class="timeline-icon" style="background: rgba(239, 68, 68, 0.2);">⚠️</div>
-                            <div class="timeline-content">
-                                <h4>Errores costosos frecuentes</h4>
-                                <p>Errores humanos en asientos contables y conciliaciones que generan pérdidas
-                                    económicas y retrabajos</p>
-                            </div>
-                        </div>
-
-                        <div class="timeline-item">
-                            <div class="timeline-icon" style="background: rgba(239, 68, 68, 0.2);">📊</div>
-                            <div class="timeline-content">
-                                <h4>Información fragmentada</h4>
-                                <p>Datos dispersos en Excel, emails y sistemas desconectados. Imposible tomar decisiones
-                                    ágiles</p>
-                            </div>
-                        </div>
-
-                        <div class="timeline-item">
-                            <div class="timeline-icon" style="background: rgba(239, 68, 68, 0.2);">🔥</div>
-                            <div class="timeline-content">
-                                <h4>Cuello de botella operativo</h4>
-                                <p>No puedes escalar porque cada nuevo cliente requiere más personal administrativo</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- DESPUÉS Column -->
-                <div class="timeline-column animate-on-scroll">
-                    <div class="timeline-header"
-                        style="background: rgba(34, 197, 94, 0.1); border-left: 4px solid #22C55E;">
-                        <h3 style="color: #22C55E; margin: 0;">Después</h3>
-                        <p style="color: rgba(255, 255, 255, 0.7); font-size: 0.9rem; margin: 0.5rem 0 0 0;">Con LogisAI
-                        </p>
-                    </div>
-
-                    <div class="timeline-items">
-                        <div class="timeline-item">
-                            <div class="timeline-icon" style="background: rgba(34, 197, 94, 0.2);">⚡</div>
-                            <div class="timeline-content">
-                                <h4>85% de tiempo recuperado</h4>
-                                <p>Procesos que tomaban horas ahora se ejecutan en minutos. Tu equipo se enfoca en
-                                    estrategia</p>
-                            </div>
-                        </div>
-
-                        <div class="timeline-item">
-                            <div class="timeline-icon" style="background: rgba(34, 197, 94, 0.2);">🎯</div>
-                            <div class="timeline-content">
-                                <h4>95% de precisión garantizada</h4>
-                                <p>Cero errores en cálculos, asientos y conciliaciones. Auditorías perfectas cada vez
-                                </p>
-                            </div>
-                        </div>
-
-                        <div class="timeline-item">
-                            <div class="timeline-icon" style="background: rgba(34, 197, 94, 0.2);">📈</div>
-                            <div class="timeline-content">
-                                <h4>Dashboards en tiempo real</h4>
-                                <p>Toda tu información integrada en dashboards actualizados automáticamente. Decisiones
-                                    basadas en datos</p>
-                            </div>
-                        </div>
-
-                        <div class="timeline-item">
-                            <div class="timeline-icon" style="background: rgba(34, 197, 94, 0.2);">🚀</div>
-                            <div class="timeline-content">
-                                <h4>Escalabilidad ilimitada</h4>
-                                <p>Crece 10x sin contratar más personal administrativo. Tus procesos fluyen sin fricción
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+          </div>
+          <ul class="impact-list" aria-label="Beneficios con automatización">
+            <li class="impact-item after">
+              <span class="impact-item-icon">⚡</span>
+              <div class="impact-item-text">
+                <strong>85% del tiempo recuperado</strong>
+                Tu equipo se enfoca en decisiones estratégicas, no en tareas repetitivas.
+              </div>
+            </li>
+            <li class="impact-item after">
+              <span class="impact-item-icon">🎯</span>
+              <div class="impact-item-text">
+                <strong>95% de precisión garantizada</strong>
+                Los procesos automatizados ejecutan exactamente lo que les indicás, sin variaciones.
+              </div>
+            </li>
+            <li class="impact-item after">
+              <span class="impact-item-icon">📈</span>
+              <div class="impact-item-text">
+                <strong>Dashboards en tiempo real</strong>
+                Toda la información de tu negocio unificada y actualizada automáticamente.
+              </div>
+            </li>
+            <li class="impact-item after">
+              <span class="impact-item-icon">🚀</span>
+              <div class="impact-item-text">
+                <strong>Escalabilidad ilimitada</strong>
+                Tus procesos crecen con el negocio sin necesidad de contratar más personal operativo.
+              </div>
+            </li>
+          </ul>
         </div>
-    </section>
 
-    <!-- ============================================
-         STATS SECTION
-         ============================================ -->
-    <section class="section">
-        <div class="container">
-            <div class="stats-grid">
-                <div class="stat-item animate-on-scroll">
-                    <span class="stat-number">85%</span>
-                    <span class="stat-label">Reducción de tiempo en procesos</span>
-                </div>
+      </div>
+    </div>
+  </section>
 
-                <div class="stat-item animate-on-scroll">
-                    <span class="stat-number">24/7</span>
-                    <span class="stat-label">Operación continua automatizada</span>
-                </div>
+  <!-- ============================================================
+       ESTADÍSTICAS
+       ============================================================ -->
+  <section class="stats" aria-labelledby="stats-title">
+    <div class="container">
 
-                <div class="stat-item animate-on-scroll">
-                    <span class="stat-number">95%</span>
-                    <span class="stat-label">Precisión en ejecución</span>
-                </div>
+      <div class="section-header">
+        <h2 class="section-title" id="stats-title">
+          Números que <span class="gradient-text">hablan solos</span>
+        </h2>
+      </div>
 
-                <div class="stat-item animate-on-scroll">
-                    <span class="stat-number">100%</span>
-                    <span class="stat-label">Personalizado a tu negocio</span>
-                </div>
-            </div>
+      <div class="stats-grid">
+        <div class="stat-card animate-on-scroll">
+          <span class="stat-value" data-target="85">0</span>
+          <p class="stat-label">Reducción de tiempo<br>en procesos operativos</p>
         </div>
-    </section>
-
-    <!-- ============================================
-         CTA SECTION
-         ============================================ -->
-    <section class="cta-section section" id="contacto" style="position: relative; overflow: hidden;">
-        <!-- Decorative background elements -->
-        <div style="position: absolute; top: -80px; right: -80px; width: 320px; height: 320px; border-radius: 50%; background: rgba(255,255,255,0.06); pointer-events: none;"></div>
-        <div style="position: absolute; bottom: -60px; left: -60px; width: 240px; height: 240px; border-radius: 50%; background: rgba(255,255,255,0.04); pointer-events: none;"></div>
-        <div style="position: absolute; top: 50%; left: 5%; transform: translateY(-50%); width: 1px; height: 60%; background: rgba(255,255,255,0.1); pointer-events: none;"></div>
-        <div style="position: absolute; top: 50%; right: 5%; transform: translateY(-50%); width: 1px; height: 60%; background: rgba(255,255,255,0.1); pointer-events: none;"></div>
-
-        <div class="container" style="position: relative; z-index: 1;">
-            <!-- Top badge -->
-            <div style="text-align: center; margin-bottom: 1.5rem;">
-                <span style="display: inline-block; background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.25); color: white; font-size: 0.78rem; font-weight: 600; letter-spacing: 1.5px; text-transform: uppercase; padding: 6px 18px; border-radius: 50px; backdrop-filter: blur(4px);">
-                    Diagnóstico Sin Costo
-                </span>
-            </div>
-
-            <div class="cta-content">
-                <h2 class="cta-title" style="font-size: clamp(2rem, 4vw, 3rem); line-height: 1.15; margin-bottom: 1.25rem;">
-                    Transformá tu operación.<br>
-                    <span style="opacity: 0.85; font-weight: 400;">Empezá hoy.</span>
-                </h2>
-                <p class="cta-description" style="font-size: 1.05rem; max-width: 520px; margin: 0 auto 2.5rem; opacity: 0.9; line-height: 1.7;">
-                    Agendá una sesión de diagnóstico sin cargo y te mostramos exactamente dónde estás perdiendo
-                    tiempo y dinero — con un plan de acción concreto.
-                </p>
-
-                <!-- Inline trust signals -->
-                <div style="display: flex; justify-content: center; gap: 2rem; flex-wrap: wrap; margin-bottom: 2.5rem;">
-                    <div style="display: flex; align-items: center; gap: 8px; color: rgba(255,255,255,0.85); font-size: 0.88rem;">
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                        Sin compromiso
-                    </div>
-                    <div style="display: flex; align-items: center; gap: 8px; color: rgba(255,255,255,0.85); font-size: 0.88rem;">
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                        Respuesta en menos de 24h
-                    </div>
-                    <div style="display: flex; align-items: center; gap: 8px; color: rgba(255,255,255,0.85); font-size: 0.88rem;">
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                        100% personalizado
-                    </div>
-                </div>
-
-                <div class="cta-buttons" style="gap: 1rem;">
-                    <a href="https://mail.google.com/mail/?view=cm&fs=1&to=facuetcheverry4@gmail.com" target="_blank" class="btn btn-white btn-lg" style="display: inline-flex; align-items: center; gap: 10px; font-weight: 700; letter-spacing: 0.3px;">
-                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
-                        Escribinos por Email
-                    </a>
-                    <a href="https://wa.me/59891315670?text=Hola,%20estoy%20interesado%20en%20vuestros%20servicios%20de%20automatizaci%C3%B3n%20con%20IA" target="_blank" class="btn btn-secondary btn-lg"
-                        style="border-color: rgba(255,255,255,0.5); color: white; display: inline-flex; align-items: center; gap: 10px; font-weight: 700; letter-spacing: 0.3px;">
-                        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.5 14.3c-.2-.1-1.3-.6-1.5-.7-.2-.1-.4-.1-.5.1-.2.2-.6.7-.7.9-.1.2-.3.2-.5.1-.2-.1-1-.4-1.8-1.1-.7-.6-1.1-1.4-1.2-1.6-.1-.2 0-.3.1-.4.1-.1.2-.2.3-.3.1-.1.2-.2.2-.4s0-.3-.1-.4c-.1-.1-.5-1.3-.7-1.8-.2-.5-.4-.4-.5-.4h-.4c-.2 0-.5.1-.7.2-.3.3-.9.9-.9 2.1s1 2.4 1.1 2.6c.1.2 1.7 2.7 4.2 3.7.6.2 1.1.4 1.4.5.6.2 1.1.2 1.5.1.5-.1 1.3-.5 1.5-1 .2-.5.2-.9.1-1zM12 20.3c-1.4 0-2.8-.4-4-1.1l-.3-.2-3 1 .8-2.9-.2-.3c-.8-1.2-1.2-2.7-1.2-4.1 0-4.6 3.7-8.3 8.3-8.3 4.6 0 8.3 3.7 8.3 8.3s-3.7 8.3-8.3 8.3zm8-16.7c-2.1-2.1-5-3.3-8-3.3-6.2 0-11.3 5-11.3 11.2 0 2 .5 3.9 1.5 5.6l-1.6 5.8 6-1.6c1.7 1 3.5 1.5 5.4 1.5 6.2 0 11.3-5 11.3-11.2 0-3-1.2-5.8-3.3-8z"/></svg>
-                        WhatsApp
-                    </a>
-                </div>
-            </div>
+        <div class="stat-card animate-on-scroll">
+          <span class="stat-value">24/7</span>
+          <p class="stat-label">Operación continua<br>sin pausas ni errores</p>
         </div>
-    </section>
-
-    <!-- ============================================
-         FOOTER
-         ============================================ -->
-    <footer class="footer">
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-brand">
-                    <div class="footer-logo">
-                        <span style="font-size: 24px; font-weight: 800; color: white; letter-spacing: -0.5px;">LogisAI</span>
-                    </div>
-                    <p class="footer-description">
-                        Firma especializada en optimización y automatización de procesos de negocio mediante RPA, IA y
-                        desarrollo a medida.
-                    </p>
-                </div>
-
-                <div>
-                    <h4 class="footer-title">Servicios</h4>
-                    <ul class="footer-links">
-                        <li><a href="#servicios" class="footer-link">RPA</a></li>
-                        <li><a href="#servicios" class="footer-link">Inteligencia Artificial</a></li>
-                        <li><a href="#servicios" class="footer-link">Desarrollo a Medida</a></li>
-                        <li><a href="#proceso" class="footer-link">Consultoría</a></li>
-                    </ul>
-                </div>
-
-                <div>
-                    <h4 class="footer-title">Empresa</h4>
-                    <ul class="footer-links">
-                        <li><a href="#proceso" class="footer-link">Metodología</a></li>
-                        <li><a href="#ventajas" class="footer-link">Ventajas</a></li>
-                        <li><a href="#contacto" class="footer-link">Contacto</a></li>
-                    </ul>
-                </div>
-
-
-            </div>
-
-            <div class="footer-bottom">
-                <p class="footer-copyright">
-                    © 2026 LogisAI. Todos los derechos reservados.
-                </p>
-                <div class="footer-social">
-                    <a href="#" class="social-link" aria-label="LinkedIn">
-                        <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
-                            <path
-                                d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" />
-                        </svg>
-                    </a>
-                    <a href="#" class="social-link" aria-label="Twitter">
-                        <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
-                            <path
-                                d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.179 0-5.515 2.966-4.797 6.045-4.091-.205-7.719-2.165-10.148-5.144-1.29 2.213-.669 5.108 1.523 6.574-.806-.026-1.566-.247-2.229-.616-.054 2.281 1.581 4.415 3.949 4.89-.693.188-1.452.232-2.224.084.626 1.956 2.444 3.379 4.6 3.419-2.07 1.623-4.678 2.348-7.29 2.04 2.179 1.397 4.768 2.212 7.548 2.212 9.142 0 14.307-7.721 13.995-14.646.962-.695 1.797-1.562 2.457-2.549z" />
-                        </svg>
-                    </a>
-                    <a href="#" class="social-link" aria-label="GitHub">
-                        <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
-                            <path
-                                d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
-                        </svg>
-                    </a>
-                </div>
-            </div>
+        <div class="stat-card animate-on-scroll">
+          <span class="stat-value" data-target="95">0</span>
+          <p class="stat-label">Precisión garantizada<br>en ejecución</p>
         </div>
-    </footer>
+        <div class="stat-card animate-on-scroll">
+          <span class="stat-value">100%</span>
+          <p class="stat-label">Personalizado<br>a tu negocio</p>
+        </div>
+      </div>
 
-    <!-- JavaScript -->
-    <script src="script.js"></script>
+    </div>
+  </section>
 
-    <!-- Inline Animation for SVG Elements -->
-    <style>
-        .float-element {
-            animation: float 6s ease-in-out infinite;
-        }
+  <!-- ============================================================
+       CTA
+       ============================================================ -->
+  <section class="cta-section" id="contacto" aria-labelledby="cta-title">
+    <div class="container">
+      <div class="cta-inner">
+        <div class="cta-orb-1" aria-hidden="true"></div>
+        <div class="cta-orb-2" aria-hidden="true"></div>
 
-        .float-element:nth-child(2) {
-            animation-delay: 0.5s;
-        }
+        <div class="cta-content">
+          <span class="cta-badge">✨ Diagnóstico sin costo</span>
 
-        .float-element:nth-child(3) {
-            animation-delay: 1s;
-        }
+          <h2 class="cta-title" id="cta-title">
+            Transformá tu operación.<br>Empezá hoy.
+          </h2>
 
-        .float-element:nth-child(4) {
-            animation-delay: 1.5s;
-        }
+          <p class="cta-desc">
+            Una sesión de 30 minutos es suficiente para identificar qué proceso de tu negocio tiene mayor potencial de automatización.
+          </p>
 
-        .float-element:nth-child(5) {
-            animation-delay: 2s;
-        }
+          <div class="cta-actions">
+            <a href="mailto:facuetcheverry4@gmail.com" class="btn btn-white btn-lg">
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><rect x="1" y="3" width="14" height="10" rx="2" stroke="currentColor" stroke-width="1.5"/><path d="M1 5.5L8 9.5L15 5.5" stroke="currentColor" stroke-width="1.5"/></svg>
+              Escribinos por email
+            </a>
+            <a href="https://wa.me/59891315670?text=Hola%20synara.ai%2C%20quiero%20automatizar%20mi%20negocio" target="_blank" rel="noopener noreferrer" class="btn btn-whatsapp btn-lg">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+              Hablar por WhatsApp
+            </a>
+          </div>
 
-        /* Floating WhatsApp */
-        .floating-whatsapp {
-            position: fixed;
-            bottom: 24px;
-            right: 24px;
-            background-color: #25D366;
-            color: white;
-            padding: 14px 24px;
-            border-radius: 30px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-            font-weight: 600;
-            font-size: 16px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-            z-index: 9999;
-            transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
-            text-decoration: none;
-        }
+          <div class="cta-trust">
+            <span class="cta-trust-item">
+              <span class="cta-check" aria-hidden="true">✓</span>
+              Sin compromiso
+            </span>
+            <span class="cta-trust-item">
+              <span class="cta-check" aria-hidden="true">✓</span>
+              Respuesta en menos de 24h
+            </span>
+            <span class="cta-trust-item">
+              <span class="cta-check" aria-hidden="true">✓</span>
+              100% personalizado
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 
-        .floating-whatsapp:hover {
-            transform: translateY(-5px) scale(1.02);
-            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
-            background-color: #1ebe57;
-            color: white;
-        }
-        
-        .floating-whatsapp svg {
-            width: 24px;
-            height: 24px;
-            fill: currentColor;
-        }
-    </style>
+  <!-- ============================================================
+       FOOTER
+       ============================================================ -->
+  <footer class="footer" aria-labelledby="footer-brand">
 
-    <!-- Floating WhatsApp Button -->
-    <a href="https://wa.me/59891315670?text=Hola,%20estoy%20interesado%20en%20vuestros%20servicios%20de%20automatizaci%C3%B3n%20con%20IA" 
-       class="floating-whatsapp" target="_blank" aria-label="Contactar por WhatsApp">
-        <svg viewBox="0 0 24 24">
-            <path d="M17.5 14.3c-.2-.1-1.3-.6-1.5-.7-.2-.1-.4-.1-.5.1-.2.2-.6.7-.7.9-.1.2-.3.2-.5.1-.2-.1-1-.4-1.8-1.1-.7-.6-1.1-1.4-1.2-1.6-.1-.2 0-.3.1-.4.1-.1.2-.2.3-.3.1-.1.2-.2.2-.4s0-.3-.1-.4c-.1-.1-.5-1.3-.7-1.8-.2-.5-.4-.4-.5-.4h-.4c-.2 0-.5.1-.7.2-.3.3-.9.9-.9 2.1s1 2.4 1.1 2.6c.1.2 1.7 2.7 4.2 3.7.6.2 1.1.4 1.4.5.6.2 1.1.2 1.5.1.5-.1 1.3-.5 1.5-1 .2-.5.2-.9.1-1zM12 20.3c-1.4 0-2.8-.4-4-1.1l-.3-.2-3 1 .8-2.9-.2-.3c-.8-1.2-1.2-2.7-1.2-4.1 0-4.6 3.7-8.3 8.3-8.3 4.6 0 8.3 3.7 8.3 8.3s-3.7 8.3-8.3 8.3zm8-16.7c-2.1-2.1-5-3.3-8-3.3-6.2 0-11.3 5-11.3 11.2 0 2 .5 3.9 1.5 5.6l-1.6 5.8 6-1.6c1.7 1 3.5 1.5 5.4 1.5 6.2 0 11.3-5 11.3-11.2 0-3-1.2-5.8-3.3-8z"/>
-        </svg>
-        <span>Contáctate con nosotros</span>
-    </a>
+    <div class="container">
+      <div class="footer-grid">
 
+        <div class="footer-brand">
+          <div class="footer-logo">
+            <div class="logo-mark">
+              <svg viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                <path d="M9 2L15 5.5V12.5L9 16L3 12.5V5.5L9 2Z" stroke="white" stroke-width="1.5" stroke-linejoin="round"/>
+                <circle cx="9" cy="9" r="2.5" fill="white"/>
+              </svg>
+            </div>
+            <span class="logo-text" id="footer-brand">synara<span class="ai-suffix">.ai</span></span>
+          </div>
+          <p class="footer-tagline">
+            Automatización inteligente para empresas que escalan. RPA, IA y desarrollo a medida.
+          </p>
+          <nav class="footer-social" aria-label="Redes sociales">
+            <a href="#" class="footer-social-link" aria-label="LinkedIn">
+              <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+            </a>
+            <a href="#" class="footer-social-link" aria-label="Twitter / X">
+              <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.746l7.737-8.835L1.254 2.25H8.08l4.258 5.63 5.906-5.63zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+            </a>
+            <a href="#" class="footer-social-link" aria-label="GitHub">
+              <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+            </a>
+          </nav>
+        </div>
+
+        <nav aria-label="Servicios">
+          <p class="footer-col-title">Servicios</p>
+          <ul class="footer-links">
+            <li><a href="#servicios" class="footer-link">Automatización RPA</a></li>
+            <li><a href="#servicios" class="footer-link">Inteligencia Artificial</a></li>
+            <li><a href="#servicios" class="footer-link">Desarrollo a Medida</a></li>
+            <li><a href="#soluciones" class="footer-link">Casos de Uso</a></li>
+          </ul>
+        </nav>
+
+        <nav aria-label="Empresa">
+          <p class="footer-col-title">Empresa</p>
+          <ul class="footer-links">
+            <li><a href="#proceso" class="footer-link">Nuestro Proceso</a></li>
+            <li><a href="#impacto" class="footer-link">Impacto</a></li>
+            <li><a href="#contacto" class="footer-link">Contacto</a></li>
+            <li><a href="mailto:facuetcheverry4@gmail.com" class="footer-link">facuetcheverry4@gmail.com</a></li>
+          </ul>
+        </nav>
+
+      </div>
+
+      <div class="footer-bottom">
+        <p class="footer-copy">
+          © <span id="currentYear"></span> <strong>synara.ai</strong> — Todos los derechos reservados.
+        </p>
+        <p class="footer-copy">Hecho con 💜 en Uruguay</p>
+      </div>
+    </div>
+
+  </footer>
+
+  <!-- ============================================================
+       BOTÓN FLOTANTE WHATSAPP
+       ============================================================ -->
+  <a
+    href="https://wa.me/59891315670?text=Hola%20synara.ai%2C%20quiero%20automatizar%20mi%20negocio"
+    class="whatsapp-float"
+    target="_blank"
+    rel="noopener noreferrer"
+    aria-label="Contactar por WhatsApp"
+  >
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+    <span>WhatsApp</span>
+  </a>
+
+  <script src="script.js"></script>
 </body>
-
 </html>

@@ -1,371 +1,267 @@
-// ============================================
-// LogisAI - JavaScript Interactions
-// ============================================
+// ============================================================
+// synara.ai — JavaScript Interactions
+// ============================================================
 
 document.addEventListener('DOMContentLoaded', function () {
 
-    // ============================================
-    // MOBILE MENU TOGGLE
-    // ============================================
-    const mobileToggle = document.getElementById('mobileToggle');
-    const navMenu = document.getElementById('navMenu');
+  // ============================================================
+  // 1. AÑO DINÁMICO EN FOOTER
+  // ============================================================
+  const yearEl = document.getElementById('currentYear');
+  if (yearEl) yearEl.textContent = new Date().getFullYear();
 
-    if (mobileToggle && navMenu) {
-        mobileToggle.addEventListener('click', function () {
-            navMenu.classList.toggle('active');
 
-            // Animate hamburger icon
-            const spans = this.querySelectorAll('span');
-            if (navMenu.classList.contains('active')) {
-                spans[0].style.transform = 'rotate(45deg) translate(5px, 5px)';
-                spans[1].style.opacity = '0';
-                spans[2].style.transform = 'rotate(-45deg) translate(7px, -6px)';
-            } else {
-                spans[0].style.transform = 'none';
-                spans[1].style.opacity = '1';
-                spans[2].style.transform = 'none';
-            }
-        });
+  // ============================================================
+  // 2. MOBILE MENU TOGGLE
+  // ============================================================
+  const menuToggle = document.getElementById('menuToggle');
+  const mainNav    = document.getElementById('mainNav');
 
-        // Close menu when clicking on a link
-        const navLinks = navMenu.querySelectorAll('.nav-link');
-        navLinks.forEach(link => {
-            link.addEventListener('click', function () {
-                navMenu.classList.remove('active');
-                const spans = mobileToggle.querySelectorAll('span');
-                spans[0].style.transform = 'none';
-                spans[1].style.opacity = '1';
-                spans[2].style.transform = 'none';
-            });
-        });
-    }
-
-    // ============================================
-    // HEADER SCROLL EFFECT
-    // ============================================
-    const header = document.getElementById('header');
-    let lastScroll = 0;
-
-    window.addEventListener('scroll', function () {
-        const currentScroll = window.pageYOffset;
-
-        if (currentScroll > 100) {
-            header.classList.add('scrolled');
-        } else {
-            header.classList.remove('scrolled');
-        }
-
-        lastScroll = currentScroll;
+  if (menuToggle && mainNav) {
+    menuToggle.addEventListener('click', function () {
+      const isOpen = mainNav.classList.toggle('open');
+      menuToggle.classList.toggle('active', isOpen);
+      menuToggle.setAttribute('aria-expanded', String(isOpen));
+      document.body.style.overflow = isOpen ? 'hidden' : '';
     });
 
-    // ============================================
-    // SMOOTH SCROLL FOR ANCHOR LINKS
-    // ============================================
-    const smoothScrollLinks = document.querySelectorAll('a[href^="#"]');
-
-    smoothScrollLinks.forEach(link => {
-        link.addEventListener('click', function (e) {
-            const href = this.getAttribute('href');
-
-            // Don't prevent default for # only (mobile toggle)
-            if (href === '#') return;
-
-            e.preventDefault();
-
-            const target = document.querySelector(href);
-            if (target) {
-                const headerHeight = header.offsetHeight;
-                const targetPosition = target.offsetTop - headerHeight - 20;
-
-                window.scrollTo({
-                    top: targetPosition,
-                    behavior: 'smooth'
-                });
-            }
-        });
+    // Cerrar al hacer click en un link
+    mainNav.querySelectorAll('.nav-link').forEach(link => {
+      link.addEventListener('click', () => {
+        mainNav.classList.remove('open');
+        menuToggle.classList.remove('active');
+        menuToggle.setAttribute('aria-expanded', 'false');
+        document.body.style.overflow = '';
+      });
     });
 
-    // ============================================
-    // INTERSECTION OBSERVER - ANIMATE ON SCROLL WITH ZOOM
-    // ============================================
-    const observerOptions = {
-        threshold: 0.15,
-        rootMargin: '0px 0px -80px 0px'
-    };
+    // Cerrar al hacer click fuera
+    document.addEventListener('click', function (e) {
+      if (!mainNav.contains(e.target) && !menuToggle.contains(e.target)) {
+        mainNav.classList.remove('open');
+        menuToggle.classList.remove('active');
+        menuToggle.setAttribute('aria-expanded', 'false');
+        document.body.style.overflow = '';
+      }
+    });
+  }
 
-    const observer = new IntersectionObserver(function (entries) {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                // Add visible class with slight delay for better effect
-                setTimeout(() => {
-                    entry.target.classList.add('visible');
-                }, 50);
 
-                // Optionally unobserve after animation to improve performance
-                observer.unobserve(entry.target);
-            }
-        });
-    }, observerOptions);
+  // ============================================================
+  // 3. HEADER: EFECTO SCROLL
+  // ============================================================
+  const header = document.getElementById('header');
 
-    // Observe all elements with animate-on-scroll class and add staggered delays
-    const animateElements = document.querySelectorAll('.animate-on-scroll');
-    animateElements.forEach((el, index) => {
-        // Add delay classes to cards in grids
-        const gridParent = el.closest('.grid, .features-grid, .stats-grid');
-        if (gridParent) {
-            const siblings = gridParent.querySelectorAll('.animate-on-scroll');
-            const indexInGrid = Array.from(siblings).indexOf(el);
-            if (indexInGrid > 0) {
-                el.style.transitionDelay = `${indexInGrid * 0.1}s`;
-            }
-        }
-        observer.observe(el);
+  if (header) {
+    const onScroll = debounce(() => {
+      header.classList.toggle('scrolled', window.scrollY > 60);
+    }, 10);
+    window.addEventListener('scroll', onScroll, { passive: true });
+  }
+
+
+  // ============================================================
+  // 4. SMOOTH SCROLL PARA ANCLAS
+  // ============================================================
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+      const id = this.getAttribute('href');
+      if (id === '#') return;
+      const target = document.querySelector(id);
+      if (!target) return;
+      e.preventDefault();
+      const headerH = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--header-h')) || 70;
+      const top = target.getBoundingClientRect().top + window.pageYOffset - headerH;
+      window.scrollTo({ top, behavior: 'smooth' });
+    });
+  });
+
+
+  // ============================================================
+  // 5. ANIMATE ON SCROLL (IntersectionObserver)
+  // ============================================================
+  const animElements = document.querySelectorAll('.animate-on-scroll');
+
+  if (animElements.length > 0) {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (!entry.isIntersecting) return;
+        const el = entry.target;
+        const delay = el.dataset.delay || 0;
+        setTimeout(() => el.classList.add('visible'), Number(delay));
+        observer.unobserve(el);
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -60px 0px' });
+
+    // Añadir delays escalonados a elementos en grillas
+    document.querySelectorAll('.services-grid .service-card, .solutions-grid .solution-card, .stats-grid .stat-card').forEach((el, i) => {
+      el.dataset.delay = i * 80;
     });
 
-    // ============================================
-    // PARALLAX & ZOOM EFFECT ON HERO
-    // ============================================
-    const heroSection = document.querySelector('.hero');
-    const heroVisual = document.querySelector('.hero-visual');
-    const heroText = document.querySelector('.hero-text');
+    animElements.forEach(el => observer.observe(el));
+  }
 
-    if (heroSection && heroVisual) {
-        window.addEventListener('scroll', function () {
-            const scrolled = window.pageYOffset;
-            const heroHeight = heroSection.offsetHeight;
 
-            if (scrolled < heroHeight) {
-                // Parallax effect
-                const parallaxRate = scrolled * 0.3;
+  // ============================================================
+  // 6. TIMELINE: ANIMAR LÍNEA AL SCROLL
+  // ============================================================
+  const timelineFill = document.getElementById('timelineFill');
+  const timeline     = document.getElementById('methodologyTimeline');
 
-                // Zoom out effect (scale down as you scroll)
-                const zoomProgress = scrolled / heroHeight;
-                const scale = 1 - (zoomProgress * 0.15); // Scale from 1 to 0.85
-                const opacity = 1 - (zoomProgress * 0.3); // Slight fade
-
-                heroVisual.style.transform = `translateY(${parallaxRate}px) scale(${scale})`;
-                heroVisual.style.opacity = opacity;
-
-                // Subtle zoom on text too
-                if (heroText) {
-                    const textScale = 1 - (zoomProgress * 0.05);
-                    heroText.style.transform = `scale(${textScale})`;
-                }
-            }
-        });
-    }
-
-    // ============================================
-    // COUNTER ANIMATION FOR STATS
-    // ============================================
-    const statNumbers = document.querySelectorAll('.stat-number');
-    let hasAnimated = false;
-
-    const animateCounter = (element) => {
-        const target = element.textContent;
-        const isPercentage = target.includes('%');
-        const isFraction = target.includes('/');
-
-        if (isPercentage) {
-            const value = parseInt(target);
-            let current = 0;
-            const increment = value / 50;
-            const timer = setInterval(() => {
-                current += increment;
-                if (current >= value) {
-                    element.textContent = value + '%';
-                    clearInterval(timer);
-                } else {
-                    element.textContent = Math.floor(current) + '%';
-                }
-            }, 30);
+  if (timelineFill && timeline) {
+    const tlObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          timelineFill.classList.add('animated');
+          tlObserver.unobserve(entry.target);
         }
-    };
+      });
+    }, { threshold: 0.3 });
+    tlObserver.observe(timeline);
+  }
 
-    const statsObserver = new IntersectionObserver(function (entries) {
-        entries.forEach(entry => {
-            if (entry.isIntersecting && !hasAnimated) {
-                hasAnimated = true;
-                statNumbers.forEach(stat => animateCounter(stat));
-            }
-        });
+
+  // ============================================================
+  // 7. COUNTER ANIMATION PARA STATS
+  // ============================================================
+  const statValues = document.querySelectorAll('.stat-value[data-target]');
+
+  if (statValues.length > 0) {
+    const counterObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (!entry.isIntersecting) return;
+        const el     = entry.target;
+        const target = parseInt(el.dataset.target, 10);
+        const suffix = el.dataset.suffix || '%';
+        animateCounter(el, target, suffix);
+        counterObserver.unobserve(el);
+      });
     }, { threshold: 0.5 });
 
-    const statsSection = document.querySelector('.stats-grid');
-    if (statsSection) {
-        statsObserver.observe(statsSection);
+    statValues.forEach(el => counterObserver.observe(el));
+  }
+
+  function animateCounter(el, target, suffix) {
+    const duration  = 1600;
+    const startTime = performance.now();
+
+    function update(currentTime) {
+      const elapsed  = currentTime - startTime;
+      const progress = Math.min(elapsed / duration, 1);
+      const eased    = easeOutCubic(progress);
+      const value    = Math.round(eased * target);
+      el.textContent = value + suffix;
+      if (progress < 1) requestAnimationFrame(update);
     }
 
-    // ============================================
-    // FORM VALIDATION (if form is added later)
-    // ============================================
-    const contactForm = document.getElementById('contactForm');
+    requestAnimationFrame(update);
+  }
 
-    if (contactForm) {
-        contactForm.addEventListener('submit', function (e) {
-            e.preventDefault();
+  function easeOutCubic(x) {
+    return 1 - Math.pow(1 - x, 3);
+  }
 
-            const formData = new FormData(this);
 
-            // Basic validation
-            let isValid = true;
-            const required = this.querySelectorAll('[required]');
+  // ============================================================
+  // 8. PARALLAX EN HERO
+  // ============================================================
+  const heroSection = document.querySelector('.hero');
+  const heroContent = document.querySelector('.hero-content');
 
-            required.forEach(field => {
-                if (!field.value.trim()) {
-                    isValid = false;
-                    field.style.borderColor = '#EF4444';
-                } else {
-                    field.style.borderColor = '';
-                }
-            });
+  if (heroSection && heroContent) {
+    const onHeroScroll = () => {
+      const scrollY     = window.pageYOffset;
+      const heroHeight  = heroSection.offsetHeight;
+      if (scrollY > heroHeight) return;
 
-            if (isValid) {
-                // Here you would typically send the form data to a server
-                console.log('Form submitted:', Object.fromEntries(formData));
-
-                // Show success message
-                alert('¡Gracias por tu mensaje! Te contactaremos pronto.');
-                this.reset();
-            } else {
-                alert('Por favor completa todos los campos requeridos.');
-            }
-        });
-    }
-
-    // ============================================
-    // FLOATING ANIMATION FOR CARDS
-    // ============================================
-    const cards = document.querySelectorAll('.card');
-
-    cards.forEach((card, index) => {
-        card.style.setProperty('--animation-delay', `${index * 0.1}s`);
-    });
-
-    // ============================================
-    // CURSOR GLOW EFFECT (Optional Premium Touch)
-    // ============================================
-    const createCursorGlow = () => {
-        const glow = document.createElement('div');
-        glow.className = 'cursor-glow';
-        glow.style.cssText = `
-            position: fixed;
-            width: 300px;
-            height: 300px;
-            border-radius: 50%;
-            background: radial-gradient(circle, rgba(37, 99, 235, 0.1) 0%, transparent 70%);
-            pointer-events: none;
-            z-index: 9999;
-            transform: translate(-50%, -50%);
-            transition: opacity 0.3s;
-            opacity: 0;
-        `;
-        document.body.appendChild(glow);
-
-        let mouseX = 0;
-        let mouseY = 0;
-        let glowX = 0;
-        let glowY = 0;
-
-        document.addEventListener('mousemove', (e) => {
-            mouseX = e.clientX;
-            mouseY = e.clientY;
-            glow.style.opacity = '1';
-        });
-
-        document.addEventListener('mouseleave', () => {
-            glow.style.opacity = '0';
-        });
-
-        const animate = () => {
-            glowX += (mouseX - glowX) * 0.1;
-            glowY += (mouseY - glowY) * 0.1;
-            glow.style.left = glowX + 'px';
-            glow.style.top = glowY + 'px';
-            requestAnimationFrame(animate);
-        };
-
-        animate();
+      const progress = scrollY / heroHeight;
+      heroContent.style.transform = `translateY(${scrollY * 0.25}px)`;
+      heroContent.style.opacity   = 1 - progress * 0.6;
     };
 
-    // Uncomment to enable cursor glow on desktop
-    // if (window.innerWidth > 1024) {
-    //     createCursorGlow();
-    // }
+    window.addEventListener('scroll', onHeroScroll, { passive: true });
+  }
 
-    // ============================================
-    // PRELOAD ANIMATION (Optional)
-    // ============================================
-    window.addEventListener('load', function () {
-        document.body.classList.add('loaded');
+
+  // ============================================================
+  // 9. CURSOR GLOW (solo desktop)
+  // ============================================================
+  const cursorGlow = document.getElementById('cursorGlow');
+
+  if (cursorGlow && window.innerWidth > 1024) {
+    let mouseX = 0, mouseY = 0;
+    let glowX  = 0, glowY  = 0;
+    let raf;
+
+    document.addEventListener('mousemove', (e) => {
+      mouseX = e.clientX;
+      mouseY = e.clientY;
     });
 
-    // ============================================
-    // LAZY LOAD IMAGES (if you add more images)
-    // ============================================
-    const images = document.querySelectorAll('img[data-src]');
+    function updateGlow() {
+      glowX += (mouseX - glowX) * 0.08;
+      glowY += (mouseY - glowY) * 0.08;
+      cursorGlow.style.left = glowX + 'px';
+      cursorGlow.style.top  = glowY + 'px';
+      raf = requestAnimationFrame(updateGlow);
+    }
 
-    const imageObserver = new IntersectionObserver((entries, observer) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                const img = entry.target;
-                img.src = img.dataset.src;
-                img.removeAttribute('data-src');
-                observer.unobserve(img);
-            }
-        });
+    raf = requestAnimationFrame(updateGlow);
+
+    // Pausar cuando el mouse sale de la ventana
+    document.addEventListener('mouseleave', () => {
+      cursorGlow.style.opacity = '0';
     });
+    document.addEventListener('mouseenter', () => {
+      cursorGlow.style.opacity = '1';
+    });
+  } else if (cursorGlow) {
+    cursorGlow.style.display = 'none';
+  }
 
-    images.forEach(img => imageObserver.observe(img));
 
-    // ============================================
-    // CONSOLE BRANDING
-    // ============================================
-    console.log('%c⚡ LogisAI', 'font-size: 24px; font-weight: bold; background: linear-gradient(135deg, #2563EB 0%, #3B82F6 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent;');
-    console.log('%cAutomatizaciones que fluyen en tu negocio', 'font-size: 14px; color: #64748B;');
-    console.log('%c¿Interesado en trabajar con nosotros? facuetcheverry4@gmail.com', 'font-size: 12px; color: #2563EB;');
+  // ============================================================
+  // 10. LAZY LOADING DE IMÁGENES
+  // ============================================================
+  const lazyImages = document.querySelectorAll('img[data-src]');
+
+  if (lazyImages.length > 0) {
+    const imgObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (!entry.isIntersecting) return;
+        const img = entry.target;
+        img.src = img.dataset.src;
+        img.removeAttribute('data-src');
+        imgObserver.unobserve(img);
+      });
+    });
+    lazyImages.forEach(img => imgObserver.observe(img));
+  }
+
+
+  // ============================================================
+  // 11. CONSOLE BRANDING
+  // ============================================================
+  console.log(
+    '%c🌀 synara.ai',
+    'background: linear-gradient(135deg, #7C3AED, #06B6D4); color: white; padding: 8px 16px; border-radius: 6px; font-size: 16px; font-weight: bold;'
+  );
+  console.log(
+    '%cAutomatización Inteligente para empresas que escalan.',
+    'color: #8B5CF6; font-size: 12px;'
+  );
+  console.log('%c✉ facuetcheverry4@gmail.com', 'color: #94A3B8; font-size: 11px;');
 
 });
 
-// ============================================
-// PERFORMANCE OPTIMIZATION
-// ============================================
 
-// Debounce function for scroll events
-function debounce(func, wait) {
-    let timeout;
-    return function executedFunction(...args) {
-        const later = () => {
-            clearTimeout(timeout);
-            func(...args);
-        };
-        clearTimeout(timeout);
-        timeout = setTimeout(later, wait);
-    };
+// ============================================================
+// UTILIDADES
+// ============================================================
+function debounce(fn, delay) {
+  let timer;
+  return function (...args) {
+    clearTimeout(timer);
+    timer = setTimeout(() => fn.apply(this, args), delay);
+  };
 }
-
-// Request animation frame polyfill
-(function () {
-    var lastTime = 0;
-    var vendors = ['webkit', 'moz'];
-    for (var x = 0; x < vendors.length && !window.requestAnimationFrame; ++x) {
-        window.requestAnimationFrame = window[vendors[x] + 'RequestAnimationFrame'];
-        window.cancelAnimationFrame =
-            window[vendors[x] + 'CancelAnimationFrame'] || window[vendors[x] + 'CancelRequestAnimationFrame'];
-    }
-
-    if (!window.requestAnimationFrame)
-        window.requestAnimationFrame = function (callback) {
-            var currTime = new Date().getTime();
-            var timeToCall = Math.max(0, 16 - (currTime - lastTime));
-            var id = window.setTimeout(function () { callback(currTime + timeToCall); },
-                timeToCall);
-            lastTime = currTime + timeToCall;
-            return id;
-        };
-
-    if (!window.cancelAnimationFrame)
-        window.cancelAnimationFrame = function (id) {
-            clearTimeout(id);
-        };
-}());
