@@ -3,7 +3,6 @@
    Paleta: Violeta #7C3AED + Cyan #06B6D4 sobre fondo oscuro
    ============================================================ */
 
-@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@400;500;600&display=swap');
 
 /* ============================================================
    1. VARIABLES DEL SISTEMA
@@ -73,6 +72,7 @@
   --space-4: 1rem;
   --space-5: 1.25rem;
   --space-6: 1.5rem;
+  --space-7: 1.75rem;
   --space-8: 2rem;
   --space-10: 2.5rem;
   --space-12: 3rem;
@@ -700,7 +700,11 @@ ul { list-style: none; }
   z-index: 2;
 }
 
-.hero-center-icon { font-size: 2.8rem; }
+.hero-center-icon {
+  width: 48px;
+  height: 48px;
+  opacity: 0.9;
+}
 
 .hero-node {
   position: absolute;
@@ -711,10 +715,15 @@ ul { list-style: none; }
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 1.3rem;
   backdrop-filter: blur(12px);
   box-shadow: var(--shadow-card);
   z-index: 3;
+  color: var(--accent-light);
+}
+
+.hero-node svg {
+  width: 20px;
+  height: 20px;
 }
 
 .hero-node:nth-child(5) { top: 10%; left: 50%; transform: translateX(-50%); animation: float 6s ease-in-out infinite; }
@@ -759,36 +768,29 @@ ul { list-style: none; }
 .clients-track:hover { animation-play-state: paused; }
 
 .client-logo {
-  display: flex;
+  display: inline-flex;
   align-items: center;
-  gap: var(--space-2);
+  padding: var(--space-2) var(--space-5);
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-full);
   white-space: nowrap;
-  opacity: 0.35;
-  transition: opacity var(--anim-base);
   flex-shrink: 0;
+  opacity: 0.6;
+  transition: opacity var(--anim-base), border-color var(--anim-base);
 }
 
-.client-logo:hover { opacity: 0.7; }
-
-.client-logo-icon {
-  width: 26px; height: 26px;
-  border-radius: var(--radius-sm);
-  background: var(--gradient-brand);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 0.65rem;
-  font-weight: 800;
-  color: #fff;
-  flex-shrink: 0;
+.client-logo:hover {
+  opacity: 1;
+  border-color: rgba(124, 58, 237, 0.25);
 }
 
 .client-logo-name {
   font-family: var(--font-display);
   font-size: var(--text-sm);
-  font-weight: 700;
-  color: var(--text-secondary);
-  letter-spacing: -0.01em;
+  font-weight: 600;
+  color: var(--text-muted);
+  letter-spacing: 0.02em;
 }
 
 /* ============================================================
@@ -1558,8 +1560,9 @@ ul { list-style: none; }
   .hero-ring-2 { width: 270px; height: 270px; }
   .hero-ring-3 { width: 335px; height: 335px; }
   .hero-center { width: 90px; height: 90px; }
-  .hero-center-icon { font-size: 2.2rem; }
-  .hero-node { width: 42px; height: 42px; font-size: 1.1rem; }
+  .hero-center-icon { width: 38px; height: 38px; }
+  .hero-node { width: 42px; height: 42px; }
+  .hero-node svg { width: 18px; height: 18px; }
 
   .footer-grid { grid-template-columns: 1fr 1fr; }
   .footer-brand { grid-column: 1 / -1; }
@@ -1624,4 +1627,35 @@ ul { list-style: none; }
   .cta-actions { flex-direction: column; align-items: center; }
   .cta-actions .btn { width: 100%; justify-content: center; max-width: 300px; }
   .footer-bottom { flex-direction: column; text-align: center; }
+}
+
+/* ============================================================
+   19. ACCESIBILIDAD: PREFERS-REDUCED-MOTION
+   ============================================================ */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  html { scroll-behavior: auto; }
+
+  .orb,
+  .hero-ring,
+  .hero-node,
+  .hero-center,
+  .methodology-line-fill {
+    animation: none !important;
+    transition: none !important;
+  }
+
+  .animate-on-scroll {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+
+  .clients-track { animation: none !important; }
 }

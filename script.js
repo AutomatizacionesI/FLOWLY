@@ -4,6 +4,8 @@
 
 document.addEventListener('DOMContentLoaded', function () {
 
+  const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
   // ============================================================
   // 1. AÑO DINÁMICO EN FOOTER
   // ============================================================
@@ -168,7 +170,7 @@ document.addEventListener('DOMContentLoaded', function () {
   const heroSection = document.querySelector('.hero');
   const heroContent = document.querySelector('.hero-content');
 
-  if (heroSection && heroContent) {
+  if (heroSection && heroContent && !prefersReduced) {
     const onHeroScroll = () => {
       const scrollY     = window.pageYOffset;
       const heroHeight  = heroSection.offsetHeight;
@@ -188,7 +190,7 @@ document.addEventListener('DOMContentLoaded', function () {
   // ============================================================
   const cursorGlow = document.getElementById('cursorGlow');
 
-  if (cursorGlow && window.innerWidth > 1024) {
+  if (cursorGlow && window.innerWidth > 1024 && !prefersReduced) {
     let mouseX = 0, mouseY = 0;
     let glowX  = 0, glowY  = 0;
     let raf;
@@ -211,9 +213,11 @@ document.addEventListener('DOMContentLoaded', function () {
     // Pausar cuando el mouse sale de la ventana
     document.addEventListener('mouseleave', () => {
       cursorGlow.style.opacity = '0';
+      cancelAnimationFrame(raf);
     });
     document.addEventListener('mouseenter', () => {
       cursorGlow.style.opacity = '1';
+      raf = requestAnimationFrame(updateGlow);
     });
   } else if (cursorGlow) {
     cursorGlow.style.display = 'none';
@@ -221,26 +225,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
   // ============================================================
-  // 10. LAZY LOADING DE IMÁGENES
-  // ============================================================
-  const lazyImages = document.querySelectorAll('img[data-src]');
-
-  if (lazyImages.length > 0) {
-    const imgObserver = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (!entry.isIntersecting) return;
-        const img = entry.target;
-        img.src = img.dataset.src;
-        img.removeAttribute('data-src');
-        imgObserver.unobserve(img);
-      });
-    });
-    lazyImages.forEach(img => imgObserver.observe(img));
-  }
-
-
-  // ============================================================
-  // 11. CONSOLE BRANDING
+  // 10. CONSOLE BRANDING
   // ============================================================
   console.log(
     '%c🌀 synara.ai',
@@ -250,7 +235,7 @@ document.addEventListener('DOMContentLoaded', function () {
     '%cAutomatización Inteligente para empresas que escalan.',
     'color: #8B5CF6; font-size: 12px;'
   );
-  console.log('%c✉ facuetcheverry4@gmail.com', 'color: #94A3B8; font-size: 11px;');
+  console.log('%c✉ hola@synara.ai', 'color: #94A3B8; font-size: 11px;');
 
 });
 
