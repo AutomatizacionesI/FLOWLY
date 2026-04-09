@@ -1,0 +1,53 @@
+<h2>Hero — ¿Cómo sumamos imágenes corporativas?</h2>
+<p class="subtitle">El núcleo animado (anillos orbitales) se mantiene igual en todas las opciones. La pregunta es qué agregamos.</p>
+
+<div class="options">
+  <div class="option" data-choice="a" onclick="toggleSelect(this)">
+    <div class="letter">A</div>
+    <div class="content">
+      <h3>Sin cambios en el Hero</h3>
+      <p>Mantenemos el hero exactamente como está. Las imágenes corporativas van solo en las secciones de abajo (Impacto, Servicios). El hero sigue siendo 100% futurista/abstracto.</p>
+      <div class="pros-cons">
+        <div class="pros"><h4>Pros</h4><ul><li>Cero riesgo de romper animaciones</li><li>Look tech puro, diferenciador</li></ul></div>
+        <div class="cons"><h4>Cons</h4><ul><li>Hero sigue siendo 100% abstracto — sin cara humana</li></ul></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="option" data-choice="b" onclick="toggleSelect(this)">
+    <div class="letter">B</div>
+    <div class="content">
+      <h3>Floating card con opt_office_team.png (Recomendado)</h3>
+      <p>Agregamos una tarjeta glassmorphism pequeña que flota <em>debajo</em> del visual orbital, mostrando <code>opt_office_team.png</code> con una etiqueta como <em>"Equipo dedicado a tu proyecto"</em>. La card aparece como si fuera un widget flotante, igual que los nodos que ya existen.</p>
+      <div class="mockup" style="margin-top:12px">
+        <div class="mockup-header">Mockup del Hero (derecha)</div>
+        <div class="mockup-body" style="display:flex;flex-direction:column;align-items:center;gap:12px;padding:20px;background:#0C0C15;border-radius:8px">
+          <div style="width:180px;height:180px;border-radius:50%;border:2px solid rgba(124,58,237,0.4);display:flex;align-items:center;justify-content:center;color:#8B5CF6;font-size:13px">[ anillos orbitales ]</div>
+          <div style="background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:12px;padding:10px 16px;display:flex;align-items:center;gap:10px;backdrop-filter:blur(12px)">
+            <div style="width:40px;height:40px;background:rgba(124,58,237,0.3);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:11px;color:#aaa">img</div>
+            <div>
+              <div style="font-size:12px;font-weight:600;color:#F8FAFC">Equipo dedicado</div>
+              <div style="font-size:11px;color:#94A3B8">a tu proyecto</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="pros-cons" style="margin-top:8px">
+        <div class="pros"><h4>Pros</h4><ul><li>Suma cara humana sin romper el look tech</li><li>Encaja en el sistema de nodos existente</li><li>Alta confianza en 2 segundos</li></ul></div>
+        <div class="cons"><h4>Cons</h4><ul><li>Requiere ajuste de z-index y posicionamiento</li></ul></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="option" data-choice="c" onclick="toggleSelect(this)">
+    <div class="letter">C</div>
+    <div class="content">
+      <h3>Panel dashboard flotante completo</h3>
+      <p>Reemplazamos el núcleo orbital por un panel estilo ventana macOS con <code>opt_business_dashboard.png</code> adentro — como si fuera el producto real. Impacta de entrada que "esto es software que funciona".</p>
+      <div class="pros-cons">
+        <div class="pros"><h4>Pros</h4><ul><li>Muy visual e impactante</li><li>Sugiere producto real, no solo concepto</li></ul></div>
+        <div class="cons"><h4>Cons</h4><ul><li>Requiere reescribir la lógica del hero visual</li><li>Puede perder la identidad futurista que ya tienen</li></ul></div>
+      </div>
+    </div>
+  </div>
+</div>

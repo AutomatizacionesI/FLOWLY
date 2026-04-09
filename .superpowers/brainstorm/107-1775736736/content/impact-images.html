@@ -1,0 +1,62 @@
+<h2>Sección Impacto — ¿Cómo integramos las imágenes corporativas?</h2>
+<p class="subtitle">La sección tiene 2 columnas: "Sin synara" (antes) vs "Con synara.ai" (después). Tenemos opt_robotic_process.png y opt_business_dashboard.png para reforzar el lado derecho.</p>
+
+<div class="options">
+  <div class="option" data-choice="a" onclick="toggleSelect(this)">
+    <div class="letter">A</div>
+    <div class="content">
+      <h3>Imagen grande encima de la columna "Con synara.ai"</h3>
+      <p>Agregamos <code>opt_robotic_process.png</code> o <code>opt_business_dashboard.png</code> como una imagen banner en la parte superior de la columna derecha, dentro del card glassmorphism, antes de los 4 items.</p>
+      <div class="mockup" style="margin-top:10px">
+        <div class="mockup-header">Columna derecha — Con synara.ai</div>
+        <div class="mockup-body" style="background:#0F0F1D;border:1px solid rgba(6,182,212,0.3);border-radius:12px;overflow:hidden">
+          <div style="height:120px;background:linear-gradient(135deg,rgba(124,58,237,0.3),rgba(6,182,212,0.2));display:flex;align-items:center;justify-content:center;color:#94A3B8;font-size:12px;border-bottom:1px solid rgba(255,255,255,0.07)">[ opt_robotic_process.png ]</div>
+          <div style="padding:16px;display:flex;flex-direction:column;gap:8px">
+            <div style="display:flex;gap:8px;align-items:center"><span style="color:#06B6D4;font-size:14px">⚡</span><span style="font-size:12px;color:#F8FAFC">82% del tiempo recuperado</span></div>
+            <div style="display:flex;gap:8px;align-items:center"><span style="color:#06B6D4;font-size:14px">🎯</span><span style="font-size:12px;color:#F8FAFC">94% de precisión garantizada</span></div>
+            <div style="display:flex;gap:8px;align-items:center"><span style="color:#06B6D4;font-size:14px">📈</span><span style="font-size:12px;color:#F8FAFC">Dashboards en tiempo real</span></div>
+            <div style="display:flex;gap:8px;align-items:center"><span style="color:#06B6D4;font-size:14px">🚀</span><span style="font-size:12px;color:#F8FAFC">Escalabilidad ilimitada</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="option" data-choice="b" onclick="toggleSelect(this)">
+    <div class="letter">B</div>
+    <div class="content">
+      <h3>Imagen flotante entre las dos columnas (Recomendado)</h3>
+      <p>Colocamos <code>opt_robotic_process.png</code> como una tarjeta glassmorphism que "emerge" entre el antes y el después — visualmente representa la transformación. Usa position relativo con z-index para superponerse levemente a ambas columnas.</p>
+      <div class="mockup" style="margin-top:10px">
+        <div class="mockup-header">Vista del Impact Grid</div>
+        <div class="mockup-body" style="background:#0C0C15;padding:16px;position:relative">
+          <div style="display:grid;grid-template-columns:1fr 60px 1fr;gap:8px;align-items:center">
+            <div style="background:#0F0F1D;border:1px solid rgba(239,68,68,0.2);border-radius:8px;padding:12px;font-size:11px;color:#94A3B8">
+              <div style="color:#EF4444;font-size:12px;font-weight:600;margin-bottom:8px">⚠ Sin synara</div>
+              <div>Horas perdidas...</div><div>Errores costosos...</div><div>Info dispersa...</div>
+            </div>
+            <div style="background:rgba(124,58,237,0.15);border:1px solid rgba(124,58,237,0.4);border-radius:8px;padding:8px;text-align:center;font-size:10px;color:#8B5CF6;height:80px;display:flex;align-items:center;justify-content:center">
+              img
+            </div>
+            <div style="background:#0F0F1D;border:1px solid rgba(6,182,212,0.3);border-radius:8px;padding:12px;font-size:11px;color:#94A3B8">
+              <div style="color:#06B6D4;font-size:12px;font-weight:600;margin-bottom:8px">✅ Con synara.ai</div>
+              <div>82% tiempo recuperado...</div><div>94% precisión...</div><div>Dashboards...</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="option" data-choice="c" onclick="toggleSelect(this)">
+    <div class="letter">C</div>
+    <div class="content">
+      <h3>Imagen debajo de ambas columnas — CTA visual</h3>
+      <p>Dejamos el grid de 2 columnas igual, y agregamos <code>opt_business_dashboard.png</code> full-width debajo del before/after como una "prueba visual" — tipo: <em>"Así se ve en producción"</em>. Refuerza que esto es real, no promesas.</p>
+      <div class="pros-cons">
+        <div class="pros"><h4>Pros</h4><ul><li>Impacto máximo — imagen grande, difícil de ignorar</li><li>Cierra el argumento con evidencia visual</li></ul></div>
+        <div class="cons"><h4>Cons</h4><ul><li>Más scroll requerido</li><li>Puede alejarse del call-to-action</li></ul></div>
+      </div>
+    </div>
+  </div>
+</div>

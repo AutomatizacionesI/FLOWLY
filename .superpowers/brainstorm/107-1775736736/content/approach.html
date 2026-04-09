@@ -1,0 +1,43 @@
+<h2>How far do we redesign synara.ai?</h2>
+<p class="subtitle">All 3 approaches keep your existing dark glassmorphism style. The question is how much new structure we add.</p>
+
+<div class="options">
+  <div class="option" data-choice="a" onclick="toggleSelect(this)">
+    <div class="letter">A</div>
+    <div class="content">
+      <h3>Surgical Fixes</h3>
+      <p><strong>What changes:</strong> Replace round stats (85%, 95%) with credible specific numbers (82%, 94%, etc). Sharpen all copy. Place the 4 corporate images into existing sections as framed visuals. Add the 4 AI avatars as a proper testimonials row inside the Impact section.</p>
+      <p><strong>New HTML elements:</strong> ~20 lines — just image frames and 4 quote cards.</p>
+      <div class="pros-cons">
+        <div class="pros"><h4>Pros</h4><ul><li>Lowest risk, fastest to implement</li><li>No layout shifts</li><li>Keeps existing SEO structure</li></ul></div>
+        <div class="cons"><h4>Cons</h4><ul><li>Doesn't add new trust signals</li><li>Testimonials feel tacked on</li></ul></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="option" data-choice="b" onclick="toggleSelect(this)">
+    <div class="letter">B</div>
+    <div class="content">
+      <h3>Balanced Overhaul (Recommended)</h3>
+      <p><strong>What changes:</strong> Everything in A, PLUS: add a full <strong>Testimonials section</strong> (4 quote cards with ai_avatar_1–4, company role, star rating) between Impact and Stats. Redesign the Impact section so each "Con synara.ai" row has a supporting corporate image (opt_robotic_process.png, opt_business_dashboard.png). Hero right-side gets opt_office_team.png as a floating card for human trust.</p>
+      <p><strong>New HTML elements:</strong> ~80 lines — new section + enhanced impact cards.</p>
+      <div class="pros-cons">
+        <div class="pros"><h4>Pros</h4><ul><li>Maximum credibility uplift</li><li>Avatars used as real social proof</li><li>Corporate images build trust exactly where needed</li><li>Still matches your existing visual system</li></ul></div>
+        <div class="cons"><h4>Cons</h4><ul><li>Testimonial quotes need to be written/confirmed</li><li>More implementation work</li></ul></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="option" data-choice="c" onclick="toggleSelect(this)">
+    <div class="letter">C</div>
+    <div class="content">
+      <h3>Full CRO Rebuild</h3>
+      <p><strong>What changes:</strong> Everything in B, PLUS: replace the hero right-side orbit animation with a full glassmorphism "floating dashboard" panel (opt_business_dashboard.png in a macOS-style window frame). Add a <strong>Results / Case Studies</strong> section with 2–3 cards (opt_server_room.png, opt_office_team.png) each showing industry + specific metric achieved. Move CTA button above the fold in the hero.</p>
+      <p><strong>New HTML elements:</strong> ~200 lines — hero redesign + new sections.</p>
+      <div class="pros-cons">
+        <div class="pros"><h4>Pros</h4><ul><li>Highest-converting layout</li><li>Every image used strategically</li><li>Looks like a funded startup's site</li></ul></div>
+        <div class="cons"><h4>Cons</h4><ul><li>More risk of breaking existing animations</li><li>Hero redesign is significant work</li><li>Needs case study content</li></ul></div>
+      </div>
+    </div>
+  </div>
+</div>
