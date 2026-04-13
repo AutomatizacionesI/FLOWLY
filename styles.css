@@ -1,5 +1,5 @@
 /* ============================================================
-   synara.ai — Design System
+   E&P — Design System
    Paleta: Violeta #7C3AED + Cyan #06B6D4 sobre fondo oscuro
    ============================================================ */
 
@@ -105,7 +105,7 @@
 
   /* Layout */
   --container-max: 1200px;
-  --header-h: 70px;
+  --header-h: 92px;
 }
 
 /* ============================================================
@@ -120,6 +120,15 @@
 html {
   scroll-behavior: smooth;
   -webkit-text-size-adjust: 100%;
+  font-size: 112.5%;
+}
+
+@media (max-width: 1100px) {
+  html { font-size: 106.25%; }
+}
+
+@media (max-width: 768px) {
+  html { font-size: 100%; }
 }
 
 body {
@@ -413,6 +422,68 @@ ul { list-style: none; }
   stroke-linejoin: round;
 }
 
+.logo-img {
+  height: 40px;
+  width: auto;
+  display: block;
+  border-radius: var(--radius-sm);
+  object-fit: contain;
+  flex-shrink: 0;
+}
+
+.logo-brand {
+  gap: var(--space-3);
+}
+
+.logo-ep {
+  width: 56px;
+  height: 56px;
+  flex-shrink: 0;
+  filter: drop-shadow(0 0 10px rgba(34, 211, 238, 0.45))
+          drop-shadow(0 0 18px rgba(6, 182, 212, 0.25));
+  transition: filter var(--anim-base), transform var(--anim-base);
+}
+
+.logo-brand:hover .logo-ep {
+  filter: drop-shadow(0 0 12px rgba(34, 211, 238, 0.7))
+          drop-shadow(0 0 26px rgba(6, 182, 212, 0.35));
+  transform: translateY(-1px);
+}
+
+.logo-wordmark {
+  display: flex;
+  flex-direction: column;
+  line-height: 1;
+  font-family: var(--font-display, Inter, system-ui, sans-serif);
+  color: var(--text-primary);
+  letter-spacing: -0.01em;
+}
+
+.logo-wordmark-top {
+  font-size: 19px;
+  font-weight: 700;
+  color: #EAF6FA;
+  letter-spacing: -0.005em;
+}
+
+.logo-wordmark-bottom {
+  margin-top: 4px;
+  font-size: 16px;
+  font-weight: 600;
+  color: #9CC6D3;
+  letter-spacing: 0.04em;
+}
+
+@media (max-width: 560px) {
+  .logo-wordmark-top { font-size: 14px; }
+  .logo-wordmark-bottom { font-size: 12px; }
+  .logo-ep { width: 40px; height: 40px; }
+}
+
+.footer-logo .logo-img {
+  height: 44px;
+}
+
 .logo-text {
   font-family: var(--font-display);
   font-size: var(--text-xl);
@@ -435,9 +506,9 @@ ul { list-style: none; }
 }
 
 .nav-link {
-  padding: var(--space-2) var(--space-4);
+  padding: var(--space-3) var(--space-4);
   border-radius: var(--radius-md);
-  font-size: var(--text-sm);
+  font-size: var(--text-base);
   font-weight: 500;
   color: var(--text-secondary);
   transition: color var(--anim-fast), background var(--anim-fast);
@@ -1673,7 +1744,7 @@ ul { list-style: none; }
 }
 
 @media (max-width: 768px) {
-  :root { --header-h: 60px; }
+  :root { --header-h: 74px; }
 
   .services-grid { grid-template-columns: 1fr; }
   .solutions-grid { grid-template-columns: 1fr; }

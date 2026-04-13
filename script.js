@@ -1,5 +1,5 @@
 // ============================================================
-// synara.ai — JavaScript Interactions
+// E&P — JavaScript Interactions
 // ============================================================
 
 document.addEventListener('DOMContentLoaded', function () {
@@ -114,8 +114,8 @@ document.addEventListener('DOMContentLoaded', function () {
   window.renderIndustryPanel = function renderIndustryPanel(industry) {
     if (!industryPanels) return;
     const lang = window.currentLang || 'es';
-    const data = synaraTranslations[lang] && synaraTranslations[lang].industries
-      ? synaraTranslations[lang].industries[industry]
+    const data = epTranslations[lang] && epTranslations[lang].industries
+      ? epTranslations[lang].industries[industry]
       : null;
     if (!data) return;
 
@@ -284,14 +284,14 @@ document.addEventListener('DOMContentLoaded', function () {
   // 10. CONSOLE BRANDING
   // ============================================================
   console.log(
-    '%c🌀 synara.ai',
+    '%c🌀 E&P',
     'background: linear-gradient(135deg, #7C3AED, #06B6D4); color: white; padding: 8px 16px; border-radius: 6px; font-size: 16px; font-weight: bold;'
   );
   console.log(
     '%cAutomatización Inteligente para empresas que escalan.',
     'color: #8B5CF6; font-size: 12px;'
   );
-  console.log('%c✉ hola@synara.ai', 'color: #94A3B8; font-size: 11px;');
+  console.log('%c✉ hola@eyp.ai', 'color: #94A3B8; font-size: 11px;');
 
 });
 
@@ -308,9 +308,9 @@ function debounce(fn, delay) {
 }
 
 // ==== TRANSLATION SYSTEM ====
-window.currentLang = localStorage.getItem('synaraLang') || 'es';
+window.currentLang = localStorage.getItem('epLang') || 'es';
 
-const synaraTranslations = {
+const epTranslations = {
   es: {
     navServices: 'Servicios',
     navProcess: 'Proceso',
@@ -324,7 +324,7 @@ const synaraTranslations = {
     heroDesc: 'Detectamos los cuellos de botella de tu operación y los eliminamos con RPA, IA y desarrollo a medida. Procesos más rápidos, menos errores, más crecimiento.',
     heroBtn1: '<svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M8 1L13 8L8 15M3 8H13" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>\nSolicitar Diagnóstico',
     heroBtn2: 'Ver Cómo Funciona',
-    heroTrust: 'Empresas de Uruguay ya automatizan con <strong>synara.ai</strong>',
+    heroTrust: 'Empresas de Uruguay ya automatizan con <strong>E&P</strong>',
 
     clientsLabel: 'Con la confianza de empresas líderes',
 
@@ -386,13 +386,13 @@ const synaraTranslations = {
     impTitle: 'El antes y el después<br>\n<span class="gradient-text">de automatizar</span>',
     impSubtitle: 'Resultados concretos y medibles que nuestros clientes experimentan en las primeras semanas.',
     
-    impBeforeTitle: 'Sin synara\n<span>El estado actual de tu operación</span>',
+    impBeforeTitle: 'Sin E&P\n<span>El estado actual de tu operación</span>',
     impBefore1: '<strong>Horas perdidas cada semana</strong>\nTareas manuales y repetitivas que consumen el tiempo de tu equipo más valioso.',
     impBefore2: '<strong>Errores costosos y frecuentes</strong>\nLa intervención humana en procesos repetitivos garantiza inconsistencias y reprocesos.',
     impBefore3: '<strong>Información dispersa y tardía</strong>\nDatos en planillas, correos y sistemas separados que nunca cuentan la misma historia.',
     impBefore4: '<strong>Cuello de botella operativo</strong>\nEl crecimiento del negocio choca contra la capacidad operativa de tu equipo.',
 
-    impAfterTitle: 'Con synara.ai\n<span>Tu operación transformada</span>',
+    impAfterTitle: 'Con E&P\n<span>Tu operación transformada</span>',
     impAfter1: '<strong>85% del tiempo recuperado</strong>\nTu equipo se enfoca en decisiones estratégicas, no en tareas repetitivas.',
     impAfter2: '<strong>95% de precisión garantizada</strong>\nLos procesos automatizados ejecutan exactamente lo que les indicás, sin variaciones.',
     impAfter3: '<strong>Dashboards en tiempo real</strong>\nToda la información de tu negocio unificada y actualizada automáticamente.',
@@ -501,7 +501,7 @@ const synaraTranslations = {
     heroDesc: 'We detect bottlenecks in your operations and eliminate them with RPA, AI, and custom development. Faster processes, fewer errors, more growth.',
     heroBtn1: '<svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M8 1L13 8L8 15M3 8H13" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>\nRequest Diagnosis',
     heroBtn2: 'See How It Works',
-    heroTrust: 'Uruguayan companies are already automating with <strong>synara.ai</strong>',
+    heroTrust: 'Uruguayan companies are already automating with <strong>E&P</strong>',
 
     clientsLabel: 'Trusted by leading companies',
 
@@ -563,13 +563,13 @@ const synaraTranslations = {
     impTitle: 'The before and after<br>\n<span class="gradient-text">of automation</span>',
     impSubtitle: 'Concrete and measurable results that our clients experience within the first few weeks.',
 
-    impBeforeTitle: 'Without synara\n<span>The current state of your operations</span>',
+    impBeforeTitle: 'Without E&P\n<span>The current state of your operations</span>',
     impBefore1: '<strong>Hours lost every week</strong>\nManual and repetitive tasks that consume your team\'s most valuable time.',
     impBefore2: '<strong>Frequent and costly errors</strong>\nHuman intervention in repetitive processes guarantees inconsistencies and rework.',
     impBefore3: '<strong>Dispersed and delayed information</strong>\nData in spreadsheets, emails, and separate systems that never tell the same story.',
     impBefore4: '<strong>Operational bottleneck</strong>\nBusiness growth collides with your team\'s operational capacity.',
 
-    impAfterTitle: 'With synara.ai\n<span>Your operations transformed</span>',
+    impAfterTitle: 'With E&P\n<span>Your operations transformed</span>',
     impAfter1: '<strong>85% of time recovered</strong>\nYour team focuses on strategic decisions, not repetitive tasks.',
     impAfter2: '<strong>95% guaranteed precision</strong>\nAutomated processes execute exactly what you tell them, without variations.',
     impAfter3: '<strong>Real-time dashboards</strong>\nAll your business information unified and updated automatically.',
@@ -667,8 +667,8 @@ const synaraTranslations = {
   }
 };
 
-function applySynaraTranslations(lang) {
-  const dict = synaraTranslations[lang];
+function applyEpTranslations(lang) {
+  const dict = epTranslations[lang];
   const els = {
     '#mainNav .nav-link:nth-child(1)': dict.navServices,
     '#mainNav .nav-link:nth-child(2)': dict.navProcess,
@@ -815,8 +815,8 @@ document.addEventListener('DOMContentLoaded', () => {
     toggleBtn.addEventListener('click', (e) => {
       e.preventDefault();
       window.currentLang = window.currentLang === 'es' ? 'en' : 'es';
-      localStorage.setItem('synaraLang', window.currentLang);
-      applySynaraTranslations(window.currentLang);
+      localStorage.setItem('epLang', window.currentLang);
+      applyEpTranslations(window.currentLang);
       if (window.renderIndustryPanel) {
         window.renderIndustryPanel(window.activeIndustry || 'finanzas');
       }
@@ -824,6 +824,6 @@ document.addEventListener('DOMContentLoaded', () => {
   }
   // Initialize translations on load safely
   if (window.currentLang !== 'es') {
-    applySynaraTranslations(window.currentLang);
+    applyEpTranslations(window.currentLang);
   }
 });
