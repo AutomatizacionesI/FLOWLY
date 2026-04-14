@@ -493,7 +493,6 @@ const epTranslations = {
     footerTagline: 'Automatización inteligente para empresas que escalan. RPA, IA y desarrollo a medida.',
     footerSvcHeader: 'Servicios',
     footerCoHeader: 'Empresa',
-    footerCopy: 'Hecho con 💜 en Uruguay',
     footerWaFloat: 'WhatsApp',
 
     langToggle: 'EN'
@@ -680,7 +679,6 @@ const epTranslations = {
     footerTagline: 'Intelligent automation for scaling companies. RPA, AI, and custom development.',
     footerSvcHeader: 'Services',
     footerCoHeader: 'Company',
-    footerCopy: 'Made with 💜 in Uruguay',
     footerWaFloat: 'WhatsApp',
 
     langToggle: 'ES'
@@ -819,7 +817,6 @@ function applyEpTranslations(lang) {
     '.footer-grid nav:nth-of-type(2) .footer-links li:nth-child(2) a': dict.navImpact,
     '.footer-grid nav:nth-of-type(2) .footer-links li:nth-child(3) a': dict.navContact,
 
-    '.footer-bottom .footer-copy:last-child': dict.footerCopy,
     '.whatsapp-float span': dict.footerWaFloat
   };
 
