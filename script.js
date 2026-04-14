@@ -109,7 +109,7 @@ document.addEventListener('DOMContentLoaded', function () {
   // ============================================================
   const industryPanels      = document.getElementById('industryPanels');
   const industryTabs        = document.querySelectorAll('.industry-tab');
-  window.activeIndustry     = 'finanzas';
+  window.activeIndustry     = 'inmobiliaria';
 
   window.renderIndustryPanel = function renderIndustryPanel(industry) {
     if (!industryPanels) return;
@@ -418,14 +418,24 @@ const epTranslations = {
           { value: '2–3 sem', label: 'tiempo de implementación' }
         ]
       },
-      logistica: {
-        title: 'Logística & Supply Chain',
-        desc: 'Conectamos tus sistemas de transporte, stock y proveedores para eliminar errores de coordinación. Trazabilidad en tiempo real y alertas automáticas ante desvíos.',
-        features: ['Seguimiento de envíos en tiempo real', 'Gestión automática de stock', 'Alertas de retraso y desvíos', 'Reportes de entrega automatizados'],
+      inmobiliaria: {
+        title: 'Inmobiliarias',
+        desc: 'Automatizamos la carga de propiedades, el seguimiento de consultas y la generación de reportes. Tu equipo comercial se enfoca en cerrar operaciones, no en tareas administrativas.',
+        features: ['Carga automática de propiedades en portales', 'Seguimiento de consultas y calificación de leads', 'Reportes de cartera y tasaciones automáticos', 'Contratos tipo generados en segundos'],
         metrics: [
-          { value: '65%', label: 'menos errores operativos' },
-          { value: '3x', label: 'velocidad de procesamiento' },
+          { value: '70%', label: 'menos carga administrativa' },
+          { value: '3x', label: 'más consultas atendidas' },
           { value: '1–2 sem', label: 'tiempo de implementación' }
+        ]
+      },
+      contabilidad: {
+        title: 'Estudios Contables',
+        desc: 'Automatizamos el procesamiento de facturas, la conciliación bancaria y los reportes a organismos. Tu equipo se enfoca en asesorar clientes, no en digitación repetitiva.',
+        features: ['Procesamiento automático de facturas en PDF', 'Conciliación bancaria con un clic', 'Reportes DGI y BPS automatizados', 'Alertas de vencimientos y cuotas'],
+        metrics: [
+          { value: '80%', label: 'reducción de tiempo operativo' },
+          { value: '0', label: 'errores de digitación' },
+          { value: '1 sem', label: 'tiempo de implementación' }
         ]
       },
       retail: {
@@ -595,14 +605,24 @@ const epTranslations = {
           { value: '2–3 wks', label: 'implementation time' }
         ]
       },
-      logistica: {
-        title: 'Logistics & Supply Chain',
-        desc: 'We connect your transport, stock, and supplier systems to eliminate coordination errors. Real-time traceability and automatic alerts for any deviations.',
-        features: ['Real-time shipment tracking', 'Automatic stock management', 'Delay and deviation alerts', 'Automated delivery reports'],
+      inmobiliaria: {
+        title: 'Real Estate Agencies',
+        desc: 'We automate property listings, inquiry tracking, and report generation. Your commercial team focuses on closing deals, not administrative work.',
+        features: ['Automatic property listing on portals', 'Inquiry tracking and lead qualification', 'Automated portfolio and valuation reports', 'Standard contracts generated in seconds'],
         metrics: [
-          { value: '65%', label: 'fewer operational errors' },
-          { value: '3x', label: 'processing speed' },
+          { value: '70%', label: 'less admin work' },
+          { value: '3x', label: 'more inquiries handled' },
           { value: '1–2 wks', label: 'implementation time' }
+        ]
+      },
+      contabilidad: {
+        title: 'Accounting Firms',
+        desc: 'We automate invoice processing, bank reconciliation, and regulatory reports. Your team focuses on advising clients, not repetitive data entry.',
+        features: ['Automatic PDF invoice processing', 'One-click bank reconciliation', 'Automated tax authority reports (DGI/BPS)', 'Due date and payment alerts'],
+        metrics: [
+          { value: '80%', label: 'reduction in operational time' },
+          { value: '0', label: 'data entry errors' },
+          { value: '1 wk', label: 'implementation time' }
         ]
       },
       retail: {
@@ -818,7 +838,7 @@ document.addEventListener('DOMContentLoaded', () => {
       localStorage.setItem('epLang', window.currentLang);
       applyEpTranslations(window.currentLang);
       if (window.renderIndustryPanel) {
-        window.renderIndustryPanel(window.activeIndustry || 'finanzas');
+        window.renderIndustryPanel(window.activeIndustry || 'inmobiliaria');
       }
     });
   }
