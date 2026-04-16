@@ -1889,6 +1889,16 @@ ul { list-style: none; }
   .cta-actions { flex-direction: column; align-items: center; }
   .cta-actions .btn { width: 100%; justify-content: center; max-width: 300px; }
   .footer-bottom { flex-direction: column; text-align: center; }
+
+  /* Fix 6: Stats single column on very small screens */
+  .stats-grid {
+    grid-template-columns: 1fr;
+  }
+
+  /* Fix 8: Industry panel compact padding on very small screens */
+  .industry-panel-wrap {
+    padding: var(--space-4);
+  }
 }
 
 /* ============================================================
