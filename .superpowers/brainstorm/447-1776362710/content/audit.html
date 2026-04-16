@@ -1,0 +1,69 @@
+<h2>Audit Mobile — Problemas encontrados</h2>
+<p class="subtitle">Revisé el CSS completo. Estos son los issues de centrado, spacing y responsive que hay que corregir.</p>
+
+<div class="section">
+  <h3>🔴 Críticos — Se ven mal en celular</h3>
+
+  <div style="display:flex;flex-direction:column;gap:12px;margin-top:12px;">
+
+    <div style="background:rgba(239,68,68,0.08);border:1px solid rgba(239,68,68,0.25);border-radius:12px;padding:16px;">
+      <strong style="color:#f87171">1. Secciones con padding fijo de 6rem (96px) arriba y abajo</strong>
+      <p style="margin-top:6px;color:#94a3b8;font-size:0.875rem">Todas las secciones usan <code style="background:rgba(255,255,255,0.07);padding:2px 6px;border-radius:4px">padding: var(--space-24) 0</code> y nunca se reduce en mobile. En celular se siente que cada sección tiene demasiado aire.<br>
+      <em>Afecta: services, methodology, solutions, impact, stats, cta, team, industries.</em></p>
+    </div>
+
+    <div style="background:rgba(239,68,68,0.08);border:1px solid rgba(239,68,68,0.25);border-radius:12px;padding:16px;">
+      <strong style="color:#f87171">2. Hero: gap y padding nunca se reducen en mobile</strong>
+      <p style="margin-top:6px;color:#94a3b8;font-size:0.875rem"><code style="background:rgba(255,255,255,0.07);padding:2px 6px;border-radius:4px">.hero-content</code> tiene <code style="background:rgba(255,255,255,0.07);padding:2px 6px;border-radius:4px">gap: 4rem</code> y <code style="background:rgba(255,255,255,0.07);padding:2px 6px;border-radius:4px">padding: 5rem 0</code> fijos. En un iPhone 13 esto empuja el contenido fuera de la pantalla.</p>
+    </div>
+
+    <div style="background:rgba(239,68,68,0.08);border:1px solid rgba(239,68,68,0.25);border-radius:12px;padding:16px;">
+      <strong style="color:#f87171">3. .hero-trust está alineado a la izquierda en un hero centrado</strong>
+      <p style="margin-top:6px;color:#94a3b8;font-size:0.875rem"><code style="background:rgba(255,255,255,0.07);padding:2px 6px;border-radius:4px">align-items: flex-start</code> en .hero-trust mientras todo el hero es <code style="background:rgba(255,255,255,0.07);padding:2px 6px;border-radius:4px">text-align: center</code>. En mobile queda descolgado a la izquierda.</p>
+    </div>
+
+    <div style="background:rgba(239,68,68,0.08);border:1px solid rgba(239,68,68,0.25);border-radius:12px;padding:16px;">
+      <strong style="color:#f87171">4. Logo footer de 480px de ancho en desktop</strong>
+      <p style="margin-top:6px;color:#94a3b8;font-size:0.875rem"><code style="background:rgba(255,255,255,0.07);padding:2px 6px;border-radius:4px">.logo-img-footer { width: 480px }</code> es demasiado grande. Tiene <code style="background:rgba(255,255,255,0.07);padding:2px 6px;border-radius:4px">max-width: 100%</code> que lo salva en mobile, pero en desktop y tablet se ve enorme y desproporcionado.</p>
+    </div>
+
+  </div>
+</div>
+
+<div class="section" style="margin-top:24px;">
+  <h3>🟡 Moderados — Mejoras de alineación y espaciado</h3>
+
+  <div style="display:flex;flex-direction:column;gap:12px;margin-top:12px;">
+
+    <div style="background:rgba(245,158,11,0.08);border:1px solid rgba(245,158,11,0.25);border-radius:12px;padding:16px;">
+      <strong style="color:#fbbf24">5. .section-header margin-bottom de 4rem nunca se reduce</strong>
+      <p style="margin-top:6px;color:#94a3b8;font-size:0.875rem"><code style="background:rgba(255,255,255,0.07);padding:2px 6px;border-radius:4px">margin-bottom: var(--space-16)</code> (4rem) fijo. En mobile debería ser ~2rem para no desperdiciar pantalla.</p>
+    </div>
+
+    <div style="background:rgba(245,158,11,0.08);border:1px solid rgba(245,158,11,0.25);border-radius:12px;padding:16px;">
+      <strong style="color:#fbbf24">6. Stats grid: solo baja a 2 columnas, no a 1 en pantallas muy chicas</strong>
+      <p style="margin-top:6px;color:#94a3b8;font-size:0.875rem">A 480px o menos, los 4 stats en 2 columnas quedan muy apretados. Deberían ir a 1 columna.</p>
+    </div>
+
+    <div style="background:rgba(245,158,11,0.08);border:1px solid rgba(245,158,11,0.25);border-radius:12px;padding:16px;">
+      <strong style="color:#fbbf24">7. .footer-tagline con max-width: 260px fijo</strong>
+      <p style="margin-top:6px;color:#94a3b8;font-size:0.875rem">En mobile dentro de una columna centrada, 260px puede verse estrecho y con saltos de línea raros. Debería ser <code style="background:rgba(255,255,255,0.07);padding:2px 6px;border-radius:4px">max-width: 100%</code> en mobile.</p>
+    </div>
+
+    <div style="background:rgba(245,158,11,0.08);border:1px solid rgba(245,158,11,0.25);border-radius:12px;padding:16px;">
+      <strong style="color:#fbbf24">8. .industry-panel-wrap padding no reducido en pantallas &lt;480px</strong>
+      <p style="margin-top:6px;color:#94a3b8;font-size:0.875rem">El panel de industrias tiene <code style="background:rgba(255,255,255,0.07);padding:2px 6px;border-radius:4px">padding: 2.5rem 3rem</code> en desktop y solo baja a 1.5rem en 768px. A 480px sigue siendo mucho padding horizontal.</p>
+    </div>
+
+  </div>
+</div>
+
+<div class="section" style="margin-top:24px;">
+  <h3>✅ Estructural — Mobile First approach</h3>
+  <p style="color:#94a3b8;font-size:0.875rem;margin-top:8px;">Además de los fixes puntuales, el CSS usa <strong style="color:#e2e8f0">desktop-first</strong> (todos los <code style="background:rgba(255,255,255,0.07);padding:2px 6px;border-radius:4px">@media (max-width: ...)</code>). Convertirlo a <strong style="color:#e2e8f0">mobile-first</strong> significa invertir la lógica: base = mobile, y los <code style="background:rgba(255,255,255,0.07);padding:2px 6px;border-radius:4px">@media (min-width: ...)</code> agregan estilos para pantallas más grandes. Esto hace el código más mantenible y performance-friendly.</p>
+</div>
+
+<div style="background:rgba(124,58,237,0.08);border:1px solid rgba(124,58,237,0.25);border-radius:12px;padding:16px;margin-top:24px;">
+  <strong style="color:#a78bfa">¿Qué querés hacer?</strong>
+  <p style="margin-top:6px;color:#94a3b8;font-size:0.875rem">Puedo: (A) solo corregir los 8 issues puntuales sin tocar la arquitectura, o (B) refactor completo a mobile-first + los 8 fixes. Respondé en la terminal.</p>
+</div>

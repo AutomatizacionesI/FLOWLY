@@ -1,0 +1,113 @@
+<h2>Diseño — 8 Fixes puntuales</h2>
+<p class="subtitle">Cada fix es un cambio quirúrgico en styles.css. Sin tocar HTML ni JS.</p>
+
+<div class="section">
+
+  <div style="display:flex;flex-direction:column;gap:10px;margin-top:8px;">
+
+    <div style="background:var(--bg,#1e1e2e);border:1px solid rgba(239,68,68,0.3);border-radius:12px;padding:16px;">
+      <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;">
+        <span style="background:rgba(239,68,68,0.2);color:#f87171;font-size:0.7rem;font-weight:700;padding:2px 8px;border-radius:999px">FIX 1</span>
+        <strong style="color:#f1f5f9">Padding de secciones en mobile</strong>
+      </div>
+      <div style="display:flex;gap:12px;font-size:0.8rem;">
+        <div style="flex:1;background:rgba(239,68,68,0.06);border-radius:8px;padding:10px;">
+          <div style="color:#f87171;font-size:0.7rem;margin-bottom:4px">ANTES (desktop-first, nunca cambia)</div>
+          <code style="color:#94a3b8">.services, .methodology, .solutions,<br>.impact, .stats, .cta-section,<br>.team-section, .industries-section {<br>&nbsp;&nbsp;padding: var(--space-24) 0; /* 6rem */<br>}</code>
+        </div>
+        <div style="flex:1;background:rgba(34,197,94,0.06);border-radius:8px;padding:10px;">
+          <div style="color:#4ade80;font-size:0.7rem;margin-bottom:4px">DESPUÉS (se reduce en mobile)</div>
+          <code style="color:#94a3b8">/* Agregado dentro de @media (max-width: 768px) */<br>.services, .methodology, .solutions,<br>.impact, .stats, .cta-section,<br>.team-section, .industries-section {<br>&nbsp;&nbsp;padding: var(--space-16) 0; /* 4rem */<br>}</code>
+        </div>
+      </div>
+    </div>
+
+    <div style="background:var(--bg,#1e1e2e);border:1px solid rgba(239,68,68,0.3);border-radius:12px;padding:16px;">
+      <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;">
+        <span style="background:rgba(239,68,68,0.2);color:#f87171;font-size:0.7rem;font-weight:700;padding:2px 8px;border-radius:999px">FIX 2</span>
+        <strong style="color:#f1f5f9">Hero gap y padding en mobile</strong>
+      </div>
+      <div style="display:flex;gap:12px;font-size:0.8rem;">
+        <div style="flex:1;background:rgba(239,68,68,0.06);border-radius:8px;padding:10px;">
+          <div style="color:#f87171;font-size:0.7rem;margin-bottom:4px">ANTES</div>
+          <code style="color:#94a3b8">.hero-content {<br>&nbsp;&nbsp;gap: var(--space-16); /* 4rem */<br>&nbsp;&nbsp;padding: var(--space-20) 0; /* 5rem */<br>}</code>
+        </div>
+        <div style="flex:1;background:rgba(34,197,94,0.06);border-radius:8px;padding:10px;">
+          <div style="color:#4ade80;font-size:0.7rem;margin-bottom:4px">DESPUÉS (en @media max-width: 768px)</div>
+          <code style="color:#94a3b8">.hero-content {<br>&nbsp;&nbsp;gap: var(--space-8); /* 2rem */<br>&nbsp;&nbsp;padding: var(--space-12) 0; /* 3rem */<br>}</code>
+        </div>
+      </div>
+    </div>
+
+    <div style="background:var(--bg,#1e1e2e);border:1px solid rgba(239,68,68,0.3);border-radius:12px;padding:16px;">
+      <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;">
+        <span style="background:rgba(239,68,68,0.2);color:#f87171;font-size:0.7rem;font-weight:700;padding:2px 8px;border-radius:999px">FIX 3</span>
+        <strong style="color:#f1f5f9">Hero trust: centrado en mobile</strong>
+      </div>
+      <div style="display:flex;gap:12px;font-size:0.8rem;">
+        <div style="flex:1;background:rgba(239,68,68,0.06);border-radius:8px;padding:10px;">
+          <div style="color:#f87171;font-size:0.7rem;margin-bottom:4px">ANTES</div>
+          <code style="color:#94a3b8">.hero-trust {<br>&nbsp;&nbsp;align-items: flex-start; /* izquierda */<br>}</code>
+        </div>
+        <div style="flex:1;background:rgba(34,197,94,0.06);border-radius:8px;padding:10px;">
+          <div style="color:#4ade80;font-size:0.7rem;margin-bottom:4px">DESPUÉS (en @media max-width: 768px)</div>
+          <code style="color:#94a3b8">.hero-trust {<br>&nbsp;&nbsp;align-items: center;<br>}</code>
+        </div>
+      </div>
+    </div>
+
+    <div style="background:var(--bg,#1e1e2e);border:1px solid rgba(239,68,68,0.3);border-radius:12px;padding:16px;">
+      <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;">
+        <span style="background:rgba(239,68,68,0.2);color:#f87171;font-size:0.7rem;font-weight:700;padding:2px 8px;border-radius:999px">FIX 4</span>
+        <strong style="color:#f1f5f9">Logo footer: tamaño reducido</strong>
+      </div>
+      <div style="display:flex;gap:12px;font-size:0.8rem;">
+        <div style="flex:1;background:rgba(239,68,68,0.06);border-radius:8px;padding:10px;">
+          <div style="color:#f87171;font-size:0.7rem;margin-bottom:4px">ANTES</div>
+          <code style="color:#94a3b8">.logo-img-footer {<br>&nbsp;&nbsp;width: 480px; /* enorme */<br>}</code>
+        </div>
+        <div style="flex:1;background:rgba(34,197,94,0.06);border-radius:8px;padding:10px;">
+          <div style="color:#4ade80;font-size:0.7rem;margin-bottom:4px">DESPUÉS</div>
+          <code style="color:#94a3b8">.logo-img-footer {<br>&nbsp;&nbsp;width: 280px; /* proporcional */<br>}</code>
+        </div>
+      </div>
+    </div>
+
+    <div style="background:var(--bg,#1e1e2e);border:1px solid rgba(245,158,11,0.3);border-radius:12px;padding:16px;">
+      <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;">
+        <span style="background:rgba(245,158,11,0.2);color:#fbbf24;font-size:0.7rem;font-weight:700;padding:2px 8px;border-radius:999px">FIX 5</span>
+        <strong style="color:#f1f5f9">Section header margin en mobile</strong>
+      </div>
+      <code style="color:#94a3b8;font-size:0.8rem">/* En @media max-width: 768px */<br>.section-header { margin-bottom: var(--space-8); /* 2rem */ }</code>
+    </div>
+
+    <div style="background:var(--bg,#1e1e2e);border:1px solid rgba(245,158,11,0.3);border-radius:12px;padding:16px;">
+      <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;">
+        <span style="background:rgba(245,158,11,0.2);color:#fbbf24;font-size:0.7rem;font-weight:700;padding:2px 8px;border-radius:999px">FIX 6</span>
+        <strong style="color:#f1f5f9">Stats: 1 columna en pantallas muy chicas</strong>
+      </div>
+      <code style="color:#94a3b8;font-size:0.8rem">/* En @media max-width: 480px */<br>.stats-grid { grid-template-columns: 1fr; }</code>
+    </div>
+
+    <div style="background:var(--bg,#1e1e2e);border:1px solid rgba(245,158,11,0.3);border-radius:12px;padding:16px;">
+      <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;">
+        <span style="background:rgba(245,158,11,0.2);color:#fbbf24;font-size:0.7rem;font-weight:700;padding:2px 8px;border-radius:999px">FIX 7</span>
+        <strong style="color:#f1f5f9">Footer tagline: ancho libre en mobile</strong>
+      </div>
+      <code style="color:#94a3b8;font-size:0.8rem">/* En @media max-width: 768px */<br>.footer-tagline { max-width: 100%; }</code>
+    </div>
+
+    <div style="background:var(--bg,#1e1e2e);border:1px solid rgba(245,158,11,0.3);border-radius:12px;padding:16px;">
+      <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;">
+        <span style="background:rgba(245,158,11,0.2);color:#fbbf24;font-size:0.7rem;font-weight:700;padding:2px 8px;border-radius:999px">FIX 8</span>
+        <strong style="color:#f1f5f9">Industry panel: padding en &lt;480px</strong>
+      </div>
+      <code style="color:#94a3b8;font-size:0.8rem">/* En @media max-width: 480px */<br>.industry-panel-wrap { padding: var(--space-4); /* 1rem */ }</code>
+    </div>
+
+  </div>
+</div>
+
+<div style="background:rgba(124,58,237,0.08);border:1px solid rgba(124,58,237,0.3);border-radius:12px;padding:16px;margin-top:16px;">
+  <strong style="color:#a78bfa">Solo se toca styles.css</strong> — un bloque de ~20 líneas al final del archivo. Sin tocar HTML, JS, ni el resto del CSS existente.
+</div>
