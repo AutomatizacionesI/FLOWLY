@@ -1847,6 +1847,39 @@ ul { list-style: none; }
   .whatsapp-float { padding: var(--space-4); border-radius: 50%; }
 
   .cursor-glow { display: none; }
+
+  /* Fix 1: Reduce section padding on mobile */
+  .services,
+  .methodology,
+  .solutions,
+  .impact,
+  .stats,
+  .cta-section,
+  .team-section,
+  .industries-section {
+    padding: var(--space-16) 0;
+  }
+
+  /* Fix 2: Reduce hero content gap and padding on mobile */
+  .hero-content {
+    gap: var(--space-8);
+    padding: var(--space-12) 0;
+  }
+
+  /* Fix 3: Center hero trust element on mobile */
+  .hero-trust {
+    align-items: center;
+  }
+
+  /* Fix 5: Reduce section header bottom margin on mobile */
+  .section-header {
+    margin-bottom: var(--space-8);
+  }
+
+  /* Fix 7: Allow footer tagline to use full width on mobile */
+  .footer-tagline {
+    max-width: 100%;
+  }
 }
 
 @media (max-width: 480px) {
