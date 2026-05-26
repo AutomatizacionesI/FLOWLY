@@ -7,6 +7,9 @@ import {
   Layers3,
   MapPinned,
   MessageSquareMore,
+  Network,
+  RefreshCw,
+  Search,
   Workflow,
 } from "lucide-react"
 
@@ -16,22 +19,14 @@ import { BlurFade } from "@/components/ui/blur-fade"
 import { DotPattern } from "@/components/ui/dot-pattern"
 import { MagicCard } from "@/components/ui/magic-card"
 import { Marquee } from "@/components/ui/marquee"
-import { NumberTicker } from "@/components/ui/number-ticker"
 import { Separator } from "@/components/ui/separator"
 
 const navigation = [
   { label: "Servicios", href: "#servicios" },
   { label: "Soluciones", href: "#soluciones" },
-  { label: "Proceso", href: "#proceso" },
+  { label: "Metodo", href: "#metodo" },
   { label: "Equipo", href: "#equipo" },
   { label: "Contacto", href: "#contacto" },
-]
-
-const metrics = [
-  { value: 82, suffix: "%", label: "menos tiempo operativo" },
-  { value: 94, suffix: "%", label: "precision automatizada" },
-  { value: 24, suffix: "/7", label: "operacion continua" },
-  { value: 3.1, suffix: "x", label: "mas capacidad sin contratar" },
 ]
 
 const services = [
@@ -41,7 +36,7 @@ const services = [
     description:
       "Bots para carga de datos, reportes, facturacion y monitoreo continuo conectados con los sistemas que tu empresa ya usa.",
     icon: Workflow,
-    accent: "text-sky-600",
+    accent: "text-[var(--brand-strong)]",
     bullets: [
       "Migracion y carga de datos",
       "Reportes y facturacion automatizados",
@@ -55,7 +50,7 @@ const services = [
     description:
       "Agentes, chatbots, lectura documental y modelos predictivos entrenados sobre la operacion concreta de cada negocio.",
     icon: Bot,
-    accent: "text-violet-600",
+    accent: "text-[var(--brand-strong)]",
     bullets: [
       "Agentes con IA generativa",
       "Prediccion de tendencias",
@@ -69,7 +64,7 @@ const services = [
     description:
       "Plataformas web, dashboards e integraciones hechas para resolver cuellos de botella reales con entregas visibles.",
     icon: Layers3,
-    accent: "text-emerald-600",
+    accent: "text-[var(--brand-strong)]",
     bullets: [
       "Plataformas y dashboards personalizados",
       "Integraciones via APIs y webhooks",
@@ -105,24 +100,53 @@ const solutions = [
 const process = [
   {
     step: "01",
-    title: "Diagnostico",
-    timing: "Semana 1",
+    title: "Diagnostico sin costo",
+    timing: "30-60 min",
     description:
-      "Mapeo de procesos, deteccion de friccion y definicion de oportunidades con mayor ROI potencial.",
+      "Nos sentamos a charlar sobre tu dia a dia. Analizamos donde estas perdiendo tiempo y dinero, y te proponemos mejoras logicas. Sin compromisos.",
+    icon: Search,
   },
   {
     step: "02",
-    title: "Prototipo funcional",
-    timing: "Semanas 2-3",
+    title: "Micro-implementaciones rapidas",
+    timing: "Resultados en semanas",
     description:
-      "Construimos un MVP real para que el equipo vea la automatizacion en accion antes de desplegar.",
+      "No cambiamos toda tu estructura de golpe. Empezamos automatizando una sola tarea critica o mejorando tu web para captar clientes.",
+    icon: Workflow,
   },
   {
     step: "03",
-    title: "Implementacion",
-    timing: "Semana 4+",
+    title: "Evolucion continua",
+    timing: "Escala modular",
     description:
-      "Despliegue, capacitacion y monitoreo para asegurar estabilidad y evolucion continua.",
+      "A medida que ves los resultados y tu equipo se adapta de forma natural, seguimos escalando. Tu inversion acompana el crecimiento real del negocio.",
+    icon: RefreshCw,
+  },
+  {
+    step: "04",
+    title: "Ecosistema robusto",
+    timing: "Sistema de elite",
+    description:
+      "Cuando tu empresa esta lista, conectamos todos los puntos. Lo que empieza como herramientas aisladas se unifica en un motor centralizado de IA robusto y seguro.",
+    icon: Network,
+  },
+]
+
+const urgencyCards = [
+  {
+    title: "Velocidad de respuesta",
+    description:
+      "Mientras vos seguis filtrando, derivando y respondiendo manualmente, otros ya atienden clientes en segundos.",
+  },
+  {
+    title: "Costo operativo",
+    description:
+      "Tu competencia ya recorta tareas administrativas repetitivas y libera horas que vos seguis pagando todos los meses.",
+  },
+  {
+    title: "Capacidad para escalar",
+    description:
+      "Ellos multiplican productividad con la misma estructura. Vos seguis creciendo sobre procesos que no escalan.",
   },
 ]
 
@@ -228,23 +252,24 @@ function App() {
       </div>
 
       <div className="mx-auto max-w-[88rem] px-4 sm:px-6 lg:px-8">
-        <header className="sticky top-0 z-50 py-4">
-          <div className="mx-auto flex max-w-7xl items-center justify-between rounded-full border border-border/80 bg-white/85 px-4 py-3 shadow-[0_16px_50px_-40px_rgba(15,23,42,0.35)] backdrop-blur-xl sm:px-6">
+        <header className="fixed inset-x-0 top-0 z-50 py-4">
+          <div className="mx-auto flex max-w-6xl items-center justify-between rounded-full border-2 border-neutral-300/85 bg-white/55 px-4 py-3 shadow-[0_20px_60px_-42px_rgba(15,23,42,0.22)] backdrop-blur-2xl sm:px-5">
             <a
               href="#"
-              className="text-lg font-light tracking-[-0.12em] text-foreground sm:text-2xl"
+              className="text-lg font-light tracking-[-0.12em] text-foreground transition-all duration-300 hover:-translate-y-0.5 hover:tracking-[-0.14em] hover:text-neutral-950 sm:text-2xl"
             >
               Spike AI
             </a>
 
-            <nav className="hidden items-center gap-6 lg:flex">
+            <nav className="hidden items-center gap-3 lg:flex">
               {navigation.map((item) => (
                 <a
                   key={item.href}
                   href={item.href}
-                  className="text-sm text-muted-foreground transition-colors hover:text-foreground"
+                  className="group relative rounded-full px-2.5 py-2 text-sm text-muted-foreground transition-all duration-300 hover:-translate-y-0.5 hover:bg-white hover:text-foreground hover:shadow-[0_12px_28px_-20px_rgba(15,23,42,0.45)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--brand-border)]"
                 >
-                  {item.label}
+                  <span className="relative z-10">{item.label}</span>
+                  <span className="absolute inset-x-3 bottom-1 h-px origin-left scale-x-0 bg-[var(--brand)] transition-transform duration-300 group-hover:scale-x-100" />
                 </a>
               ))}
             </nav>
@@ -253,7 +278,7 @@ function App() {
               href={whatsappHref}
               target="_blank"
               rel="noreferrer"
-              className="inline-flex h-9 items-center justify-center rounded-full border border-neutral-950 bg-neutral-950 px-4 text-sm font-medium text-white transition-transform hover:-translate-y-0.5 hover:bg-neutral-800"
+              className="inline-flex h-9 items-center justify-center rounded-full border border-neutral-950 bg-neutral-950 px-4 text-sm font-medium text-white transition-all duration-300 hover:-translate-y-0.5 hover:scale-[1.02] hover:bg-neutral-800 hover:shadow-[0_18px_30px_-18px_rgba(15,23,42,0.65)]"
               style={{ color: "#ffffff" }}
             >
               <span style={{ color: "#ffffff" }}>Agendar</span>
@@ -261,7 +286,7 @@ function App() {
           </div>
         </header>
 
-        <section className="relative mx-auto flex min-h-[calc(100vh-5.5rem)] max-w-7xl items-center py-16 sm:py-20 lg:py-24">
+        <section className="relative mx-auto flex min-h-[calc(100vh-5.5rem)] max-w-7xl items-center pt-32 pb-16 sm:pt-36 sm:pb-20 lg:pt-40 lg:pb-24">
           <div className="grid w-full gap-14 lg:grid-cols-[minmax(0,0.88fr)_minmax(340px,0.92fr)] lg:items-center">
             <BlurFade inView delay={0.05}>
               <div>
@@ -277,15 +302,18 @@ function App() {
             <div className="space-y-8 lg:pl-4">
               <div className="max-w-xl">
                 <BlurFade inView delay={0.14}>
-                  <h2 className="text-3xl font-medium tracking-[-0.08em] text-balance text-foreground sm:text-4xl">
-                    Recupera 3 horas por dia sin sumar mas friccion al equipo.
+                  <h2 className="text-4xl font-medium tracking-[-0.1em] text-balance text-foreground sm:text-5xl lg:text-[3.4rem] lg:leading-[0.96]">
+                    Tu competencia ya esta usando{" "}
+                    <span className="text-[var(--brand-strong)]">IA.</span> No te
+                    quedes atras.
                   </h2>
                 </BlurFade>
 
                 <BlurFade inView delay={0.2}>
                   <p className="mt-4 text-base leading-8 text-muted-foreground sm:text-lg">
-                    IA, automatizacion e integraciones a medida para empresas que ya
-                    crecieron y necesitan operar con mas claridad, velocidad y foco.
+                    El mundo empresarial se automatiza a velocidad record. En Spike
+                    AI te ayudamos a dar el paso sin complicaciones, sin presupuestos
+                    millonarios y a traves de un proceso de adaptacion constante.
                   </p>
                 </BlurFade>
 
@@ -303,10 +331,10 @@ function App() {
                     </a>
                     <a
                       href="#servicios"
-                      className="inline-flex h-11 items-center justify-center gap-2 rounded-full border border-border bg-white px-6 text-sm font-medium text-foreground transition-transform hover:-translate-y-0.5 hover:bg-secondary"
+                      className="inline-flex h-11 items-center justify-center gap-2 rounded-full border border-[var(--brand-border)] bg-white px-6 text-sm font-medium text-foreground transition-transform hover:-translate-y-0.5 hover:border-[var(--brand-strong)]"
                     >
                       Ver servicios
-                      <ArrowRight className="size-4" />
+                      <ArrowRight className="size-4 text-[var(--brand-strong)]" />
                     </a>
                   </div>
                 </BlurFade>
@@ -337,40 +365,90 @@ function App() {
         </section>
 
         <section className="mx-auto max-w-7xl py-16 sm:py-20">
-          <SectionIntro
-            label="Impacto"
-            title="Capacidad operativa visible, medible y mas liviana."
-            description="No alcanza con verse tech. La mejora tiene que sentirse en horas recuperadas, precision, continuidad y velocidad para tomar decisiones."
-          />
+          <BlurFade inView>
+            <div className="rounded-[2.5rem] border border-neutral-300/85 bg-neutral-100/72 backdrop-blur-xl px-6 py-10 sm:px-10 sm:py-12 lg:px-14 lg:py-16">
+              <div className="mx-auto max-w-4xl text-center">
+                <h2 className="mt-6 text-3xl font-medium tracking-[-0.08em] text-balance text-foreground sm:text-5xl lg:text-[3.45rem] lg:leading-[0.95]">
+                  El verdadero peligro para tu empresa
+                  <br className="hidden sm:block" />
+                  no es la Inteligencia Artificial.{" "}
+                  <span className="text-[var(--brand-strong)]">
+                    <br className="hidden sm:block" />
+                    Es que tus competidores la adopten antes que tu.
+                  </span>
+                </h2>
+                <p className="mx-auto mt-6 max-w-3xl text-base leading-8 text-muted-foreground sm:text-lg">
+                  Reducir costos, responder a clientes en segundos y multiplicar la
+                  productividad ya no es opcional. Quienes no empiecen la
+                  transicion hoy, manana van a jugar con desventaja.
+                </p>
+              </div>
 
-          <div className="mt-10 grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
-            {metrics.map((metric, index) => (
-              <BlurFade key={metric.label} inView delay={0.08 * index}>
-                <MagicCard
-                  className="h-full rounded-[1.8rem]"
-                  gradientColor="#dbeafe"
-                  gradientFrom="#cbd5e1"
-                  gradientTo="#bfdbfe"
-                >
-                  <div className="rounded-[1.75rem] bg-white p-6">
-                    <div className="text-[0.68rem] uppercase tracking-[0.22em] text-muted-foreground">
-                      KPI {index + 1}
+              <div className="mx-auto mt-10 grid max-w-5xl gap-3 sm:grid-cols-3 sm:gap-4 lg:mt-12">
+                {urgencyCards.map((item) => (
+                  <div
+                    key={item.title}
+                    className="rounded-[1.5rem] border border-white/90 bg-white/92 px-5 py-5 shadow-[0_18px_40px_-34px_rgba(15,23,42,0.22)] transition-transform duration-300 hover:-translate-y-1"
+                  >
+                    <div className="text-[0.76rem] font-bold uppercase tracking-[0.18em] text-foreground">
+                      {item.title}
                     </div>
-                    <div className="mt-5 text-4xl font-medium tracking-[-0.08em] sm:text-5xl">
-                      <NumberTicker
-                        value={metric.value}
-                        decimalPlaces={metric.value % 1 === 0 ? 0 : 1}
-                        className="text-foreground"
-                      />
-                      <span>{metric.suffix}</span>
-                    </div>
-                    <p className="mt-3 text-sm leading-6 text-muted-foreground">
-                      {metric.label}
+                    <p className="mt-3 text-sm leading-7 text-foreground/82 sm:text-[0.95rem]">
+                      {item.description}
                     </p>
                   </div>
+                ))}
+              </div>
+            </div>
+          </BlurFade>
+        </section>
+
+        <section id="metodo" className="mx-auto max-w-7xl py-16 sm:py-20">
+          <SectionIntro
+            label="Nuestro Metodo"
+            title="La IA como un proceso, no como un salto al vacio."
+            description="Empezamos por lo obvio, entregamos mejoras visibles rapido y recien despues escalamos. Asi la adopcion de IA deja de ser una apuesta y pasa a ser un proceso."
+          />
+
+          <div className="relative mt-12">
+            <div className="absolute left-8 right-8 top-8 hidden h-px bg-border lg:block" />
+            <div className="grid gap-5 lg:grid-cols-4">
+            {process.map((step, index) => (
+              <BlurFade key={step.step} inView delay={0.08 * index}>
+                <MagicCard
+                  className="h-full rounded-[1.8rem]"
+                  gradientColor="#f8fafc"
+                  gradientFrom="#e5e7eb"
+                  gradientTo="#dbeafe"
+                >
+                  <article className="relative rounded-[1.75rem] bg-white p-6">
+                    <div className="flex items-center justify-between">
+                      <div className="flex size-10 items-center justify-center rounded-full border border-[var(--brand-border)] bg-white text-[var(--brand-strong)]">
+                        <step.icon className="size-4.5" />
+                      </div>
+                      <span className="text-[0.68rem] uppercase tracking-[0.24em] text-muted-foreground">
+                        Paso {step.step}
+                      </span>
+                    </div>
+                    <div className="mt-6">
+                      <Badge
+                        variant="outline"
+                        className="border-border bg-secondary px-3 py-1 text-[0.68rem] uppercase tracking-[0.18em] text-muted-foreground"
+                      >
+                        {step.timing}
+                      </Badge>
+                    </div>
+                    <h3 className="mt-5 text-2xl font-medium tracking-[-0.06em]">
+                      {step.title}
+                    </h3>
+                    <p className="mt-4 text-base leading-7 text-muted-foreground">
+                      {step.description}
+                    </p>
+                  </article>
                 </MagicCard>
               </BlurFade>
             ))}
+          </div>
           </div>
         </section>
 
@@ -406,7 +484,7 @@ function App() {
                             {service.title}
                           </h3>
                         </div>
-                        <div className="rounded-2xl border border-border bg-secondary p-3 transition-transform duration-300 group-hover:-translate-y-1">
+                        <div className="rounded-2xl border border-border bg-white p-3 transition-transform duration-300 group-hover:-translate-y-1 group-hover:border-[var(--brand-strong)]">
                           <Icon className={`size-5 ${service.accent}`} />
                         </div>
                       </div>
@@ -418,7 +496,7 @@ function App() {
                       <ul className="mt-7 space-y-3">
                         {service.bullets.map((bullet) => (
                           <li key={bullet} className="flex items-start gap-3 text-sm leading-6">
-                            <CircleCheckBig className="mt-0.5 size-4 shrink-0 text-sky-600" />
+                            <CircleCheckBig className="mt-0.5 size-4 shrink-0 text-[var(--brand-strong)]" />
                             <span>{bullet}</span>
                           </li>
                         ))}
@@ -532,54 +610,13 @@ function App() {
                 <ul className="mt-6 space-y-4">
                   {comparison.after.map((item) => (
                     <li key={item} className="flex gap-3 text-sm leading-7 text-white/76 sm:text-base">
-                      <CircleCheckBig className="mt-1 size-4 shrink-0 text-sky-300" />
+                      <CircleCheckBig className="mt-1 size-4 shrink-0 text-[var(--brand)]" />
                       <span>{item}</span>
                     </li>
                   ))}
                 </ul>
               </div>
             </BlurFade>
-          </div>
-        </section>
-
-        <section id="proceso" className="mx-auto max-w-7xl py-16 sm:py-20">
-          <SectionIntro
-            label="Proceso"
-            title="Un metodo corto, visible y orientado a ROI."
-            description="Cada proyecto arranca con diagnostico, sigue con un prototipo funcional y recien despues escala a implementacion completa."
-          />
-
-          <div className="mt-12 grid gap-5 lg:grid-cols-3">
-            {process.map((step, index) => (
-              <BlurFade key={step.step} inView delay={0.08 * index}>
-                <MagicCard
-                  className="h-full rounded-[1.8rem]"
-                  gradientColor="#f8fafc"
-                  gradientFrom="#e5e7eb"
-                  gradientTo="#dbeafe"
-                >
-                  <article className="rounded-[1.75rem] bg-white p-6">
-                    <div className="flex items-center justify-between">
-                      <span className="text-[0.68rem] uppercase tracking-[0.24em] text-muted-foreground">
-                        Paso {step.step}
-                      </span>
-                      <Badge
-                        variant="outline"
-                        className="border-border bg-secondary px-3 py-1 text-[0.68rem] uppercase tracking-[0.18em] text-muted-foreground"
-                      >
-                        {step.timing}
-                      </Badge>
-                    </div>
-                    <h3 className="mt-8 text-2xl font-medium tracking-[-0.06em]">
-                      {step.title}
-                    </h3>
-                    <p className="mt-4 text-base leading-7 text-muted-foreground">
-                      {step.description}
-                    </p>
-                  </article>
-                </MagicCard>
-              </BlurFade>
-            ))}
           </div>
         </section>
 
@@ -635,8 +672,8 @@ function App() {
                           {founder.role}
                         </p>
                       </div>
-                      <div className="rounded-full border border-border bg-secondary p-3">
-                        <MapPinned className="size-5 text-foreground/80" />
+                      <div className="rounded-full border border-border bg-white p-3">
+                        <MapPinned className="size-5 text-[var(--brand-strong)]" />
                       </div>
                     </div>
                     <p className="mt-6 text-base leading-7 text-muted-foreground">

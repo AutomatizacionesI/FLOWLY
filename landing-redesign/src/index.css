@@ -76,6 +76,10 @@
   --border: oklch(0.91 0.01 245);
   --input: oklch(0.93 0.01 245);
   --ring: oklch(0.7 0.08 215);
+  --brand: #22d966;
+  --brand-strong: #13c455;
+  --brand-soft: rgba(34, 217, 102, 0.09);
+  --brand-border: rgba(34, 217, 102, 0.28);
 }
 
 * {
@@ -112,5 +116,5 @@ button {
 }
 
 ::selection {
-  background: color-mix(in oklab, #d7f2ff 72%, white 28%);
+  background: color-mix(in oklab, #dcfce7 78%, white 22%);
 }
