@@ -93,6 +93,7 @@ html {
 body {
   margin: 0;
   min-width: 320px;
+  overflow-x: clip;
   background-color: var(--background);
   background: linear-gradient(to bottom, rgba(255, 255, 255, 0.98), rgba(252, 252, 253, 1));
   color: var(--foreground);
@@ -117,4 +118,38 @@ button {
 
 ::selection {
   background: color-mix(in oklab, #dcfce7 78%, white 22%);
+}
+
+/* ── Method section: CSS-Tricks sticky stacking ── */
+.method-card,
+.method-stack-card {
+  position: sticky;
+}
+
+.method-stack {
+  view-timeline-name: --method-stack-scroll;
+  view-timeline-axis: block;
+}
+
+.method-stack-card__inner {
+  transform-origin: center top;
+  will-change: transform, filter;
+}
+
+@media (min-width: 1024px) {
+  .method-stack-card__inner {
+    animation-name: method-stack-scale;
+    animation-duration: 1ms;
+    animation-timing-function: linear;
+    animation-fill-mode: forwards;
+    animation-timeline: --method-stack-scroll;
+    animation-range: exit-crossing calc((var(--index) - 1) * 25%) exit-crossing calc(var(--index) * 25%);
+  }
+}
+
+@keyframes method-stack-scale {
+  to {
+    transform: scale(calc(1 - ((var(--numcards) - var(--index)) * 0.035)));
+    filter: saturate(0.92);
+  }
 }

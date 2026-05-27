@@ -12,6 +12,7 @@ import {
   Search,
   Workflow,
 } from "lucide-react"
+import { type CSSProperties, useEffect, useRef, useState } from "react"
 
 import { AnimatedGridPattern } from "@/components/ui/animated-grid-pattern"
 import { Badge } from "@/components/ui/badge"
@@ -101,34 +102,62 @@ const process = [
   {
     step: "01",
     title: "Diagnostico sin costo",
+    headline: "Te escuchamos antes de proponer.",
     timing: "30-60 min",
     description:
       "Nos sentamos a charlar sobre tu dia a dia. Analizamos donde estas perdiendo tiempo y dinero, y te proponemos mejoras logicas. Sin compromisos.",
     icon: Search,
+    bullets: [
+      "Detectamos cuellos de botella concretos",
+      "Priorizamos oportunidades reales",
+      "Definimos por donde conviene empezar",
+    ],
+    outcome: "Claridad sobre el primer paso",
   },
   {
     step: "02",
     title: "Micro-implementaciones rapidas",
+    headline: "Arrancamos por lo que mas duele.",
     timing: "Resultados en semanas",
     description:
       "No cambiamos toda tu estructura de golpe. Empezamos automatizando una sola tarea critica o mejorando tu web para captar clientes.",
     icon: Workflow,
+    bullets: [
+      "Automatizamos una tarea critica",
+      "Entregamos algo usable rapido",
+      "Mostramos impacto sin friccion interna",
+    ],
+    outcome: "Primer ROI visible",
   },
   {
     step: "03",
     title: "Evolucion continua",
+    headline: "Escalamos cuando ves resultados.",
     timing: "Escala modular",
     description:
       "A medida que ves los resultados y tu equipo se adapta de forma natural, seguimos escalando. Tu inversion acompana el crecimiento real del negocio.",
     icon: RefreshCw,
+    bullets: [
+      "Sumamos modulos solo cuando tiene sentido",
+      "El equipo se adapta sin choque brusco",
+      "La inversion acompana el crecimiento real",
+    ],
+    outcome: "Adopcion natural",
   },
   {
     step: "04",
     title: "Ecosistema robusto",
+    headline: "Tu empresa corre con IA propia.",
     timing: "Sistema de elite",
     description:
       "Cuando tu empresa esta lista, conectamos todos los puntos. Lo que empieza como herramientas aisladas se unifica en un motor centralizado de IA robusto y seguro.",
     icon: Network,
+    bullets: [
+      "Unificamos herramientas y datos",
+      "Centralizamos la operacion inteligente",
+      "Construimos una base lista para escalar",
+    ],
+    outcome: "Infraestructura conectada",
   },
 ]
 
@@ -209,6 +238,314 @@ const implementationStack = [
 const whatsappHref =
   "https://wa.me/59891315670?text=Hola%20Spike%20AI%2C%20quiero%20automatizar%20mi%20negocio"
 
+/* ─────────────────────────────────────────────
+   Method Section — CSS-Tricks sticky stacking
+   Each card is position:sticky with incremental top.
+   No wrappers, no JS transforms, no negative margins.
+   Cards flow naturally; sticky + z-index does the rest.
+   Ref: css-tricks.com/stacked-cards-with-sticky-positioning
+   ───────────────────────────────────────────── */
+
+const cardColors = [
+  "bg-[#edf8f0] border-[#c4e2cc]",          // 1: soft green
+  "bg-white border-border",                   // 2: white (page default)
+  "bg-[#f7faf8] border-[#d0ddd4]",           // 3: very subtle green-white
+  "bg-[#f1f6f2] border-[#c0d5c6]",           // 4: light sage
+]
+
+function MethodSection() {
+  const cardRefs = useRef<(HTMLElement | null)[]>([])
+  const [activeStep, setActiveStep] = useState(0)
+  const total = process.length
+  void total
+
+  useEffect(() => {
+    const onScroll = () => {
+      if (window.innerWidth < 1024) return
+
+      /* Track which card is "on top" (latest one to reach its sticky top) */
+      let next = 0
+      cardRefs.current.forEach((ref, i) => {
+        if (!ref) return
+        const rect = ref.getBoundingClientRect()
+        const stickyTop = 128 + i * 24 // matches the inline top values
+        // Card is stuck when its top equals its sticky top (± 2px tolerance)
+        if (rect.top <= stickyTop + 2) next = i
+      })
+      setActiveStep((prev) => (prev !== next ? next : prev))
+    }
+
+    onScroll()
+    window.addEventListener("scroll", onScroll, { passive: true })
+    return () => window.removeEventListener("scroll", onScroll)
+  }, [])
+
+  return (
+    <section id="metodo" className="mx-auto max-w-7xl py-16 sm:py-20">
+      <div className="grid gap-10 lg:grid-cols-[minmax(0,0.36fr)_minmax(0,0.64fr)] lg:items-start">
+
+        {/* ── LEFT: sticky labels ── */}
+        <div className="lg:sticky lg:top-32 lg:self-start lg:py-4">
+          <BlurFade inView>
+            <div className="space-y-12 lg:space-y-16">
+              {process.map((step, i) => {
+                const isActive = activeStep === i
+                return (
+                  <div key={step.step}>
+                    <Badge
+                      variant="outline"
+                      className={[
+                        "px-3 py-1 text-[0.68rem] uppercase tracking-[0.22em] transition-all duration-700",
+                        isActive
+                          ? "border-[var(--brand-border)] bg-[var(--brand-soft)] text-[var(--brand-strong)]"
+                          : "border-transparent bg-transparent text-muted-foreground/25",
+                      ].join(" ")}
+                    >
+                      {step.timing}
+                    </Badge>
+                    <h3
+                      className={[
+                        "mt-3 text-[1.7rem] font-medium leading-[1.15] tracking-[-0.06em]",
+                        "transition-all duration-700 ease-out",
+                        isActive ? "text-foreground" : "text-foreground/15",
+                      ].join(" ")}
+                    >
+                      {step.headline}
+                    </h3>
+                  </div>
+                )
+              })}
+            </div>
+          </BlurFade>
+        </div>
+
+        {/* ── RIGHT: sticky stacking cards (CSS-Tricks pattern) ── */}
+        <div>
+          {process.map((step, i) => {
+            const Icon = step.icon
+            return (
+              <article
+                key={step.step}
+                ref={(el) => { cardRefs.current[i] = el }}
+                className={`method-card relative overflow-hidden rounded-[1.4rem] ${cardColors[i]} p-8 lg:p-10 shadow-[0_4px_24px_-6px_rgba(0,0,0,0.07)] lg:mb-0 mb-5`}
+                style={{
+                  top: `calc(8rem + ${i * 24}px)`,
+                  height: "28rem",
+                }}
+              >
+                {/* Green accent strip at top */}
+                <div className="absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-[var(--brand)] via-[var(--brand-strong)] to-[var(--brand)]/30" />
+
+                {/* Decorative bg step number */}
+                <span className="absolute right-5 -top-2 text-[11rem] font-bold leading-none text-[var(--brand)]/[0.05] select-none pointer-events-none">
+                  {step.step}
+                </span>
+
+                {/* Decorative gradient orb */}
+                <div className="absolute -right-20 -top-20 h-56 w-56 rounded-full bg-gradient-to-br from-[var(--brand)]/8 to-transparent blur-3xl pointer-events-none" />
+
+                {/* Top row: icon + step label */}
+                <div className="relative flex items-center justify-between mt-1">
+                  <div className="flex items-center gap-3.5">
+                    <div className="flex size-11 items-center justify-center rounded-xl border-[var(--brand-border)] bg-[var(--brand-soft)] border">
+                      <Icon className="size-5 text-[var(--brand-strong)]" />
+                    </div>
+                    <span className="text-[0.72rem] font-medium uppercase tracking-[0.22em] text-[var(--brand-strong)]/60">
+                      Paso {step.step}
+                    </span>
+                  </div>
+                  <span className="inline-flex items-center rounded-full border border-border bg-white/60 px-3 py-1.5 text-[0.68rem] uppercase tracking-[0.18em] text-foreground/40">
+                    {step.timing}
+                  </span>
+                </div>
+
+                {/* Title */}
+                <h3 className="relative mt-8 text-[1.65rem] font-medium tracking-[-0.04em] text-foreground leading-tight">
+                  {step.title}
+                </h3>
+
+                {/* Description */}
+                <p className="relative mt-4 max-w-lg text-[0.98rem] leading-7 text-foreground/55">
+                  {step.description}
+                </p>
+
+                {/* Bottom accent line */}
+                <div className="absolute inset-x-8 bottom-8 lg:inset-x-10 lg:bottom-10">
+                  <div className="h-px w-full bg-gradient-to-r from-[var(--brand)]/20 via-[var(--brand)]/8 to-transparent" />
+                </div>
+              </article>
+            )
+          })}
+        </div>
+
+      </div>
+    </section>
+  )
+}
+
+/* ─────────────────────────────────────────────
+   Section intro (generic reusable)
+   ───────────────────────────────────────────── */
+void MethodSection
+
+const methodStackCardColors = [
+  "bg-[#edf8f0] border-[#c4e2cc]",
+  "bg-white border-border",
+  "bg-[#f7faf8] border-[#d0ddd4]",
+  "bg-[#f1f6f2] border-[#c0d5c6]",
+]
+
+function MethodSectionV2() {
+  const cardRefs = useRef<(HTMLElement | null)[]>([])
+  const [activeStep, setActiveStep] = useState(0)
+
+  useEffect(() => {
+    const onScroll = () => {
+      if (window.innerWidth < 1024) return
+
+      let next = 0
+      cardRefs.current.forEach((ref, i) => {
+        if (!ref) return
+        const rect = ref.getBoundingClientRect()
+        const stickyTop = 112 + i * 24
+        if (rect.top <= stickyTop + 4) next = i
+      })
+      setActiveStep((prev) => (prev !== next ? next : prev))
+    }
+
+    onScroll()
+    window.addEventListener("scroll", onScroll, { passive: true })
+    return () => window.removeEventListener("scroll", onScroll)
+  }, [])
+
+  return (
+    <section id="metodo" className="mx-auto max-w-7xl py-16 sm:py-20">
+      <BlurFade inView>
+        <div className="mx-auto max-w-3xl text-center">
+          <Badge
+            variant="outline"
+            className="border-border bg-white px-3 py-1 text-[0.68rem] uppercase tracking-[0.22em] text-muted-foreground"
+          >
+            Nuestro metodo
+          </Badge>
+          <h2 className="mt-6 text-3xl font-medium tracking-[-0.07em] text-balance text-foreground sm:text-4xl lg:text-[3.05rem] lg:leading-[0.97]">
+            La IA como un proceso, no como un salto al vacio.
+          </h2>
+          <p className="mt-5 text-base leading-8 text-muted-foreground sm:text-lg">
+            Empezamos por una mejora concreta, la hacemos funcionar rapido y
+            despues escalamos. Asi tu empresa adopta IA sin trauma y con
+            resultados visibles desde etapas tempranas.
+          </p>
+        </div>
+      </BlurFade>
+
+      <div className="mt-12 grid gap-10 lg:grid-cols-[minmax(0,0.34fr)_minmax(0,0.66fr)] lg:items-start">
+        <div className="lg:sticky lg:top-28 lg:self-start lg:py-4">
+          <BlurFade inView delay={0.06}>
+            <div className="flex min-h-[62vh] flex-col justify-between lg:min-h-[72vh]">
+              {process.map((step, i) => {
+                const isActive = activeStep === i
+                return (
+                  <div
+                    key={step.step}
+                    className={[
+                      "transition-all duration-500",
+                      isActive ? "opacity-100" : "opacity-70",
+                    ].join(" ")}
+                  >
+                    <div className="flex items-start gap-3">
+                      <span
+                        className={[
+                          "inline-flex min-w-10 items-center justify-center text-[0.82rem] font-medium uppercase tracking-[0.14em] transition-colors duration-500",
+                          isActive
+                            ? "text-[var(--brand-strong)]"
+                            : "text-muted-foreground/42",
+                        ].join(" ")}
+                      >
+                        {step.step}
+                      </span>
+                      <div>
+                        <p
+                          className={[
+                            "text-[0.74rem] uppercase tracking-[0.22em] transition-colors duration-500",
+                            isActive ? "text-[var(--brand-strong)]" : "text-muted-foreground/45",
+                          ].join(" ")}
+                        >
+                          {step.timing}
+                        </p>
+                        <h3
+                          className={[
+                            "mt-1 max-w-[18rem] text-[1.5rem] font-medium leading-[1.05] tracking-[-0.06em] transition-colors duration-500 sm:text-[1.7rem] lg:text-[2rem]",
+                            isActive ? "text-foreground" : "text-foreground/24",
+                          ].join(" ")}
+                        >
+                          {step.headline}
+                        </h3>
+                      </div>
+                    </div>
+                  </div>
+                )
+              })}
+            </div>
+          </BlurFade>
+        </div>
+
+        <div
+          className="method-stack pb-12 lg:pb-28"
+          style={{ ["--numcards" as string]: process.length } as CSSProperties}
+        >
+          {process.map((step, i) => {
+            return (
+              <article
+                key={step.step}
+                ref={(el) => {
+                  cardRefs.current[i] = el
+                }}
+                className="method-stack-card relative mb-6 lg:mb-8"
+                style={
+                  {
+                    ["--index" as string]: i + 1,
+                    top: `calc(6.75rem + ${i * 24}px)`,
+                    zIndex: i + 1,
+                  } as CSSProperties
+                }
+              >
+                <div
+                  className={`method-stack-card__inner relative overflow-hidden rounded-[1.9rem] border ${methodStackCardColors[i]} p-7 shadow-[0_24px_60px_-46px_rgba(15,23,42,0.25)] lg:min-h-[82vh] lg:p-10`}
+                >
+                  <div className="absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-[var(--brand)] via-[var(--brand-strong)] to-[var(--brand)]/30" />
+                  <span className="pointer-events-none absolute right-5 top-2 select-none text-[10rem] font-bold leading-none text-[var(--brand)]/[0.05]">
+                    {step.step}
+                  </span>
+                  <div className="pointer-events-none absolute -right-16 -top-16 h-52 w-52 rounded-full bg-gradient-to-br from-[var(--brand)]/8 to-transparent blur-3xl" />
+
+                  <div className="relative flex min-h-[calc(82vh-5rem)] items-center">
+                    <div className="max-w-3xl">
+                      <p className="text-[0.72rem] font-medium uppercase tracking-[0.22em] text-[var(--brand-strong)]/65">
+                        Paso {step.step} · {step.timing}
+                      </p>
+                      <h3 className="mt-5 text-[2.35rem] font-medium leading-[0.95] tracking-[-0.09em] text-foreground sm:text-[2.8rem] lg:text-[4.5rem]">
+                        {step.title}
+                      </h3>
+                      <p className="mt-6 max-w-2xl text-[1rem] leading-8 text-foreground/58 sm:text-[1.08rem] lg:text-[1.18rem] lg:leading-9">
+                        {step.description}
+                      </p>
+                    </div>
+                  </div>
+
+                  <div className="absolute inset-x-7 bottom-7 lg:inset-x-10 lg:bottom-9">
+                    <div className="h-px w-full bg-gradient-to-r from-[var(--brand)]/20 via-[var(--brand)]/8 to-transparent" />
+                  </div>
+                </div>
+              </article>
+            )
+          })}
+        </div>
+      </div>
+    </section>
+  )
+}
+
 function SectionIntro({
   label,
   title,
@@ -238,7 +575,7 @@ function SectionIntro({
 
 function App() {
   return (
-    <main className="relative overflow-x-hidden text-foreground">
+    <main className="relative text-foreground">
       <div className="pointer-events-none fixed inset-0 -z-20">
         <DotPattern
           width={24}
@@ -403,54 +740,7 @@ function App() {
           </BlurFade>
         </section>
 
-        <section id="metodo" className="mx-auto max-w-7xl py-16 sm:py-20">
-          <SectionIntro
-            label="Nuestro Metodo"
-            title="La IA como un proceso, no como un salto al vacio."
-            description="Empezamos por lo obvio, entregamos mejoras visibles rapido y recien despues escalamos. Asi la adopcion de IA deja de ser una apuesta y pasa a ser un proceso."
-          />
-
-          <div className="relative mt-12">
-            <div className="absolute left-8 right-8 top-8 hidden h-px bg-border lg:block" />
-            <div className="grid gap-5 lg:grid-cols-4">
-            {process.map((step, index) => (
-              <BlurFade key={step.step} inView delay={0.08 * index}>
-                <MagicCard
-                  className="h-full rounded-[1.8rem]"
-                  gradientColor="#f8fafc"
-                  gradientFrom="#e5e7eb"
-                  gradientTo="#dbeafe"
-                >
-                  <article className="relative rounded-[1.75rem] bg-white p-6">
-                    <div className="flex items-center justify-between">
-                      <div className="flex size-10 items-center justify-center rounded-full border border-[var(--brand-border)] bg-white text-[var(--brand-strong)]">
-                        <step.icon className="size-4.5" />
-                      </div>
-                      <span className="text-[0.68rem] uppercase tracking-[0.24em] text-muted-foreground">
-                        Paso {step.step}
-                      </span>
-                    </div>
-                    <div className="mt-6">
-                      <Badge
-                        variant="outline"
-                        className="border-border bg-secondary px-3 py-1 text-[0.68rem] uppercase tracking-[0.18em] text-muted-foreground"
-                      >
-                        {step.timing}
-                      </Badge>
-                    </div>
-                    <h3 className="mt-5 text-2xl font-medium tracking-[-0.06em]">
-                      {step.title}
-                    </h3>
-                    <p className="mt-4 text-base leading-7 text-muted-foreground">
-                      {step.description}
-                    </p>
-                  </article>
-                </MagicCard>
-              </BlurFade>
-            ))}
-          </div>
-          </div>
-        </section>
+        <MethodSectionV2 />
 
         <section id="servicios" className="mx-auto max-w-7xl py-16 sm:py-20">
           <SectionIntro
