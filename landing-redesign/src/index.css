@@ -76,10 +76,10 @@
   --border: oklch(0.91 0.01 245);
   --input: oklch(0.93 0.01 245);
   --ring: oklch(0.7 0.08 215);
-  --brand: #22d966;
-  --brand-strong: #13c455;
-  --brand-soft: rgba(34, 217, 102, 0.09);
-  --brand-border: rgba(34, 217, 102, 0.28);
+  --brand: #63e28f;
+  --brand-strong: #63e28f;
+  --brand-soft: rgba(99, 226, 143, 0.12);
+  --brand-border: rgba(99, 226, 143, 0.34);
 }
 
 * {

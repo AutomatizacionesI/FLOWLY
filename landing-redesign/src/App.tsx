@@ -1,100 +1,163 @@
 import {
+  ArrowLeft,
   ArrowRight,
   ArrowUpRight,
+  BarChart3,
   Bot,
+  Building2,
   CircleCheckBig,
   Clock3,
-  Layers3,
-  MapPinned,
-  MessageSquareMore,
+  Database,
+  Landmark,
+  LayoutTemplate,
   Network,
   RefreshCw,
   Search,
+  Sparkles,
+  TreePine,
   Workflow,
 } from "lucide-react"
 import { type CSSProperties, useEffect, useRef, useState } from "react"
 
-import { AnimatedGridPattern } from "@/components/ui/animated-grid-pattern"
 import { Badge } from "@/components/ui/badge"
 import { BlurFade } from "@/components/ui/blur-fade"
 import { DotPattern } from "@/components/ui/dot-pattern"
-import { MagicCard } from "@/components/ui/magic-card"
 import { Marquee } from "@/components/ui/marquee"
-import { Separator } from "@/components/ui/separator"
 
 const navigation = [
   { label: "Servicios", href: "#servicios" },
-  { label: "Soluciones", href: "#soluciones" },
   { label: "Metodo", href: "#metodo" },
-  { label: "Equipo", href: "#equipo" },
   { label: "Contacto", href: "#contacto" },
 ]
 
-const services = [
+const caseStudies = [
   {
-    title: "Automatizacion RPA",
-    eyebrow: "Tu equipo, sin tareas repetitivas",
+    title: "Sistema de gestion de alquileres para inmobiliarias",
+    eyebrow: "Operacion centralizada",
     description:
-      "Bots para carga de datos, reportes, facturacion y monitoreo continuo conectados con los sistemas que tu empresa ya usa.",
-    icon: Workflow,
-    accent: "text-[var(--brand-strong)]",
+      "Unificamos seguimiento comercial, contratos, vencimientos, estado de propiedades y tareas operativas en un solo sistema conectado con automatizaciones reales.",
+    icon: Building2,
+    result: "Menos seguimiento manual y mas control operativo",
     bullets: [
-      "Migracion y carga de datos",
-      "Reportes y facturacion automatizados",
-      "Conexion con software existente",
-      "Alertas y monitoreo en tiempo real",
+      "Propiedades, contratos y vencimientos en un solo flujo",
+      "Alertas y automatizaciones para tareas repetitivas",
+      "Visibilidad completa para equipo comercial y operativo",
     ],
+    visualLabel: "Inmobiliarias",
+    visualTitle: "Alquileres, seguimiento y operacion en un sistema vivo.",
+    visualNodes: ["Leads", "Contratos", "Cobros", "Alertas"],
   },
   {
-    title: "Inteligencia artificial",
-    eyebrow: "IA que trabaja con tus datos",
+    title: "IA para conciliacion bancaria y control financiero",
+    eyebrow: "Finanzas automatizadas",
     description:
-      "Agentes, chatbots, lectura documental y modelos predictivos entrenados sobre la operacion concreta de cada negocio.",
+      "Implementamos flujos con IA y reglas operativas para conciliar movimientos, detectar inconsistencias y acelerar cierres sin depender de revisiones eternas.",
+    icon: Landmark,
+    result: "Menos horas administrativas y mas precision financiera",
+    bullets: [
+      "Cruce de extractos, facturas y movimientos",
+      "Deteccion automatica de diferencias",
+      "Base lista para reporting y decision",
+    ],
+    visualLabel: "Banca y administracion",
+    visualTitle: "Conciliar ya no deberia consumir a tu equipo.",
+    visualNodes: ["Bancos", "Facturas", "Validacion IA", "Reportes"],
+  },
+  {
+    title: "Asistente de IA contable con contexto y procesos definidos",
+    eyebrow: "IA interna para equipos",
+    description:
+      "Creamos asistentes conectados a documentacion, criterios contables y procedimientos internos para ayudar al equipo en consultas, tareas y validaciones.",
     icon: Bot,
-    accent: "text-[var(--brand-strong)]",
+    result: "Conocimiento operativo disponible en segundos",
     bullets: [
-      "Agentes con IA generativa",
-      "Prediccion de tendencias",
-      "Lectura automatica de PDFs y contratos",
-      "BI con insights automaticos",
+      "Responde sobre normativa y procesos internos",
+      "Asiste en tareas repetitivas con contexto real",
+      "Reduce dependencia de pocas personas clave",
     ],
+    visualLabel: "Estudios y empresas",
+    visualTitle: "Un asistente que entiende como trabaja tu empresa.",
+    visualNodes: ["Contexto", "Procesos", "Consultas", "Tareas"],
   },
   {
-    title: "Desarrollo a medida",
-    eyebrow: "La herramienta exacta para tu negocio",
+    title: "IA conectada a la base de una inmobiliaria para automatizar y asistir",
+    eyebrow: "Acceso inteligente a la informacion",
     description:
-      "Plataformas web, dashboards e integraciones hechas para resolver cuellos de botella reales con entregas visibles.",
-    icon: Layers3,
-    accent: "text-[var(--brand-strong)]",
+      "Conectamos la IA a la base operativa de la inmobiliaria para responder consultas internas, disparar acciones y asistir al equipo con informacion confiable.",
+    icon: Database,
+    result: "La informacion correcta disponible al instante",
     bullets: [
-      "Plataformas y dashboards personalizados",
-      "Integraciones via APIs y webhooks",
-      "Automatizaciones sin codigo",
-      "Resultados visibles semana a semana",
+      "Consultas internas con acceso a datos reales",
+      "Automatizaciones disparadas desde la propia base",
+      "Asistencia para empleados sin cambiar el flujo diario",
     ],
-  },
-]
-
-const solutions = [
-  {
-    title: "Finanzas automaticas",
-    description:
-      "Conciliacion bancaria, facturas, seguimiento de pagos y reportes financieros sin pasos manuales.",
+    visualLabel: "Base conectada",
+    visualTitle: "Datos operativos convertidos en acciones utiles.",
+    visualNodes: ["Base", "Consultas", "Automatizaciones", "Equipo"],
   },
   {
-    title: "Data & Business Intelligence",
+    title: "Dashboards de rendimiento automatizados para operaciones complejas",
+    eyebrow: "BI accionable",
     description:
-      "Dashboards en tiempo real con KPIs, alertas y reportes distribuidos sin friccion operativa.",
+      "Desarrollamos dashboards vivos para salones de eventos, depositos, barracas, inmobiliarias y empresas de limpieza, con reporting automatico y lectura simple.",
+    icon: BarChart3,
+    result: "KPIs claros sin perseguir planillas",
+    bullets: [
+      "Reportes automaticos para multiples areas",
+      "KPIs actualizados sin carga manual",
+      "Lectura ejecutiva y operativa en el mismo sistema",
+    ],
+    visualLabel: "Performance",
+    visualTitle: "Tu negocio medido sin friccion operativa.",
+    visualNodes: ["Ventas", "Ocupacion", "Margen", "Alertas"],
   },
   {
-    title: "Ecosistemas de gestion",
+    title: "Reestructuracion de base de datos y reporting para una forestal",
+    eyebrow: "Infraestructura de datos",
     description:
-      "Herramientas conectadas en un solo flujo para evitar duplicados, retrasos y datos inconsistentes.",
+      "Ordenamos una base compleja, redefinimos estructura, limpiamos criterios y montamos reporting automatizado para que la operacion deje de depender de parches.",
+    icon: TreePine,
+    result: "Datos ordenados, trazables y utiles para decidir",
+    bullets: [
+      "Limpieza y rediseno de estructura de datos",
+      "Reporting automatico sobre una base confiable",
+      "Menos dependencia de procesos manuales y archivos rotos",
+    ],
+    visualLabel: "Forestal",
+    visualTitle: "Cuando la base se ordena, la operacion cambia.",
+    visualNodes: ["Base nueva", "Criterios", "Reporting", "Decision"],
   },
   {
-    title: "Asistentes cognitivos",
+    title: "Landing pages con IA para captar y calificar clientes",
+    eyebrow: "Captacion inteligente",
     description:
-      "Agentes que atienden consultas, califican leads y procesan solicitudes las 24 horas.",
+      "Disenamos landings para marcas de moda y termos con sistemas de IA que responden, filtran y ordenan oportunidades comerciales desde el primer contacto.",
+    icon: LayoutTemplate,
+    result: "Mas leads utiles y menos tiempo perdido",
+    bullets: [
+      "Captacion con mejor experiencia de entrada",
+      "IA para respuesta y pre-calificacion inicial",
+      "Integracion con seguimiento comercial posterior",
+    ],
+    visualLabel: "Marketing + IA",
+    visualTitle: "No solo captar mas. Captar mejor desde el inicio.",
+    visualNodes: ["Landing", "Asistente IA", "Leads", "Seguimiento"],
+  },
+  {
+    title: "Y si tu problema es otro, tambien lo podemos resolver con IA",
+    eyebrow: "Soluciones a medida",
+    description:
+      "Si hay un cuello de botella, una operacion trabada o demasiadas tareas que dependen de personas, probablemente haya una forma inteligente de redisenarlo.",
+    icon: Sparkles,
+    result: "La IA aplicada al problema real de tu empresa",
+    bullets: [
+      "Partimos del problema, no de la herramienta",
+      "Disenamos una solucion modular y escalable",
+      "Implementamos segun tu contexto operativo real",
+    ],
+    visualLabel: "Custom AI",
+    visualTitle: "No hace falta que el caso ya exista para resolverlo bien.",
+    visualNodes: ["Diagnostico", "Diseno", "Implementacion", "Escala"],
   },
 ]
 
@@ -181,27 +244,16 @@ const urgencyCards = [
 
 const comparison = {
   before: [
-    "Horas perdidas cada semana en tareas manuales.",
-    "Errores costosos por intervencion humana repetitiva.",
-    "Informacion dispersa entre planillas, correos y sistemas.",
-    "Crecimiento frenado por capacidad operativa limitada.",
+    "Tu equipo pierde tiempo en tareas repetitivas.",
+    "La operacion se mueve mas lento de lo que deberia.",
+    "Tu competencia gana ventaja mientras vos sostienes friccion.",
   ],
   after: [
-    "82% menos tiempo operativo para enfocarse en decisiones estrategicas.",
-    "94% de precision en ejecucion automatizada.",
-    "Reportes automaticos en menos de 60 segundos.",
-    "3.1x mas capacidad sin sumar estructura operativa extra.",
+    "Tu equipo recupera tiempo para pensar y decidir mejor.",
+    "La operacion gana velocidad, orden y claridad.",
+    "Te adelantas con una estructura mas inteligente.",
   ],
 }
-
-const industries = [
-  "Inmobiliarias",
-  "Contabilidad",
-  "Finanzas",
-  "Retail",
-  "Salud",
-  "Legal",
-]
 
 const clients = [
   "Castells",
@@ -211,28 +263,6 @@ const clients = [
   "Estudio G Pittaluga",
   "HIKE",
   "Proz Recovery",
-]
-
-const founders = [
-  {
-    name: "Facundo Etcheverry",
-    role: "Co-founder - Sistemas & Automatizacion",
-    description:
-      "Arquitectura de automatizaciones RPA, integraciones complejas y desarrollo de agentes de IA.",
-  },
-  {
-    name: "Gonzalo Pittaluga",
-    role: "Co-founder - Datos & Estrategia",
-    description:
-      "Inteligencia de negocios, dashboards estrategicos y modelos predictivos orientados a operacion.",
-  },
-]
-
-const implementationStack = [
-  "Agentes con IA",
-  "Integraciones API",
-  "BI en tiempo real",
-  "Automatizacion RPA",
 ]
 
 const whatsappHref =
@@ -573,6 +603,304 @@ function SectionIntro({
   )
 }
 
+function SuccessCasesSection() {
+  const loopStart = caseStudies.length
+  const [caseIndex, setCaseIndex] = useState(loopStart)
+  const [dragOffset, setDragOffset] = useState(0)
+  const [isDragging, setIsDragging] = useState(false)
+  const [transitionsEnabled, setTransitionsEnabled] = useState(true)
+  const [viewportWidth, setViewportWidth] = useState(0)
+  const [autoSeed, setAutoSeed] = useState(0)
+  const viewportRef = useRef<HTMLDivElement | null>(null)
+  const dragStartXRef = useRef(0)
+  const dragMovedRef = useRef(false)
+
+  const slideGap = 24
+  const dragThreshold = 70
+  const loopedCaseStudies = [...caseStudies, ...caseStudies, ...caseStudies]
+  const normalizedIndex =
+    ((caseIndex % caseStudies.length) + caseStudies.length) % caseStudies.length
+  const slideWidth =
+    viewportWidth > 1024
+      ? Math.max(680, viewportWidth / 2 - slideGap)
+      : Math.max(360, viewportWidth - 40)
+
+  useEffect(() => {
+    const updateViewportWidth = () => {
+      setViewportWidth(viewportRef.current?.offsetWidth ?? 0)
+    }
+
+    updateViewportWidth()
+    window.addEventListener("resize", updateViewportWidth)
+    return () => window.removeEventListener("resize", updateViewportWidth)
+  }, [])
+
+  useEffect(() => {
+    if (isDragging) return
+
+    const timer = window.setTimeout(() => {
+      setCaseIndex((prev) => prev + 1)
+    }, 5000)
+
+    return () => window.clearTimeout(timer)
+  }, [caseIndex, isDragging, autoSeed])
+
+  const goToIndex = (nextIndex: number) => {
+    setCaseIndex((prev) => {
+      const options = [
+        nextIndex,
+        nextIndex + caseStudies.length,
+        nextIndex + caseStudies.length * 2,
+      ]
+
+      return options.reduce((closest, option) =>
+        Math.abs(option - prev) < Math.abs(closest - prev) ? option : closest
+      )
+    })
+    setAutoSeed((prev) => prev + 1)
+  }
+
+  const goPrev = () => {
+    setCaseIndex((prev) => prev - 1)
+    setAutoSeed((prev) => prev + 1)
+  }
+
+  const goNext = () => {
+    setCaseIndex((prev) => prev + 1)
+    setAutoSeed((prev) => prev + 1)
+  }
+
+  const handlePointerDown = (event: React.PointerEvent<HTMLDivElement>) => {
+    dragStartXRef.current = event.clientX
+    dragMovedRef.current = false
+    setIsDragging(true)
+    setDragOffset(0)
+    event.currentTarget.setPointerCapture(event.pointerId)
+  }
+
+  const handlePointerMove = (event: React.PointerEvent<HTMLDivElement>) => {
+    if (!isDragging) return
+    const delta = event.clientX - dragStartXRef.current
+    if (Math.abs(delta) > 4) dragMovedRef.current = true
+    setDragOffset(delta)
+  }
+
+  const finishDrag = (pointerId?: number, currentTarget?: HTMLDivElement | null) => {
+    if (!isDragging) return
+
+    const delta = dragOffset
+    setIsDragging(false)
+    setDragOffset(0)
+    setAutoSeed((prev) => prev + 1)
+
+    if (currentTarget && pointerId !== undefined && currentTarget.hasPointerCapture(pointerId)) {
+      currentTarget.releasePointerCapture(pointerId)
+    }
+
+    if (Math.abs(delta) >= dragThreshold) {
+      setCaseIndex((prev) =>
+        delta < 0 ? prev + 1 : prev - 1
+      )
+    }
+  }
+
+  const handlePointerUp = (event: React.PointerEvent<HTMLDivElement>) => {
+    finishDrag(event.pointerId, event.currentTarget)
+  }
+
+  const handlePointerLeave = (event: React.PointerEvent<HTMLDivElement>) => {
+    if (!isDragging) return
+    finishDrag(event.pointerId, event.currentTarget)
+  }
+
+  const handleTrackTransitionEnd = () => {
+    if (caseIndex >= caseStudies.length * 2 || caseIndex < caseStudies.length) {
+      setTransitionsEnabled(false)
+      setCaseIndex((prev) => {
+        if (prev >= caseStudies.length * 2) return prev - caseStudies.length
+        if (prev < caseStudies.length) return prev + caseStudies.length
+        return prev
+      })
+      window.requestAnimationFrame(() => {
+        window.requestAnimationFrame(() => {
+          setTransitionsEnabled(true)
+        })
+      })
+    }
+  }
+
+  const centerIndex = caseIndex
+  const baseTranslate =
+    viewportWidth > 0
+      ? viewportWidth / 2 - slideWidth / 2 - centerIndex * (slideWidth + slideGap)
+      : 0
+
+  return (
+    <section
+      id="servicios"
+      className="relative left-1/2 min-h-[118vh] w-screen -translate-x-1/2 overflow-hidden bg-[#f4f4f1] py-18 sm:min-h-[126vh] sm:py-20"
+    >
+      <div className="flex min-h-[118vh] flex-col justify-start sm:min-h-[126vh]">
+        <div className="mx-auto w-full max-w-4xl px-4 pt-8 text-center sm:px-6 sm:pt-10 lg:px-8 lg:pt-12">
+          <BlurFade inView className="space-y-4">
+            <Badge
+              variant="outline"
+              className="border-border bg-white px-3 py-1 text-[0.68rem] uppercase tracking-[0.22em] text-muted-foreground"
+            >
+              Casos de exito
+            </Badge>
+            <h2 className="mx-auto max-w-4xl text-3xl font-medium tracking-[-0.07em] text-balance text-foreground sm:text-4xl md:text-5xl">
+              Implementaciones reales de IA aplicadas a problemas concretos.
+            </h2>
+            <p className="mx-auto max-w-3xl text-base leading-7 text-muted-foreground sm:text-lg">
+              Un slider interactivo para recorrer algunos de los sistemas,
+              asistentes y automatizaciones que ya construimos para distintos
+              tipos de operacion.
+            </p>
+          </BlurFade>
+        </div>
+
+        <BlurFade inView delay={0.08}>
+        <div className="mt-6 flex flex-1 flex-col justify-start pb-12 sm:mt-8 sm:pb-14">
+          <div
+            ref={viewportRef}
+            className="overflow-x-hidden overflow-y-visible py-6 sm:py-8"
+            onPointerDown={handlePointerDown}
+            onPointerMove={handlePointerMove}
+            onPointerUp={handlePointerUp}
+            onPointerCancel={handlePointerUp}
+            onPointerLeave={handlePointerLeave}
+          >
+            <div
+              className={[
+                "flex gap-6",
+                isDragging || !transitionsEnabled
+                  ? "cursor-grabbing transition-none"
+                  : "cursor-grab transition-transform duration-[1100ms] ease-[cubic-bezier(0.16,1,0.3,1)]",
+              ].join(" ")}
+              onTransitionEnd={handleTrackTransitionEnd}
+              style={{
+                transform: `translateX(${baseTranslate + dragOffset}px)`,
+              }}
+            >
+              {loopedCaseStudies.map((item, loopIndex) => {
+                const Icon = item.icon
+                const isActive = loopIndex === centerIndex
+
+                return (
+                  <article
+                    key={`${item.title}-${loopIndex}`}
+                    className={[
+                      "w-[920px] flex-shrink-0 rounded-[2rem] border border-border/70 bg-white p-6 text-slate-900 shadow-[0_30px_90px_-70px_rgba(15,23,42,0.25)] transition-all duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] select-none lg:min-h-[35rem] lg:p-7",
+                      isActive
+                        ? "scale-[1.08] opacity-100"
+                        : "scale-[0.84] opacity-100",
+                    ].join(" ")}
+                    style={{ width: `${slideWidth}px` }}
+                  >
+                    <div className="grid h-full gap-6 lg:grid-cols-[minmax(0,1.02fr)_minmax(320px,0.98fr)] lg:items-stretch">
+                      <div className="flex h-full flex-col overflow-hidden rounded-[1.5rem] border border-slate-200/70 bg-[radial-gradient(circle_at_top_left,rgba(34,217,102,0.26),transparent_42%),linear-gradient(180deg,#f8fafc_0%,#eef2f7_100%)] p-5 lg:p-6">
+                        <div className="flex items-center justify-between gap-3">
+                          <div className="rounded-full border border-white/70 bg-white/80 px-3 py-1 text-[0.68rem] uppercase tracking-[0.2em] text-slate-500">
+                            {item.visualLabel}
+                          </div>
+                          <Icon className="size-4 text-[var(--brand-strong)]" />
+                        </div>
+
+                        <div className="mt-5 flex flex-1 flex-col justify-between gap-3">
+                          {item.visualNodes.map((node, nodeIndex) => (
+                            <div
+                              key={`${item.title}-${loopIndex}-${node}`}
+                              className={[
+                                "w-fit rounded-full border px-3 py-2 text-sm font-medium text-slate-700 shadow-[0_12px_26px_-22px_rgba(15,23,42,0.22)]",
+                                nodeIndex === 1
+                                  ? "ml-auto border-[var(--brand-border)] bg-[var(--brand-soft)]"
+                                  : "border-white/80 bg-white/85",
+                                nodeIndex === 2 ? "ml-7" : "",
+                                nodeIndex === 3 ? "ml-auto" : "",
+                              ].join(" ")}
+                            >
+                              {node}
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+
+                      <div className="flex h-full flex-col justify-between py-1">
+                        <div>
+                          <p className="text-[0.7rem] uppercase tracking-[0.22em] text-slate-500">
+                            {item.eyebrow}
+                          </p>
+                          <h3 className="mt-3 text-[2rem] font-medium leading-[0.98] tracking-[-0.07em] text-slate-900 lg:text-[2.35rem]">
+                            {item.title}
+                          </h3>
+                          <p className="mt-4 text-[1rem] leading-7 text-slate-600 lg:text-[1.02rem]">
+                            {item.description}
+                          </p>
+                        </div>
+
+                        <div className="mt-8 space-y-3">
+                          {item.bullets.slice(0, 3).map((bullet) => (
+                            <div key={`${item.title}-${loopIndex}-${bullet}`} className="flex items-start gap-2.5 text-sm leading-6 text-slate-700 lg:text-[0.96rem]">
+                              <CircleCheckBig className="mt-1 size-4 shrink-0 text-[var(--brand-strong)]" />
+                              <span>{bullet}</span>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                    </div>
+                  </article>
+                )
+              })}
+            </div>
+          </div>
+
+          <div className="mx-auto mt-8 flex max-w-7xl items-center justify-between gap-10 px-4 sm:px-6 lg:px-8">
+            <div className="flex items-center gap-2">
+              {caseStudies.map((item, index) => (
+                <button
+                  key={item.title}
+                  type="button"
+                  onClick={() => goToIndex(index)}
+                  aria-label={`Mostrar caso ${index + 1}`}
+                  className={[
+                    "size-2.5 rounded-full transition-all duration-300",
+                    index === normalizedIndex
+                      ? "bg-slate-800"
+                      : "bg-slate-300 hover:bg-slate-400",
+                  ].join(" ")}
+                />
+              ))}
+            </div>
+
+            <div className="ml-10 flex items-center gap-3 sm:ml-16 lg:ml-24">
+              <button
+                id="prevBtn"
+                type="button"
+                onClick={goPrev}
+                className="inline-flex size-12 items-center justify-center text-slate-950 transition-all duration-300 hover:-translate-y-0.5 hover:text-black"
+                aria-label="Caso anterior"
+              >
+                <ArrowLeft className="size-5" />
+              </button>
+              <button
+                id="nextBtn"
+                type="button"
+                onClick={goNext}
+                className="inline-flex size-12 items-center justify-center text-slate-950 transition-all duration-300 hover:-translate-y-0.5 hover:text-black"
+                aria-label="Caso siguiente"
+              >
+                <ArrowRight className="size-5" />
+              </button>
+            </div>
+          </div>
+        </div>
+      </BlurFade>
+      </div>
+    </section>
+  )
+}
+
 function App() {
   return (
     <main className="relative text-foreground">
@@ -742,316 +1070,188 @@ function App() {
 
         <MethodSectionV2 />
 
-        <section id="servicios" className="mx-auto max-w-7xl py-16 sm:py-20">
-          <SectionIntro
-            label="Servicios"
-            title="Una capa operativa nueva para negocios que ya no quieren crecer con friccion."
-            description="Disenamos sistemas que absorben trabajo manual, conectan herramientas y convierten datos dispersos en capacidad operativa real."
-          />
+        <SuccessCasesSection />
 
-          <div className="mt-12 grid gap-6 lg:grid-cols-3">
-            {services.map((service, index) => {
-              const Icon = service.icon
-
-              return (
-                <BlurFade key={service.title} inView delay={0.08 * index}>
-                  <MagicCard
-                    className="h-full rounded-[2rem]"
-                    gradientColor="#eff6ff"
-                    gradientFrom="#e5e7eb"
-                    gradientTo="#dbeafe"
-                  >
-                    <article className="group rounded-[1.95rem] bg-white p-6">
-                      <div className="flex items-start justify-between gap-4">
-                        <div className="space-y-4">
-                          <Badge
-                            variant="outline"
-                            className="border-border bg-secondary px-3 py-1 text-[0.68rem] uppercase tracking-[0.18em] text-muted-foreground"
-                          >
-                            {service.eyebrow}
-                          </Badge>
-                          <h3 className="text-2xl font-medium tracking-[-0.06em]">
-                            {service.title}
-                          </h3>
-                        </div>
-                        <div className="rounded-2xl border border-border bg-white p-3 transition-transform duration-300 group-hover:-translate-y-1 group-hover:border-[var(--brand-strong)]">
-                          <Icon className={`size-5 ${service.accent}`} />
-                        </div>
-                      </div>
-
-                      <p className="mt-5 text-base leading-7 text-muted-foreground">
-                        {service.description}
-                      </p>
-
-                      <ul className="mt-7 space-y-3">
-                        {service.bullets.map((bullet) => (
-                          <li key={bullet} className="flex items-start gap-3 text-sm leading-6">
-                            <CircleCheckBig className="mt-0.5 size-4 shrink-0 text-[var(--brand-strong)]" />
-                            <span>{bullet}</span>
-                          </li>
-                        ))}
-                      </ul>
-                    </article>
-                  </MagicCard>
-                </BlurFade>
-              )
-            })}
+        <section className="relative left-1/2 w-screen -translate-x-1/2 py-16 sm:py-20">
+          <div className="mx-auto max-w-4xl px-4 text-center sm:px-6 lg:px-8">
+            <SectionIntro
+              label="Antes / Despues"
+              title="Menos horas perdidas. Mas foco en lo que realmente mueve el negocio."
+              description="La diferencia no es tecnologica solamente. Cambia la forma en la que opera tu empresa."
+            />
           </div>
-        </section>
 
-        <section id="soluciones" className="mx-auto max-w-7xl py-16 sm:py-20">
-          <div className="grid gap-8 lg:grid-cols-[minmax(0,0.92fr)_minmax(0,1.08fr)]">
-            <BlurFade inView className="h-full">
-              <div className="relative h-full overflow-hidden rounded-[2.2rem] border border-neutral-900 bg-neutral-950 px-7 py-8 text-white sm:px-9 sm:py-10">
-                <AnimatedGridPattern
-                  numSquares={18}
-                  maxOpacity={0.16}
-                  duration={5}
-                  repeatDelay={0.8}
-                  className="absolute inset-0 h-full w-full text-white/20 [mask-image:radial-gradient(420px_circle_at_top,white,transparent)]"
-                />
-                <div className="relative z-10">
-                  <Badge className="rounded-full border-white/15 bg-white/10 px-3 py-1 text-[0.68rem] uppercase tracking-[0.22em] text-white/80">
-                    Casos de uso
-                  </Badge>
-                  <h2 className="mt-6 max-w-lg text-3xl font-medium tracking-[-0.06em] text-balance sm:text-4xl">
-                    Soluciones de alto impacto para equipos que necesitan operar mas rapido.
-                  </h2>
-                  <p className="mt-5 max-w-lg text-base leading-7 text-white/72">
-                    No vendemos piezas sueltas. Disenamos sistemas donde automatizacion,
-                    IA e integraciones trabajan juntas sobre el cuello de botella real.
+          <div className="mt-10 overflow-hidden border-y border-border/80">
+            <div className="grid lg:grid-cols-2">
+              <BlurFade inView>
+                <div className="flex h-full flex-col items-center justify-center bg-[#eef2e8] px-7 py-12 text-center sm:px-10 sm:py-16 lg:min-h-[32rem] lg:px-14">
+                  <div className="w-fit rounded-md bg-neutral-950 px-3 py-1 text-[0.68rem] uppercase tracking-[0.18em] text-white">
+                    Sin Spike AI
+                  </div>
+                  <h3 className="mt-6 max-w-md text-3xl font-medium tracking-[-0.07em] text-balance text-foreground sm:text-[2.6rem] lg:text-[2.85rem] lg:leading-[0.98]">
+                    La operacion se vuelve mas pesada de lo que deberia.
+                  </h3>
+                  <p className="mt-6 max-w-lg text-base leading-8 text-foreground/68 sm:text-lg">
+                    Todo depende de tareas manuales, seguimiento y desgaste operativo.
                   </p>
 
-                  <div className="mt-9 grid gap-3 sm:grid-cols-2">
-                    {implementationStack.map((item) => (
-                      <div
-                        key={item}
-                        className="rounded-2xl border border-white/10 bg-white/6 px-4 py-3 text-sm text-white/78"
-                      >
-                        {item}
-                      </div>
+                  <ul className="mt-10 max-w-lg space-y-5 text-left">
+                    {comparison.before.map((item) => (
+                      <li key={item} className="flex gap-3 text-sm leading-7 text-foreground/72 sm:text-base">
+                        <Clock3 className="mt-1 size-4 shrink-0 text-foreground/42" />
+                        <span>{item}</span>
+                      </li>
                     ))}
-                  </div>
+                  </ul>
                 </div>
-              </div>
-            </BlurFade>
+              </BlurFade>
 
-            <div className="grid gap-4">
-              {solutions.map((solution, index) => (
-                <BlurFade key={solution.title} inView delay={0.08 * index}>
-                  <MagicCard
-                    className="rounded-[1.7rem]"
-                    gradientColor="#eff6ff"
-                    gradientFrom="#e5e7eb"
-                    gradientTo="#bae6fd"
-                  >
-                    <article className="group rounded-[1.65rem] bg-white p-6">
-                      <div className="flex items-start justify-between gap-4">
-                        <div>
-                          <div className="text-[0.68rem] uppercase tracking-[0.22em] text-muted-foreground">
-                            Solucion {index + 1}
-                          </div>
-                          <h3 className="mt-3 text-xl font-medium tracking-[-0.05em]">
-                            {solution.title}
-                          </h3>
-                        </div>
-                        <ArrowUpRight className="mt-1 size-4 text-muted-foreground transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
-                      </div>
-                      <p className="mt-4 max-w-xl text-sm leading-7 text-muted-foreground sm:text-base">
-                        {solution.description}
-                      </p>
-                    </article>
-                  </MagicCard>
-                </BlurFade>
-              ))}
+              <BlurFade inView delay={0.08}>
+                <div className="flex h-full flex-col items-center justify-center bg-neutral-950 px-7 py-12 text-center text-white sm:px-10 sm:py-16 lg:min-h-[32rem] lg:px-14">
+                  <div className="w-fit rounded-md bg-white/12 px-3 py-1 text-[0.68rem] uppercase tracking-[0.18em] text-white">
+                    Con Spike AI
+                  </div>
+                  <h3 className="mt-6 max-w-md text-3xl font-medium tracking-[-0.07em] text-balance text-white sm:text-[2.6rem] lg:text-[2.85rem] lg:leading-[0.98]">
+                    El equipo recupera tiempo para lo que realmente importa.
+                  </h3>
+                  <p className="mt-6 max-w-lg text-base leading-8 text-white/72 sm:text-lg">
+                    La IA libera capacidad para decidir mejor y ejecutar con mas claridad.
+                  </p>
+
+                  <ul className="mt-10 max-w-lg space-y-5 text-left">
+                    {comparison.after.map((item) => (
+                      <li key={item} className="flex gap-3 text-sm leading-7 text-white/76 sm:text-base">
+                        <CircleCheckBig className="mt-1 size-4 shrink-0 text-[var(--brand)]" />
+                        <span>{item}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </BlurFade>
             </div>
           </div>
         </section>
 
         <section className="mx-auto max-w-7xl py-16 sm:py-20">
-          <SectionIntro
-            label="Antes / Despues"
-            title="Menos horas perdidas. Mas visibilidad. Mas foco en decisiones."
-            description="La diferencia no es solo tecnologica: cambia el ritmo operativo completo del negocio."
-          />
-
-          <div className="mt-12 grid gap-6 lg:grid-cols-2">
-            <BlurFade inView>
-              <div className="rounded-[2rem] border border-border bg-white p-6">
-                <div className="w-fit rounded-full border border-border bg-secondary px-3 py-1 text-xs uppercase tracking-[0.18em] text-muted-foreground">
-                  Sin Spike AI
-                </div>
-                <ul className="mt-6 space-y-4">
-                  {comparison.before.map((item) => (
-                    <li key={item} className="flex gap-3 text-sm leading-7 text-muted-foreground sm:text-base">
-                      <Clock3 className="mt-1 size-4 shrink-0 text-foreground/45" />
-                      <span>{item}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </BlurFade>
-
-            <BlurFade inView delay={0.1}>
-              <div className="rounded-[2rem] border border-neutral-900 bg-neutral-950 p-6 text-white">
-                <div className="w-fit rounded-full border border-white/14 bg-white/10 px-3 py-1 text-xs uppercase tracking-[0.18em] text-white/78">
-                  Con Spike AI
-                </div>
-                <ul className="mt-6 space-y-4">
-                  {comparison.after.map((item) => (
-                    <li key={item} className="flex gap-3 text-sm leading-7 text-white/76 sm:text-base">
-                      <CircleCheckBig className="mt-1 size-4 shrink-0 text-[var(--brand)]" />
-                      <span>{item}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </BlurFade>
-          </div>
-        </section>
-
-        <section id="industrias" className="mx-auto max-w-7xl py-16 sm:py-20">
-          <div className="grid gap-10 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)]">
-            <SectionIntro
-              label="Industrias"
-              title="Experiencia en operaciones con mucha repeticion, coordinacion y volumen de datos."
-              description="Trabajamos con organizaciones que sienten la friccion en procesos, seguimiento, documentacion y reporting."
-            />
-
-            <BlurFade inView>
-              <div className="relative overflow-hidden rounded-[2rem] border border-border bg-white p-5">
-                <DotPattern className="[mask-image:radial-gradient(340px_circle_at_center,white,transparent)] opacity-50" />
-                <div className="relative z-10 grid gap-4 sm:grid-cols-2">
-                  {industries.map((industry) => (
-                    <div
-                      key={industry}
-                      className="rounded-[1.4rem] border border-border bg-white px-5 py-5 text-base font-medium tracking-[-0.03em] transition-transform duration-300 hover:-translate-y-1"
-                    >
-                      {industry}
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </BlurFade>
-          </div>
-        </section>
-
-        <section id="equipo" className="mx-auto max-w-7xl py-16 sm:py-20">
-          <SectionIntro
-            label="Equipo"
-            title="Dos perfiles complementarios para disenar automatizacion con criterio tecnico y de negocio."
-            description="Spike AI combina arquitectura de sistemas, integraciones, datos y estrategia para construir soluciones con impacto medible."
-          />
-
-          <div className="mt-12 grid gap-6 lg:grid-cols-2">
-            {founders.map((founder, index) => (
-              <BlurFade key={founder.name} inView delay={0.08 * index}>
-                <MagicCard
-                  className="h-full rounded-[2rem]"
-                  gradientColor="#f8fafc"
-                  gradientFrom="#e5e7eb"
-                  gradientTo="#dbeafe"
-                >
-                  <article className="rounded-[1.95rem] bg-white p-6">
-                    <div className="flex items-start justify-between gap-4">
-                      <div>
-                        <h3 className="text-2xl font-medium tracking-[-0.06em]">
-                          {founder.name}
-                        </h3>
-                        <p className="mt-2 text-sm uppercase tracking-[0.18em] text-muted-foreground">
-                          {founder.role}
-                        </p>
-                      </div>
-                      <div className="rounded-full border border-border bg-white p-3">
-                        <MapPinned className="size-5 text-[var(--brand-strong)]" />
-                      </div>
-                    </div>
-                    <p className="mt-6 text-base leading-7 text-muted-foreground">
-                      {founder.description}
-                    </p>
-                  </article>
-                </MagicCard>
-              </BlurFade>
-            ))}
-          </div>
-        </section>
-
-        <section id="contacto" className="mx-auto max-w-7xl py-16 sm:py-20">
           <BlurFade inView>
-            <div className="relative overflow-hidden rounded-[2.4rem] border border-neutral-900 bg-neutral-950 px-6 py-8 text-white shadow-[0_34px_100px_-52px_rgba(15,23,42,0.58)] sm:px-10 sm:py-10">
-              <AnimatedGridPattern
-                numSquares={22}
-                maxOpacity={0.14}
-                duration={5}
-                repeatDelay={1}
-                className="absolute inset-0 h-full w-full text-white/20 [mask-image:radial-gradient(580px_circle_at_top,white,transparent)]"
-              />
-              <div className="relative z-10 grid gap-8 lg:grid-cols-[minmax(0,1fr)_21rem] lg:items-end">
-                <div>
-                  <Badge className="rounded-full border-white/14 bg-white/10 px-3 py-1 text-[0.68rem] uppercase tracking-[0.22em] text-white/78">
-                    Contacto
-                  </Badge>
-                  <h2 className="mt-6 max-w-3xl text-3xl font-medium tracking-[-0.06em] text-balance sm:text-5xl">
-                    Si hoy tu operacion depende de tareas manuales, ahi ya hay una oportunidad.
-                  </h2>
-                  <p className="mt-5 max-w-2xl text-base leading-8 text-white/72 sm:text-lg">
-                    Agenda una reunion de diagnostico gratuita de 30 minutos y detectemos
-                    juntos donde ganar tiempo, precision y capacidad.
-                  </p>
-
-                  <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-                    <a
-                      href={whatsappHref}
-                      target="_blank"
-                      rel="noreferrer"
-                      className="inline-flex h-11 items-center justify-center gap-2 rounded-full border border-white bg-white px-6 text-sm font-medium text-neutral-950 transition-transform hover:-translate-y-0.5 hover:bg-white/90"
-                    >
-                      Hablar por WhatsApp
-                      <MessageSquareMore className="size-4" />
-                    </a>
-                    <a
-                      href="mailto:eyp.automation@gmail.com"
-                      className="inline-flex h-11 items-center justify-center gap-2 rounded-full border border-white/16 bg-white/8 px-6 text-sm font-medium text-white transition-transform hover:-translate-y-0.5 hover:bg-white/12"
-                    >
-                      Escribir por email
-                      <ArrowRight className="size-4" />
-                    </a>
-                  </div>
-                </div>
-
-                <div className="relative overflow-hidden rounded-[1.8rem] border border-white/10 bg-white/8 p-5">
-                  <AnimatedGridPattern
-                    numSquares={10}
-                    maxOpacity={0.12}
-                    duration={4}
-                    repeatDelay={0.6}
-                    className="absolute inset-0 h-full w-full text-white/20 [mask-image:radial-gradient(260px_circle_at_center,white,transparent)]"
-                  />
-                  <div className="relative z-10 space-y-4">
-                    <div className="rounded-2xl border border-white/10 bg-white/8 px-4 py-4 text-sm">
-                      <div className="text-white/56">WhatsApp</div>
-                      <div className="mt-1 font-medium text-white">+598 91 315 670</div>
-                    </div>
-                    <div className="rounded-2xl border border-white/10 bg-white/8 px-4 py-4 text-sm">
-                      <div className="text-white/56">Email</div>
-                      <div className="mt-1 font-medium text-white">eyp.automation@gmail.com</div>
-                    </div>
-                    <div className="rounded-2xl border border-white/10 bg-white/8 px-4 py-4 text-sm">
-                      <div className="text-white/56">Base</div>
-                      <div className="mt-1 font-medium text-white">Uruguay - proyectos en toda la region</div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <Separator className="my-8 bg-white/10" />
-
-              <div className="relative z-10 flex flex-col gap-3 text-sm text-white/58 sm:flex-row sm:items-center sm:justify-between">
-                <p>Spike AI - Automatizacion inteligente para empresas que escalan.</p>
-                <p>Diagnostico sin costo - respuesta en menos de 24 hs</p>
+            <div className="overflow-hidden rounded-[2.4rem] bg-[var(--brand)] px-6 py-10 text-neutral-950 shadow-[0_30px_90px_-56px_rgba(19,196,85,0.32)] sm:px-10 sm:py-12">
+              <div className="mx-auto max-w-3xl text-center">
+                <h2 className="text-3xl font-medium tracking-[-0.07em] text-balance sm:text-5xl">
+                  No hace falta empezar con un cambio enorme para empezar a usar IA bien.
+                </h2>
+                <p className="mt-5 text-base leading-8 text-neutral-950/72 sm:text-lg">
+                  A veces alcanza una charla para detectar donde tiene mas sentido automatizar, asistir a tu equipo o empezar a mejorar procesos paso a paso.
+                </p>
+                <a
+                  href={whatsappHref}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="mt-8 inline-flex h-11 items-center justify-center gap-2 rounded-full border border-neutral-950 bg-neutral-950 px-6 text-sm font-medium text-white transition-transform hover:-translate-y-0.5 hover:bg-neutral-900"
+                  style={{ color: "#ffffff" }}
+                >
+                  <span style={{ color: "#ffffff" }}>Escribirnos</span>
+                  <ArrowUpRight className="size-4 text-white" />
+                </a>
               </div>
             </div>
           </BlurFade>
+        </section>
+
+        <section
+          id="contacto"
+          className="relative left-1/2 w-screen -translate-x-1/2 bg-neutral-950 py-14 text-white sm:py-16"
+        >
+          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+            <div className="grid gap-10 border-b border-white/10 pb-10 lg:grid-cols-[minmax(0,1.2fr)_minmax(0,0.8fr)] lg:items-start">
+              <div>
+                <div className="text-[0.68rem] uppercase tracking-[0.22em] text-white/46">
+                  Contacto
+                </div>
+                <h2 className="mt-4 max-w-xl text-3xl font-medium tracking-[-0.07em] text-balance text-white sm:text-5xl">
+                  Hablemos de tu operacion.
+                </h2>
+                <p className="mt-5 max-w-2xl text-base leading-8 text-white/68 sm:text-lg">
+                  Si ves friccion, tareas manuales o procesos que ya no escalan, escribinos y vemos por donde conviene empezar.
+                </p>
+              </div>
+
+              <div className="grid gap-3 sm:grid-cols-3 lg:grid-cols-1">
+                {[
+                  {
+                    label: "WhatsApp",
+                    value: "+598 91 315 670",
+                    href: whatsappHref,
+                  },
+                  {
+                    label: "Email",
+                    value: "eyp.automation@gmail.com",
+                    href: "mailto:eyp.automation@gmail.com",
+                  },
+                  {
+                    label: "Base",
+                    value: "Uruguay - proyectos en toda la region",
+                    href: undefined,
+                  },
+                ].map((item) => {
+                  const content = (
+                    <div className="rounded-[1.5rem] border border-white/10 bg-white/6 px-4 py-4 transition-colors duration-300 hover:bg-white/9">
+                      <div className="text-[0.68rem] uppercase tracking-[0.2em] text-white/46">
+                        {item.label}
+                      </div>
+                      <div className="mt-2 text-sm font-medium leading-6 text-white/88">
+                        {item.value}
+                      </div>
+                    </div>
+                  )
+
+                  return item.href ? (
+                    <a
+                      key={item.label}
+                      href={item.href}
+                      target={item.href.startsWith("http") ? "_blank" : undefined}
+                      rel={item.href.startsWith("http") ? "noreferrer" : undefined}
+                    >
+                      {content}
+                    </a>
+                  ) : (
+                    <div key={item.label}>{content}</div>
+                  )
+                })}
+              </div>
+            </div>
+
+            <div className="flex flex-col gap-5 pt-6 sm:flex-row sm:items-center sm:justify-between">
+              <div className="text-sm text-white/46">
+                <p>Spike AI</p>
+                <p className="mt-1">Automatizacion inteligente para empresas que quieren moverse antes.</p>
+              </div>
+
+              <div className="flex items-center gap-3">
+                <a
+                  href="https://www.linkedin.com"
+                  target="_blank"
+                  rel="noreferrer"
+                  aria-label="LinkedIn"
+                  className="inline-flex size-10 items-center justify-center rounded-full border border-white/10 bg-white/6 text-white/72 transition-all duration-300 hover:-translate-y-0.5 hover:bg-white/10 hover:text-white"
+                >
+                  <svg viewBox="0 0 24 24" className="size-4 fill-current" aria-hidden="true">
+                    <path d="M4.98 3.5C4.98 4.88 3.87 6 2.49 6S0 4.88 0 3.5 1.11 1 2.49 1s2.49 1.12 2.49 2.5ZM.5 8h4V24h-4V8Zm7 0h3.83v2.19h.05c.53-1.01 1.84-2.19 3.79-2.19 4.05 0 4.8 2.67 4.8 6.14V24h-4v-7.08c0-1.69-.03-3.86-2.35-3.86-2.35 0-2.71 1.84-2.71 3.73V24h-4V8Z" />
+                  </svg>
+                </a>
+                <a
+                  href="https://www.instagram.com"
+                  target="_blank"
+                  rel="noreferrer"
+                  aria-label="Instagram"
+                  className="inline-flex size-10 items-center justify-center rounded-full border border-white/10 bg-white/6 text-white/72 transition-all duration-300 hover:-translate-y-0.5 hover:bg-white/10 hover:text-white"
+                >
+                  <svg viewBox="0 0 24 24" className="size-4 fill-current" aria-hidden="true">
+                    <path d="M7.75 2C4.57 2 2 4.57 2 7.75v8.5C2 19.43 4.57 22 7.75 22h8.5C19.43 22 22 19.43 22 16.25v-8.5C22 4.57 19.43 2 16.25 2h-8.5Zm0 1.8h8.5c2.19 0 3.95 1.76 3.95 3.95v8.5c0 2.19-1.76 3.95-3.95 3.95h-8.5A3.94 3.94 0 0 1 3.8 16.25v-8.5c0-2.19 1.76-3.95 3.95-3.95Zm9.05 1.35a1.1 1.1 0 1 0 0 2.2 1.1 1.1 0 0 0 0-2.2ZM12 6.86A5.14 5.14 0 1 0 17.14 12 5.15 5.15 0 0 0 12 6.86Zm0 1.8A3.34 3.34 0 1 1 8.66 12 3.35 3.35 0 0 1 12 8.66Z" />
+                  </svg>
+                </a>
+              </div>
+            </div>
+          </div>
         </section>
       </div>
     </main>
