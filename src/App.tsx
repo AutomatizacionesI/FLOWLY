@@ -3,7 +3,6 @@ import {
   ArrowRight,
   ArrowUpRight,
   BarChart3,
-  Bot,
   Building2,
   CircleCheckBig,
   Clock3,
@@ -68,7 +67,7 @@ const caseStudies = [
     eyebrow: "IA interna para equipos",
     description:
       "Creamos asistentes conectados a documentacion, criterios contables y procedimientos internos para ayudar al equipo en consultas, tareas y validaciones.",
-    icon: Bot,
+    icon: Workflow,
     result: "Conocimiento operativo disponible en segundos",
     bullets: [
       "Responde sobre normativa y procesos internos",
@@ -610,7 +609,6 @@ function SuccessCasesSection() {
   const [isDragging, setIsDragging] = useState(false)
   const [transitionsEnabled, setTransitionsEnabled] = useState(true)
   const [viewportWidth, setViewportWidth] = useState(0)
-  const [autoSeed, setAutoSeed] = useState(0)
   const viewportRef = useRef<HTMLDivElement | null>(null)
   const dragStartXRef = useRef(0)
   const dragMovedRef = useRef(false)
@@ -635,16 +633,6 @@ function SuccessCasesSection() {
     return () => window.removeEventListener("resize", updateViewportWidth)
   }, [])
 
-  useEffect(() => {
-    if (isDragging) return
-
-    const timer = window.setTimeout(() => {
-      setCaseIndex((prev) => prev + 1)
-    }, 5000)
-
-    return () => window.clearTimeout(timer)
-  }, [caseIndex, isDragging, autoSeed])
-
   const goToIndex = (nextIndex: number) => {
     setCaseIndex((prev) => {
       const options = [
@@ -657,17 +645,14 @@ function SuccessCasesSection() {
         Math.abs(option - prev) < Math.abs(closest - prev) ? option : closest
       )
     })
-    setAutoSeed((prev) => prev + 1)
   }
 
   const goPrev = () => {
     setCaseIndex((prev) => prev - 1)
-    setAutoSeed((prev) => prev + 1)
   }
 
   const goNext = () => {
     setCaseIndex((prev) => prev + 1)
-    setAutoSeed((prev) => prev + 1)
   }
 
   const handlePointerDown = (event: React.PointerEvent<HTMLDivElement>) => {
@@ -691,7 +676,6 @@ function SuccessCasesSection() {
     const delta = dragOffset
     setIsDragging(false)
     setDragOffset(0)
-    setAutoSeed((prev) => prev + 1)
 
     if (currentTarget && pointerId !== undefined && currentTarget.hasPointerCapture(pointerId)) {
       currentTarget.releasePointerCapture(pointerId)
@@ -798,31 +782,16 @@ function SuccessCasesSection() {
                     ].join(" ")}
                     style={{ width: `${slideWidth}px` }}
                   >
-                    <div className="grid h-full gap-6 lg:grid-cols-[minmax(0,1.02fr)_minmax(320px,0.98fr)] lg:items-stretch">
-                      <div className="flex h-full flex-col overflow-hidden rounded-[1.5rem] border border-slate-200/70 bg-[radial-gradient(circle_at_top_left,rgba(34,217,102,0.26),transparent_42%),linear-gradient(180deg,#f8fafc_0%,#eef2f7_100%)] p-5 lg:p-6">
-                        <div className="flex items-center justify-between gap-3">
+                    <div className="grid h-full gap-6 lg:grid-cols-[minmax(0,0.88fr)_minmax(340px,1.12fr)] lg:items-stretch">
+                      <div className="flex h-full flex-col overflow-hidden rounded-[1.5rem] border border-slate-200/70 bg-[radial-gradient(circle_at_top_left,rgba(99,226,143,0.18),transparent_36%),linear-gradient(180deg,#f8fafc_0%,#eef2f7_100%)] p-5 lg:p-6">
+                        <div className="flex items-center gap-3">
                           <div className="rounded-full border border-white/70 bg-white/80 px-3 py-1 text-[0.68rem] uppercase tracking-[0.2em] text-slate-500">
                             {item.visualLabel}
                           </div>
-                          <Icon className="size-4 text-[var(--brand-strong)]" />
                         </div>
 
-                        <div className="mt-5 flex flex-1 flex-col justify-between gap-3">
-                          {item.visualNodes.map((node, nodeIndex) => (
-                            <div
-                              key={`${item.title}-${loopIndex}-${node}`}
-                              className={[
-                                "w-fit rounded-full border px-3 py-2 text-sm font-medium text-slate-700 shadow-[0_12px_26px_-22px_rgba(15,23,42,0.22)]",
-                                nodeIndex === 1
-                                  ? "ml-auto border-[var(--brand-border)] bg-[var(--brand-soft)]"
-                                  : "border-white/80 bg-white/85",
-                                nodeIndex === 2 ? "ml-7" : "",
-                                nodeIndex === 3 ? "ml-auto" : "",
-                              ].join(" ")}
-                            >
-                              {node}
-                            </div>
-                          ))}
+                        <div className="relative mt-5 flex flex-1 items-center justify-center">
+                          <Icon className="size-28 text-slate-400 lg:size-36" />
                         </div>
                       </div>
 
@@ -846,6 +815,12 @@ function SuccessCasesSection() {
                               <span>{bullet}</span>
                             </div>
                           ))}
+                        </div>
+
+                        <div className="mt-8 border-t border-slate-200/80 pt-4">
+                          <p className="text-sm leading-6 text-slate-500 lg:text-[0.96rem]">
+                            {item.result}
+                          </p>
                         </div>
                       </div>
                     </div>
