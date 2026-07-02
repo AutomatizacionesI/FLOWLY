@@ -262,6 +262,7 @@ const clients = [
   "Estudio G Pittaluga",
   "HIKE",
   "Proz Recovery",
+  "Lunar Vintage",
 ]
 
 const whatsappHref =
