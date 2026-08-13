@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="720" viewBox="0 90 700 360" role="img" aria-labelledby="title desc">
+  <title id="title">Spike</title>
+  <desc id="desc">Logotipo tipográfico de Spike</desc>
+  <style>
+    @font-face {
+      font-family: "Geist Spike";
+      src: url("./geist-latin-wght-normal.woff2") format("woff2");
+      font-weight: 100 900;
+      font-style: normal;
+    }
+    .wordmark {
+      font-family: "Geist Spike", "Geist", Arial, sans-serif;
+      font-size: 360px;
+      font-weight: 300;
+      letter-spacing: -43px;
+      fill: #171717;
+    }
+  </style>
+  <text class="wordmark" x="-20" y="376">Spike</text>
+</svg>
