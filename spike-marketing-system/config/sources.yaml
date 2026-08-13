@@ -1,0 +1,45 @@
+source_groups:
+  platform_official:
+    priority: 1
+    examples:
+      - "Meta for Business"
+      - "Instagram Creators"
+      - "Meta Newsroom"
+  ai_and_work:
+    priority: 1
+    examples:
+      - "official product documentation"
+      - "research institutions"
+      - "reports with visible methodology"
+  audience_signals:
+    priority: 2
+    examples:
+      - "questions from business owners"
+      - "professional communities"
+      - "industry publications"
+  competitive_reference:
+    priority: 3
+    rule: "Analyze patterns and gaps; never copy distinctive execution."
+  authenticity_and_ai_slop:
+    priority: 1
+    examples:
+      - "peer-reviewed research on perceived authenticity and content quality"
+      - "official platform policies on original and synthetic content"
+      - "creator-economy studies with visible methodology"
+      - "recognized design systems for component anatomy"
+    rule: "Track the topic daily; record only new, actionable and adequately sourced signals."
+  engagement_and_retention:
+    priority: 1
+    examples:
+      - "official Meta and Instagram creator guidance"
+      - "Instagram Help Center metrics and definitions"
+      - "peer-reviewed research on curiosity, attention and social transmission"
+      - "recognized UX and information-design experts"
+    rule: "Separate platform facts, academic evidence and professional inference; never present a tactic as a guarantee of virality."
+
+excluded_patterns:
+  - "content farms without sources"
+  - "engagement bait presented as evidence"
+  - "anonymous claims without verification"
+  - "reposted content without original analysis"
+  - "AI-slop commentary without evidence or a concrete implication"

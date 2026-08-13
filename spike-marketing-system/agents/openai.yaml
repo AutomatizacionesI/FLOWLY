@@ -1,0 +1,8 @@
+interface:
+  display_name: "Spike Marketing System"
+  short_description: "Planifica, diseña y produce contenido para Spike"
+  default_prompt: "Usá $spike-marketing-system para planificar, producir y revisar contenido de Spike AI con doble aprobación humana."
+  brand_color: "#63E28F"
+
+policy:
+  allow_implicit_invocation: true

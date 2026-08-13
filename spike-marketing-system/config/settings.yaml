@@ -1,0 +1,34 @@
+system:
+  name: "Spike Marketing System"
+  language: "es-UY"
+  timezone: "America/Montevideo"
+  primary_channel: "Instagram"
+
+governance:
+  human_approval_required: true
+  autonomous_publishing: false
+  autonomous_outreach: false
+  landing_access: "optional-read-only"
+  modify_outside_package: false
+
+editorial:
+  posts_per_week_min: 2
+  posts_per_week_max: 3
+  on_camera: false
+  voiceover_allowed: true
+  screen_recording_allowed: true
+  team_photos_allowed: true
+  cta_required: false
+  default_conversion: "write-to-spike"
+  client_names_allowed: false
+  primary_formats:
+    - "carousel-4x5"
+    - "reel-9x16"
+    - "static-4x5"
+  research_language:
+    - "es"
+    - "en"
+    - "pt"
+  geography:
+    primary: "Uruguay"
+    secondary: "Latin America"
