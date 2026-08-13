@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1080" height="1080" viewBox="0 0 1080 1080" role="img" aria-labelledby="title desc">
+  <title id="title">Spike.</title>
+  <desc id="desc">Logo cuadrado de Spike para Instagram</desc>
+  <style>
+    @font-face {
+      font-family: "Geist Spike";
+      src: url("./geist-latin-wght-normal.woff2") format("woff2");
+      font-weight: 100 900;
+      font-style: normal;
+    }
+    text {
+      font-family: "Geist Spike", "Geist", Arial, sans-serif;
+      font-size: 430px;
+      font-weight: 300;
+      letter-spacing: -52px;
+    }
+  </style>
+  <rect width="1080" height="1080" fill="#ffffff"/>
+  <text x="540" y="668" text-anchor="middle">
+    <tspan fill="#171717">Spike</tspan><tspan fill="#63e28f">.</tspan>
+  </text>
+</svg>
