@@ -1160,8 +1160,8 @@ function App() {
                   },
                   {
                     label: "Email",
-                    value: "eyp.automation@gmail.com",
-                    href: "mailto:eyp.automation@gmail.com",
+                    value: "spike.automations@gmail.com",
+                    href: "mailto:spike.automations@gmail.com",
                   },
                   {
                     label: "Base",
