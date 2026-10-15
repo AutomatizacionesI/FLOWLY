@@ -12,12 +12,20 @@ import {
   Network,
   RefreshCw,
   Search,
-  Sparkles,
   TreePine,
   Workflow,
 } from "lucide-react"
 import { type CSSProperties, useEffect, useRef, useState } from "react"
 
+import {
+  AssistantVisual,
+  DashboardVisual,
+  DataVisual,
+  DatabaseVisual,
+  ReconciliationVisual,
+  RentalsVisual,
+  SalesVisual,
+} from "@/components/case-visuals"
 import { Badge } from "@/components/ui/badge"
 import { BlurFade } from "@/components/ui/blur-fade"
 import { DotPattern } from "@/components/ui/dot-pattern"
@@ -36,6 +44,7 @@ const caseStudies = [
     description:
       "Unificamos seguimiento comercial, contratos, vencimientos, estado de propiedades y tareas operativas en un solo sistema conectado con automatizaciones reales.",
     icon: Building2,
+    visual: RentalsVisual,
     result: "Menos seguimiento manual y mas control operativo",
     bullets: [
       "Propiedades, contratos y vencimientos en un solo flujo",
@@ -52,6 +61,7 @@ const caseStudies = [
     description:
       "Implementamos flujos con IA y reglas operativas para conciliar movimientos, detectar inconsistencias y acelerar cierres sin depender de revisiones eternas.",
     icon: Landmark,
+    visual: ReconciliationVisual,
     result: "Menos horas administrativas y mas precision financiera",
     bullets: [
       "Cruce de extractos, facturas y movimientos",
@@ -68,6 +78,7 @@ const caseStudies = [
     description:
       "Creamos asistentes conectados a documentacion, criterios contables y procedimientos internos para ayudar al equipo en consultas, tareas y validaciones.",
     icon: Workflow,
+    visual: AssistantVisual,
     result: "Conocimiento operativo disponible en segundos",
     bullets: [
       "Responde sobre normativa y procesos internos",
@@ -84,6 +95,7 @@ const caseStudies = [
     description:
       "Conectamos la IA a la base operativa de la inmobiliaria para responder consultas internas, disparar acciones y asistir al equipo con informacion confiable.",
     icon: Database,
+    visual: DatabaseVisual,
     result: "La informacion correcta disponible al instante",
     bullets: [
       "Consultas internas con acceso a datos reales",
@@ -100,6 +112,7 @@ const caseStudies = [
     description:
       "Desarrollamos dashboards vivos para salones de eventos, depositos, barracas, inmobiliarias y empresas de limpieza, con reporting automatico y lectura simple.",
     icon: BarChart3,
+    visual: DashboardVisual,
     result: "KPIs claros sin perseguir planillas",
     bullets: [
       "Reportes automaticos para multiples areas",
@@ -116,6 +129,7 @@ const caseStudies = [
     description:
       "Ordenamos una base compleja, redefinimos estructura, limpiamos criterios y montamos reporting automatizado para que la operacion deje de depender de parches.",
     icon: TreePine,
+    visual: DataVisual,
     result: "Datos ordenados, trazables y utiles para decidir",
     bullets: [
       "Limpieza y rediseno de estructura de datos",
@@ -127,36 +141,22 @@ const caseStudies = [
     visualNodes: ["Base nueva", "Criterios", "Reporting", "Decision"],
   },
   {
-    title: "Landing pages con IA para captar y calificar clientes",
-    eyebrow: "Captacion inteligente",
+    title: "Sistema completo de ventas para marcas con varios canales",
+    eyebrow: "Retail y ecommerce",
+    client: "HIKE y Lunar Vintage",
     description:
-      "Disenamos landings para marcas de moda y termos con sistemas de IA que responden, filtran y ordenan oportunidades comerciales desde el primer contacto.",
+      "Construimos un software propio que centraliza toda la venta en un solo lugar: pedidos de la tienda online, de Instagram y WhatsApp, y del local, con el stock sincronizado y la informacion de clientes unificada.",
     icon: LayoutTemplate,
-    result: "Mas leads utiles y menos tiempo perdido",
+    visual: SalesVisual,
+    result: "Toda la venta en un solo lugar, sin planillas paralelas",
     bullets: [
-      "Captacion con mejor experiencia de entrada",
-      "IA para respuesta y pre-calificacion inicial",
-      "Integracion con seguimiento comercial posterior",
+      "Pedidos de todos los canales en una sola bandeja",
+      "Stock y precios sincronizados entre canales",
+      "Historial de cliente e informacion comercial centralizada",
     ],
-    visualLabel: "Marketing + IA",
-    visualTitle: "No solo captar mas. Captar mejor desde el inicio.",
-    visualNodes: ["Landing", "Asistente IA", "Leads", "Seguimiento"],
-  },
-  {
-    title: "Y si tu problema es otro, tambien lo podemos resolver con IA",
-    eyebrow: "Soluciones a medida",
-    description:
-      "Si hay un cuello de botella, una operacion trabada o demasiadas tareas que dependen de personas, probablemente haya una forma inteligente de redisenarlo.",
-    icon: Sparkles,
-    result: "La IA aplicada al problema real de tu empresa",
-    bullets: [
-      "Partimos del problema, no de la herramienta",
-      "Disenamos una solucion modular y escalable",
-      "Implementamos segun tu contexto operativo real",
-    ],
-    visualLabel: "Custom AI",
-    visualTitle: "No hace falta que el caso ya exista para resolverlo bien.",
-    visualNodes: ["Diagnostico", "Diseno", "Implementacion", "Escala"],
+    visualLabel: "Retail multicanal",
+    visualTitle: "Vender por todos lados sin perder el control de nada.",
+    visualNodes: ["Canales", "Pedidos", "Stock", "Clientes"],
   },
 ]
 
@@ -769,7 +769,7 @@ function SuccessCasesSection() {
               }}
             >
               {loopedCaseStudies.map((item, loopIndex) => {
-                const Icon = item.icon
+                const Visual = item.visual
                 const isActive = loopIndex === centerIndex
 
                 return (
@@ -784,22 +784,18 @@ function SuccessCasesSection() {
                     style={{ width: `${slideWidth}px` }}
                   >
                     <div className="grid h-full gap-6 lg:grid-cols-[minmax(0,0.88fr)_minmax(340px,1.12fr)] lg:items-stretch">
-                      <div className="flex h-full flex-col overflow-hidden rounded-[1.5rem] border border-slate-200/70 bg-[radial-gradient(circle_at_top_left,rgba(99,226,143,0.18),transparent_36%),linear-gradient(180deg,#f8fafc_0%,#eef2f7_100%)] p-5 lg:p-6">
-                        <div className="flex items-center gap-3">
-                          <div className="rounded-full border border-white/70 bg-white/80 px-3 py-1 text-[0.68rem] uppercase tracking-[0.2em] text-slate-500">
-                            {item.visualLabel}
-                          </div>
-                        </div>
-
-                        <div className="relative mt-5 flex flex-1 items-center justify-center">
-                          <Icon className="size-28 text-slate-400 lg:size-36" />
-                        </div>
-                      </div>
+                      <Visual />
 
                       <div className="flex h-full flex-col justify-between py-1">
                         <div>
                           <p className="text-[0.7rem] uppercase tracking-[0.22em] text-slate-500">
                             {item.eyebrow}
+                            {"client" in item && item.client ? (
+                              <span className="text-[var(--brand-strong)]">
+                                {" "}
+                                &middot; {item.client}
+                              </span>
+                            ) : null}
                           </p>
                           <h3 className="mt-3 text-[2rem] font-medium leading-[0.98] tracking-[-0.07em] text-slate-900 lg:text-[2.35rem]">
                             {item.title}
@@ -932,10 +928,14 @@ function App() {
             <BlurFade inView delay={0.05}>
               <div>
                 <p className="text-[0.68rem] uppercase tracking-[0.28em] text-muted-foreground">
-                  Uruguay - AI automation studio
+                  Uruguay - Automatizacion y sistemas a medida
                 </p>
-                <h1 className="mt-5 text-6xl font-light tracking-[-0.12em] text-foreground sm:text-7xl md:text-8xl xl:text-[9rem] xl:leading-[0.9]">
-                  Spike AI
+                <h1 className="mt-5 text-[3.4rem] font-light leading-[0.92] tracking-[-0.1em] text-foreground sm:text-7xl md:text-[5.6rem] xl:text-[6.6rem] xl:leading-[0.88]">
+                  Tu operacion
+                  <br />
+                  en un solo
+                  <br />
+                  <span className="text-[var(--brand-strong)]">lugar.</span>
                 </h1>
               </div>
             </BlurFade>
@@ -943,18 +943,17 @@ function App() {
             <div className="space-y-8 lg:pl-4">
               <div className="max-w-xl">
                 <BlurFade inView delay={0.14}>
-                  <h2 className="text-4xl font-medium tracking-[-0.1em] text-balance text-foreground sm:text-5xl lg:text-[3.4rem] lg:leading-[0.96]">
-                    Tu competencia ya esta usando{" "}
-                    <span className="text-[var(--brand-strong)]">IA.</span> No te
-                    quedes atras.
+                  <h2 className="text-[2rem] font-medium tracking-[-0.08em] text-balance text-foreground sm:text-[2.4rem] lg:text-[2.7rem] lg:leading-[1]">
+                    Menos planillas sueltas. Menos tareas que dependen de una
+                    sola persona.
                   </h2>
                 </BlurFade>
 
                 <BlurFade inView delay={0.2}>
                   <p className="mt-4 text-base leading-8 text-muted-foreground sm:text-lg">
-                    El mundo empresarial se automatiza a velocidad record. En Spike
-                    AI te ayudamos a dar el paso sin complicaciones, sin presupuestos
-                    millonarios y a traves de un proceso de adaptacion constante.
+                    Ordenamos como trabaja tu empresa y automatizamos lo que hoy
+                    se hace a mano. Empezamos por una pieza concreta, no por un
+                    proyecto de un ano.
                   </p>
                 </BlurFade>
 
@@ -974,9 +973,19 @@ function App() {
                       href="#servicios"
                       className="inline-flex h-11 items-center justify-center gap-2 rounded-full border border-[var(--brand-border)] bg-white px-6 text-sm font-medium text-foreground transition-transform hover:-translate-y-0.5 hover:border-[var(--brand-strong)]"
                     >
-                      Ver servicios
+                      Ver casos
                       <ArrowRight className="size-4 text-[var(--brand-strong)]" />
                     </a>
+                  </div>
+                </BlurFade>
+
+                <BlurFade inView delay={0.32}>
+                  <div className="mt-7 flex flex-wrap items-center gap-x-5 gap-y-2 text-[0.78rem] text-muted-foreground/80">
+                    <span>Primera conversacion sin costo</span>
+                    <span className="size-1 rounded-full bg-border" />
+                    <span>Respondemos en menos de 24 h</span>
+                    <span className="size-1 rounded-full bg-border" />
+                    <span>Proyectos en toda la region</span>
                   </div>
                 </BlurFade>
 
@@ -985,23 +994,40 @@ function App() {
           </div>
         </section>
 
-        <section className="mx-auto max-w-7xl py-8 sm:py-10">
+        <section className="mx-auto max-w-7xl py-14 sm:py-16">
           <BlurFade inView>
-            <div className="overflow-hidden rounded-[1.8rem] border border-border/80 bg-white/80 py-4">
-              <div className="px-5 text-[0.68rem] uppercase tracking-[0.22em] text-muted-foreground sm:px-6">
-                Empresas que ya confiaron
-              </div>
-              <Marquee pauseOnHover className="[--duration:28s] mt-3">
+            <div className="text-center">
+              <p className="text-[0.68rem] uppercase tracking-[0.26em] text-muted-foreground">
+                Confian en nosotros
+              </p>
+              <h2 className="mx-auto mt-4 max-w-2xl text-2xl font-medium tracking-[-0.06em] text-balance text-foreground sm:text-[2.1rem] sm:leading-[1.05]">
+                Empresas que ya trabajan sobre sistemas que construimos.
+              </h2>
+            </div>
+          </BlurFade>
+
+          <BlurFade inView delay={0.1}>
+            <div className="relative mt-9 overflow-hidden">
+              <Marquee pauseOnHover className="[--duration:34s]">
                 {clients.map((client) => (
                   <div
                     key={client}
-                    className="rounded-full border border-border bg-white px-4 py-2 text-sm font-medium text-foreground/80"
+                    className="rounded-full border border-border bg-white px-6 py-3 text-base font-medium tracking-[-0.02em] text-foreground/85 shadow-[0_18px_40px_-34px_rgba(15,23,42,0.3)]"
                   >
                     {client}
                   </div>
                 ))}
               </Marquee>
+              <div className="pointer-events-none absolute inset-y-0 left-0 w-24 bg-gradient-to-r from-background to-transparent" />
+              <div className="pointer-events-none absolute inset-y-0 right-0 w-24 bg-gradient-to-l from-background to-transparent" />
             </div>
+          </BlurFade>
+
+          <BlurFade inView delay={0.16}>
+            <p className="mx-auto mt-9 max-w-2xl text-center text-sm leading-7 text-muted-foreground">
+              Inmobiliarias, estudios contables, retail, forestal y servicios.
+              Mas de 50 automatizaciones entregadas desde 2023.
+            </p>
           </BlurFade>
         </section>
 

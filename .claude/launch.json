@@ -2,15 +2,9 @@
   "version": "0.0.1",
   "configurations": [
     {
-      "name": "flowly-preview",
-      "runtimeExecutable": "npx",
-      "runtimeArgs": ["serve", "-p", "5050", "."],
-      "port": 5050
-    },
-    {
-      "name": "landing-redesign",
+      "name": "spike-landing",
       "runtimeExecutable": "npm",
-      "runtimeArgs": ["run", "dev", "--prefix", "landing-redesign"],
+      "runtimeArgs": ["run", "dev"],
       "port": 5173
     }
   ]
