@@ -223,24 +223,6 @@ const process = [
   },
 ]
 
-const urgencyCards = [
-  {
-    title: "Velocidad de respuesta",
-    description:
-      "Mientras vos seguis filtrando, derivando y respondiendo manualmente, otros ya atienden clientes en segundos.",
-  },
-  {
-    title: "Costo operativo",
-    description:
-      "Tu competencia ya recorta tareas administrativas repetitivas y libera horas que vos seguis pagando todos los meses.",
-  },
-  {
-    title: "Capacidad para escalar",
-    description:
-      "Ellos multiplican productividad con la misma estructura. Vos seguis creciendo sobre procesos que no escalan.",
-  },
-]
-
 const comparison = {
   before: [
     "Tu equipo pierde tiempo en tareas repetitivas.",
@@ -1028,45 +1010,6 @@ function App() {
               Inmobiliarias, estudios contables, retail, forestal y servicios.
               Mas de 50 automatizaciones entregadas desde 2023.
             </p>
-          </BlurFade>
-        </section>
-
-        <section className="mx-auto max-w-7xl py-16 sm:py-20">
-          <BlurFade inView>
-            <div className="rounded-[2.5rem] border border-neutral-300/85 bg-neutral-100/72 backdrop-blur-xl px-6 py-10 sm:px-10 sm:py-12 lg:px-14 lg:py-16">
-              <div className="mx-auto max-w-4xl text-center">
-                <h2 className="mt-6 text-3xl font-medium tracking-[-0.08em] text-balance text-foreground sm:text-5xl lg:text-[3.45rem] lg:leading-[0.95]">
-                  El verdadero peligro para tu empresa
-                  <br className="hidden sm:block" />
-                  no es la Inteligencia Artificial.{" "}
-                  <span className="text-[var(--brand-strong)]">
-                    <br className="hidden sm:block" />
-                    Es que tus competidores la adopten antes que tu.
-                  </span>
-                </h2>
-                <p className="mx-auto mt-6 max-w-3xl text-base leading-8 text-muted-foreground sm:text-lg">
-                  Reducir costos, responder a clientes en segundos y multiplicar la
-                  productividad ya no es opcional. Quienes no empiecen la
-                  transicion hoy, manana van a jugar con desventaja.
-                </p>
-              </div>
-
-              <div className="mx-auto mt-10 grid max-w-5xl gap-3 sm:grid-cols-3 sm:gap-4 lg:mt-12">
-                {urgencyCards.map((item) => (
-                  <div
-                    key={item.title}
-                    className="rounded-[1.5rem] border border-white/90 bg-white/92 px-5 py-5 shadow-[0_18px_40px_-34px_rgba(15,23,42,0.22)] transition-transform duration-300 hover:-translate-y-1"
-                  >
-                    <div className="text-[0.76rem] font-bold uppercase tracking-[0.18em] text-foreground">
-                      {item.title}
-                    </div>
-                    <p className="mt-3 text-sm leading-7 text-foreground/82 sm:text-[0.95rem]">
-                      {item.description}
-                    </p>
-                  </div>
-                ))}
-              </div>
-            </div>
           </BlurFade>
         </section>
 
