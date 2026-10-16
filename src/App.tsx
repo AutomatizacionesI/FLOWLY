@@ -530,7 +530,7 @@ function MethodSectionV2() {
             Nuestro método
           </Badge>
           <h2 className="mt-6 text-3xl font-medium tracking-[-0.07em] text-balance text-foreground sm:text-4xl lg:text-[3.05rem] lg:leading-[0.97]">
-            La IA como un proceso, no como un salto al vacio.
+            La IA como un proceso, no como un salto al vacío.
           </h2>
           <p className="mt-5 text-base leading-8 text-muted-foreground sm:text-lg">
             Empezamos por una mejora concreta, la hacemos funcionar rápido y
