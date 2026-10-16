@@ -1,13 +1,21 @@
 /* ─────────────────────────────────────────────
    Case visuals — simulaciones de los sistemas que construimos.
-   Paleta propia, deliberadamente distinta a la de la landing: estos
-   paneles tienen que leerse como producto, no como una seccion mas.
-   Cada caso tiene su propia estructura dominante (calendario, cruce,
-   chat, consola, grafico, pipeline, feed) para que no se vean iguales.
-   No son capturas: son mockups fieles, sin datos de clientes.
+   Animadas con Motion (motion/react), no con keyframes de CSS: los
+   numeros cuentan hasta su valor, las filas entran escalonadas con
+   resorte y los trazos se dibujan al entrar en pantalla.
+   Paleta propia, distinta a la de la landing, para que se lean como
+   producto. No son capturas: son mockups, sin datos de clientes.
    ───────────────────────────────────────────── */
 
-import type { ReactNode } from "react"
+import { useEffect, useRef, type ReactNode } from "react"
+import {
+  motion,
+  useInView,
+  useMotionValue,
+  useReducedMotion,
+  useSpring,
+  type Variants,
+} from "motion/react"
 
 const INK = "#1c2434"
 const MUTE = "#8a93a4"
@@ -21,6 +29,102 @@ const INDIGO = "#5b5bd6"
 const TEAL = "#14b8a6"
 const AMBER = "#f59e0b"
 const GREEN = "#22c55e"
+
+/* ── movimiento compartido ── */
+
+const listVariants: Variants = {
+  hidden: {},
+  show: { transition: { staggerChildren: 0.075, delayChildren: 0.12 } },
+}
+
+const itemVariants: Variants = {
+  hidden: { opacity: 0, y: 7 },
+  show: {
+    opacity: 1,
+    y: 0,
+    transition: { type: "spring", stiffness: 280, damping: 26 },
+  },
+}
+
+const viewport = { once: true, amount: 0.15 } as const
+
+function Stagger({
+  className,
+  children,
+}: {
+  className?: string
+  children: ReactNode
+}) {
+  return (
+    <motion.div
+      className={className}
+      variants={listVariants}
+      initial="hidden"
+      whileInView="show"
+      viewport={viewport}
+    >
+      {children}
+    </motion.div>
+  )
+}
+
+/* Numero que cuenta hasta su valor al entrar en pantalla. */
+function Counter({
+  value,
+  decimals = 0,
+  prefix = "",
+  suffix = "",
+}: {
+  value: number
+  decimals?: number
+  prefix?: string
+  suffix?: string
+}) {
+  const ref = useRef<HTMLSpanElement>(null)
+  const reduced = useReducedMotion()
+  const mv = useMotionValue(0)
+  const spring = useSpring(mv, { damping: 34, stiffness: 140 })
+  const inView = useInView(ref, { once: true, margin: "-40px" })
+
+  const format = (n: number) =>
+    prefix +
+    new Intl.NumberFormat("es-UY", {
+      minimumFractionDigits: decimals,
+      maximumFractionDigits: decimals,
+    }).format(n) +
+    suffix
+
+  useEffect(() => {
+    if (inView) mv.set(value)
+  }, [inView, mv, value])
+
+  useEffect(() => {
+    if (reduced) {
+      if (ref.current) ref.current.textContent = format(value)
+      return
+    }
+    return spring.on("change", (latest) => {
+      if (ref.current) ref.current.textContent = format(latest)
+    })
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [spring, reduced, value, decimals, prefix, suffix])
+
+  return <span ref={ref}>{reduced ? format(value) : format(0)}</span>
+}
+
+/* Punto que late, para marcar "en vivo". */
+function LiveDot({ color, size = 5 }: { color: string; size?: number }) {
+  const reduced = useReducedMotion()
+
+  return (
+    <motion.span
+      className="inline-block rounded-full"
+      style={{ width: size, height: size, background: color }}
+      animate={reduced ? undefined : { opacity: [1, 0.35, 1], scale: [1, 0.78, 1] }}
+      transition={{ duration: 2.4, repeat: Infinity, ease: "easeInOut" }}
+    />
+  )
+}
 
 /* ── chrome compartido ── */
 
@@ -56,7 +160,7 @@ function Window({
       >
         <div className="mb-3 flex items-center gap-2 px-1">
           <span
-            className="cv-live size-[18px] rounded-md"
+            className="size-[18px] rounded-md"
             style={{ background: dark ? GREEN : INK }}
           />
           <span
@@ -67,22 +171,24 @@ function Window({
           </span>
         </div>
 
-        {nav.map((item, i) => (
-          <span
-            key={item}
-            className="rounded-lg px-2 py-[6px] text-[0.66rem] font-medium"
-            style={
-              i === active
-                ? {
-                    background: dark ? D_CARD : "#f1f3f7",
-                    color: dark ? "#e8ecf3" : INK,
-                  }
-                : { color: MUTE }
-            }
-          >
-            {item}
-          </span>
-        ))}
+        <div className="flex flex-col gap-1">
+          {nav.map((item, i) => (
+            <span
+              key={item}
+              className="rounded-lg px-2 py-[6px] text-[0.66rem] font-medium"
+              style={
+                i === active
+                  ? {
+                      background: dark ? D_CARD : "#f1f3f7",
+                      color: dark ? "#e8ecf3" : INK,
+                    }
+                  : { color: MUTE }
+              }
+            >
+              {item}
+            </span>
+          ))}
+        </div>
       </aside>
 
       <div className="flex min-w-0 flex-1 flex-col gap-3 p-3.5 sm:p-4">
@@ -104,12 +210,16 @@ function Card({
   children: ReactNode
 }) {
   return (
-    <div
+    <motion.div
       className="flex min-h-0 flex-1 flex-col rounded-xl border px-3 py-2.5"
       style={{
         borderColor: dark ? D_LINE : LINE,
         background: dark ? D_CARD : "#fff",
       }}
+      initial={{ opacity: 0, y: 10 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={viewport}
+      transition={{ type: "spring", stiffness: 240, damping: 28 }}
     >
       <div className="flex items-center justify-between gap-2">
         <span
@@ -128,7 +238,7 @@ function Card({
         ) : null}
       </div>
       <div className="mt-2.5 flex min-h-0 flex-1 flex-col">{children}</div>
-    </div>
+    </motion.div>
   )
 }
 
@@ -159,8 +269,9 @@ function Row({
   dark?: boolean
 }) {
   return (
-    <div
-      className="cv-row flex items-center justify-between gap-3 border-t py-[7px] first:border-t-0"
+    <motion.div
+      variants={itemVariants}
+      className="flex items-center justify-between gap-3 border-t py-[7px] first:border-t-0"
       style={{ borderColor: dark ? D_LINE : "#f1f3f7" }}
     >
       <span
@@ -170,17 +281,17 @@ function Row({
         {left}
       </span>
       {right}
-    </div>
+    </motion.div>
   )
 }
 
 function Metric({
   label,
-  value,
+  children,
   color = INK,
 }: {
   label: string
-  value: string
+  children: ReactNode
   color?: string
 }) {
   return (
@@ -189,11 +300,40 @@ function Metric({
         {label}
       </p>
       <p
-        className="cv-value mt-0.5 text-[1.3rem] font-semibold leading-none tracking-[-0.04em] tabular-nums"
+        className="mt-0.5 text-[1.3rem] font-semibold leading-none tracking-[-0.04em] tabular-nums"
         style={{ color }}
       >
-        {value}
+        {children}
       </p>
+    </div>
+  )
+}
+
+/* Barra que se llena de izquierda a derecha. */
+function Fill({
+  pct,
+  color,
+  delay = 0,
+  track = "#eef1f5",
+}: {
+  pct: number
+  color: string
+  delay?: number
+  track?: string
+}) {
+  return (
+    <div
+      className="h-[5px] w-full overflow-hidden rounded-full"
+      style={{ background: track }}
+    >
+      <motion.div
+        className="h-full rounded-full"
+        style={{ background: color, transformOrigin: "left" }}
+        initial={{ scaleX: 0 }}
+        whileInView={{ scaleX: pct / 100 }}
+        viewport={viewport}
+        transition={{ duration: 1.1, ease: [0.22, 1, 0.36, 1], delay }}
+      />
     </div>
   )
 }
@@ -201,6 +341,7 @@ function Metric({
 /* ── 1. Inmobiliaria · calendario de vencimientos ── */
 
 export function RentalsVisual() {
+  const reduced = useReducedMotion()
   const days = Array.from({ length: 31 }, (_, i) => i + 1)
   const marks: Record<number, string> = {
     4: GREEN,
@@ -216,10 +357,24 @@ export function RentalsVisual() {
       active={0}
     >
       <Card title="Octubre · vencimientos" action="Mes">
-        <div className="grid grid-cols-[repeat(10,minmax(0,1fr))] gap-[3px] sm:grid-cols-[repeat(16,minmax(0,1fr))]">
+        <motion.div
+          className="grid grid-cols-[repeat(10,minmax(0,1fr))] gap-[3px] sm:grid-cols-[repeat(16,minmax(0,1fr))]"
+          variants={{ hidden: {}, show: { transition: { staggerChildren: 0.012 } } }}
+          initial="hidden"
+          whileInView="show"
+          viewport={viewport}
+        >
           {days.map((d) => (
-            <span
+            <motion.span
               key={d}
+              variants={{
+                hidden: { opacity: 0, scale: 0.7 },
+                show: {
+                  opacity: 1,
+                  scale: 1,
+                  transition: { type: "spring", stiffness: 420, damping: 24 },
+                },
+              }}
               className="relative flex aspect-square items-center justify-center rounded-[4px] text-[0.5rem] font-medium"
               style={{
                 background: marks[d] ? `${marks[d]}1f` : "#f4f6f8",
@@ -228,32 +383,33 @@ export function RentalsVisual() {
             >
               {d}
               {marks[d] ? (
-                <span
-                  className="cv-live absolute bottom-[2px] size-[3px] rounded-full"
-                  style={{ background: marks[d] }}
-                />
+                <span className="absolute bottom-[2px]">
+                  <LiveDot color={marks[d]} size={3} />
+                </span>
               ) : null}
-            </span>
+            </motion.span>
           ))}
-        </div>
+        </motion.div>
 
         <div className="mt-2.5 flex items-center gap-3">
-          <span
-            className="cv-sweep h-[22px] w-[2px] rounded-full"
+          <motion.span
+            className="h-[22px] w-[2px] rounded-full"
             style={{ background: INDIGO }}
+            animate={reduced ? undefined : { x: [0, 14, 0] }}
+            transition={{ duration: 4.5, repeat: Infinity, ease: "easeInOut" }}
           />
           <span className="text-[0.6rem]" style={{ color: MUTE }}>
-            Hoy · 4 vencimientos en los próximos 30 días
+            Hoy · <Counter value={4} /> vencimientos en los próximos 30 días
           </span>
         </div>
       </Card>
 
       <Card title="Acciones automáticas">
-        <div className="cv-rows flex flex-col">
+        <Stagger className="flex flex-col">
           <Row left="Pocitos · renovación enviada" right={<Pill text="Hecho" tone="ok" />} />
           <Row left="Carrasco · recordatorio día 17" right={<Pill text="Programado" tone="idle" />} />
           <Row left="Centro · sin respuesta" right={<Pill text="Escalado" tone="warn" />} />
-        </div>
+        </Stagger>
       </Card>
     </Window>
   )
@@ -277,52 +433,54 @@ export function ReconciliationVisual() {
     >
       <Card title="Cruce automático" action="1.240 mov.">
         <div className="flex flex-1 items-center gap-2">
-          <div className="flex min-w-0 flex-1 flex-col gap-[5px]">
-            {pairs.map((p, i) => (
-              <div
+          <Stagger className="flex min-w-0 flex-1 flex-col gap-[5px]">
+            {pairs.map((p) => (
+              <motion.div
                 key={p.bank}
-                className="cv-row truncate rounded-md border px-2 py-[5px] text-[0.62rem]"
-                style={{
-                  borderColor: LINE,
-                  color: BODY,
-                  animationDelay: `${i * 160}ms`,
-                }}
+                variants={itemVariants}
+                className="truncate rounded-md border px-2 py-[5px] text-[0.62rem]"
+                style={{ borderColor: LINE, color: BODY }}
               >
                 {p.bank}
-              </div>
+              </motion.div>
             ))}
-          </div>
+          </Stagger>
 
           <div className="flex shrink-0 flex-col gap-[5px]">
             {pairs.map((p, i) => (
               <div key={p.bank} className="flex h-[26px] items-center">
-                <span
-                  className={p.ok ? "cv-link block h-[1.5px] w-5" : "block h-[1.5px] w-5"}
-                  style={{
-                    background: p.ok ? GREEN : "#e2e6eb",
-                    animationDelay: `${i * 300}ms`,
+                <motion.span
+                  className="block h-[1.5px] w-5 origin-left"
+                  style={{ background: p.ok ? GREEN : "#e2e6eb" }}
+                  initial={{ scaleX: 0 }}
+                  whileInView={{ scaleX: 1 }}
+                  viewport={viewport}
+                  transition={{
+                    duration: 0.45,
+                    delay: 0.35 + i * 0.18,
+                    ease: "easeOut",
                   }}
                 />
               </div>
             ))}
           </div>
 
-          <div className="flex min-w-0 flex-1 flex-col gap-[5px]">
-            {pairs.map((p, i) => (
-              <div
+          <Stagger className="flex min-w-0 flex-1 flex-col gap-[5px]">
+            {pairs.map((p) => (
+              <motion.div
                 key={p.doc}
-                className="cv-row truncate rounded-md border px-2 py-[5px] text-[0.62rem]"
+                variants={itemVariants}
+                className="truncate rounded-md border px-2 py-[5px] text-[0.62rem]"
                 style={{
                   borderColor: p.ok ? "#cdebd8" : "#fde3c7",
                   background: p.ok ? "#f2fbf5" : "#fff8ef",
                   color: p.ok ? "#15803d" : "#b45309",
-                  animationDelay: `${i * 160 + 80}ms`,
                 }}
               >
                 {p.doc}
-              </div>
+              </motion.div>
             ))}
-          </div>
+          </Stagger>
         </div>
       </Card>
 
@@ -330,20 +488,16 @@ export function ReconciliationVisual() {
         className="flex items-end justify-between gap-4 rounded-xl border px-3 py-2.5"
         style={{ borderColor: LINE, background: "#fff" }}
       >
-        <Metric label="Conciliados" value="1.198" color={INDIGO} />
-        <Metric label="A revisar" value="42" color={AMBER} />
+        <Metric label="Conciliados" color={INDIGO}>
+          <Counter value={1198} />
+        </Metric>
+        <Metric label="A revisar" color={AMBER}>
+          <Counter value={42} />
+        </Metric>
         <div className="min-w-0 flex-1">
-          <div
-            className="h-[5px] w-full overflow-hidden rounded-full"
-            style={{ background: "#eef1f5" }}
-          >
-            <div
-              className="cv-fill h-full rounded-full"
-              style={{ width: "96%", background: INDIGO }}
-            />
-          </div>
+          <Fill pct={96} color={INDIGO} delay={0.2} />
           <p className="mt-1.5 text-[0.58rem]" style={{ color: MUTE }}>
-            96% del cierre resuelto sin intervención
+            <Counter value={96} suffix="%" /> del cierre resuelto sin intervención
           </p>
         </div>
       </div>
@@ -351,9 +505,11 @@ export function ReconciliationVisual() {
   )
 }
 
-/* ── 3. Asistente · conversación a pantalla completa ── */
+/* ── 3. Asistente · conversación ── */
 
 export function AssistantVisual() {
+  const reduced = useReducedMotion()
+
   return (
     <Window
       app="Asistente"
@@ -364,50 +520,62 @@ export function AssistantVisual() {
         className="flex min-h-0 flex-1 flex-col justify-end gap-2 rounded-xl border px-3 py-3"
         style={{ borderColor: LINE, background: "#fff" }}
       >
-        <div
-          className="cv-row ml-auto max-w-[78%] rounded-2xl rounded-br-md px-3 py-2 text-[0.72rem] leading-5"
-          style={{ background: INDIGO, color: "#fff", animationDelay: "120ms" }}
+        <motion.div
+          className="ml-auto max-w-[78%] rounded-2xl rounded-br-md px-3 py-2 text-[0.72rem] leading-5"
+          style={{ background: INDIGO, color: "#fff" }}
+          initial={{ opacity: 0, y: 8, scale: 0.96 }}
+          whileInView={{ opacity: 1, y: 0, scale: 1 }}
+          viewport={viewport}
+          transition={{ type: "spring", stiffness: 300, damping: 24 }}
         >
           ¿Cómo se imputa una factura de exterior?
-        </div>
+        </motion.div>
 
-        <div
-          className="cv-row max-w-[86%] rounded-2xl rounded-bl-md border px-3 py-2 text-[0.72rem] leading-5"
-          style={{
-            borderColor: LINE,
-            background: "#fafbfc",
-            color: BODY,
-            animationDelay: "560ms",
-          }}
+        <motion.div
+          className="max-w-[86%] rounded-2xl rounded-bl-md border px-3 py-2 text-[0.72rem] leading-5"
+          style={{ borderColor: LINE, background: "#fafbfc", color: BODY }}
+          initial={{ opacity: 0, y: 8, scale: 0.96 }}
+          whileInView={{ opacity: 1, y: 0, scale: 1 }}
+          viewport={viewport}
+          transition={{ type: "spring", stiffness: 300, damping: 24, delay: 0.5 }}
         >
           Va a la cuenta 6.2.1 con retención. Según el procedimiento interno,
           primero cargás el comprobante y después el formulario.
-        </div>
+        </motion.div>
 
-        <div
-          className="cv-row flex flex-wrap items-center gap-1.5"
-          style={{ animationDelay: "900ms" }}
-        >
-          <span className="text-[0.56rem] font-medium" style={{ color: MUTE }}>
+        <Stagger className="flex flex-wrap items-center gap-1.5">
+          <motion.span
+            variants={itemVariants}
+            className="text-[0.56rem] font-medium"
+            style={{ color: MUTE }}
+          >
             Fuentes
-          </span>
+          </motion.span>
           {["Procedimiento interno.pdf", "Plan de cuentas"].map((src) => (
-            <span
+            <motion.span
               key={src}
+              variants={itemVariants}
               className="rounded-md px-1.5 py-[2px] text-[0.56rem] font-medium"
               style={{ background: "#eef1f5", color: BODY }}
             >
               {src}
-            </span>
+            </motion.span>
           ))}
-        </div>
+        </Stagger>
 
         <div className="flex items-center gap-[4px] pl-1 pt-1">
           {[0, 1, 2].map((d) => (
-            <span
+            <motion.span
               key={d}
-              className="cv-dot size-[4px] rounded-full"
-              style={{ background: INDIGO, animationDelay: `${d * 180}ms` }}
+              className="size-[4px] rounded-full"
+              style={{ background: INDIGO }}
+              animate={reduced ? undefined : { y: [0, -3, 0], opacity: [0.4, 1, 0.4] }}
+              transition={{
+                duration: 1.4,
+                repeat: Infinity,
+                ease: "easeInOut",
+                delay: d * 0.18,
+              }}
             />
           ))}
           <span className="ml-1.5 text-[0.56rem]" style={{ color: MUTE }}>
@@ -419,9 +587,11 @@ export function AssistantVisual() {
   )
 }
 
-/* ── 4. Base conectada · consola de consultas (oscuro) ── */
+/* ── 4. Base conectada · consola (oscuro) ── */
 
 export function DatabaseVisual() {
+  const reduced = useReducedMotion()
+
   return (
     <Window
       app="Base"
@@ -443,28 +613,29 @@ export function DatabaseVisual() {
         <p className="mt-2.5 text-[0.56rem] font-medium" style={{ color: MUTE }}>
           SQL generado
         </p>
-        <code
-          className="cv-type mt-1 block font-mono text-[0.62rem]"
+        <motion.code
+          className="mt-1 block overflow-hidden whitespace-nowrap font-mono text-[0.62rem]"
           style={{ color: GREEN }}
+          initial={reduced ? undefined : { width: 0 }}
+          whileInView={reduced ? undefined : { width: "100%" }}
+          viewport={viewport}
+          transition={{ duration: 1.5, ease: "linear", delay: 0.3 }}
         >
           select * from propiedades where ultima_visita &lt; now() - 5
-        </code>
+        </motion.code>
       </div>
 
       <Card title="Resultado" action="3 filas" dark>
-        <div className="cv-rows flex flex-col">
+        <Stagger className="flex flex-col">
           <Row dark left="Pocitos · 2 amb." right={<Pill text="6 días" tone="warn" />} />
           <Row dark left="Carrasco · casa" right={<Pill text="8 días" tone="warn" />} />
           <Row dark left="Centro · oficina" right={<Pill text="11 días" tone="warn" />} />
-        </div>
+        </Stagger>
         <div
           className="mt-2 flex items-center gap-2 border-t pt-2"
           style={{ borderColor: D_LINE }}
         >
-          <span
-            className="cv-live size-[5px] rounded-full"
-            style={{ background: GREEN }}
-          />
+          <LiveDot color={GREEN} />
           <span className="text-[0.6rem]" style={{ color: MUTE }}>
             Tarea creada para el equipo comercial
           </span>
@@ -488,8 +659,12 @@ export function DashboardVisual() {
       <Card title="Ingresos · últimos 8 meses" action="2026">
         <div className="flex min-h-0 flex-1 flex-col">
           <div className="flex items-end gap-6">
-            <Metric label="Este mes" value="$ 1,24 M" />
-            <Metric label="Variación" value="+14%" color="#15803d" />
+            <Metric label="Este mes">
+              <Counter value={1.24} decimals={2} prefix="$ " suffix=" M" />
+            </Metric>
+            <Metric label="Variación" color="#15803d">
+              <Counter value={14} prefix="+" suffix="%" />
+            </Metric>
           </div>
 
           <svg
@@ -506,28 +681,39 @@ export function DashboardVisual() {
             </defs>
 
             {[16, 32, 48].map((y) => (
-              <line
-                key={y}
-                x1="0"
-                y1={y}
-                x2="224"
-                y2={y}
-                stroke="#eef1f5"
-                strokeWidth="1"
-              />
+              <line key={y} x1="0" y1={y} x2="224" y2={y} stroke="#eef1f5" strokeWidth="1" />
             ))}
 
-            <polygon points={`${pts} 224,64 0,64`} fill="url(#cv_area)" />
-            <polyline
-              className="cv-draw"
+            <motion.polygon
+              points={`${pts} 224,64 0,64`}
+              fill="url(#cv_area)"
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              viewport={viewport}
+              transition={{ duration: 0.8, delay: 0.6 }}
+            />
+            <motion.polyline
               points={pts}
               fill="none"
               stroke={INDIGO}
               strokeWidth="2"
               strokeLinecap="round"
               strokeLinejoin="round"
+              initial={{ pathLength: 0 }}
+              whileInView={{ pathLength: 1 }}
+              viewport={viewport}
+              transition={{ duration: 1.5, ease: [0.22, 1, 0.36, 1] }}
             />
-            <circle className="cv-live" cx="222" cy="8" r="3.5" fill={INDIGO} />
+            <motion.circle
+              cx="222"
+              cy="8"
+              r="3.5"
+              fill={INDIGO}
+              initial={{ scale: 0 }}
+              whileInView={{ scale: 1 }}
+              viewport={viewport}
+              transition={{ type: "spring", stiffness: 400, damping: 18, delay: 1.3 }}
+            />
           </svg>
 
           <div className="mt-1 flex items-center justify-between">
@@ -546,6 +732,8 @@ export function DashboardVisual() {
 /* ── 6. Datos · pipeline de migración (oscuro) ── */
 
 export function DataVisual() {
+  const reduced = useReducedMotion()
+
   return (
     <Window
       app="Datos"
@@ -555,57 +743,49 @@ export function DataVisual() {
     >
       <Card title="Pipeline" action="Corriendo" dark>
         <div className="flex flex-1 items-center gap-2">
-          <div className="flex min-w-0 flex-1 flex-col gap-[5px]">
-            {["planilla_v3.xlsx", "copia_2024.xlsx", "archivo_roto.csv"].map(
-              (f, i) => (
-                <div
-                  key={f}
-                  className="cv-row truncate rounded-md border px-2 py-[5px] font-mono text-[0.58rem]"
-                  style={{
-                    borderColor: D_LINE,
-                    color: MUTE,
-                    animationDelay: `${i * 160}ms`,
-                  }}
-                >
-                  {f}
-                </div>
-              )
-            )}
-          </div>
+          <Stagger className="flex min-w-0 flex-1 flex-col gap-[5px]">
+            {["planilla_v3.xlsx", "copia_2024.xlsx", "archivo_roto.csv"].map((f) => (
+              <motion.div
+                key={f}
+                variants={itemVariants}
+                className="truncate rounded-md border px-2 py-[5px] font-mono text-[0.58rem]"
+                style={{ borderColor: D_LINE, color: MUTE }}
+              >
+                {f}
+              </motion.div>
+            ))}
+          </Stagger>
 
-          <div className="relative flex h-[62px] w-10 shrink-0 items-center justify-center">
-            <span
-              className="absolute h-[1.5px] w-full"
-              style={{ background: D_LINE }}
-            />
+          <div className="relative flex h-[62px] w-10 shrink-0 items-center">
+            <span className="absolute h-[1.5px] w-full" style={{ background: D_LINE }} />
             {[0, 1, 2].map((d) => (
-              <span
+              <motion.span
                 key={d}
-                className="cv-travel absolute left-0 size-[5px] rounded-full"
-                style={{
-                  background: GREEN,
-                  animationDelay: `${d * 1.1}s`,
+                className="absolute left-0 size-[5px] rounded-full"
+                style={{ background: GREEN }}
+                animate={reduced ? undefined : { x: [0, 34], opacity: [0, 1, 1, 0] }}
+                transition={{
+                  duration: 2.6,
+                  repeat: Infinity,
+                  ease: "linear",
+                  delay: d * 0.9,
                 }}
               />
             ))}
           </div>
 
-          <div className="flex min-w-0 flex-1 flex-col gap-[5px]">
-            {["produccion", "stock", "reportes"].map((t, i) => (
-              <div
+          <Stagger className="flex min-w-0 flex-1 flex-col gap-[5px]">
+            {["produccion", "stock", "reportes"].map((t) => (
+              <motion.div
                 key={t}
-                className="cv-row truncate rounded-md border px-2 py-[5px] font-mono text-[0.58rem]"
-                style={{
-                  borderColor: "#1f4d33",
-                  background: "#13241b",
-                  color: GREEN,
-                  animationDelay: `${i * 160 + 200}ms`,
-                }}
+                variants={itemVariants}
+                className="truncate rounded-md border px-2 py-[5px] font-mono text-[0.58rem]"
+                style={{ borderColor: "#1f4d33", background: "#13241b", color: GREEN }}
               >
                 {t}
-              </div>
+              </motion.div>
             ))}
-          </div>
+          </Stagger>
         </div>
       </Card>
 
@@ -613,15 +793,27 @@ export function DataVisual() {
         className="flex items-end justify-between gap-4 rounded-xl border px-3 py-2.5"
         style={{ borderColor: D_LINE, background: D_CARD }}
       >
-        <Metric label="Filas migradas" value="214.830" color="#e8ecf3" />
-        <Metric label="Duplicados" value="0" color={GREEN} />
-        <Metric label="Fuentes" value="11" color="#e8ecf3" />
+        <Metric label="Filas migradas" color="#e8ecf3">
+          <Counter value={214830} />
+        </Metric>
+        <Metric label="Duplicados" color={GREEN}>
+          <Counter value={0} />
+        </Metric>
+        <Metric label="Fuentes" color="#e8ecf3">
+          <Counter value={11} />
+        </Metric>
       </div>
     </Window>
   )
 }
 
-/* ── 7. Ventas · feed de pedidos y reparto por canal ── */
+/* ── 7. Ventas · HIKE y Lunar Vintage ── */
+
+/* Placeholder de marca: reemplazar por los logos reales cuando lleguen. */
+const brands = [
+  { name: "HIKE", color: "#1c2434", bg: "#eef1f5" },
+  { name: "Lunar Vintage", color: "#7c3aed", bg: "#f3eefe" },
+]
 
 export function SalesVisual() {
   const channels = [
@@ -631,33 +823,54 @@ export function SalesVisual() {
   ]
 
   const orders = [
-    { id: "#2841", ch: "Instagram", amount: "$ 3.120", tone: "ok" as const },
-    { id: "#2840", ch: "Tienda online", amount: "$ 1.890", tone: "ok" as const },
-    { id: "#2839", ch: "WhatsApp", amount: "$ 2.450", tone: "idle" as const },
+    { id: "#2841", brand: "Lunar Vintage", amount: "$ 3.120", tone: "ok" as const },
+    { id: "#2840", brand: "HIKE", amount: "$ 1.890", tone: "ok" as const },
+    { id: "#2839", brand: "HIKE", amount: "$ 2.450", tone: "idle" as const },
   ]
 
   return (
     <Window app="Ventas" nav={["Pedidos", "Canales", "Stock", "Clientes"]} active={0}>
-      <Card title="Pedidos entrando" action="En vivo">
-        <div className="flex flex-col gap-[5px]">
+      <Stagger className="flex items-center gap-2">
+        {brands.map((b) => (
+          <motion.span
+            key={b.name}
+            variants={itemVariants}
+            className="rounded-lg px-2.5 py-1 text-[0.64rem] font-semibold tracking-[-0.01em]"
+            style={{ background: b.bg, color: b.color }}
+          >
+            {b.name}
+          </motion.span>
+        ))}
+        <span className="ml-auto flex items-center gap-1.5">
+          <LiveDot color={GREEN} size={5} />
+          <span className="text-[0.58rem]" style={{ color: MUTE }}>
+            en vivo
+          </span>
+        </span>
+      </Stagger>
+
+      <Card title="Pedidos entrando">
+        <Stagger className="flex flex-col gap-[5px]">
           {orders.map((o, i) => (
-            <div
+            <motion.div
               key={o.id}
-              className="cv-feed flex items-center justify-between gap-3 rounded-md border px-2.5 py-[6px]"
+              variants={itemVariants}
+              className="flex items-center justify-between gap-3 rounded-md border px-2.5 py-[6px]"
               style={{
                 borderColor: LINE,
                 background: i === 0 ? "#f2fbf5" : "#fff",
-                animationDelay: `${i * 900}ms`,
               }}
             >
               <span className="font-mono text-[0.6rem]" style={{ color: MUTE }}>
                 {o.id}
               </span>
               <span
-                className="min-w-0 flex-1 truncate text-[0.66rem]"
-                style={{ color: BODY }}
+                className="min-w-0 flex-1 truncate text-[0.66rem] font-medium"
+                style={{
+                  color: brands.find((b) => b.name === o.brand)?.color ?? BODY,
+                }}
               >
-                {o.ch}
+                {o.brand}
               </span>
               <span
                 className="shrink-0 text-[0.66rem] font-semibold tabular-nums"
@@ -666,9 +879,9 @@ export function SalesVisual() {
                 {o.amount}
               </span>
               <Pill text={o.tone === "ok" ? "Pago" : "Pendiente"} tone={o.tone} />
-            </div>
+            </motion.div>
           ))}
-        </div>
+        </Stagger>
       </Card>
 
       <Card title="Reparto por canal">
@@ -683,21 +896,11 @@ export function SalesVisual() {
                   className="shrink-0 text-[0.62rem] font-semibold tabular-nums"
                   style={{ color: INK }}
                 >
-                  {ch.pct}%
+                  <Counter value={ch.pct} suffix="%" />
                 </span>
               </div>
-              <div
-                className="mt-1 h-[5px] w-full overflow-hidden rounded-full"
-                style={{ background: "#eef1f5" }}
-              >
-                <div
-                  className="cv-fill h-full rounded-full"
-                  style={{
-                    width: `${ch.pct}%`,
-                    background: ch.c,
-                    animationDelay: `${i * 220}ms`,
-                  }}
-                />
+              <div className="mt-1">
+                <Fill pct={ch.pct} color={ch.c} delay={i * 0.14} />
               </div>
             </div>
           ))}

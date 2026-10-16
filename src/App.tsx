@@ -1038,14 +1038,14 @@ function App() {
           </div>
         </header>
 
-        <section className="relative mx-auto flex max-w-7xl items-start pt-28 pb-14 sm:pt-32 sm:pb-16 lg:pt-32 lg:pb-20">
-          <div className="grid w-full gap-12 lg:grid-cols-[minmax(0,0.92fr)_minmax(340px,0.88fr)] lg:items-start lg:gap-16">
+        <section className="relative mx-auto flex max-w-7xl items-start pt-24 pb-12 sm:pt-28 sm:pb-16 lg:pt-32 lg:pb-20">
+          <div className="grid w-full gap-7 sm:gap-10 lg:grid-cols-[minmax(0,0.92fr)_minmax(340px,0.88fr)] lg:items-start lg:gap-16">
             <BlurFade inView delay={0.05}>
               <div>
                 <p className="text-[0.68rem] uppercase tracking-[0.28em] text-muted-foreground">
                   Software y automatización a medida
                 </p>
-                <h1 className="mt-5 text-[3.2rem] font-light leading-[0.94] tracking-[-0.1em] text-foreground sm:text-[4.2rem] md:text-[5rem] xl:text-[5.8rem] xl:leading-[0.9]">
+                <h1 className="mt-4 text-[clamp(2.5rem,11vw,3.4rem)] font-light leading-[0.96] tracking-[-0.085em] text-balance text-foreground sm:text-[4.2rem] sm:leading-[0.94] sm:tracking-[-0.1em] md:text-[5rem] xl:text-[5.8rem] xl:leading-[0.9]">
                   Sistemas
                   <br />
                   diseñados para
@@ -1055,23 +1055,23 @@ function App() {
               </div>
             </BlurFade>
 
-            <div className="space-y-8 lg:pl-4">
-              <div className="max-w-xl">
-                <BlurFade inView delay={0.12}>
-                  <div className="mb-8 flex justify-start">
+            <div className="lg:pl-4">
+              <div className="flex max-w-xl flex-col">
+                <BlurFade inView delay={0.12} className="order-last lg:order-none">
+                  <div className="mt-12 flex justify-start sm:mt-14 lg:mt-0 lg:mb-8">
                     <span className="shape-green block">
                       <Triangle
                         index={0}
                         size={260}
                         noise
-                        className="h-auto w-[190px] sm:w-[220px] lg:w-[250px]"
+                        className="h-auto w-[120px] sm:w-[160px] lg:w-[250px]"
                       />
                     </span>
                   </div>
                 </BlurFade>
 
                 <BlurFade inView delay={0.2}>
-                  <p className="text-base leading-8 text-muted-foreground sm:text-lg">
+                  <p className="mt-7 text-base leading-8 text-muted-foreground sm:text-lg lg:mt-0">
                     Ordenamos cómo trabaja tu empresa y automatizamos lo que hoy
                     se hace a mano.
                   </p>
@@ -1114,11 +1114,11 @@ function App() {
           </div>
         </section>
 
-        <section className="relative left-1/2 w-screen -translate-x-1/2 border-y border-border/70 bg-[linear-gradient(180deg,#ffffff_0%,#f3f6f8_100%)] py-10 sm:py-12">
+        <section className="relative left-1/2 w-screen -translate-x-1/2 border-y border-border/70 bg-white py-10 sm:py-12">
           <BlurFade inView>
             <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
               <p className="text-center text-[0.66rem] uppercase tracking-[0.26em] text-muted-foreground/70">
-                Empresas que ya confían en nosotros
+                Empresas que ya usan nuestros sistemas
               </p>
 
               <div className="mt-8 flex flex-wrap items-center justify-center gap-x-10 gap-y-6 sm:gap-x-14 lg:gap-x-16">
