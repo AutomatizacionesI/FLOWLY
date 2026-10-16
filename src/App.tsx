@@ -160,6 +160,27 @@ const caseStudies = [
   },
 ]
 
+const startingPoints = [
+  {
+    pain: "Tengo la informacion repartida en seis planillas.",
+    solution:
+      "Unificamos todo en un sistema donde cada dato se carga una sola vez y el reporte se arma solo.",
+    context: "En produccion en una inmobiliaria",
+  },
+  {
+    pain: "Perdemos la manana en tareas que son siempre iguales.",
+    solution:
+      "Automatizamos la tarea completa: carga, control, aviso y registro. Corre sola y avisa solo si algo no cierra.",
+    context: "En produccion en un estudio contable",
+  },
+  {
+    pain: "Todo depende de que una persona se acuerde.",
+    solution:
+      "Un asistente conectado a tu operacion responde consultas internas y dispara las acciones que hoy dependen de alguien.",
+    context: "En produccion en una empresa de servicios",
+  },
+]
+
 const process = [
   {
     step: "01",
@@ -1010,6 +1031,45 @@ function App() {
               Inmobiliarias, estudios contables, retail, forestal y servicios.
               Mas de 50 automatizaciones entregadas desde 2023.
             </p>
+          </BlurFade>
+        </section>
+
+        <section className="mx-auto max-w-7xl py-16 sm:py-20">
+          <SectionIntro
+            label="Por donde empezar"
+            title="Casi siempre empieza por una de estas tres."
+            description="No hace falta tener claro que automatizar. Alcanza con reconocer el problema."
+          />
+
+          <div className="mt-10 grid gap-4 lg:grid-cols-3">
+            {startingPoints.map((item, index) => (
+              <BlurFade key={item.pain} inView delay={0.06 * index} className="h-full">
+                <div className="flex h-full flex-col rounded-[1.8rem] border border-border/80 bg-white p-6 shadow-[0_26px_70px_-60px_rgba(15,23,42,0.3)] transition-transform duration-300 hover:-translate-y-1">
+                  <p className="text-[1.05rem] font-medium leading-7 tracking-[-0.03em] text-foreground">
+                    &ldquo;{item.pain}&rdquo;
+                  </p>
+                  <p className="mt-4 text-sm leading-7 text-muted-foreground">
+                    {item.solution}
+                  </p>
+                  <div className="mt-6 flex items-center gap-2 border-t border-border/70 pt-4 text-[0.76rem] text-[var(--brand-strong)]">
+                    <CircleCheckBig className="size-3.5 shrink-0" />
+                    <span>{item.context}</span>
+                  </div>
+                </div>
+              </BlurFade>
+            ))}
+          </div>
+
+          <BlurFade inView delay={0.24}>
+            <div className="mt-4 rounded-[1.8rem] border border-dashed border-border bg-muted/40 px-6 py-6 sm:px-8">
+              <h3 className="text-[1.05rem] font-medium tracking-[-0.03em] text-foreground">
+                Y si tu caso es distinto?
+              </h3>
+              <p className="mt-2 max-w-3xl text-sm leading-7 text-muted-foreground">
+                Casi siempre lo es. Partimos del problema, no de la herramienta.
+                Contanos como trabajan hoy y te decimos si hay algo para hacer.
+              </p>
+            </div>
           </BlurFade>
         </section>
 
