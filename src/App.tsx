@@ -196,6 +196,21 @@ const integrations = [
   "Power BI",
 ]
 
+const team = [
+  {
+    name: "Facundo Etcheverry",
+    role: "Co-founder - Sistemas y automatizacion",
+    bio: "Arquitectura de automatizaciones, integraciones y agentes conectados a la operacion de cada empresa.",
+    linkedin: "https://www.linkedin.com/in/REEMPLAZAR",
+  },
+  {
+    name: "Gonzalo Pittaluga",
+    role: "Co-founder - Datos y estrategia",
+    bio: "Inteligencia de negocios, dashboards y modelos sobre los datos reales de cada operacion.",
+    linkedin: "https://www.linkedin.com/in/REEMPLAZAR",
+  },
+]
+
 const process = [
   {
     step: "01",
@@ -1170,6 +1185,42 @@ function App() {
                 </div>
               </BlurFade>
             </div>
+          </div>
+        </section>
+
+        <section className="mx-auto max-w-7xl py-16 sm:py-20">
+          <SectionIntro
+            label="Equipo"
+            title="Hablas directo con quien construye tu sistema."
+            description="Sin gerentes de cuenta ni intermediarios. El que te atiende en la primera reunion es el que despues escribe el codigo."
+          />
+
+          <div className="mt-10 grid gap-4 lg:grid-cols-2">
+            {team.map((person, index) => (
+              <BlurFade key={person.name} inView delay={0.08 * index} className="h-full">
+                <div className="flex h-full flex-col rounded-[1.8rem] border border-border/80 bg-white p-6 shadow-[0_26px_70px_-60px_rgba(15,23,42,0.3)] sm:p-7">
+                  <div className="size-16 rounded-full border border-dashed border-[var(--brand-border)] bg-[var(--brand-soft)]" />
+                  <h3 className="mt-5 text-[1.35rem] font-medium tracking-[-0.05em] text-foreground">
+                    {person.name}
+                  </h3>
+                  <p className="mt-1 text-[0.72rem] uppercase tracking-[0.18em] text-muted-foreground">
+                    {person.role}
+                  </p>
+                  <p className="mt-4 text-sm leading-7 text-muted-foreground">
+                    {person.bio}
+                  </p>
+                  <a
+                    href={person.linkedin}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="mt-6 inline-flex w-fit items-center gap-1.5 text-sm font-medium text-foreground transition-colors duration-300 hover:text-[var(--brand-strong)]"
+                  >
+                    LinkedIn
+                    <ArrowUpRight className="size-4" />
+                  </a>
+                </div>
+              </BlurFade>
+            ))}
           </div>
         </section>
 
