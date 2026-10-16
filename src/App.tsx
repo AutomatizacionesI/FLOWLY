@@ -242,6 +242,10 @@ const faqs = [
   },
 ]
 
+/* Testimonios reales. Mientras este array este vacio, la seccion no se renderiza.
+   Cargar solo con testimonios textuales de clientes, con permiso. */
+const testimonials: { quote: string; name: string; role: string; stage: string }[] = []
+
 const process = [
   {
     step: "01",
@@ -1218,6 +1222,35 @@ function App() {
             </div>
           </div>
         </section>
+
+        {testimonials.length > 0 ? (
+          <section className="mx-auto max-w-7xl py-16 sm:py-20">
+            <SectionIntro
+              label="Testimonios"
+              title="Lo que dicen los que ya trabajan con nosotros."
+              description="Clientes con sistemas en produccion."
+            />
+
+            <div className="mt-10 grid gap-4 lg:grid-cols-3">
+              {testimonials.map((item, index) => (
+                <BlurFade key={item.name} inView delay={0.06 * index} className="h-full">
+                  <div className="flex h-full flex-col rounded-[1.8rem] border border-border/80 bg-white p-6 shadow-[0_26px_70px_-60px_rgba(15,23,42,0.3)]">
+                    <p className="text-[0.98rem] leading-7 text-foreground/85">
+                      &ldquo;{item.quote}&rdquo;
+                    </p>
+                    <div className="mt-6 border-t border-border/70 pt-4">
+                      <p className="text-sm font-medium text-foreground">{item.name}</p>
+                      <p className="mt-0.5 text-[0.78rem] text-muted-foreground">{item.role}</p>
+                      <p className="mt-1 text-[0.72rem] uppercase tracking-[0.16em] text-[var(--brand-strong)]">
+                        {item.stage}
+                      </p>
+                    </div>
+                  </div>
+                </BlurFade>
+              ))}
+            </div>
+          </section>
+        ) : null}
 
         <section className="mx-auto max-w-7xl py-16 sm:py-20">
           <SectionIntro
