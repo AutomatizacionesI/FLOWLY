@@ -1040,7 +1040,7 @@ function App() {
         </header>
 
         <section className="relative mx-auto flex max-w-7xl items-start pt-24 pb-12 sm:pt-28 sm:pb-16 lg:pt-32 lg:pb-20">
-          <div className="grid w-full gap-7 sm:gap-10 lg:grid-cols-[minmax(0,0.92fr)_minmax(340px,0.88fr)] lg:items-start lg:gap-16">
+          <div className="grid w-full gap-7 sm:gap-10 lg:grid-cols-[minmax(0,0.92fr)_minmax(340px,0.88fr)] lg:items-center lg:gap-16">
             <BlurFade inView delay={0.05}>
               <div>
                 <p className="text-[0.68rem] uppercase tracking-[0.28em] text-muted-foreground">
@@ -1059,7 +1059,7 @@ function App() {
             <div className="lg:pl-4">
               <div className="flex max-w-xl flex-col">
                 <BlurFade inView delay={0.12} className="order-last lg:order-none">
-                  <div className="mt-12 sm:mt-14 lg:mb-9 lg:mt-0">
+                  <div className="mx-auto mt-12 w-full max-w-[420px] sm:mt-14 lg:mx-0 lg:mb-8 lg:ml-auto lg:mt-0 lg:max-w-[460px]">
                     <HeroMacbook />
                   </div>
                 </BlurFade>
@@ -1438,10 +1438,10 @@ function App() {
                 +598 91 315 670
               </a>
               <a
-                href="mailto:hola@spikeai.com"
+                href="mailto:spike.automations@gmail.com"
                 className="text-sm text-muted-foreground transition-colors duration-300 hover:text-foreground"
               >
-                hola@spikeai.com
+                spike.automations@gmail.com
               </a>
               <span className="text-sm text-muted-foreground">Uruguay</span>
 
