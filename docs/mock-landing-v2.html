@@ -1,0 +1,544 @@
+<title>Spike AI Landing v2</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600&family=Geist+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: mock anotado — cada bloque de la landing dentro de un marco con etiqueta de cambio */
+:root{
+  color-scheme: light;
+  --bg:#fbfcfd; --surface:#ffffff; --fg:#1b2230; --fg-soft:#5d6878; --fg-faint:#8b94a3;
+  --border:#e4e8ed; --border-soft:#eef1f5;
+  --brand:#63e28f; --brand-ink:#17894a; --brand-soft:rgba(99,226,143,.13); --brand-line:rgba(99,226,143,.38);
+  --new:#17894a; --new-bg:rgba(99,226,143,.16); --new-line:rgba(99,226,143,.45);
+  --out:#b3261e; --out-bg:rgba(179,38,30,.08); --out-line:rgba(179,38,30,.22);
+  --edit:#8a5a00; --edit-bg:rgba(201,138,0,.1); --edit-line:rgba(201,138,0,.26);
+  --keep:#5d6878; --keep-bg:rgba(93,104,120,.08); --keep-line:rgba(93,104,120,.2);
+  --sans:"Geist", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --mono:"Geist Mono", ui-monospace, "SF Mono", Menlo, monospace;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font-family:var(--sans);font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased}
+.wrap{max-width:1120px;margin:0 auto;padding-inline:20px;padding-block:0}
+h1,h2,h3,h4{text-wrap:balance;margin:0}
+p{margin:0}
+a{color:inherit}
+
+/* chrome del mock */
+.mockbar{position:sticky;top:env(safe-area-inset-top,0px);z-index:60;background:rgba(251,252,253,.9);backdrop-filter:blur(12px);border-bottom:1px solid var(--border)}
+.mockbar .wrap{display:flex;flex-wrap:wrap;align-items:center;gap:10px 16px;padding-block:12px}
+.mockbar strong{font-weight:600;font-size:.9rem;letter-spacing:-.01em}
+.mockbar .sep{flex:1;min-width:0}
+.legend{display:flex;flex-wrap:wrap;gap:6px}
+.tag{display:inline-flex;align-items:center;gap:6px;border-radius:999px;padding:3px 10px;font-size:.68rem;font-weight:500;letter-spacing:.06em;text-transform:uppercase;border:1px solid}
+.tag.new{color:var(--new);background:var(--new-bg);border-color:var(--new-line)}
+.tag.out{color:var(--out);background:var(--out-bg);border-color:var(--out-line)}
+.tag.edit{color:var(--edit);background:var(--edit-bg);border-color:var(--edit-line)}
+.tag.keep{color:var(--keep);background:var(--keep-bg);border-color:var(--keep-line)}
+
+.intro{padding-block:40px 8px}
+.intro h1{font-size:clamp(1.9rem,4.4vw,2.9rem);font-weight:300;letter-spacing:-.05em;line-height:1.05}
+.intro p{margin-top:14px;max-width:62ch;color:var(--fg-soft)}
+
+.block{position:relative;margin-block:34px;border:1px dashed var(--border);border-radius:28px;background:var(--surface)}
+.block > .head{display:flex;flex-wrap:wrap;align-items:center;gap:10px;padding:14px 20px;border-bottom:1px dashed var(--border);background:var(--bg);border-radius:27px 27px 0 0}
+.block > .head .n{font-family:var(--mono);font-size:.72rem;color:var(--fg-faint);font-variant-numeric:tabular-nums}
+.block > .head .name{font-size:.88rem;font-weight:600;letter-spacing:-.01em}
+.block > .head .why{flex-basis:100%;font-size:.8rem;color:var(--fg-soft);line-height:1.5}
+.body{padding:28px 20px 32px}
+@media(min-width:760px){.body{padding:40px 36px 44px}}
+.block.gone .body{opacity:.5}
+
+/* piezas de la landing */
+.eyebrow{font-size:.66rem;letter-spacing:.26em;text-transform:uppercase;color:var(--fg-faint)}
+.h2{font-size:clamp(1.55rem,3.4vw,2.35rem);font-weight:400;letter-spacing:-.045em;line-height:1.12}
+.h3{font-size:1.02rem;font-weight:600;letter-spacing:-.02em}
+.lede{margin-top:12px;color:var(--fg-soft);max-width:60ch}
+.small{font-size:.86rem;color:var(--fg-soft)}
+.mini{font-size:.76rem;color:var(--fg-faint)}
+.btn{display:inline-flex;align-items:center;gap:8px;height:42px;padding:0 20px;border-radius:999px;font-size:.88rem;font-weight:500;border:1px solid var(--fg);background:var(--fg);color:#fff;text-decoration:none}
+.btn.ghost{background:var(--surface);color:var(--fg);border-color:var(--brand-line)}
+.btns{display:flex;flex-wrap:wrap;gap:10px;margin-top:22px}
+.card{border:1px solid var(--border);border-radius:20px;background:var(--surface);padding:20px}
+.grid{display:grid;gap:14px}
+@media(min-width:720px){.g2{grid-template-columns:repeat(2,minmax(0,1fr))}.g3{grid-template-columns:repeat(3,minmax(0,1fr))}.g4{grid-template-columns:repeat(4,minmax(0,1fr))}}
+.chip{display:inline-flex;align-items:center;gap:7px;border:1px solid var(--border);border-radius:999px;padding:7px 14px;font-size:.84rem;background:var(--surface)}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.ph{border:1px dashed var(--brand-line);background:var(--brand-soft);border-radius:14px;padding:12px 14px;font-size:.78rem;color:var(--brand-ink)}
+
+/* nav */
+.nav{display:flex;align-items:center;gap:14px;flex-wrap:wrap;border:1px solid var(--border);border-radius:999px;padding:9px 9px 9px 20px;background:var(--surface)}
+.nav .logo{font-weight:600;letter-spacing:-.03em}
+.nav ul{display:flex;gap:16px;list-style:none;margin:0;padding:0;font-size:.86rem;color:var(--fg-soft);flex-wrap:wrap}
+.nav .sp{flex:1;min-width:0}
+.nav .btn{height:36px;font-size:.82rem}
+
+/* hero */
+.hero{display:grid;gap:34px}
+@media(min-width:900px){.hero{grid-template-columns:minmax(0,1.05fr) minmax(320px,.95fr);align-items:center}}
+.hero h2{font-size:clamp(2rem,5vw,3.4rem);font-weight:400;letter-spacing:-.055em;line-height:1.04}
+.hero h2 em{font-style:normal;color:var(--brand-ink)}
+.trust{margin-top:20px;display:flex;flex-wrap:wrap;gap:8px 18px;font-size:.8rem;color:var(--fg-faint)}
+
+/* simulación whatsapp */
+.sim{border:1px solid var(--border);border-radius:24px;background:linear-gradient(180deg,#f8fafb,#eef2f6);padding:16px;min-width:0}
+.sim .simbar{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:12px}
+.dot{width:8px;height:8px;border-radius:999px;background:var(--brand);display:inline-block}
+.chat{display:flex;flex-direction:column;gap:9px;min-height:236px}
+.msg{max-width:86%;padding:10px 13px;border-radius:16px;font-size:.84rem;line-height:1.45;box-shadow:0 10px 24px -20px rgba(15,23,42,.4);opacity:0;transform:translateY(6px);animation:pop .4s ease forwards}
+.msg.in{align-self:flex-start;background:var(--surface);border:1px solid var(--border)}
+.msg.out{align-self:flex-end;background:var(--brand-soft);border:1px solid var(--brand-line)}
+.msg b{font-weight:600}
+@keyframes pop{to{opacity:1;transform:translateY(0)}}
+@media(prefers-reduced-motion:reduce){.msg{animation:none;opacity:1;transform:none}}
+
+/* dolor → solución */
+.pain{border:1px solid var(--border);border-radius:20px;padding:20px;background:var(--surface);display:flex;flex-direction:column;gap:10px}
+.pain .q{font-size:.95rem;font-weight:500}
+.pain .a{font-size:.88rem;color:var(--fg-soft)}
+.pain .uses{margin-top:auto;padding-top:12px;border-top:1px solid var(--border-soft);font-size:.78rem;color:var(--brand-ink);font-weight:500}
+
+/* caso */
+.case{display:grid;gap:18px;border:1px solid var(--border);border-radius:24px;padding:18px;background:var(--surface)}
+@media(min-width:820px){.case{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}}
+.casevis{border:1px solid var(--border);border-radius:18px;background:linear-gradient(180deg,#f8fafb,#eef2f6);padding:16px;display:flex;flex-direction:column;gap:10px;min-height:214px}
+.row{display:flex;align-items:center;justify-content:space-between;gap:10px;background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:9px 12px;font-size:.8rem}
+.row .v{font-family:var(--mono);font-variant-numeric:tabular-nums;color:var(--brand-ink);font-weight:500}
+.bar{height:7px;border-radius:999px;background:var(--border-soft);overflow:hidden}
+.bar i{display:block;height:100%;background:var(--brand);border-radius:999px}
+.fact{margin-top:14px;border-left:2px solid var(--brand);padding-left:12px;font-size:.88rem}
+.fact b{font-weight:600}
+
+/* antes/despues */
+.ba{display:grid;gap:14px}
+@media(min-width:720px){.ba{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.ba ul{margin:12px 0 0;padding-left:18px;color:var(--fg-soft);font-size:.89rem;display:flex;flex-direction:column;gap:7px}
+.ba .after{border-color:var(--brand-line);background:var(--brand-soft)}
+
+/* metodo */
+.step{border:1px solid var(--border);border-radius:20px;padding:18px;background:var(--surface);display:flex;flex-direction:column;gap:8px}
+.step .k{font-family:var(--mono);font-size:.74rem;color:var(--fg-faint)}
+
+/* equipo */
+.person{display:flex;gap:14px;align-items:flex-start;border:1px solid var(--border);border-radius:20px;padding:18px;background:var(--surface)}
+.avatar{width:56px;height:56px;border-radius:999px;flex:none;background:var(--brand-soft);border:1px dashed var(--brand-line);display:grid;place-items:center;font-size:.6rem;color:var(--brand-ink);text-align:center;line-height:1.2}
+
+/* faq */
+details{border:1px solid var(--border);border-radius:16px;background:var(--surface);padding:14px 18px}
+details+details{margin-top:9px}
+summary{cursor:pointer;font-weight:500;font-size:.94rem;list-style:none;display:flex;justify-content:space-between;gap:12px;align-items:center}
+summary::-webkit-details-marker{display:none}
+summary::after{content:"+";color:var(--fg-faint);font-size:1.1rem;line-height:1}
+details[open] summary::after{content:"–"}
+details p{margin-top:10px;font-size:.88rem;color:var(--fg-soft)}
+details:focus-within{outline:2px solid var(--brand-line);outline-offset:2px}
+
+/* footer mock */
+.foot{display:flex;flex-wrap:wrap;gap:12px 28px;align-items:center;justify-content:space-between;font-size:.85rem;color:var(--fg-soft)}
+.fix{font-family:var(--mono);font-size:.75rem;color:var(--out);background:var(--out-bg);border:1px solid var(--out-line);border-radius:8px;padding:3px 8px;display:inline-block}
+.done{font-family:var(--mono);font-size:.75rem;color:var(--new);background:var(--new-bg);border:1px solid var(--new-line);border-radius:8px;padding:3px 8px;display:inline-block}
+.closing{margin-block:46px 70px;border:1px solid var(--border);border-radius:28px;padding:28px 22px;background:var(--surface)}
+.closing ol{margin:14px 0 0;padding-left:20px;color:var(--fg-soft);font-size:.92rem;display:flex;flex-direction:column;gap:9px}
+</style>
+
+<div class="mockbar">
+  <div class="wrap">
+    <strong>Mock — Landing Spike AI v2</strong>
+    <span class="sep"></span>
+    <div class="legend">
+      <span class="tag new">Nuevo</span>
+      <span class="tag edit">Reescrito</span>
+      <span class="tag keep">Se mantiene</span>
+      <span class="tag out">Se va</span>
+    </div>
+  </div>
+</div>
+
+<div class="wrap">
+
+  <section class="intro">
+    <h1>Así quedaría la landing</h1>
+    <p>Estructura y copy propuestos sobre los estilos base actuales. No están todos los detalles de la landing real: esto es para decidir qué secciones entran, en qué orden y con qué mensaje. Cada bloque dice qué cambia y por qué.</p>
+  </section>
+
+  <!-- 01 NAV -->
+  <section class="block">
+    <div class="head">
+      <span class="n">01</span><span class="name">Header</span><span class="tag edit">Reescrito</span>
+      <span class="why">Se suman Casos, Equipo y FAQ al nav, y el CTA pasa a agendar en vez de ir directo a WhatsApp.</span>
+    </div>
+    <div class="body">
+      <div class="nav">
+        <span class="logo">Spike AI</span>
+        <ul><li>Qué resolvemos</li><li>Casos</li><li>Método</li><li>Equipo</li><li>Preguntas</li></ul>
+        <span class="sp"></span>
+        <a class="btn" href="#">Agendar 30 min</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 02 HERO -->
+  <section class="block">
+    <div class="head">
+      <span class="n">02</span><span class="name">Hero</span><span class="tag edit">Reescrito</span>
+      <span class="why">Sale el &ldquo;Spike AI&rdquo; gigante y el miedo a la competencia. Entra el dolor operativo concreto y, a la derecha, una simulación de algo que realmente construimos. La palabra IA aparece recién más abajo, como el cómo y no como la promesa.</span>
+    </div>
+    <div class="body">
+      <div class="hero">
+        <div>
+          <p class="eyebrow">Automatización y sistemas a medida</p>
+          <h2 style="margin-top:16px">Tu operación entera,<br><em>en un solo lugar.</em></h2>
+          <p class="lede">Planillas sueltas, pedidos que llegan por WhatsApp, información que vive en la cabeza de una sola persona. Ordenamos cómo trabaja tu empresa y automatizamos lo que hoy se hace a mano.</p>
+          <div class="btns">
+            <a class="btn" href="#">Agendar 30 min</a>
+            <a class="btn ghost" href="#">Escribinos por WhatsApp</a>
+          </div>
+          <div class="trust">
+            <span>Primera conversación sin costo</span>
+            <span>Respondemos en menos de 24 h</span>
+            <span>Desde Uruguay, para toda la región</span>
+          </div>
+        </div>
+        <div class="sim">
+          <div class="simbar">
+            <span class="mini"><span class="dot"></span> Asistente conectado a la base</span>
+            <span class="mini">Ejemplo real</span>
+          </div>
+          <div class="chat">
+            <div class="msg out" style="animation-delay:.1s">¿Qué contratos vencen este mes?</div>
+            <div class="msg in" style="animation-delay:.7s">Vencen <b>4</b>. Dos ya tienen renovación enviada, uno está sin respuesta hace 9 días y uno no fue contactado.</div>
+            <div class="msg out" style="animation-delay:1.5s">Mandale recordatorio a los dos que faltan</div>
+            <div class="msg in" style="animation-delay:2.2s">Listo. Recordatorios enviados y tarea creada para seguimiento el lunes.</div>
+          </div>
+        </div>
+      </div>
+      <div class="ph" style="margin-top:20px">Nota de implementación: la simulación es un mockup animado nuestro, no una captura. Fiel a lo que construimos, sin datos de clientes.</div>
+    </div>
+  </section>
+
+  <!-- 03 CLIENTES -->
+  <section class="block">
+    <div class="head">
+      <span class="n">03</span><span class="name">Empresas que confían</span><span class="tag edit">Reescrito</span>
+      <span class="why">Hoy es un marquee de nombres en texto que parece inventado. Pasa a ser una sección con peso propio: logos reales, y abajo el dato de volumen.</span>
+    </div>
+    <div class="body">
+      <p class="eyebrow">Confían en nosotros</p>
+      <div class="chips" style="margin-top:18px">
+        <span class="chip">Castells</span><span class="chip">Blanco &amp; Etcheverry</span><span class="chip">Match Carrasco</span>
+        <span class="chip">Kopel Sánchez</span><span class="chip">Estudio G Pittaluga</span><span class="chip">HIKE</span>
+        <span class="chip">Proz Recovery</span><span class="chip">Lunar Vintage</span>
+      </div>
+      <p class="small" style="margin-top:18px">Inmobiliarias, estudios contables, forestal, retail y servicios. Más de 50 automatizaciones entregadas.</p>
+      <div class="ph" style="margin-top:18px">Pendiente: pedir los logos en PNG/SVG. Un nombre en texto plano se lee como relleno; el logo se lee como cliente.</div>
+    </div>
+  </section>
+
+  <!-- 04 MIEDO -->
+  <section class="block gone">
+    <div class="head">
+      <span class="n">04</span><span class="name">Bloque de urgencia / miedo</span><span class="tag out">Se va</span>
+      <span class="why">&ldquo;Tu competencia ya está usando IA&rdquo; es el cliché de agencia de IA. No construye confianza y ocupa un scroll entero. El lugar lo ocupan los casos.</span>
+    </div>
+    <div class="body">
+      <div class="grid g3">
+        <div class="card"><h3 class="h3">Velocidad de respuesta</h3><p class="small" style="margin-top:8px">Mientras vos seguís filtrando y derivando, otros ya atienden en segundos.</p></div>
+        <div class="card"><h3 class="h3">Costo operativo</h3><p class="small" style="margin-top:8px">Tu competencia ya recorta tareas repetitivas y libera horas que vos pagás.</p></div>
+        <div class="card"><h3 class="h3">Capacidad para escalar</h3><p class="small" style="margin-top:8px">Ellos multiplican productividad con la misma estructura.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 05 POR DONDE EMPEZAR -->
+  <section class="block">
+    <div class="head">
+      <span class="n">05</span><span class="name">Por dónde empezar</span><span class="tag new">Nuevo</span>
+      <span class="why">La sección que más nos falta. El visitante se reconoce en un dolor concreto y ve que ya lo resolvimos para alguien con nombre. Es la estructura de Minificando, que es la que mejor convierte de las tres.</span>
+    </div>
+    <div class="body">
+      <p class="eyebrow">Por dónde empezar</p>
+      <h2 class="h2" style="margin-top:14px">Casi siempre empieza por una de estas tres.</h2>
+      <div class="grid g3" style="margin-top:26px">
+        <div class="pain">
+          <p class="q">&ldquo;Tengo la información repartida en seis planillas.&rdquo;</p>
+          <p class="a">Unificamos todo en un sistema donde cada dato se carga una sola vez y el reporte se arma solo.</p>
+          <p class="uses">En uso en Castells</p>
+        </div>
+        <div class="pain">
+          <p class="q">&ldquo;Perdemos la mañana en tareas que son siempre iguales.&rdquo;</p>
+          <p class="a">Automatizamos la tarea completa: carga, control, aviso y registro. Corre sola y te avisa solo si algo no cierra.</p>
+          <p class="uses">En uso en Estudio G Pittaluga</p>
+        </div>
+        <div class="pain">
+          <p class="q">&ldquo;Todo depende de que una persona se acuerde.&rdquo;</p>
+          <p class="a">Un asistente conectado a tu operación responde consultas internas y dispara las acciones que hoy dependen de alguien.</p>
+          <p class="uses">En uso en Match Carrasco</p>
+        </div>
+      </div>
+      <div class="card" style="margin-top:16px;border-style:dashed">
+        <h3 class="h3">¿Tu caso es distinto?</h3>
+        <p class="small" style="margin-top:8px">Casi siempre lo es. Partimos del problema, no de la herramienta. Contanos cómo trabajan hoy y te decimos si hay algo para hacer.</p>
+      </div>
+      <div class="ph" style="margin-top:16px">Pendiente: confirmar qué cliente va en cada &ldquo;en uso en&rdquo;, con su permiso.</div>
+    </div>
+  </section>
+
+  <!-- 06 CASOS -->
+  <section class="block">
+    <div class="head">
+      <span class="n">06</span><span class="name">Casos</span><span class="tag edit">Reescrito</span>
+      <span class="why">El carrusel se mantiene, pero cada caso cambia: el ícono gigante lo reemplaza una simulación del sistema, aparece el nombre del cliente y un hecho operativo concreto en vez de una frase genérica. Sin porcentajes inventados.</span>
+    </div>
+    <div class="body">
+      <p class="eyebrow">Casos</p>
+      <h2 class="h2" style="margin-top:14px">Sistemas que están corriendo hoy.</h2>
+
+      <div class="case" style="margin-top:26px">
+        <div class="casevis">
+          <div class="mini">Panel de alquileres &mdash; simulación</div>
+          <div class="row"><span>Contratos activos</span><span class="v">148</span></div>
+          <div class="row"><span>Vencen este mes</span><span class="v">4</span></div>
+          <div class="row"><span>Cobranzas pendientes</span><span class="v">7</span></div>
+          <div class="bar" style="margin-top:4px"><i style="width:82%"></i></div>
+          <div class="mini">Ocupación 82%</div>
+        </div>
+        <div>
+          <p class="eyebrow">Inmobiliaria &middot; Castells</p>
+          <h3 class="h2" style="font-size:1.4rem;margin-top:10px">Alquileres, contratos y cobranzas en un solo sistema</h3>
+          <p class="small" style="margin-top:12px">Unificamos seguimiento comercial, contratos, vencimientos y estado de propiedades, con alertas automáticas para lo que antes se controlaba a mano.</p>
+          <p class="fact"><b>El control de vencimientos pasó de una planilla revisada a mano a un aviso automático.</b></p>
+        </div>
+      </div>
+
+      <div class="case" style="margin-top:16px">
+        <div class="casevis">
+          <div class="mini">Conciliación bancaria &mdash; simulación</div>
+          <div class="row"><span>Movimientos procesados</span><span class="v">1.240</span></div>
+          <div class="row"><span>Conciliados automáticamente</span><span class="v">1.198</span></div>
+          <div class="row"><span>Requieren revisión</span><span class="v">42</span></div>
+          <div class="bar" style="margin-top:4px"><i style="width:96%"></i></div>
+          <div class="mini">Cierre listo para revisión</div>
+        </div>
+        <div>
+          <p class="eyebrow">Estudio contable &middot; Estudio G Pittaluga</p>
+          <h3 class="h2" style="font-size:1.4rem;margin-top:10px">Conciliación y control financiero automatizados</h3>
+          <p class="small" style="margin-top:12px">Cruce automático de extractos, facturas y movimientos, con detección de diferencias y la base lista para reporting.</p>
+          <p class="fact"><b>La conciliación dejó de ocupar días de cierre: ahora se revisa solo lo que no cuadra.</b></p>
+        </div>
+      </div>
+
+      <div class="ph" style="margin-top:18px">Van los 7 casos reales. El octavo (&ldquo;y si tu problema es otro&rdquo;) sale del carrusel y pasa a ser la tarjeta de &ldquo;¿tu caso es distinto?&rdquo; de la sección anterior.</div>
+    </div>
+  </section>
+
+  <!-- 07 ANTES DESPUES -->
+  <section class="block">
+    <div class="head">
+      <span class="n">07</span><span class="name">Antes / Después</span><span class="tag edit">Reescrito</span>
+      <span class="why">La sección queda, pero con ejemplos concretos en vez de frases vagas. Sale la comparación con la competencia.</span>
+    </div>
+    <div class="body">
+      <div class="ba">
+        <div class="card">
+          <p class="eyebrow">Cómo se trabaja hoy</p>
+          <ul>
+            <li>El mismo dato se carga tres veces en tres lugares distintos.</li>
+            <li>El reporte del mes se arma a mano copiando de varias planillas.</li>
+            <li>Si falta la persona que sabe, el proceso se frena.</li>
+            <li>Los pedidos llegan por WhatsApp y se pierden entre conversaciones.</li>
+          </ul>
+        </div>
+        <div class="card after">
+          <p class="eyebrow">Cómo queda</p>
+          <ul>
+            <li>El dato se carga una vez y aparece en todos lados.</li>
+            <li>El reporte se genera solo y llega el día que tiene que llegar.</li>
+            <li>El proceso corre igual, esté quien esté.</li>
+            <li>Cada pedido entra al sistema con su estado y su responsable.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 08 METODO -->
+  <section class="block">
+    <div class="head">
+      <span class="n">08</span><span class="name">Método</span><span class="tag keep">Se mantiene</span>
+      <span class="why">Los 4 pasos con sticky stacking quedan igual. El ángulo de micro-implementaciones sin big bang es un buen diferencial frente a consultoras caras. Solo se corrigen acentos.</span>
+    </div>
+    <div class="body">
+      <div class="grid g4">
+        <div class="step"><span class="k">01</span><h3 class="h3">Diagnóstico sin costo</h3><p class="small">30-60 min. Dónde se pierde tiempo y por dónde conviene empezar.</p></div>
+        <div class="step"><span class="k">02</span><h3 class="h3">Micro-implementaciones</h3><p class="small">Arrancamos por lo que más duele. Resultados en semanas, no meses.</p></div>
+        <div class="step"><span class="k">03</span><h3 class="h3">Evolución continua</h3><p class="small">Escalamos cuando ves resultados y el equipo se adapta.</p></div>
+        <div class="step"><span class="k">04</span><h3 class="h3">Ecosistema conectado</h3><p class="small">Todo unificado en un sistema central, listo para crecer.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 09 INTEGRACIONES -->
+  <section class="block">
+    <div class="head">
+      <span class="n">09</span><span class="name">Integraciones</span><span class="tag new">Nuevo</span>
+      <span class="why">Prueba técnica barata y muy convincente: demuestra que trabajamos con lo que el cliente ya usa. AtomLabs muestra 15 logos y funciona.</span>
+    </div>
+    <div class="body">
+      <p class="eyebrow">Trabajamos sobre lo que ya usás</p>
+      <div class="chips" style="margin-top:18px">
+        <span class="chip">WhatsApp Business API</span><span class="chip">n8n</span><span class="chip">Supabase</span><span class="chip">Google Sheets</span>
+        <span class="chip">Odoo</span><span class="chip">HubSpot</span><span class="chip">Bitrix24</span><span class="chip">Make</span>
+        <span class="chip">Mercado Libre</span><span class="chip">Notion</span><span class="chip">Gmail / Outlook</span><span class="chip">Power BI</span>
+      </div>
+      <div class="ph" style="margin-top:18px">Confirmar la lista real. Solo va lo que efectivamente integramos.</div>
+    </div>
+  </section>
+
+  <!-- 10 TESTIMONIOS -->
+  <section class="block">
+    <div class="head">
+      <span class="n">10</span><span class="name">Testimonios</span><span class="tag new">Nuevo</span>
+      <span class="why">Es donde peor estamos contra los tres competidores: ellos tienen 7, 17 y un video; nosotros cero. La sección queda armada y se publica cuando lleguen los reales.</span>
+    </div>
+    <div class="body">
+      <p class="eyebrow">Lo que dicen</p>
+      <div class="grid g3" style="margin-top:20px">
+        <div class="card" style="border-style:dashed">
+          <p class="small" style="color:var(--fg-faint)">Testimonio pendiente — cliente con sistema en producción.</p>
+          <p class="mini" style="margin-top:14px">Nombre · Cargo · Empresa</p>
+        </div>
+        <div class="card" style="border-style:dashed">
+          <p class="small" style="color:var(--fg-faint)">Testimonio pendiente — que mencione cómo trabajamos, no solo el resultado.</p>
+          <p class="mini" style="margin-top:14px">Nombre · Cargo · Empresa</p>
+        </div>
+        <div class="card" style="border-style:dashed">
+          <p class="small" style="color:var(--fg-faint)">Testimonio pendiente — de alguien que solo tuvo la reunión de diagnóstico.</p>
+          <p class="mini" style="margin-top:14px">Nombre · Cargo · Empresa · Primera reunión</p>
+        </div>
+      </div>
+      <div class="ph" style="margin-top:18px">El tercero es el truco de Minificando: un testimonio de la reunión exploratoria baja el miedo a agendar. Es gratis y casi nadie lo usa. La sección no se publica con textos inventados.</div>
+    </div>
+  </section>
+
+  <!-- 11 EQUIPO -->
+  <section class="block">
+    <div class="head">
+      <span class="n">11</span><span class="name">Equipo</span><span class="tag new">Nuevo</span>
+      <span class="why">Ser dos personas accesibles es una ventaja frente a una consultora, no algo a esconder. Además los perfiles de LinkedIn son el canal desde el que se hace el outbound.</span>
+    </div>
+    <div class="body">
+      <p class="eyebrow">Quiénes somos</p>
+      <h2 class="h2" style="margin-top:14px">Hablás directo con quien construye tu sistema.</h2>
+      <p class="lede">Sin gerentes de cuenta ni intermediarios. El que te atiende en la primera reunión es el que después escribe el código.</p>
+      <div class="grid g2" style="margin-top:26px">
+        <div class="person">
+          <div class="avatar">Foto</div>
+          <div>
+            <h3 class="h3">Facundo Etcheverry</h3>
+            <p class="mini">Co-founder · Sistemas y automatización</p>
+            <p class="small" style="margin-top:10px">Arquitectura de automatizaciones, integraciones y agentes conectados a la operación.</p>
+            <p class="mini" style="margin-top:10px;color:var(--brand-ink)">LinkedIn</p>
+          </div>
+        </div>
+        <div class="person">
+          <div class="avatar">Foto</div>
+          <div>
+            <h3 class="h3">Gonzalo Pittaluga</h3>
+            <p class="mini">Co-founder · Datos y estrategia</p>
+            <p class="small" style="margin-top:10px">Inteligencia de negocios, dashboards y modelos sobre los datos de cada empresa.</p>
+            <p class="mini" style="margin-top:10px;color:var(--brand-ink)">LinkedIn</p>
+          </div>
+        </div>
+      </div>
+      <div class="ph" style="margin-top:18px">Pendiente: dos fotos decentes (fondo liso, buena luz) y los links reales de LinkedIn.</div>
+    </div>
+  </section>
+
+  <!-- 12 FAQ -->
+  <section class="block">
+    <div class="head">
+      <span class="n">12</span><span class="name">Preguntas frecuentes</span><span class="tag new">Nuevo</span>
+      <span class="why">Pre-negocia alcance, precio y demo antes de la reunión, filtra consultas que no califican y nos protege de regalar trabajo. También da señal a Google y a los asistentes de IA.</span>
+    </div>
+    <div class="body">
+      <p class="eyebrow">Preguntas frecuentes</p>
+      <div style="margin-top:20px">
+        <details open>
+          <summary>¿Cómo cobran?</summary>
+          <p>Cada proyecto se cotiza con alcance, entregables, precio cerrado y plazos definidos antes de empezar. No trabajamos por hora ni con presupuestos abiertos. Las necesidades nuevas que aparecen durante el proyecto se evalúan como cambios de alcance.</p>
+        </details>
+        <details>
+          <summary>¿La primera conversación incluye un diagnóstico o una demo?</summary>
+          <p>La primera conversación sirve para entender cómo trabajan hoy y evaluar si podemos ayudar. Si hace falta un diagnóstico más profundo o una demo, acordamos antes qué incluye, qué información necesitamos y en cuánto tiempo.</p>
+        </details>
+        <details>
+          <summary>¿Cuánto tarda en estar funcionando?</summary>
+          <p>La primera automatización suele estar corriendo entre dos y cuatro semanas. Los sistemas completos llevan más, pero entregamos por partes para que veas resultados antes de terminar.</p>
+        </details>
+        <details>
+          <summary>¿Tengo que cambiar las herramientas que uso hoy?</summary>
+          <p>Casi nunca. Trabajamos sobre lo que ya tenés y conectamos lo que haga falta. Si algo conviene reemplazar, te lo decimos con el motivo.</p>
+        </details>
+        <details>
+          <summary>¿Qué pasa con nuestros datos?</summary>
+          <p>Los datos son tuyos y quedan en infraestructura tuya o en servicios que vos controlás. Firmamos acuerdo de confidencialidad si lo necesitás.</p>
+        </details>
+        <details>
+          <summary>¿Qué pasa si mi equipo no es técnico?</summary>
+          <p>Es el caso más común. Capacitamos al equipo y dejamos el sistema funcionando con la gente que ya trabaja ahí. Si nadie lo usa, no sirvió.</p>
+        </details>
+        <details>
+          <summary>¿Trabajan fuera de Uruguay?</summary>
+          <p>Sí. Estamos en Uruguay y trabajamos con empresas de toda la región de forma remota.</p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- 13 CTA -->
+  <section class="block">
+    <div class="head">
+      <span class="n">13</span><span class="name">Cierre y contacto</span><span class="tag edit">Reescrito</span>
+      <span class="why">Dos caminos en vez de cuatro botones iguales: agendar para el que quiere elegir horario, WhatsApp para el que prefiere escribir. Y el email propio en vez del Gmail.</span>
+    </div>
+    <div class="body">
+      <h2 class="h2">Media hora y te decimos si hay algo para hacer.</h2>
+      <p class="lede">Sin costo y sin compromiso. Si no vemos una oportunidad clara, te lo decimos en la misma reunión.</p>
+      <div class="btns">
+        <a class="btn" href="#">Agendar 30 min</a>
+        <a class="btn ghost" href="#">Escribinos por WhatsApp</a>
+      </div>
+      <hr style="border:0;height:1px;background:var(--border-soft);margin-block:28px">
+      <div class="foot">
+        <div>
+          <p class="mini">WhatsApp</p>
+          <p class="small">+598 91 315 670</p>
+        </div>
+        <div>
+          <p class="mini">Email</p>
+          <p class="small">hola@spikeai.com <span class="fix">hoy: gmail</span></p>
+        </div>
+        <div>
+          <p class="mini">Base</p>
+          <p class="small">Uruguay — proyectos en toda la región</p>
+        </div>
+        <div>
+          <p class="mini">Redes</p>
+          <p class="small">LinkedIn · Instagram <span class="fix">hoy: links rotos</span></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="closing">
+    <p class="eyebrow">Fuera del mock</p>
+    <h2 class="h2" style="margin-top:12px">Lo que se arregla aunque no se vea</h2>
+    <ol>
+      <li><span class="done">SEO</span> &nbsp;Título real, meta description y tarjetas OG con imagen, para que el link deje de compartirse pelado por WhatsApp y LinkedIn.</li>
+      <li><span class="done">Medición</span> &nbsp;Analytics, pixel y un evento por cada click de WhatsApp y de agenda. Hoy no se mide absolutamente nada.</li>
+      <li><span class="done">Copy</span> &nbsp;Acentos y eñes en toda la landing. Hoy no hay ninguno y se lee como traducción automática.</li>
+      <li><span class="done">Links</span> &nbsp;LinkedIn e Instagram del footer apuntan a la home de las redes, no a nuestros perfiles.</li>
+      <li><span class="done">Fase 2</span> &nbsp;Router para páginas de caso propias (/casos/castells) y por industria. Queda planificado, no entra ahora.</li>
+    </ol>
+  </section>
+
+</div>
