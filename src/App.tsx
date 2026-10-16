@@ -329,7 +329,7 @@ const clients = [
   "Castells",
   "Blanco & Etcheverry",
   "Match Carrasco",
-  "Kopel Sanchez",
+  "Kopel Sánchez",
   "Estudio G Pittaluga",
   "HIKE",
   "Proz Recovery",
