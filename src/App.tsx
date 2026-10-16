@@ -17,6 +17,8 @@ import {
 } from "lucide-react"
 import { type CSSProperties, useEffect, useRef, useState } from "react"
 
+import { Ellipse, Flower, Moon, Polygon, Star, Triangle } from "coolshapes-react"
+
 import {
   AssistantVisual,
   DashboardVisual,
@@ -351,6 +353,23 @@ const clients = [
   "Lunar Vintage",
 ]
 
+const methodShapes = [
+  { Shape: Star, index: 0 },
+  { Shape: Moon, index: 1 },
+  { Shape: Polygon, index: 2 },
+  { Shape: Flower, index: 3 },
+]
+
+const caseShapes = [
+  { Shape: Ellipse, index: 0 },
+  { Shape: Star, index: 2 },
+  { Shape: Flower, index: 1 },
+  { Shape: Moon, index: 3 },
+  { Shape: Triangle, index: 2 },
+  { Shape: Star, index: 5 },
+  { Shape: Ellipse, index: 4 },
+]
+
 const whatsappHref =
   "https://wa.me/59891315670?text=Hola%20Spike%20AI%2C%20quiero%20automatizar%20mi%20negocio"
 
@@ -611,6 +630,8 @@ function MethodSectionV2() {
           style={{ ["--numcards" as string]: process.length } as CSSProperties}
         >
           {process.map((step, i) => {
+            const MethodShape = methodShapes[i].Shape
+
             return (
               <article
                 key={step.step}
@@ -636,16 +657,26 @@ function MethodSectionV2() {
                   <div className="pointer-events-none absolute -right-16 -top-16 h-52 w-52 rounded-full bg-gradient-to-br from-[var(--brand)]/8 to-transparent blur-3xl" />
 
                   <div className="relative flex min-h-[calc(82vh-5rem)] items-center">
-                    <div className="max-w-3xl">
-                      <p className="text-[0.72rem] font-medium uppercase tracking-[0.22em] text-[var(--brand-strong)]/65">
-                        Paso {step.step} · {step.timing}
-                      </p>
-                      <h3 className="mt-5 text-[2.35rem] font-medium leading-[0.95] tracking-[-0.09em] text-foreground sm:text-[2.8rem] lg:text-[4.5rem]">
-                        {step.title}
-                      </h3>
-                      <p className="mt-6 max-w-2xl text-[1rem] leading-8 text-foreground/58 sm:text-[1.08rem] lg:text-[1.18rem] lg:leading-9">
-                        {step.description}
-                      </p>
+                    <div className="grid w-full items-center gap-10 lg:grid-cols-[minmax(0,1fr)_auto]">
+                      <div className="max-w-2xl">
+                        <p className="text-[0.72rem] font-medium uppercase tracking-[0.22em] text-[var(--brand-strong)]/65">
+                          Paso {step.step} · {step.timing}
+                        </p>
+                        <h3 className="mt-4 text-[1.9rem] font-medium leading-[1] tracking-[-0.07em] text-foreground sm:text-[2.2rem] lg:text-[2.9rem]">
+                          {step.title}
+                        </h3>
+                        <p className="mt-5 max-w-xl text-[0.98rem] leading-7 text-foreground/58 lg:text-[1.04rem] lg:leading-8">
+                          {step.description}
+                        </p>
+                      </div>
+
+                      <MethodShape
+                        index={methodShapes[i].index}
+                        size={320}
+                        noise
+                        aria-hidden
+                        className="hidden h-auto w-[200px] justify-self-end drop-shadow-[0_26px_50px_rgba(15,23,42,0.16)] lg:block lg:w-[250px]"
+                      />
                     </div>
                   </div>
 
@@ -856,20 +887,30 @@ function SuccessCasesSection() {
             >
               {loopedCaseStudies.map((item, loopIndex) => {
                 const Visual = item.visual
+                const { Shape, index: shapeIndex } =
+                  caseShapes[caseStudies.indexOf(item) % caseShapes.length]
                 const isActive = loopIndex === centerIndex
 
                 return (
                   <article
                     key={`${item.title}-${loopIndex}`}
                     className={[
-                      "w-[920px] flex-shrink-0 rounded-[2rem] border border-border/70 bg-white p-6 text-slate-900 shadow-[0_30px_90px_-70px_rgba(15,23,42,0.25)] transition-all duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] select-none lg:min-h-[35rem] lg:p-7",
+                      "relative w-[920px] flex-shrink-0 overflow-hidden rounded-[2rem] border border-border/70 bg-white p-6 text-slate-900 shadow-[0_30px_90px_-70px_rgba(15,23,42,0.25)] transition-all duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] select-none lg:min-h-[35rem] lg:p-7",
                       isActive
                         ? "scale-[1.08] opacity-100"
                         : "scale-[0.84] opacity-100",
                     ].join(" ")}
                     style={{ width: `${slideWidth}px` }}
                   >
-                    <div className="flex h-full flex-col gap-6">
+                    <Shape
+                      index={shapeIndex}
+                      size={170}
+                      noise
+                      aria-hidden
+                      className="pointer-events-none absolute -right-8 -top-8 h-auto w-[150px] opacity-80"
+                    />
+
+                    <div className="relative flex h-full flex-col gap-6">
                       <div className="grid gap-x-10 gap-y-4 lg:grid-cols-[minmax(0,1.15fr)_minmax(0,0.85fr)] lg:items-end">
                         <div>
                           <p className="text-[0.7rem] uppercase tracking-[0.22em] text-slate-500">
@@ -1016,7 +1057,16 @@ function App() {
 
             <div className="space-y-8 lg:pl-4">
               <div className="max-w-xl">
-                {/* Acá va la figura del hero (unDraw/Storyset) cuando este elegida */}
+                <BlurFade inView delay={0.12}>
+                  <div className="mb-9 flex justify-start">
+                    <Triangle
+                      index={0}
+                      size={260}
+                      noise
+                      className="h-auto w-[200px] drop-shadow-[0_30px_60px_rgba(15,23,42,0.18)] sm:w-[240px] lg:w-[270px]"
+                    />
+                  </div>
+                </BlurFade>
 
                 <BlurFade inView delay={0.2}>
                   <p className="text-base leading-8 text-muted-foreground sm:text-lg">

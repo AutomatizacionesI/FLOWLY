@@ -1,139 +1,252 @@
 /* ─────────────────────────────────────────────
    Case visuals — simulaciones de los sistemas que construimos.
-   Paneles oscuros estilo producto real sobre la tarjeta clara del caso.
+   Paleta propia, deliberadamente distinta a la de la landing: estos
+   paneles tienen que leerse como producto, no como una seccion mas.
    No son capturas: son mockups fieles, sin datos de clientes.
    ───────────────────────────────────────────── */
 
 import type { ReactNode } from "react"
 
-/* ── primitivas compartidas ── */
+const INK = "#1c2434"
+const MUTE = "#8a93a4"
+const LINE = "#e9ecf1"
+const CANVAS = "#f6f7f9"
 
-function Frame({
-  label,
-  meta,
+/* ── chrome compartido: ventana con sidebar ── */
+
+function Window({
+  app,
+  nav,
+  active,
+  tone = "light",
   children,
 }: {
-  label: string
-  meta?: string
+  app: string
+  nav: string[]
+  active: number
+  tone?: "light" | "dark"
   children: ReactNode
 }) {
+  const dark = tone === "dark"
+
   return (
-    <div className="relative flex h-full flex-col overflow-hidden rounded-[1.5rem] border border-white/10 bg-neutral-950 p-4 text-white lg:p-5">
-      <div
-        aria-hidden
-        className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(99,226,143,0.16),transparent_55%)]"
-      />
-      <div className="relative flex items-center justify-between gap-3">
-        <div className="flex items-center gap-2">
-          <span className="relative flex size-1.5">
-            <span className="absolute inline-flex size-full animate-ping rounded-full bg-[var(--brand)] opacity-60" />
-            <span className="relative inline-flex size-1.5 rounded-full bg-[var(--brand)]" />
-          </span>
-          <span className="text-[0.64rem] uppercase tracking-[0.2em] text-white/55">
-            {label}
+    <div
+      className="flex h-full min-h-[270px] overflow-hidden rounded-[1.25rem] border"
+      style={{
+        borderColor: dark ? "#232a36" : LINE,
+        background: dark ? "#141922" : CANVAS,
+      }}
+    >
+      {/* sidebar */}
+      <aside
+        className="hidden w-[132px] shrink-0 flex-col gap-1 border-r p-3 sm:flex"
+        style={{
+          borderColor: dark ? "#232a36" : LINE,
+          background: dark ? "#10151d" : "#fff",
+        }}
+      >
+        <div className="mb-3 flex items-center gap-2 px-1">
+          <span
+            className="size-[18px] rounded-md"
+            style={{ background: dark ? "#22c55e" : INK }}
+          />
+          <span
+            className="text-[0.7rem] font-semibold tracking-[-0.01em]"
+            style={{ color: dark ? "#e8ecf3" : INK }}
+          >
+            {app}
           </span>
         </div>
-        {meta ? (
-          <span className="text-[0.64rem] uppercase tracking-[0.16em] text-white/32">
-            {meta}
+
+        {nav.map((item, i) => (
+          <span
+            key={item}
+            className="rounded-lg px-2 py-[6px] text-[0.66rem] font-medium"
+            style={
+              i === active
+                ? {
+                    background: dark ? "#1b2230" : "#f1f3f7",
+                    color: dark ? "#e8ecf3" : INK,
+                  }
+                : { color: MUTE }
+            }
+          >
+            {item}
           </span>
-        ) : null}
+        ))}
+      </aside>
+
+      {/* contenido */}
+      <div className="flex min-w-0 flex-1 flex-col gap-3 p-3.5 sm:p-4">
+        {children}
       </div>
-      <div className="relative mt-4 flex flex-1 flex-col gap-2.5">{children}</div>
     </div>
   )
 }
 
-function Tile({ children }: { children: ReactNode }) {
-  return (
-    <div className="rounded-xl border border-white/10 bg-white/[0.045] px-3.5 py-2.5">
-      {children}
-    </div>
-  )
-}
-
-function Stat({
+function Kpi({
   label,
   value,
-  tone = "default",
+  delta,
+  up = true,
+  dark = false,
 }: {
   label: string
   value: string
-  tone?: "default" | "brand"
+  delta?: string
+  up?: boolean
+  dark?: boolean
 }) {
   return (
-    <Tile>
-      <p className="text-[0.6rem] uppercase tracking-[0.16em] text-white/40">
+    <div
+      className="min-w-0 flex-1 rounded-xl border px-3 py-2.5"
+      style={{
+        borderColor: dark ? "#232a36" : LINE,
+        background: dark ? "#1b2230" : "#fff",
+      }}
+    >
+      <p className="truncate text-[0.6rem] font-medium" style={{ color: MUTE }}>
         {label}
       </p>
-      <p
-        className={[
-          "mt-1 text-[1.35rem] font-medium leading-none tracking-[-0.04em] tabular-nums",
-          tone === "brand" ? "text-[var(--brand)]" : "text-white",
-        ].join(" ")}
-      >
-        {value}
-      </p>
-    </Tile>
-  )
-}
-
-function Line({
-  left,
-  right,
-  state,
-}: {
-  left: string
-  right: string
-  state?: "ok" | "warn" | "idle"
-}) {
-  const dot =
-    state === "ok"
-      ? "bg-[var(--brand)]"
-      : state === "warn"
-        ? "bg-amber-400"
-        : "bg-white/25"
-
-  return (
-    <Tile>
-      <div className="flex items-center justify-between gap-3">
-        <span className="flex min-w-0 items-center gap-2.5">
-          <span className={`size-1.5 shrink-0 rounded-full ${dot}`} />
-          <span className="truncate text-[0.8rem] text-white/72">{left}</span>
+      <div className="mt-1 flex items-baseline gap-1.5">
+        <span
+          className="text-[1.15rem] font-semibold leading-none tracking-[-0.035em] tabular-nums"
+          style={{ color: dark ? "#f2f5f9" : INK }}
+        >
+          {value}
         </span>
-        <span className="shrink-0 text-[0.78rem] font-medium tabular-nums text-white/90">
-          {right}
-        </span>
+        {delta ? (
+          <span
+            className="rounded-full px-1.5 py-[1px] text-[0.58rem] font-semibold"
+            style={{
+              color: up ? "#15803d" : "#be123c",
+              background: up ? "#dcfce7" : "#ffe4e6",
+            }}
+          >
+            {delta}
+          </span>
+        ) : null}
       </div>
-    </Tile>
-  )
-}
-
-function Progress({ value, caption }: { value: number; caption: string }) {
-  return (
-    <div className="mt-auto pt-1">
-      <div className="h-1.5 w-full overflow-hidden rounded-full bg-white/10">
-        <div
-          className="h-full rounded-full bg-[var(--brand)]"
-          style={{ width: `${value}%` }}
-        />
-      </div>
-      <p className="mt-2 text-[0.68rem] text-white/40">{caption}</p>
     </div>
   )
 }
 
-function Bubble({ from, children }: { from: "user" | "system"; children: ReactNode }) {
+function Card({
+  title,
+  action,
+  dark = false,
+  children,
+}: {
+  title: string
+  action?: string
+  dark?: boolean
+  children: ReactNode
+}) {
   return (
     <div
-      className={[
-        "max-w-[88%] rounded-2xl px-3.5 py-2.5 text-[0.8rem] leading-6",
-        from === "user"
-          ? "ml-auto border border-[rgba(99,226,143,0.3)] bg-[rgba(99,226,143,0.12)] text-white/90"
-          : "border border-white/10 bg-white/[0.05] text-white/75",
-      ].join(" ")}
+      className="flex min-h-0 flex-1 flex-col rounded-xl border px-3 py-2.5"
+      style={{
+        borderColor: dark ? "#232a36" : LINE,
+        background: dark ? "#1b2230" : "#fff",
+      }}
     >
-      {children}
+      <div className="flex items-center justify-between gap-2">
+        <span
+          className="text-[0.68rem] font-semibold tracking-[-0.01em]"
+          style={{ color: dark ? "#e8ecf3" : INK }}
+        >
+          {title}
+        </span>
+        {action ? (
+          <span
+            className="rounded-md border px-1.5 py-[2px] text-[0.56rem] font-medium"
+            style={{ borderColor: dark ? "#2b3444" : LINE, color: MUTE }}
+          >
+            {action}
+          </span>
+        ) : null}
+      </div>
+      <div className="mt-2.5 flex min-h-0 flex-1 flex-col">{children}</div>
+    </div>
+  )
+}
+
+function Pill({ text, tone }: { text: string; tone: "ok" | "warn" | "idle" }) {
+  const map = {
+    ok: { c: "#15803d", b: "#dcfce7" },
+    warn: { c: "#b45309", b: "#fef3c7" },
+    idle: { c: "#64748b", b: "#eef1f5" },
+  }[tone]
+
+  return (
+    <span
+      className="shrink-0 rounded-full px-2 py-[2px] text-[0.58rem] font-semibold"
+      style={{ color: map.c, background: map.b }}
+    >
+      {text}
+    </span>
+  )
+}
+
+function Row({
+  left,
+  mid,
+  right,
+  dark = false,
+}: {
+  left: string
+  mid?: ReactNode
+  right: ReactNode
+  dark?: boolean
+}) {
+  return (
+    <div
+      className="flex items-center justify-between gap-3 border-t py-[7px] first:border-t-0"
+      style={{ borderColor: dark ? "#232a36" : "#f1f3f7" }}
+    >
+      <span
+        className="min-w-0 flex-1 truncate text-[0.68rem]"
+        style={{ color: dark ? "#c7cfdb" : "#445063" }}
+      >
+        {left}
+      </span>
+      {mid}
+      {right}
+    </div>
+  )
+}
+
+function Bars({ data }: { data: { h: number; c: string }[] }) {
+  return (
+    <div className="flex h-full min-h-[58px] items-end gap-[5px]">
+      {data.map((b, i) => (
+        <div key={i} className="flex min-w-0 flex-1 flex-col justify-end gap-[3px]">
+          <div
+            className="w-full rounded-[3px]"
+            style={{ height: `${b.h}%`, background: b.c }}
+          />
+        </div>
+      ))}
+    </div>
+  )
+}
+
+function Donut({ pct, color }: { pct: number; color: string }) {
+  return (
+    <div
+      className="relative size-[62px] shrink-0 rounded-full"
+      style={{
+        background: `conic-gradient(${color} ${pct * 3.6}deg, #eef1f5 0deg)`,
+      }}
+    >
+      <div className="absolute inset-[9px] grid place-items-center rounded-full bg-white">
+        <span
+          className="text-[0.66rem] font-semibold tabular-nums"
+          style={{ color: INK }}
+        >
+          {pct}%
+        </span>
+      </div>
     </div>
   )
 }
@@ -142,16 +255,22 @@ function Bubble({ from, children }: { from: "user" | "system"; children: ReactNo
 
 export function RentalsVisual() {
   return (
-    <Frame label="Panel de alquileres" meta="Simulación">
-      <div className="grid grid-cols-2 gap-2.5">
-        <Stat label="Contratos activos" value="148" />
-        <Stat label="Vencen este mes" value="4" tone="brand" />
+    <Window app="Alquileres" nav={["Resumen", "Contratos", "Propiedades", "Cobranzas", "Alertas"]} active={1}>
+      <div className="flex gap-2.5">
+        <Kpi label="Contratos activos" value="148" delta="+6" />
+        <Kpi label="Vencen este mes" value="4" />
+        <Kpi label="Ocupación" value="82%" delta="+3%" />
       </div>
-      <Line left="Renovación enviada" right="2" state="ok" />
-      <Line left="Sin respuesta hace 9 días" right="1" state="warn" />
-      <Line left="Sin contactar" right="1" state="idle" />
-      <Progress value={82} caption="Ocupación 82% - alertas automáticas activas" />
-    </Frame>
+
+      <Card title="Vencimientos próximos" action="Este mes">
+        <div className="flex flex-col">
+          <Row left="Pocitos - 2 amb." right={<Pill text="Renovado" tone="ok" />} />
+          <Row left="Carrasco - casa" right={<Pill text="Renovado" tone="ok" />} />
+          <Row left="Centro - oficina" right={<Pill text="Sin respuesta" tone="warn" />} />
+          <Row left="Malvin - 1 amb." right={<Pill text="Sin contactar" tone="idle" />} />
+        </div>
+      </Card>
+    </Window>
   )
 }
 
@@ -159,16 +278,37 @@ export function RentalsVisual() {
 
 export function ReconciliationVisual() {
   return (
-    <Frame label="Conciliación bancaria" meta="Simulación">
-      <div className="grid grid-cols-2 gap-2.5">
-        <Stat label="Movimientos" value="1.240" />
-        <Stat label="Conciliados" value="1.198" tone="brand" />
+    <Window app="Finanzas" nav={["Resumen", "Movimientos", "Conciliación", "Reportes"]} active={2}>
+      <div className="flex gap-2.5">
+        <Kpi label="Movimientos" value="1.240" />
+        <Kpi label="Conciliados" value="1.198" delta="96%" />
+        <Kpi label="A revisar" value="42" delta="-18" up={false} />
       </div>
-      <Line left="Transferencia - proveedor" right="match" state="ok" />
-      <Line left="Débito automático" right="match" state="ok" />
-      <Line left="Diferencia de $ 1.430" right="revisar" state="warn" />
-      <Progress value={96} caption="42 movimientos para revisión manual" />
-    </Frame>
+
+      <div className="flex min-h-0 flex-1 gap-2.5">
+        <Card title="Avance del cierre">
+          <div className="flex items-center gap-3">
+            <Donut pct={96} color="#5b5bd6" />
+            <div className="min-w-0">
+              <p className="text-[0.64rem]" style={{ color: MUTE }}>
+                Cruce automático
+              </p>
+              <p className="text-[0.7rem] font-medium" style={{ color: INK }}>
+                Listo para revisión
+              </p>
+            </div>
+          </div>
+        </Card>
+
+        <Card title="Diferencias">
+          <div className="flex flex-col">
+            <Row left="Transferencia" right={<Pill text="Match" tone="ok" />} />
+            <Row left="Débito automático" right={<Pill text="Match" tone="ok" />} />
+            <Row left="Dif. $ 1.430" right={<Pill text="Revisar" tone="warn" />} />
+          </div>
+        </Card>
+      </div>
+    </Window>
   )
 }
 
@@ -176,169 +316,197 @@ export function ReconciliationVisual() {
 
 export function AssistantVisual() {
   return (
-    <Frame label="Asistente interno" meta="Simulación">
-      <Bubble from="user">¿Cómo se imputa una factura de exterior?</Bubble>
-      <Bubble from="system">
-        Según el procedimiento interno, va a la cuenta 6.2.1 con retención.
-        Te dejo el paso a paso y el formulario.
-      </Bubble>
-      <Bubble from="user">Generame el asiento</Bubble>
-      <Bubble from="system">
-        Listo. Asiento borrador creado y asignado para revisión.
-      </Bubble>
-      <Progress value={100} caption="Conectado a documentación y procesos internos" />
-    </Frame>
+    <Window app="Asistente" nav={["Consultas", "Documentos", "Procesos", "Historial"]} active={0}>
+      <Card title="Consulta del equipo" action="En linea">
+        <div className="flex flex-col gap-2">
+          <div
+            className="ml-auto max-w-[80%] rounded-2xl rounded-br-md px-3 py-2 text-[0.7rem] leading-5"
+            style={{ background: "#5b5bd6", color: "#fff" }}
+          >
+            ¿Cómo se imputa una factura de exterior?
+          </div>
+          <div
+            className="max-w-[86%] rounded-2xl rounded-bl-md border px-3 py-2 text-[0.7rem] leading-5"
+            style={{ borderColor: LINE, background: "#fff", color: "#445063" }}
+          >
+            Va a la cuenta 6.2.1 con retención. Te dejo el paso a paso y el
+            formulario.
+          </div>
+          <div className="flex items-center gap-1.5">
+            <span
+              className="rounded-md px-1.5 py-[2px] text-[0.56rem] font-medium"
+              style={{ background: "#eef1f5", color: MUTE }}
+            >
+              Procedimiento interno.pdf
+            </span>
+            <span
+              className="rounded-md px-1.5 py-[2px] text-[0.56rem] font-medium"
+              style={{ background: "#eef1f5", color: MUTE }}
+            >
+              Plan de cuentas
+            </span>
+          </div>
+        </div>
+      </Card>
+
+      <div className="flex gap-2.5">
+        <Kpi label="Consultas hoy" value="37" delta="+12" />
+        <Kpi label="Respuesta media" value="4 s" />
+      </div>
+    </Window>
   )
 }
 
-/* ── 4. IA conectada a la base operativa ── */
+/* ── 4. IA conectada a la base operativa (oscuro) ── */
 
 export function DatabaseVisual() {
   return (
-    <Frame label="Consulta sobre la base" meta="Simulación">
-      <Bubble from="user">¿Qué propiedades quedaron sin visita esta semana?</Bubble>
-      <div className="rounded-xl border border-white/10 bg-white/[0.045] p-3">
-        <p className="text-[0.6rem] uppercase tracking-[0.16em] text-white/40">
-          Resultado
+    <Window
+      app="Base"
+      nav={["Consultas", "Tablas", "Automatizaciones", "Equipo"]}
+      active={0}
+      tone="dark"
+    >
+      <Card title="Consulta en lenguaje natural" action="SQL generado" dark>
+        <p className="text-[0.7rem] leading-5" style={{ color: "#c7cfdb" }}>
+          ¿Qué propiedades quedaron sin visita esta semana?
         </p>
-        <div className="mt-2 space-y-1.5">
-          {[
-            ["Pocitos - 2 amb.", "6 días"],
-            ["Carrasco - casa", "8 días"],
-            ["Centro - oficina", "11 días"],
-          ].map(([a, b]) => (
-            <div key={a} className="flex items-center justify-between gap-3">
-              <span className="truncate text-[0.8rem] text-white/72">{a}</span>
-              <span className="shrink-0 text-[0.76rem] tabular-nums text-[var(--brand)]">
-                {b}
-              </span>
-            </div>
-          ))}
+        <div className="mt-2 flex flex-col">
+          <Row dark left="Pocitos - 2 amb." right={<Pill text="6 días" tone="warn" />} />
+          <Row dark left="Carrasco - casa" right={<Pill text="8 días" tone="warn" />} />
+          <Row dark left="Centro - oficina" right={<Pill text="11 días" tone="warn" />} />
         </div>
+      </Card>
+
+      <div className="flex gap-2.5">
+        <Kpi dark label="Registros" value="48.210" />
+        <Kpi dark label="Tarea creada" value="Auto" delta="OK" />
       </div>
-      <Line left="Tarea creada para el equipo comercial" right="auto" state="ok" />
-      <Progress value={100} caption="Respuesta sobre datos reales, sin salir del flujo" />
-    </Frame>
+    </Window>
   )
 }
 
 /* ── 5. Dashboards de rendimiento ── */
 
 export function DashboardVisual() {
-  const bars = [52, 68, 44, 81, 73, 95, 62]
+  const bars = [
+    { h: 48, c: "#c7d2fe" },
+    { h: 66, c: "#a5b4fc" },
+    { h: 42, c: "#c7d2fe" },
+    { h: 80, c: "#818cf8" },
+    { h: 71, c: "#a5b4fc" },
+    { h: 95, c: "#5b5bd6" },
+    { h: 58, c: "#c7d2fe" },
+  ]
 
   return (
-    <Frame label="Panel de rendimiento" meta="Simulación">
-      <div className="grid grid-cols-2 gap-2.5">
-        <Stat label="Ingresos del mes" value="$ 1,24 M" />
-        <Stat label="Vs. mes anterior" value="+14%" tone="brand" />
+    <Window app="Rendimiento" nav={["Resumen", "Ventas", "Operación", "Reportes"]} active={0}>
+      <div className="flex gap-2.5">
+        <Kpi label="Ingresos del mes" value="$ 1,24 M" delta="+14%" />
+        <Kpi label="Ordenes" value="872" delta="+9%" />
+        <Kpi label="Margen" value="31%" delta="-2%" up={false} />
       </div>
-      <div className="rounded-xl border border-white/10 bg-white/[0.045] px-3.5 py-3">
-        <p className="text-[0.6rem] uppercase tracking-[0.16em] text-white/40">
-          Últimos 7 días
-        </p>
-        <div className="mt-3 flex h-[72px] items-end gap-1.5">
-          {bars.map((h, i) => (
-            <div
-              key={i}
-              className={[
-                "flex-1 rounded-t-[3px]",
-                i === bars.length - 2 ? "bg-[var(--brand)]" : "bg-white/18",
-              ].join(" ")}
-              style={{ height: `${h}%` }}
-            />
-          ))}
-        </div>
+
+      <div className="flex min-h-0 flex-1 gap-2.5">
+        <Card title="Ultimos 7 dias" action="Semana">
+          <Bars data={bars} />
+        </Card>
+
+        <Card title="Por area">
+          <div className="flex flex-col">
+            <Row left="Ventas" right={<span className="text-[0.66rem] font-semibold tabular-nums" style={{ color: INK }}>46%</span>} />
+            <Row left="Deposito" right={<span className="text-[0.66rem] font-semibold tabular-nums" style={{ color: INK }}>31%</span>} />
+            <Row left="Administración" right={<span className="text-[0.66rem] font-semibold tabular-nums" style={{ color: INK }}>23%</span>} />
+          </div>
+        </Card>
       </div>
-      <Progress value={100} caption="Reportes automáticos, sin cargar una planilla" />
-    </Frame>
+    </Window>
   )
 }
 
-/* ── 6. Reestructuracion de base de datos ── */
+/* ── 6. Reestructuracion de base de datos (oscuro) ── */
 
 export function DataVisual() {
   return (
-    <Frame label="Base reestructurada" meta="Simulación">
-      <div className="rounded-xl border border-white/10 bg-white/[0.045] px-3.5 py-3">
-        <p className="text-[0.6rem] uppercase tracking-[0.16em] text-white/40">
-          Antes
-        </p>
-        <div className="mt-2 flex flex-wrap gap-1.5">
-          {["planilla_v3", "planilla_final", "copia_2024", "archivo_roto"].map(
-            (t) => (
-              <span
-                key={t}
-                className="rounded-md border border-white/10 bg-white/[0.04] px-2 py-1 text-[0.68rem] text-white/45 line-through"
-              >
-                {t}
-              </span>
-            )
-          )}
+    <Window
+      app="Datos"
+      nav={["Origen", "Migración", "Modelo", "Reportes"]}
+      active={1}
+      tone="dark"
+    >
+      <Card title="Migración" action="Completa" dark>
+        <div className="flex flex-col">
+          <Row dark left="planilla_v3.xlsx" right={<Pill text="Migrado" tone="ok" />} />
+          <Row dark left="planilla_final.xlsx" right={<Pill text="Migrado" tone="ok" />} />
+          <Row dark left="copia_2024.xlsx" right={<Pill text="Duplicado" tone="idle" />} />
+          <Row dark left="archivo_roto.csv" right={<Pill text="Corregido" tone="warn" />} />
         </div>
+      </Card>
+
+      <div className="flex gap-2.5">
+        <Kpi dark label="Filas migradas" value="214.830" />
+        <Kpi dark label="Duplicados" value="0" delta="-3.1k" />
+        <Kpi dark label="Reportes" value="Auto" />
       </div>
-      <div className="rounded-xl border border-[rgba(99,226,143,0.28)] bg-[rgba(99,226,143,0.08)] px-3.5 py-3">
-        <p className="text-[0.6rem] uppercase tracking-[0.16em] text-[var(--brand)]">
-          Ahora
-        </p>
-        <div className="mt-2 space-y-1.5">
-          {[
-            ["producción", "trazable"],
-            ["stock", "unificado"],
-            ["reportes", "automáticos"],
-          ].map(([a, b]) => (
-            <div key={a} className="flex items-center justify-between gap-3">
-              <span className="text-[0.8rem] text-white/80">{a}</span>
-              <span className="text-[0.74rem] text-white/50">{b}</span>
-            </div>
-          ))}
-        </div>
-      </div>
-      <Progress value={100} caption="Una sola fuente de verdad para toda la operación" />
-    </Frame>
+    </Window>
   )
 }
 
 /* ── 7. Sistema de ventas centralizado (HIKE / Lunar Vintage) ── */
 
 export function SalesVisual() {
+  const channels: { name: string; pct: number; c: string }[] = [
+    { name: "Tienda online", pct: 48, c: "#5b5bd6" },
+    { name: "Instagram y WhatsApp", pct: 33, c: "#14b8a6" },
+    { name: "Local y mayorista", pct: 19, c: "#f59e0b" },
+  ]
+
   return (
-    <Frame label="Centro de ventas" meta="Simulación">
-      <div className="grid grid-cols-2 gap-2.5">
-        <Stat label="Ventas del mes" value="312" />
-        <Stat label="Ticket promedio" value="+9%" tone="brand" />
+    <Window app="Ventas" nav={["Resumen", "Pedidos", "Stock", "Clientes", "Canales"]} active={0}>
+      <div className="flex gap-2.5">
+        <Kpi label="Ventas del mes" value="312" delta="+18%" />
+        <Kpi label="Ticket promedio" value="$ 2.480" delta="+9%" />
+        <Kpi label="Sin despachar" value="7" />
       </div>
-      <div className="rounded-xl border border-white/10 bg-white/[0.045] px-3.5 py-3">
-        <p className="text-[0.6rem] uppercase tracking-[0.16em] text-white/40">
-          Canales conectados
-        </p>
-        <div className="mt-2.5 space-y-2">
-          {[
-            ["Tienda online", 48],
-            ["Instagram y WhatsApp", 33],
-            ["Local y mayorista", 19],
-          ].map(([name, pct]) => (
-            <div key={name as string}>
-              <div className="flex items-center justify-between gap-3">
-                <span className="truncate text-[0.78rem] text-white/72">
-                  {name}
-                </span>
-                <span className="shrink-0 text-[0.74rem] tabular-nums text-white/90">
-                  {pct}%
-                </span>
-              </div>
-              <div className="mt-1 h-1 w-full overflow-hidden rounded-full bg-white/10">
+
+      <div className="flex min-h-0 flex-1 gap-2.5">
+        <Card title="Canales conectados">
+          <div className="flex flex-col gap-2">
+            {channels.map((ch) => (
+              <div key={ch.name}>
+                <div className="flex items-center justify-between gap-2">
+                  <span className="truncate text-[0.66rem]" style={{ color: "#445063" }}>
+                    {ch.name}
+                  </span>
+                  <span
+                    className="shrink-0 text-[0.64rem] font-semibold tabular-nums"
+                    style={{ color: INK }}
+                  >
+                    {ch.pct}%
+                  </span>
+                </div>
                 <div
-                  className="h-full rounded-full bg-[var(--brand)]"
-                  style={{ width: `${pct}%` }}
-                />
+                  className="mt-1 h-[5px] w-full overflow-hidden rounded-full"
+                  style={{ background: "#eef1f5" }}
+                >
+                  <div
+                    className="h-full rounded-full"
+                    style={{ width: `${ch.pct}%`, background: ch.c }}
+                  />
+                </div>
               </div>
-            </div>
-          ))}
-        </div>
+            ))}
+          </div>
+        </Card>
+
+        <Card title="Stock" action="Sincronizado">
+          <div className="flex flex-col">
+            <Row left="Campera oversize" right={<Pill text="12" tone="ok" />} />
+            <Row left="Buzo cuello alto" right={<Pill text="3" tone="warn" />} />
+            <Row left="Pantalón cargo" right={<Pill text="27" tone="ok" />} />
+          </div>
+        </Card>
       </div>
-      <Line left="Stock sincronizado entre canales" right="ok" state="ok" />
-      <Progress value={100} caption="Toda la venta en un solo lugar, sin planillas paralelas" />
-    </Frame>
+    </Window>
   )
 }
