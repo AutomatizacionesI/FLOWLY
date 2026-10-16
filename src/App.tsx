@@ -200,13 +200,13 @@ const team = [
     name: "Facundo Etcheverry",
     role: "Sistemas y automatización",
     photo: "/equipo/facundo.jpeg",
-    linkedin: "https://www.linkedin.com/in/REEMPLAZAR",
+    linkedin: "https://www.linkedin.com/in/facundo-etcheverry-castells-87517531a/",
   },
   {
     name: "Gonzalo Pittaluga",
     role: "Datos y estrategia",
     photo: "/equipo/gonzalo.jpeg",
-    linkedin: "https://www.linkedin.com/in/REEMPLAZAR",
+    linkedin: "https://www.linkedin.com/in/gonzalopittaluga/",
   },
 ]
 
@@ -1453,7 +1453,7 @@ function App() {
 
               <div className="flex flex-1 items-center justify-start gap-4 sm:justify-end">
                 <a
-                  href="https://www.linkedin.com/company/REEMPLAZAR"
+                  href="https://www.linkedin.com/company/spike-automations/"
                   target="_blank"
                   rel="noreferrer"
                   aria-label="LinkedIn"
@@ -1464,7 +1464,7 @@ function App() {
                   </svg>
                 </a>
                 <a
-                  href="https://www.instagram.com/REEMPLAZAR"
+                  href="https://www.instagram.com/somos.spike/"
                   target="_blank"
                   rel="noreferrer"
                   aria-label="Instagram"
