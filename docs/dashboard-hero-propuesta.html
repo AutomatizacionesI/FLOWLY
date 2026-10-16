@@ -1,0 +1,410 @@
+<title>Dashboard Hero Spike</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&display=swap">
+<style>
+/* Layout: el dashboard a tamaño grande para juzgar el detalle, y abajo al tamaño real del hero */
+:root{
+  color-scheme: light;
+  --page:#fbfcfd; --ink:#131a26; --body:#4a5568; --mute:#98a1ae; --faint:#b9c0ca;
+  --line:#edf0f4; --card:#ffffff; --canvas:#f7f8fa;
+  --indigo:#5b5bd6; --indigo-soft:#ececfb;
+  --teal:#14b8a6; --amber:#f59e0b; --rose:#f43f5e; --green:#22c55e;
+  --sans:"Geist", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--page);color:var(--ink);font-family:var(--sans);line-height:1.5;-webkit-font-smoothing:antialiased}
+.wrap{max-width:1140px;margin:0 auto;padding-inline:20px;padding-block:0}
+h1,h2,h3{margin:0;text-wrap:balance}
+p{margin:0}
+
+.lead{padding-block:40px 6px}
+.lead h1{font-size:clamp(1.8rem,4vw,2.6rem);font-weight:300;letter-spacing:-.05em;line-height:1.06}
+.lead p{margin-top:12px;max-width:62ch;color:var(--body);font-size:.94rem}
+.sec{margin-block:34px}
+.sec .cap{display:flex;flex-wrap:wrap;align-items:baseline;gap:8px 12px;margin-bottom:16px}
+.sec .cap h2{font-size:1.05rem;font-weight:600;letter-spacing:-.03em}
+.sec .cap span{font-size:.84rem;color:var(--mute)}
+
+/* ── marco macbook ── */
+.mb{width:100%;max-width:1000px;margin-inline:auto;user-select:none}
+.mb .lid{position:relative;border-radius:20px;padding:9px;
+  background:linear-gradient(160deg,#3a3d42 0%,#1d1d1f 38%,#0f1011 100%);
+  box-shadow:0 50px 90px -46px rgba(15,23,42,.5), inset 0 2px 0 rgba(255,255,255,.13)}
+.mb .screen{position:relative;aspect-ratio:16/10.4;overflow:hidden;border-radius:12px;background:var(--canvas);box-shadow:inset 0 0 0 1px rgba(0,0,0,.5)}
+.mb .notch{position:absolute;left:50%;top:0;z-index:20;height:16px;width:120px;transform:translateX(-50%);border-radius:0 0 8px 8px;background:#0f1011}
+.mb .base{position:relative;margin-inline:auto;width:108%;transform:translateX(-3.7%);margin-top:-1px}
+.mb .base .b1{height:13px;border-radius:0 0 10px 10px;background:linear-gradient(180deg,#d4d8dd 0%,#aeb4bb 55%,#878d95 100%)}
+.mb .base .notchb{position:absolute;left:50%;top:0;height:6px;width:96px;transform:translateX(-50%);border-radius:0 0 6px 6px;background:linear-gradient(180deg,#9aa0a8,#b7bcc3)}
+.mb .base .b2{margin-inline:auto;height:4px;width:60%;border-radius:0 0 7px 7px;background:linear-gradient(180deg,#8d939b,#6f757c)}
+.mb.small{max-width:460px}
+.mb.small .lid{border-radius:14px;padding:6px}
+.mb.small .screen{border-radius:9px}
+.mb.small .notch{height:9px;width:68px;border-radius:0 0 5px 5px}
+.mb.small .base .b1{height:8px}
+.mb.small .base .notchb{height:4px;width:54px}
+
+/* ── dashboard ── */
+.dash{display:flex;height:100%;width:100%;background:var(--canvas);container-type:inline-size}
+.side{display:flex;width:17%;min-width:0;flex-direction:column;background:var(--card);border-right:1px solid var(--line);padding:2.2% 1.8%}
+.brand{display:flex;align-items:center;gap:5%;margin-bottom:9%}
+.brand i{display:block;width:1.35em;height:1.35em;border-radius:.4em;background:var(--ink);flex:none}
+.brand b{font-size:min(1.45cqw,15px);font-weight:600;letter-spacing:-.02em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.grp{font-size:min(1cqw,10px);letter-spacing:.14em;text-transform:uppercase;color:var(--faint);margin:7% 0 3% 4%}
+.nav{display:flex;flex-direction:column;gap:2px}
+.nav a{display:flex;align-items:center;gap:6%;border-radius:.45em;padding:4% 7%;font-size:min(1.25cqw,13px);color:var(--mute);text-decoration:none;white-space:nowrap;overflow:hidden}
+.nav a i{width:.75em;height:.75em;border-radius:.2em;background:currentColor;opacity:.42;flex:none}
+.nav a.on{background:#f1f3f7;color:var(--ink);font-weight:500}
+.nav a.on i{background:var(--indigo);opacity:1}
+.side .foot{margin-top:auto;display:flex;align-items:center;gap:6%;border-top:1px solid var(--line);padding-top:7%}
+.side .foot .av{width:1.6em;height:1.6em;border-radius:50%;background:linear-gradient(140deg,#c7d2fe,#5b5bd6);flex:none}
+.side .foot div{min-width:0}
+.side .foot b{display:block;font-size:min(1.2cqw,12px);font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.side .foot span{display:block;font-size:min(1cqw,10px);color:var(--mute)}
+
+.main{display:flex;min-width:0;flex:1;flex-direction:column;gap:1.6%;padding:2.4% 2.2%;padding-top:3.2%}
+.top{display:flex;align-items:center;gap:2%}
+.top h3{font-size:min(2.1cqw,22px);font-weight:600;letter-spacing:-.035em}
+.top .sub{font-size:min(1.1cqw,11px);color:var(--mute);margin-top:1px}
+.top .sp{flex:1}
+.search{display:flex;align-items:center;gap:5px;border:1px solid var(--line);background:var(--card);border-radius:99px;padding:.45em 1em;font-size:min(1.15cqw,12px);color:var(--mute)}
+.ico{width:1.9em;height:1.9em;border-radius:50%;border:1px solid var(--line);background:var(--card);display:grid;place-items:center;font-size:min(1.1cqw,11px);color:var(--mute)}
+.avat{width:2em;height:2em;border-radius:50%;background:linear-gradient(140deg,#c7d2fe,#5b5bd6)}
+
+.kpis{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:1.6%}
+.kpi{border:1px solid var(--line);background:var(--card);border-radius:.7em;padding:3.4% 4%;min-width:0}
+.kpi .l{font-size:min(1.05cqw,11px);color:var(--mute);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.kpi .v{display:flex;align-items:baseline;gap:5px;margin-top:3px}
+.kpi .v b{font-size:min(2cqw,21px);font-weight:600;letter-spacing:-.04em;line-height:1;font-variant-numeric:tabular-nums}
+.chip{border-radius:99px;padding:1px 6px;font-size:min(.95cqw,10px);font-weight:600}
+.chip.up{color:#15803d;background:#dcfce7}
+.chip.dn{color:#be123c;background:#ffe4e6}
+.kpi svg{display:block;width:100%;height:1.9em;margin-top:5px}
+
+.mid{display:grid;grid-template-columns:minmax(0,2.1fr) minmax(0,1fr);gap:1.6%;flex:1;min-height:0}
+.panel{border:1px solid var(--line);background:var(--card);border-radius:.7em;padding:3% 3.4%;display:flex;flex-direction:column;min-width:0;min-height:0}
+.panel .ph{display:flex;align-items:center;gap:8px}
+.panel .ph b{font-size:min(1.35cqw,14px);font-weight:600;letter-spacing:-.02em}
+.panel .ph .sp{flex:1}
+.leg{display:flex;align-items:center;gap:4px;font-size:min(1cqw,10px);color:var(--mute)}
+.leg i{width:.55em;height:.55em;border-radius:50%;display:block}
+.tag{border:1px solid var(--line);border-radius:.4em;padding:1px 6px;font-size:min(.95cqw,10px);color:var(--mute)}
+.chartwrap{position:relative;flex:1;min-height:0;margin-top:6px}
+.chartwrap svg{display:block;width:100%;height:100%}
+.xaxis{display:flex;justify-content:space-between;margin-top:4px;font-size:min(.95cqw,10px);color:var(--faint)}
+.tip{position:absolute;left:71%;top:14%;transform:translateX(-50%);background:var(--ink);color:#fff;border-radius:.4em;padding:3px 7px;font-size:min(1cqw,10px);font-weight:500;white-space:nowrap}
+.tip::after{content:"";position:absolute;left:50%;bottom:-3px;width:6px;height:6px;background:var(--ink);transform:translateX(-50%) rotate(45deg)}
+.dot{position:absolute;left:71%;top:30%;width:.6em;height:.6em;border-radius:50%;background:var(--indigo);box-shadow:0 0 0 3px #fff;transform:translate(-50%,-50%)}
+
+.donut{display:grid;place-items:center;flex:1;min-height:0;margin-top:4px}
+.donut .ring{position:relative;width:min(9cqw,96px);aspect-ratio:1;border-radius:50%;
+  background:conic-gradient(var(--indigo) 0 48%, var(--teal) 48% 81%, var(--amber) 81% 100%)}
+.donut .ring span{position:absolute;inset:26%;border-radius:50%;background:var(--card);display:grid;place-items:center;font-size:min(1.3cqw,13px);font-weight:600;letter-spacing:-.03em}
+.legs{display:flex;flex-direction:column;gap:3px;margin-top:7px;width:100%}
+.legs div{display:flex;align-items:center;gap:5px;font-size:min(1cqw,10px);color:var(--body)}
+.legs i{width:.55em;height:.55em;border-radius:50%;flex:none}
+.legs b{margin-left:auto;font-variant-numeric:tabular-nums;color:var(--ink)}
+
+.tbl{border:1px solid var(--line);background:var(--card);border-radius:.7em;padding:2.6% 3%;min-width:0}
+.tbl .ph{display:flex;align-items:center;gap:8px;margin-bottom:5px}
+.tbl .ph b{font-size:min(1.3cqw,14px);font-weight:600;letter-spacing:-.02em}
+.tbl .ph .sp{flex:1}
+.tbl table{width:100%;border-collapse:collapse}
+.tbl th{text-align:left;font-size:min(.95cqw,10px);font-weight:500;color:var(--faint);padding:3px 0;border-bottom:1px solid var(--line)}
+.tbl td{font-size:min(1.1cqw,11px);color:var(--body);padding:4px 0;border-bottom:1px solid var(--line)}
+.tbl tr:last-child td{border-bottom:0}
+.tbl td.b{color:var(--ink);font-weight:500}
+.tbl td.n{text-align:right;font-variant-numeric:tabular-nums;color:var(--ink);font-weight:600}
+.st{border-radius:99px;padding:1px 7px;font-size:min(.95cqw,10px);font-weight:600}
+.st.ok{color:#15803d;background:#dcfce7}
+.st.pe{color:#b45309;background:#fef3c7}
+.st.nu{color:#4338ca;background:var(--indigo-soft)}
+.bd{display:inline-block;width:.8em;height:.8em;border-radius:.25em;margin-right:5px;vertical-align:-1px}
+
+.note{margin-top:18px;border:1px dashed var(--line);border-radius:14px;background:var(--card);padding:16px 18px;font-size:.88rem;color:var(--body);line-height:1.6}
+.note b{color:var(--ink)}
+.end{margin-block:40px 70px}
+</style>
+
+<div class="wrap">
+  <section class="lead">
+    <h1>Dashboard del hero</h1>
+    <p>Mucho más completo: barra lateral con navegación agrupada, buscador, cuatro métricas con su tendencia, gráfico de facturación, reparto por canal y tabla de últimos pedidos. Primero en grande para que veas el detalle, y abajo al tamaño real que va a tener en la web.</p>
+  </section>
+
+  <section class="sec">
+    <div class="cap"><h2>En grande</h2><span>para juzgar el detalle</span></div>
+
+    <div class="mb">
+      <div class="lid">
+        <div class="screen">
+          <div class="notch"></div>
+
+          <div class="dash">
+            <!-- sidebar -->
+            <aside class="side">
+              <div class="brand"><i></i><b>Operación</b></div>
+
+              <div class="grp">General</div>
+              <nav class="nav">
+                <a class="on" href="#"><i></i>Resumen</a>
+                <a href="#"><i></i>Pedidos</a>
+                <a href="#"><i></i>Clientes</a>
+              </nav>
+
+              <div class="grp">Operación</div>
+              <nav class="nav">
+                <a href="#"><i></i>Stock</a>
+                <a href="#"><i></i>Automatizaciones</a>
+                <a href="#"><i></i>Proveedores</a>
+              </nav>
+
+              <div class="grp">Análisis</div>
+              <nav class="nav">
+                <a href="#"><i></i>Reportes</a>
+              </nav>
+
+              <div class="foot">
+                <span class="av"></span>
+                <div><b>Martina R.</b><span>Administración</span></div>
+              </div>
+            </aside>
+
+            <!-- main -->
+            <div class="main">
+              <div class="top">
+                <div>
+                  <h3>Resumen de operación</h3>
+                  <p class="sub">Jueves 16 de octubre · actualizado hace 2 minutos</p>
+                </div>
+                <span class="sp"></span>
+                <span class="search">Buscar pedido, cliente…</span>
+                <span class="ico">◷</span>
+                <span class="avat"></span>
+              </div>
+
+              <div class="kpis">
+                <div class="kpi">
+                  <p class="l">Facturación del mes</p>
+                  <p class="v"><b>$ 1,24 M</b><span class="chip up">+14%</span></p>
+                  <svg viewBox="0 0 60 18" preserveAspectRatio="none"><polyline points="0,14 10,11 20,12 30,7 40,9 50,4 60,2" fill="none" stroke="#5b5bd6" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </div>
+                <div class="kpi">
+                  <p class="l">Pedidos</p>
+                  <p class="v"><b>872</b><span class="chip up">+9%</span></p>
+                  <svg viewBox="0 0 60 18" preserveAspectRatio="none"><polyline points="0,12 10,13 20,8 30,10 40,6 50,7 60,3" fill="none" stroke="#14b8a6" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </div>
+                <div class="kpi">
+                  <p class="l">Ticket promedio</p>
+                  <p class="v"><b>$ 2.480</b><span class="chip dn">-2%</span></p>
+                  <svg viewBox="0 0 60 18" preserveAspectRatio="none"><polyline points="0,6 10,8 20,7 30,10 40,9 50,12 60,11" fill="none" stroke="#f59e0b" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </div>
+                <div class="kpi">
+                  <p class="l">Horas ahorradas</p>
+                  <p class="v"><b>146</b><span class="chip up">+22%</span></p>
+                  <svg viewBox="0 0 60 18" preserveAspectRatio="none"><polyline points="0,15 10,13 20,12 30,8 40,7 50,5 60,2" fill="none" stroke="#22c55e" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </div>
+              </div>
+
+              <div class="mid">
+                <div class="panel">
+                  <div class="ph">
+                    <b>Facturación</b>
+                    <span class="sp"></span>
+                    <span class="leg"><i style="background:#5b5bd6"></i>2026</span>
+                    <span class="leg"><i style="background:#dfe3e9"></i>2025</span>
+                    <span class="tag">12 meses</span>
+                  </div>
+                  <div class="chartwrap">
+                    <svg viewBox="0 0 240 86" preserveAspectRatio="none">
+                      <defs>
+                        <linearGradient id="g1" x1="0" y1="0" x2="0" y2="1">
+                          <stop offset="0%" stop-color="#5b5bd6" stop-opacity=".24"/>
+                          <stop offset="100%" stop-color="#5b5bd6" stop-opacity="0"/>
+                        </linearGradient>
+                      </defs>
+                      <line x1="0" y1="21" x2="240" y2="21" stroke="#f2f4f7"/>
+                      <line x1="0" y1="43" x2="240" y2="43" stroke="#f2f4f7"/>
+                      <line x1="0" y1="65" x2="240" y2="65" stroke="#f2f4f7"/>
+                      <polyline points="0,70 24,66 48,69 72,60 96,63 120,54 144,58 168,47 192,50 216,42 240,38" fill="none" stroke="#dfe3e9" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                      <polygon points="0,62 24,54 48,58 72,40 96,46 120,30 144,36 168,22 192,28 216,14 240,8 240,86 0,86" fill="url(#g1)"/>
+                      <polyline points="0,62 24,54 48,58 72,40 96,46 120,30 144,36 168,22 192,28 216,14 240,8" fill="none" stroke="#5b5bd6" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                    <span class="tip">Setiembre · $ 1,18 M</span>
+                    <span class="dot"></span>
+                  </div>
+                  <div class="xaxis"><span>Nov</span><span>Ene</span><span>Mar</span><span>May</span><span>Jul</span><span>Set</span></div>
+                </div>
+
+                <div class="panel">
+                  <div class="ph"><b>Por canal</b><span class="sp"></span><span class="tag">Mes</span></div>
+                  <div class="donut">
+                    <div class="ring"><span>872</span></div>
+                  </div>
+                  <div class="legs">
+                    <div><i style="background:#5b5bd6"></i>Tienda online<b>48%</b></div>
+                    <div><i style="background:#14b8a6"></i>Instagram y WhatsApp<b>33%</b></div>
+                    <div><i style="background:#f59e0b"></i>Local y mayorista<b>19%</b></div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="tbl">
+                <div class="ph"><b>Últimos pedidos</b><span class="sp"></span><span class="tag">Ver todos</span></div>
+                <table>
+                  <thead>
+                    <tr><th>Pedido</th><th>Cliente</th><th>Canal</th><th>Estado</th><th style="text-align:right">Monto</th></tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td class="b">#2841</td><td>Lucía Fernández</td><td>Instagram</td>
+                      <td><span class="st ok">Pago</span></td><td class="n">$ 3.120</td>
+                    </tr>
+                    <tr>
+                      <td class="b">#2840</td><td>Martín Suárez</td><td>Tienda online</td>
+                      <td><span class="st ok">Pago</span></td><td class="n">$ 1.890</td>
+                    </tr>
+                    <tr>
+                      <td class="b">#2839</td><td>Carolina Díaz</td><td>WhatsApp</td>
+                      <td><span class="st pe">Pendiente</span></td><td class="n">$ 2.450</td>
+                    </tr>
+                    <tr>
+                      <td class="b">#2838</td><td>Rodrigo Peña</td><td>Mayorista</td>
+                      <td><span class="st nu">Preparando</span></td><td class="n">$ 7.640</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="base"><div class="b1"></div><div class="notchb"></div><div class="b2"></div></div>
+    </div>
+  </section>
+
+  <section class="sec">
+    <div class="cap"><h2>Al tamaño real</h2><span>como se va a ver en el hero, 460px</span></div>
+
+    <div class="mb small">
+      <div class="lid">
+        <div class="screen">
+          <div class="notch"></div>
+          <div class="dash">
+            <aside class="side">
+              <div class="brand"><i></i><b>Operación</b></div>
+              <div class="grp">General</div>
+              <nav class="nav">
+                <a class="on" href="#"><i></i>Resumen</a>
+                <a href="#"><i></i>Pedidos</a>
+                <a href="#"><i></i>Clientes</a>
+              </nav>
+              <div class="grp">Operación</div>
+              <nav class="nav">
+                <a href="#"><i></i>Stock</a>
+                <a href="#"><i></i>Automatizaciones</a>
+                <a href="#"><i></i>Proveedores</a>
+              </nav>
+              <div class="grp">Análisis</div>
+              <nav class="nav"><a href="#"><i></i>Reportes</a></nav>
+              <div class="foot">
+                <span class="av"></span>
+                <div><b>Martina R.</b><span>Administración</span></div>
+              </div>
+            </aside>
+
+            <div class="main">
+              <div class="top">
+                <div>
+                  <h3>Resumen de operación</h3>
+                  <p class="sub">Jueves 16 de octubre · hace 2 minutos</p>
+                </div>
+                <span class="sp"></span>
+                <span class="search">Buscar…</span>
+                <span class="avat"></span>
+              </div>
+
+              <div class="kpis">
+                <div class="kpi">
+                  <p class="l">Facturación</p>
+                  <p class="v"><b>$ 1,24 M</b><span class="chip up">+14%</span></p>
+                  <svg viewBox="0 0 60 18" preserveAspectRatio="none"><polyline points="0,14 10,11 20,12 30,7 40,9 50,4 60,2" fill="none" stroke="#5b5bd6" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </div>
+                <div class="kpi">
+                  <p class="l">Pedidos</p>
+                  <p class="v"><b>872</b><span class="chip up">+9%</span></p>
+                  <svg viewBox="0 0 60 18" preserveAspectRatio="none"><polyline points="0,12 10,13 20,8 30,10 40,6 50,7 60,3" fill="none" stroke="#14b8a6" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </div>
+                <div class="kpi">
+                  <p class="l">Ticket</p>
+                  <p class="v"><b>$ 2.480</b><span class="chip dn">-2%</span></p>
+                  <svg viewBox="0 0 60 18" preserveAspectRatio="none"><polyline points="0,6 10,8 20,7 30,10 40,9 50,12 60,11" fill="none" stroke="#f59e0b" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </div>
+                <div class="kpi">
+                  <p class="l">Horas</p>
+                  <p class="v"><b>146</b><span class="chip up">+22%</span></p>
+                  <svg viewBox="0 0 60 18" preserveAspectRatio="none"><polyline points="0,15 10,13 20,12 30,8 40,7 50,5 60,2" fill="none" stroke="#22c55e" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </div>
+              </div>
+
+              <div class="mid">
+                <div class="panel">
+                  <div class="ph"><b>Facturación</b><span class="sp"></span><span class="leg"><i style="background:#5b5bd6"></i>2026</span></div>
+                  <div class="chartwrap">
+                    <svg viewBox="0 0 240 86" preserveAspectRatio="none">
+                      <defs>
+                        <linearGradient id="g2" x1="0" y1="0" x2="0" y2="1">
+                          <stop offset="0%" stop-color="#5b5bd6" stop-opacity=".24"/>
+                          <stop offset="100%" stop-color="#5b5bd6" stop-opacity="0"/>
+                        </linearGradient>
+                      </defs>
+                      <line x1="0" y1="21" x2="240" y2="21" stroke="#f2f4f7"/>
+                      <line x1="0" y1="43" x2="240" y2="43" stroke="#f2f4f7"/>
+                      <line x1="0" y1="65" x2="240" y2="65" stroke="#f2f4f7"/>
+                      <polyline points="0,70 24,66 48,69 72,60 96,63 120,54 144,58 168,47 192,50 216,42 240,38" fill="none" stroke="#dfe3e9" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                      <polygon points="0,62 24,54 48,58 72,40 96,46 120,30 144,36 168,22 192,28 216,14 240,8 240,86 0,86" fill="url(#g2)"/>
+                      <polyline points="0,62 24,54 48,58 72,40 96,46 120,30 144,36 168,22 192,28 216,14 240,8" fill="none" stroke="#5b5bd6" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                    <span class="tip">Set · $ 1,18 M</span>
+                    <span class="dot"></span>
+                  </div>
+                  <div class="xaxis"><span>Nov</span><span>Mar</span><span>Jul</span><span>Set</span></div>
+                </div>
+
+                <div class="panel">
+                  <div class="ph"><b>Por canal</b></div>
+                  <div class="donut"><div class="ring"><span>872</span></div></div>
+                  <div class="legs">
+                    <div><i style="background:#5b5bd6"></i>Online<b>48%</b></div>
+                    <div><i style="background:#14b8a6"></i>Redes<b>33%</b></div>
+                    <div><i style="background:#f59e0b"></i>Local<b>19%</b></div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="tbl">
+                <div class="ph"><b>Últimos pedidos</b><span class="sp"></span><span class="tag">Ver todos</span></div>
+                <table>
+                  <tbody>
+                    <tr><td class="b">#2841</td><td>Lucía Fernández</td><td><span class="st ok">Pago</span></td><td class="n">$ 3.120</td></tr>
+                    <tr><td class="b">#2840</td><td>Martín Suárez</td><td><span class="st ok">Pago</span></td><td class="n">$ 1.890</td></tr>
+                    <tr><td class="b">#2839</td><td>Carolina Díaz</td><td><span class="st pe">Pendiente</span></td><td class="n">$ 2.450</td></tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="base"><div class="b1"></div><div class="notchb"></div><div class="b2"></div></div>
+    </div>
+
+    <div class="note">
+      <b>Qué cambia respecto del que está puesto hoy.</b> Entra barra lateral con navegación agrupada y usuario al pie, buscador y avatar arriba, cuatro métricas con su tendencia en vez de dos, el gráfico suma la comparación contra el año anterior en gris, y aparecen el reparto por canal y la tabla de últimos pedidos. En la web además se anima: los números cuentan, el trazo se dibuja y las filas entran escalonadas.
+      <br><br>
+      <b>Lo que falta definir:</b> si en la tabla preferís nombres de personas como está ahora, o nombres de empresa. Para el caso de HIKE y Lunar Vintage podemos poner esas marcas directamente.
+    </div>
+  </section>
+
+  <div class="end"></div>
+</div>

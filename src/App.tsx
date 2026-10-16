@@ -1039,7 +1039,7 @@ function App() {
           </div>
         </header>
 
-        <section className="relative mx-auto flex max-w-7xl items-start pt-24 pb-12 sm:pt-28 sm:pb-16 lg:pt-32 lg:pb-20">
+        <section className="relative mx-auto flex max-w-7xl items-center pt-24 pb-12 sm:pt-28 sm:pb-16 lg:min-h-[calc(100vh-5.5rem)] lg:pb-16 lg:pt-24">
           <div className="grid w-full gap-7 sm:gap-10 lg:grid-cols-[minmax(0,0.92fr)_minmax(340px,0.88fr)] lg:items-center lg:gap-16">
             <BlurFade inView delay={0.05}>
               <div>
@@ -1059,7 +1059,7 @@ function App() {
             <div className="lg:pl-4">
               <div className="flex max-w-xl flex-col">
                 <BlurFade inView delay={0.12} className="order-last lg:order-none">
-                  <div className="mx-auto mt-12 w-full max-w-[420px] sm:mt-14 lg:mx-0 lg:mb-8 lg:ml-auto lg:mt-0 lg:max-w-[460px]">
+                  <div className="mx-auto mt-12 w-full max-w-[420px] sm:mt-14 lg:mb-8 lg:mt-0 lg:max-w-[460px]">
                     <HeroMacbook />
                   </div>
                 </BlurFade>
