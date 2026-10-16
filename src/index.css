@@ -251,3 +251,77 @@ summary::-webkit-details-marker {
 .cv-rows > *:nth-child(3) { animation-delay: 300ms; }
 .cv-rows > *:nth-child(4) { animation-delay: 410ms; }
 .cv-rows > *:nth-child(5) { animation-delay: 520ms; }
+
+/* Animaciones especificas por tipo de visual */
+
+@keyframes cv-draw {
+  from { stroke-dashoffset: 1000; }
+  to   { stroke-dashoffset: 0; }
+}
+
+@keyframes cv-travel {
+  0%        { transform: translateX(0); opacity: 0; }
+  10%, 90%  { opacity: 1; }
+  100%      { transform: translateX(34px); opacity: 0; }
+}
+
+@keyframes cv-sweep {
+  0%, 100% { transform: translateX(0); }
+  50%      { transform: translateX(14px); }
+}
+
+@keyframes cv-type {
+  from { width: 0; }
+  to   { width: 100%; }
+}
+
+@keyframes cv-feed {
+  0%       { transform: translateY(-8px); opacity: 0; }
+  12%, 88% { transform: translateY(0); opacity: 1; }
+  100%     { transform: translateY(0); opacity: 1; }
+}
+
+@keyframes cv-link {
+  0%, 100% { opacity: 0.25; }
+  50%      { opacity: 1; }
+}
+
+.cv-draw {
+  stroke-dasharray: 1000;
+  animation: cv-draw 2.1s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.cv-travel {
+  animation: cv-travel 3.4s linear infinite;
+}
+
+.cv-sweep {
+  animation: cv-sweep 4.5s ease-in-out infinite;
+}
+
+.cv-type {
+  overflow: hidden;
+  white-space: nowrap;
+  animation: cv-type 1.6s steps(32, end) both;
+}
+
+.cv-feed {
+  animation: cv-feed 4s ease-out both;
+}
+
+.cv-link {
+  animation: cv-link 2.6s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cv-draw,
+  .cv-travel,
+  .cv-sweep,
+  .cv-type,
+  .cv-feed,
+  .cv-link {
+    animation: none;
+  }
+  .cv-draw { stroke-dasharray: none; }
+  .cv-type { width: 100%; }
+}

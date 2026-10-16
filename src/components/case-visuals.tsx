@@ -2,6 +2,8 @@
    Case visuals — simulaciones de los sistemas que construimos.
    Paleta propia, deliberadamente distinta a la de la landing: estos
    paneles tienen que leerse como producto, no como una seccion mas.
+   Cada caso tiene su propia estructura dominante (calendario, cruce,
+   chat, consola, grafico, pipeline, feed) para que no se vean iguales.
    No son capturas: son mockups fieles, sin datos de clientes.
    ───────────────────────────────────────────── */
 
@@ -9,10 +11,18 @@ import type { ReactNode } from "react"
 
 const INK = "#1c2434"
 const MUTE = "#8a93a4"
+const BODY = "#445063"
 const LINE = "#e9ecf1"
 const CANVAS = "#f6f7f9"
+const D_LINE = "#232a36"
+const D_CARD = "#1b2230"
 
-/* ── chrome compartido: ventana con sidebar ── */
+const INDIGO = "#5b5bd6"
+const TEAL = "#14b8a6"
+const AMBER = "#f59e0b"
+const GREEN = "#22c55e"
+
+/* ── chrome compartido ── */
 
 function Window({
   app,
@@ -33,22 +43,21 @@ function Window({
     <div
       className="flex h-full min-h-[270px] overflow-hidden rounded-[1.25rem] border"
       style={{
-        borderColor: dark ? "#232a36" : LINE,
+        borderColor: dark ? D_LINE : LINE,
         background: dark ? "#141922" : CANVAS,
       }}
     >
-      {/* sidebar */}
       <aside
         className="hidden w-[132px] shrink-0 flex-col gap-1 border-r p-3 sm:flex"
         style={{
-          borderColor: dark ? "#232a36" : LINE,
+          borderColor: dark ? D_LINE : LINE,
           background: dark ? "#10151d" : "#fff",
         }}
       >
         <div className="mb-3 flex items-center gap-2 px-1">
           <span
             className="cv-live size-[18px] rounded-md"
-            style={{ background: dark ? "#22c55e" : INK }}
+            style={{ background: dark ? GREEN : INK }}
           />
           <span
             className="text-[0.7rem] font-semibold tracking-[-0.01em]"
@@ -65,7 +74,7 @@ function Window({
             style={
               i === active
                 ? {
-                    background: dark ? "#1b2230" : "#f1f3f7",
+                    background: dark ? D_CARD : "#f1f3f7",
                     color: dark ? "#e8ecf3" : INK,
                   }
                 : { color: MUTE }
@@ -76,56 +85,8 @@ function Window({
         ))}
       </aside>
 
-      {/* contenido */}
       <div className="flex min-w-0 flex-1 flex-col gap-3 p-3.5 sm:p-4">
         {children}
-      </div>
-    </div>
-  )
-}
-
-function Kpi({
-  label,
-  value,
-  delta,
-  up = true,
-  dark = false,
-}: {
-  label: string
-  value: string
-  delta?: string
-  up?: boolean
-  dark?: boolean
-}) {
-  return (
-    <div
-      className="min-w-0 flex-1 rounded-xl border px-3 py-2.5"
-      style={{
-        borderColor: dark ? "#232a36" : LINE,
-        background: dark ? "#1b2230" : "#fff",
-      }}
-    >
-      <p className="truncate text-[0.6rem] font-medium" style={{ color: MUTE }}>
-        {label}
-      </p>
-      <div className="mt-1 flex items-baseline gap-1.5">
-        <span
-          className="cv-value text-[1.15rem] font-semibold leading-none tracking-[-0.035em] tabular-nums"
-          style={{ color: dark ? "#f2f5f9" : INK }}
-        >
-          {value}
-        </span>
-        {delta ? (
-          <span
-            className="rounded-full px-1.5 py-[1px] text-[0.58rem] font-semibold"
-            style={{
-              color: up ? "#15803d" : "#be123c",
-              background: up ? "#dcfce7" : "#ffe4e6",
-            }}
-          >
-            {delta}
-          </span>
-        ) : null}
       </div>
     </div>
   )
@@ -146,8 +107,8 @@ function Card({
     <div
       className="flex min-h-0 flex-1 flex-col rounded-xl border px-3 py-2.5"
       style={{
-        borderColor: dark ? "#232a36" : LINE,
-        background: dark ? "#1b2230" : "#fff",
+        borderColor: dark ? D_LINE : LINE,
+        background: dark ? D_CARD : "#fff",
       }}
     >
       <div className="flex items-center justify-between gap-2">
@@ -190,341 +151,558 @@ function Pill({ text, tone }: { text: string; tone: "ok" | "warn" | "idle" }) {
 
 function Row({
   left,
-  mid,
   right,
   dark = false,
-  delay = 0,
 }: {
   left: string
-  mid?: ReactNode
   right: ReactNode
   dark?: boolean
-  delay?: number
 }) {
   return (
     <div
       className="cv-row flex items-center justify-between gap-3 border-t py-[7px] first:border-t-0"
-      style={{
-        borderColor: dark ? "#232a36" : "#f1f3f7",
-        animationDelay: `${delay}ms`,
-      }}
+      style={{ borderColor: dark ? D_LINE : "#f1f3f7" }}
     >
       <span
         className="min-w-0 flex-1 truncate text-[0.68rem]"
-        style={{ color: dark ? "#c7cfdb" : "#445063" }}
+        style={{ color: dark ? "#c7cfdb" : BODY }}
       >
         {left}
       </span>
-      {mid}
       {right}
     </div>
   )
 }
 
-function Bars({ data }: { data: { h: number; c: string }[] }) {
+function Metric({
+  label,
+  value,
+  color = INK,
+}: {
+  label: string
+  value: string
+  color?: string
+}) {
   return (
-    <div className="flex h-full min-h-[58px] items-end gap-[5px]">
-      {data.map((b, i) => (
-        <div key={i} className="flex min-w-0 flex-1 flex-col justify-end gap-[3px]">
-          <div
-            className="cv-bar w-full rounded-[3px]"
-            style={{
-              height: `${b.h}%`,
-              background: b.c,
-              animationDelay: `${i * 90}ms`,
-            }}
-          />
-        </div>
-      ))}
+    <div>
+      <p className="text-[0.58rem] font-medium" style={{ color: MUTE }}>
+        {label}
+      </p>
+      <p
+        className="cv-value mt-0.5 text-[1.3rem] font-semibold leading-none tracking-[-0.04em] tabular-nums"
+        style={{ color }}
+      >
+        {value}
+      </p>
     </div>
   )
 }
 
-function Donut({ pct, color }: { pct: number; color: string }) {
-  return (
-    <div
-      className="relative size-[62px] shrink-0 rounded-full"
-      style={{
-        background: `conic-gradient(${color} ${pct * 3.6}deg, #eef1f5 0deg)`,
-      }}
-    >
-      <div className="absolute inset-[9px] grid place-items-center rounded-full bg-white">
-        <span
-          className="text-[0.66rem] font-semibold tabular-nums"
-          style={{ color: INK }}
-        >
-          {pct}%
-        </span>
-      </div>
-    </div>
-  )
-}
-
-/* ── 1. Inmobiliaria: alquileres y contratos ── */
+/* ── 1. Inmobiliaria · calendario de vencimientos ── */
 
 export function RentalsVisual() {
-  return (
-    <Window app="Alquileres" nav={["Resumen", "Contratos", "Propiedades", "Cobranzas", "Alertas"]} active={1}>
-      <div className="flex gap-2.5">
-        <Kpi label="Contratos activos" value="148" delta="+6" />
-        <Kpi label="Vencen este mes" value="4" />
-        <Kpi label="Ocupación" value="82%" delta="+3%" />
-      </div>
+  const days = Array.from({ length: 31 }, (_, i) => i + 1)
+  const marks: Record<number, string> = {
+    4: GREEN,
+    9: GREEN,
+    17: AMBER,
+    26: "#f43f5e",
+  }
 
-      <Card title="Vencimientos próximos" action="Este mes">
+  return (
+    <Window
+      app="Alquileres"
+      nav={["Calendario", "Contratos", "Propiedades", "Cobranzas"]}
+      active={0}
+    >
+      <Card title="Octubre · vencimientos" action="Mes">
+        <div className="grid grid-cols-[repeat(10,minmax(0,1fr))] gap-[3px] sm:grid-cols-[repeat(16,minmax(0,1fr))]">
+          {days.map((d) => (
+            <span
+              key={d}
+              className="relative flex aspect-square items-center justify-center rounded-[4px] text-[0.5rem] font-medium"
+              style={{
+                background: marks[d] ? `${marks[d]}1f` : "#f4f6f8",
+                color: marks[d] ? INK : "#b4bcc8",
+              }}
+            >
+              {d}
+              {marks[d] ? (
+                <span
+                  className="cv-live absolute bottom-[2px] size-[3px] rounded-full"
+                  style={{ background: marks[d] }}
+                />
+              ) : null}
+            </span>
+          ))}
+        </div>
+
+        <div className="mt-2.5 flex items-center gap-3">
+          <span
+            className="cv-sweep h-[22px] w-[2px] rounded-full"
+            style={{ background: INDIGO }}
+          />
+          <span className="text-[0.6rem]" style={{ color: MUTE }}>
+            Hoy · 4 vencimientos en los próximos 30 días
+          </span>
+        </div>
+      </Card>
+
+      <Card title="Acciones automáticas">
         <div className="cv-rows flex flex-col">
-          <Row left="Pocitos - 2 amb." right={<Pill text="Renovado" tone="ok" />} />
-          <Row left="Carrasco - casa" right={<Pill text="Renovado" tone="ok" />} />
-          <Row left="Centro - oficina" right={<Pill text="Sin respuesta" tone="warn" />} />
-          <Row left="Malvin - 1 amb." right={<Pill text="Sin contactar" tone="idle" />} />
+          <Row left="Pocitos · renovación enviada" right={<Pill text="Hecho" tone="ok" />} />
+          <Row left="Carrasco · recordatorio día 17" right={<Pill text="Programado" tone="idle" />} />
+          <Row left="Centro · sin respuesta" right={<Pill text="Escalado" tone="warn" />} />
         </div>
       </Card>
     </Window>
   )
 }
 
-/* ── 2. Conciliacion bancaria ── */
+/* ── 2. Conciliación · cruce de dos columnas ── */
 
 export function ReconciliationVisual() {
+  const pairs = [
+    { bank: "Transf. 04/10", doc: "FC A-1204", ok: true },
+    { bank: "Débito 07/10", doc: "FC A-1211", ok: true },
+    { bank: "Depósito 11/10", doc: "FC A-1219", ok: true },
+    { bank: "Transf. 14/10", doc: "sin match", ok: false },
+  ]
+
   return (
-    <Window app="Finanzas" nav={["Resumen", "Movimientos", "Conciliación", "Reportes"]} active={2}>
-      <div className="flex gap-2.5">
-        <Kpi label="Movimientos" value="1.240" />
-        <Kpi label="Conciliados" value="1.198" delta="96%" />
-        <Kpi label="A revisar" value="42" delta="-18" up={false} />
-      </div>
-
-      <div className="flex min-h-0 flex-1 gap-2.5">
-        <Card title="Avance del cierre">
-          <div className="flex items-center gap-3">
-            <Donut pct={96} color="#5b5bd6" />
-            <div className="min-w-0">
-              <p className="text-[0.64rem]" style={{ color: MUTE }}>
-                Cruce automático
-              </p>
-              <p className="text-[0.7rem] font-medium" style={{ color: INK }}>
-                Listo para revisión
-              </p>
-            </div>
+    <Window
+      app="Finanzas"
+      nav={["Movimientos", "Conciliación", "Diferencias", "Cierre"]}
+      active={1}
+    >
+      <Card title="Cruce automático" action="1.240 mov.">
+        <div className="flex flex-1 items-center gap-2">
+          <div className="flex min-w-0 flex-1 flex-col gap-[5px]">
+            {pairs.map((p, i) => (
+              <div
+                key={p.bank}
+                className="cv-row truncate rounded-md border px-2 py-[5px] text-[0.62rem]"
+                style={{
+                  borderColor: LINE,
+                  color: BODY,
+                  animationDelay: `${i * 160}ms`,
+                }}
+              >
+                {p.bank}
+              </div>
+            ))}
           </div>
-        </Card>
 
-        <Card title="Diferencias">
-          <div className="cv-rows flex flex-col">
-            <Row left="Transferencia" right={<Pill text="Match" tone="ok" />} />
-            <Row left="Débito automático" right={<Pill text="Match" tone="ok" />} />
-            <Row left="Dif. $ 1.430" right={<Pill text="Revisar" tone="warn" />} />
+          <div className="flex shrink-0 flex-col gap-[5px]">
+            {pairs.map((p, i) => (
+              <div key={p.bank} className="flex h-[26px] items-center">
+                <span
+                  className={p.ok ? "cv-link block h-[1.5px] w-5" : "block h-[1.5px] w-5"}
+                  style={{
+                    background: p.ok ? GREEN : "#e2e6eb",
+                    animationDelay: `${i * 300}ms`,
+                  }}
+                />
+              </div>
+            ))}
           </div>
-        </Card>
+
+          <div className="flex min-w-0 flex-1 flex-col gap-[5px]">
+            {pairs.map((p, i) => (
+              <div
+                key={p.doc}
+                className="cv-row truncate rounded-md border px-2 py-[5px] text-[0.62rem]"
+                style={{
+                  borderColor: p.ok ? "#cdebd8" : "#fde3c7",
+                  background: p.ok ? "#f2fbf5" : "#fff8ef",
+                  color: p.ok ? "#15803d" : "#b45309",
+                  animationDelay: `${i * 160 + 80}ms`,
+                }}
+              >
+                {p.doc}
+              </div>
+            ))}
+          </div>
+        </div>
+      </Card>
+
+      <div
+        className="flex items-end justify-between gap-4 rounded-xl border px-3 py-2.5"
+        style={{ borderColor: LINE, background: "#fff" }}
+      >
+        <Metric label="Conciliados" value="1.198" color={INDIGO} />
+        <Metric label="A revisar" value="42" color={AMBER} />
+        <div className="min-w-0 flex-1">
+          <div
+            className="h-[5px] w-full overflow-hidden rounded-full"
+            style={{ background: "#eef1f5" }}
+          >
+            <div
+              className="cv-fill h-full rounded-full"
+              style={{ width: "96%", background: INDIGO }}
+            />
+          </div>
+          <p className="mt-1.5 text-[0.58rem]" style={{ color: MUTE }}>
+            96% del cierre resuelto sin intervención
+          </p>
+        </div>
       </div>
     </Window>
   )
 }
 
-/* ── 3. Asistente interno con contexto ── */
+/* ── 3. Asistente · conversación a pantalla completa ── */
 
 export function AssistantVisual() {
   return (
-    <Window app="Asistente" nav={["Consultas", "Documentos", "Procesos", "Historial"]} active={0}>
-      <Card title="Consulta del equipo" action="En linea">
-        <div className="flex flex-col gap-2">
-          <div
-            className="ml-auto max-w-[80%] rounded-2xl rounded-br-md px-3 py-2 text-[0.7rem] leading-5"
-            style={{ background: "#5b5bd6", color: "#fff" }}
-          >
-            ¿Cómo se imputa una factura de exterior?
-          </div>
-          <div
-            className="max-w-[86%] rounded-2xl rounded-bl-md border px-3 py-2 text-[0.7rem] leading-5"
-            style={{ borderColor: LINE, background: "#fff", color: "#445063" }}
-          >
-            Va a la cuenta 6.2.1 con retención. Te dejo el paso a paso y el
-            formulario.
-          </div>
-          <div className="flex items-center gap-1.5">
-            <span className="mr-1 flex items-center gap-[3px]">
-              {[0, 1, 2].map((d) => (
-                <span
-                  key={d}
-                  className="cv-dot size-[4px] rounded-full"
-                  style={{ background: "#5b5bd6", animationDelay: `${d * 180}ms` }}
-                />
-              ))}
-            </span>
-            <span
-              className="rounded-md px-1.5 py-[2px] text-[0.56rem] font-medium"
-              style={{ background: "#eef1f5", color: MUTE }}
-            >
-              Procedimiento interno.pdf
-            </span>
-            <span
-              className="rounded-md px-1.5 py-[2px] text-[0.56rem] font-medium"
-              style={{ background: "#eef1f5", color: MUTE }}
-            >
-              Plan de cuentas
-            </span>
-          </div>
+    <Window
+      app="Asistente"
+      nav={["Consultas", "Documentos", "Procesos", "Historial"]}
+      active={0}
+    >
+      <div
+        className="flex min-h-0 flex-1 flex-col justify-end gap-2 rounded-xl border px-3 py-3"
+        style={{ borderColor: LINE, background: "#fff" }}
+      >
+        <div
+          className="cv-row ml-auto max-w-[78%] rounded-2xl rounded-br-md px-3 py-2 text-[0.72rem] leading-5"
+          style={{ background: INDIGO, color: "#fff", animationDelay: "120ms" }}
+        >
+          ¿Cómo se imputa una factura de exterior?
         </div>
-      </Card>
 
-      <div className="flex gap-2.5">
-        <Kpi label="Consultas hoy" value="37" delta="+12" />
-        <Kpi label="Respuesta media" value="4 s" />
+        <div
+          className="cv-row max-w-[86%] rounded-2xl rounded-bl-md border px-3 py-2 text-[0.72rem] leading-5"
+          style={{
+            borderColor: LINE,
+            background: "#fafbfc",
+            color: BODY,
+            animationDelay: "560ms",
+          }}
+        >
+          Va a la cuenta 6.2.1 con retención. Según el procedimiento interno,
+          primero cargás el comprobante y después el formulario.
+        </div>
+
+        <div
+          className="cv-row flex flex-wrap items-center gap-1.5"
+          style={{ animationDelay: "900ms" }}
+        >
+          <span className="text-[0.56rem] font-medium" style={{ color: MUTE }}>
+            Fuentes
+          </span>
+          {["Procedimiento interno.pdf", "Plan de cuentas"].map((src) => (
+            <span
+              key={src}
+              className="rounded-md px-1.5 py-[2px] text-[0.56rem] font-medium"
+              style={{ background: "#eef1f5", color: BODY }}
+            >
+              {src}
+            </span>
+          ))}
+        </div>
+
+        <div className="flex items-center gap-[4px] pl-1 pt-1">
+          {[0, 1, 2].map((d) => (
+            <span
+              key={d}
+              className="cv-dot size-[4px] rounded-full"
+              style={{ background: INDIGO, animationDelay: `${d * 180}ms` }}
+            />
+          ))}
+          <span className="ml-1.5 text-[0.56rem]" style={{ color: MUTE }}>
+            escribiendo
+          </span>
+        </div>
       </div>
     </Window>
   )
 }
 
-/* ── 4. IA conectada a la base operativa (oscuro) ── */
+/* ── 4. Base conectada · consola de consultas (oscuro) ── */
 
 export function DatabaseVisual() {
   return (
     <Window
       app="Base"
-      nav={["Consultas", "Tablas", "Automatizaciones", "Equipo"]}
+      nav={["Consola", "Tablas", "Automatizaciones", "Equipo"]}
       active={0}
       tone="dark"
     >
-      <Card title="Consulta en lenguaje natural" action="SQL generado" dark>
-        <p className="text-[0.7rem] leading-5" style={{ color: "#c7cfdb" }}>
+      <div
+        className="rounded-xl border px-3 py-2.5"
+        style={{ borderColor: D_LINE, background: D_CARD }}
+      >
+        <p className="text-[0.56rem] font-medium" style={{ color: MUTE }}>
+          Pregunta
+        </p>
+        <p className="mt-1 text-[0.72rem] leading-5" style={{ color: "#e8ecf3" }}>
           ¿Qué propiedades quedaron sin visita esta semana?
         </p>
-        <div className="cv-rows mt-2 flex flex-col">
-          <Row dark left="Pocitos - 2 amb." right={<Pill text="6 días" tone="warn" />} />
-          <Row dark left="Carrasco - casa" right={<Pill text="8 días" tone="warn" />} />
-          <Row dark left="Centro - oficina" right={<Pill text="11 días" tone="warn" />} />
+
+        <p className="mt-2.5 text-[0.56rem] font-medium" style={{ color: MUTE }}>
+          SQL generado
+        </p>
+        <code
+          className="cv-type mt-1 block font-mono text-[0.62rem]"
+          style={{ color: GREEN }}
+        >
+          select * from propiedades where ultima_visita &lt; now() - 5
+        </code>
+      </div>
+
+      <Card title="Resultado" action="3 filas" dark>
+        <div className="cv-rows flex flex-col">
+          <Row dark left="Pocitos · 2 amb." right={<Pill text="6 días" tone="warn" />} />
+          <Row dark left="Carrasco · casa" right={<Pill text="8 días" tone="warn" />} />
+          <Row dark left="Centro · oficina" right={<Pill text="11 días" tone="warn" />} />
+        </div>
+        <div
+          className="mt-2 flex items-center gap-2 border-t pt-2"
+          style={{ borderColor: D_LINE }}
+        >
+          <span
+            className="cv-live size-[5px] rounded-full"
+            style={{ background: GREEN }}
+          />
+          <span className="text-[0.6rem]" style={{ color: MUTE }}>
+            Tarea creada para el equipo comercial
+          </span>
         </div>
       </Card>
-
-      <div className="flex gap-2.5">
-        <Kpi dark label="Registros" value="48.210" />
-        <Kpi dark label="Tarea creada" value="Auto" delta="OK" />
-      </div>
     </Window>
   )
 }
 
-/* ── 5. Dashboards de rendimiento ── */
+/* ── 5. Rendimiento · gráfico de área ── */
 
 export function DashboardVisual() {
-  const bars = [
-    { h: 48, c: "#c7d2fe" },
-    { h: 66, c: "#a5b4fc" },
-    { h: 42, c: "#c7d2fe" },
-    { h: 80, c: "#818cf8" },
-    { h: 71, c: "#a5b4fc" },
-    { h: 95, c: "#5b5bd6" },
-    { h: 58, c: "#c7d2fe" },
-  ]
+  const pts = "0,54 32,44 64,49 96,30 128,36 160,18 192,26 224,8"
 
   return (
-    <Window app="Rendimiento" nav={["Resumen", "Ventas", "Operación", "Reportes"]} active={0}>
-      <div className="flex gap-2.5">
-        <Kpi label="Ingresos del mes" value="$ 1,24 M" delta="+14%" />
-        <Kpi label="Ordenes" value="872" delta="+9%" />
-        <Kpi label="Margen" value="31%" delta="-2%" up={false} />
-      </div>
-
-      <div className="flex min-h-0 flex-1 gap-2.5">
-        <Card title="Ultimos 7 dias" action="Semana">
-          <Bars data={bars} />
-        </Card>
-
-        <Card title="Por area">
-          <div className="cv-rows flex flex-col">
-            <Row left="Ventas" right={<span className="text-[0.66rem] font-semibold tabular-nums" style={{ color: INK }}>46%</span>} />
-            <Row left="Deposito" right={<span className="text-[0.66rem] font-semibold tabular-nums" style={{ color: INK }}>31%</span>} />
-            <Row left="Administración" right={<span className="text-[0.66rem] font-semibold tabular-nums" style={{ color: INK }}>23%</span>} />
+    <Window
+      app="Rendimiento"
+      nav={["Resumen", "Ventas", "Operación", "Reportes"]}
+      active={0}
+    >
+      <Card title="Ingresos · últimos 8 meses" action="2026">
+        <div className="flex min-h-0 flex-1 flex-col">
+          <div className="flex items-end gap-6">
+            <Metric label="Este mes" value="$ 1,24 M" />
+            <Metric label="Variación" value="+14%" color="#15803d" />
           </div>
-        </Card>
-      </div>
+
+          <svg
+            viewBox="0 0 224 64"
+            preserveAspectRatio="none"
+            className="mt-2.5 h-[70px] w-full"
+            aria-hidden
+          >
+            <defs>
+              <linearGradient id="cv_area" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stopColor={INDIGO} stopOpacity="0.28" />
+                <stop offset="100%" stopColor={INDIGO} stopOpacity="0" />
+              </linearGradient>
+            </defs>
+
+            {[16, 32, 48].map((y) => (
+              <line
+                key={y}
+                x1="0"
+                y1={y}
+                x2="224"
+                y2={y}
+                stroke="#eef1f5"
+                strokeWidth="1"
+              />
+            ))}
+
+            <polygon points={`${pts} 224,64 0,64`} fill="url(#cv_area)" />
+            <polyline
+              className="cv-draw"
+              points={pts}
+              fill="none"
+              stroke={INDIGO}
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+            <circle className="cv-live" cx="222" cy="8" r="3.5" fill={INDIGO} />
+          </svg>
+
+          <div className="mt-1 flex items-center justify-between">
+            {["Mar", "May", "Jul", "Set"].map((m) => (
+              <span key={m} className="text-[0.54rem]" style={{ color: MUTE }}>
+                {m}
+              </span>
+            ))}
+          </div>
+        </div>
+      </Card>
     </Window>
   )
 }
 
-/* ── 6. Reestructuracion de base de datos (oscuro) ── */
+/* ── 6. Datos · pipeline de migración (oscuro) ── */
 
 export function DataVisual() {
   return (
     <Window
       app="Datos"
-      nav={["Origen", "Migración", "Modelo", "Reportes"]}
+      nav={["Origen", "Pipeline", "Modelo", "Reportes"]}
       active={1}
       tone="dark"
     >
-      <Card title="Migración" action="Completa" dark>
-        <div className="cv-rows flex flex-col">
-          <Row dark left="planilla_v3.xlsx" right={<Pill text="Migrado" tone="ok" />} />
-          <Row dark left="planilla_final.xlsx" right={<Pill text="Migrado" tone="ok" />} />
-          <Row dark left="copia_2024.xlsx" right={<Pill text="Duplicado" tone="idle" />} />
-          <Row dark left="archivo_roto.csv" right={<Pill text="Corregido" tone="warn" />} />
+      <Card title="Pipeline" action="Corriendo" dark>
+        <div className="flex flex-1 items-center gap-2">
+          <div className="flex min-w-0 flex-1 flex-col gap-[5px]">
+            {["planilla_v3.xlsx", "copia_2024.xlsx", "archivo_roto.csv"].map(
+              (f, i) => (
+                <div
+                  key={f}
+                  className="cv-row truncate rounded-md border px-2 py-[5px] font-mono text-[0.58rem]"
+                  style={{
+                    borderColor: D_LINE,
+                    color: MUTE,
+                    animationDelay: `${i * 160}ms`,
+                  }}
+                >
+                  {f}
+                </div>
+              )
+            )}
+          </div>
+
+          <div className="relative flex h-[62px] w-10 shrink-0 items-center justify-center">
+            <span
+              className="absolute h-[1.5px] w-full"
+              style={{ background: D_LINE }}
+            />
+            {[0, 1, 2].map((d) => (
+              <span
+                key={d}
+                className="cv-travel absolute left-0 size-[5px] rounded-full"
+                style={{
+                  background: GREEN,
+                  animationDelay: `${d * 1.1}s`,
+                }}
+              />
+            ))}
+          </div>
+
+          <div className="flex min-w-0 flex-1 flex-col gap-[5px]">
+            {["produccion", "stock", "reportes"].map((t, i) => (
+              <div
+                key={t}
+                className="cv-row truncate rounded-md border px-2 py-[5px] font-mono text-[0.58rem]"
+                style={{
+                  borderColor: "#1f4d33",
+                  background: "#13241b",
+                  color: GREEN,
+                  animationDelay: `${i * 160 + 200}ms`,
+                }}
+              >
+                {t}
+              </div>
+            ))}
+          </div>
         </div>
       </Card>
 
-      <div className="flex gap-2.5">
-        <Kpi dark label="Filas migradas" value="214.830" />
-        <Kpi dark label="Duplicados" value="0" delta="-3.1k" />
-        <Kpi dark label="Reportes" value="Auto" />
+      <div
+        className="flex items-end justify-between gap-4 rounded-xl border px-3 py-2.5"
+        style={{ borderColor: D_LINE, background: D_CARD }}
+      >
+        <Metric label="Filas migradas" value="214.830" color="#e8ecf3" />
+        <Metric label="Duplicados" value="0" color={GREEN} />
+        <Metric label="Fuentes" value="11" color="#e8ecf3" />
       </div>
     </Window>
   )
 }
 
-/* ── 7. Sistema de ventas centralizado (HIKE / Lunar Vintage) ── */
+/* ── 7. Ventas · feed de pedidos y reparto por canal ── */
 
 export function SalesVisual() {
-  const channels: { name: string; pct: number; c: string }[] = [
-    { name: "Tienda online", pct: 48, c: "#5b5bd6" },
-    { name: "Instagram y WhatsApp", pct: 33, c: "#14b8a6" },
-    { name: "Local y mayorista", pct: 19, c: "#f59e0b" },
+  const channels = [
+    { name: "Tienda online", pct: 48, c: INDIGO },
+    { name: "Instagram y WhatsApp", pct: 33, c: TEAL },
+    { name: "Local y mayorista", pct: 19, c: AMBER },
+  ]
+
+  const orders = [
+    { id: "#2841", ch: "Instagram", amount: "$ 3.120", tone: "ok" as const },
+    { id: "#2840", ch: "Tienda online", amount: "$ 1.890", tone: "ok" as const },
+    { id: "#2839", ch: "WhatsApp", amount: "$ 2.450", tone: "idle" as const },
   ]
 
   return (
-    <Window app="Ventas" nav={["Resumen", "Pedidos", "Stock", "Clientes", "Canales"]} active={0}>
-      <div className="flex gap-2.5">
-        <Kpi label="Ventas del mes" value="312" delta="+18%" />
-        <Kpi label="Ticket promedio" value="$ 2.480" delta="+9%" />
-        <Kpi label="Sin despachar" value="7" />
-      </div>
+    <Window app="Ventas" nav={["Pedidos", "Canales", "Stock", "Clientes"]} active={0}>
+      <Card title="Pedidos entrando" action="En vivo">
+        <div className="flex flex-col gap-[5px]">
+          {orders.map((o, i) => (
+            <div
+              key={o.id}
+              className="cv-feed flex items-center justify-between gap-3 rounded-md border px-2.5 py-[6px]"
+              style={{
+                borderColor: LINE,
+                background: i === 0 ? "#f2fbf5" : "#fff",
+                animationDelay: `${i * 900}ms`,
+              }}
+            >
+              <span className="font-mono text-[0.6rem]" style={{ color: MUTE }}>
+                {o.id}
+              </span>
+              <span
+                className="min-w-0 flex-1 truncate text-[0.66rem]"
+                style={{ color: BODY }}
+              >
+                {o.ch}
+              </span>
+              <span
+                className="shrink-0 text-[0.66rem] font-semibold tabular-nums"
+                style={{ color: INK }}
+              >
+                {o.amount}
+              </span>
+              <Pill text={o.tone === "ok" ? "Pago" : "Pendiente"} tone={o.tone} />
+            </div>
+          ))}
+        </div>
+      </Card>
 
-      <div className="flex min-h-0 flex-1 gap-2.5">
-        <Card title="Canales conectados">
-          <div className="flex flex-col gap-2">
-            {channels.map((ch) => (
-              <div key={ch.name}>
-                <div className="flex items-center justify-between gap-2">
-                  <span className="truncate text-[0.66rem]" style={{ color: "#445063" }}>
-                    {ch.name}
-                  </span>
-                  <span
-                    className="shrink-0 text-[0.64rem] font-semibold tabular-nums"
-                    style={{ color: INK }}
-                  >
-                    {ch.pct}%
-                  </span>
-                </div>
-                <div
-                  className="mt-1 h-[5px] w-full overflow-hidden rounded-full"
-                  style={{ background: "#eef1f5" }}
+      <Card title="Reparto por canal">
+        <div className="flex flex-col gap-2">
+          {channels.map((ch, i) => (
+            <div key={ch.name}>
+              <div className="flex items-center justify-between gap-2">
+                <span className="truncate text-[0.64rem]" style={{ color: BODY }}>
+                  {ch.name}
+                </span>
+                <span
+                  className="shrink-0 text-[0.62rem] font-semibold tabular-nums"
+                  style={{ color: INK }}
                 >
-                  <div
-                    className="cv-fill h-full rounded-full"
-                    style={{ width: `${ch.pct}%`, background: ch.c }}
-                  />
-                </div>
+                  {ch.pct}%
+                </span>
               </div>
-            ))}
-          </div>
-        </Card>
-
-        <Card title="Stock" action="Sincronizado">
-          <div className="cv-rows flex flex-col">
-            <Row left="Campera oversize" right={<Pill text="12" tone="ok" />} />
-            <Row left="Buzo cuello alto" right={<Pill text="3" tone="warn" />} />
-            <Row left="Pantalón cargo" right={<Pill text="27" tone="ok" />} />
-          </div>
-        </Card>
-      </div>
+              <div
+                className="mt-1 h-[5px] w-full overflow-hidden rounded-full"
+                style={{ background: "#eef1f5" }}
+              >
+                <div
+                  className="cv-fill h-full rounded-full"
+                  style={{
+                    width: `${ch.pct}%`,
+                    background: ch.c,
+                    animationDelay: `${i * 220}ms`,
+                  }}
+                />
+              </div>
+            </div>
+          ))}
+        </div>
+      </Card>
     </Window>
   )
 }
