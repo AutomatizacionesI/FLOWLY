@@ -1042,7 +1042,7 @@ function App() {
         <section className="relative mx-auto flex max-w-7xl items-center pt-24 pb-12 sm:pt-28 sm:pb-16 lg:min-h-[calc(100vh-5.5rem)] lg:pb-16 lg:pt-24">
           <div className="grid w-full gap-10 sm:gap-12 lg:grid-cols-[minmax(0,1fr)_minmax(360px,0.85fr)] lg:items-center lg:gap-16">
             {/* todo el texto, a la izquierda */}
-            <div className="flex max-w-xl flex-col">
+            <div className="flex max-w-xl flex-col lg:mt-14">
               <BlurFade inView delay={0.05}>
                 <p className="text-[0.68rem] uppercase tracking-[0.28em] text-muted-foreground">
                   Software y automatización a medida
@@ -1082,16 +1082,6 @@ function App() {
                     Ver casos
                     <ArrowRight className="size-4 text-[var(--brand-strong)]" />
                   </a>
-                </div>
-              </BlurFade>
-
-              <BlurFade inView delay={0.26}>
-                <div className="mt-7 flex flex-wrap items-center gap-x-5 gap-y-2 text-[0.78rem] text-muted-foreground/80">
-                  <span>Primera conversación sin costo</span>
-                  <span className="size-1 rounded-full bg-border" />
-                  <span>Respondemos en menos de 24 h</span>
-                  <span className="size-1 rounded-full bg-border" />
-                  <span>Proyectos en toda la región</span>
                 </div>
               </BlurFade>
             </div>
