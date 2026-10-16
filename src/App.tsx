@@ -1040,71 +1040,68 @@ function App() {
         </header>
 
         <section className="relative mx-auto flex max-w-7xl items-center pt-24 pb-12 sm:pt-28 sm:pb-16 lg:min-h-[calc(100vh-5.5rem)] lg:pb-16 lg:pt-24">
-          <div className="grid w-full gap-7 sm:gap-10 lg:grid-cols-[minmax(0,0.92fr)_minmax(340px,0.88fr)] lg:items-center lg:gap-16">
-            <BlurFade inView delay={0.05}>
-              <div>
+          <div className="grid w-full gap-10 sm:gap-12 lg:grid-cols-[minmax(0,1fr)_minmax(360px,0.85fr)] lg:items-center lg:gap-16">
+            {/* todo el texto, a la izquierda */}
+            <div className="flex max-w-xl flex-col">
+              <BlurFade inView delay={0.05}>
                 <p className="text-[0.68rem] uppercase tracking-[0.28em] text-muted-foreground">
                   Software y automatización a medida
                 </p>
-                <h1 className="mt-4 text-[clamp(2.5rem,11vw,3.4rem)] font-light leading-[0.96] tracking-[-0.085em] text-balance text-foreground sm:text-[4.2rem] sm:leading-[0.94] sm:tracking-[-0.1em] md:text-[5rem] xl:text-[5.8rem] xl:leading-[0.9]">
+                <h1 className="mt-4 text-[clamp(2.5rem,11vw,3.4rem)] font-light leading-[0.96] tracking-[-0.085em] text-balance text-foreground sm:text-[4.2rem] sm:leading-[0.94] sm:tracking-[-0.1em] lg:text-[4.6rem] xl:text-[5.2rem] xl:leading-[0.92]">
                   Sistemas
                   <br />
                   diseñados para
                   <br />
                   <span className="text-[var(--brand-strong)]">tu negocio.</span>
                 </h1>
+              </BlurFade>
+
+              <BlurFade inView delay={0.14}>
+                <p className="mt-6 max-w-lg text-base leading-8 text-muted-foreground sm:text-lg">
+                  Ordenamos cómo trabaja tu empresa y automatizamos lo que hoy
+                  se hace a mano.
+                </p>
+              </BlurFade>
+
+              <BlurFade inView delay={0.2}>
+                <div className="mt-7 flex flex-col gap-3 sm:flex-row">
+                  <a
+                    href={whatsappHref}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="inline-flex h-11 items-center justify-center gap-2 rounded-full border border-neutral-950 bg-neutral-950 px-6 text-sm font-medium text-white shadow-none transition-transform hover:-translate-y-0.5 hover:bg-neutral-800"
+                    style={{ color: "#ffffff" }}
+                  >
+                    <span style={{ color: "#ffffff" }}>Hablemos de tu negocio</span>
+                    <ArrowUpRight className="size-4 text-white" />
+                  </a>
+                  <a
+                    href="#servicios"
+                    className="inline-flex h-11 items-center justify-center gap-2 rounded-full border border-[var(--brand-border)] bg-white px-6 text-sm font-medium text-foreground transition-transform hover:-translate-y-0.5 hover:border-[var(--brand-strong)]"
+                  >
+                    Ver casos
+                    <ArrowRight className="size-4 text-[var(--brand-strong)]" />
+                  </a>
+                </div>
+              </BlurFade>
+
+              <BlurFade inView delay={0.26}>
+                <div className="mt-7 flex flex-wrap items-center gap-x-5 gap-y-2 text-[0.78rem] text-muted-foreground/80">
+                  <span>Primera conversación sin costo</span>
+                  <span className="size-1 rounded-full bg-border" />
+                  <span>Respondemos en menos de 24 h</span>
+                  <span className="size-1 rounded-full bg-border" />
+                  <span>Proyectos en toda la región</span>
+                </div>
+              </BlurFade>
+            </div>
+
+            {/* solo la MacBook, a la derecha */}
+            <BlurFade inView delay={0.16}>
+              <div className="mx-auto w-full max-w-[360px] sm:max-w-[420px] lg:max-w-[440px]">
+                <HeroMacbook />
               </div>
             </BlurFade>
-
-            <div className="lg:pl-4">
-              <div className="flex max-w-xl flex-col lg:mx-auto">
-                <BlurFade inView delay={0.12} className="order-last lg:order-none">
-                  <div className="mx-auto mt-12 w-full max-w-[340px] sm:mt-14 sm:max-w-[380px] lg:mb-8 lg:mt-0 lg:max-w-[400px]">
-                    <HeroMacbook />
-                  </div>
-                </BlurFade>
-
-                <BlurFade inView delay={0.2}>
-                  <p className="mt-7 text-base leading-8 text-muted-foreground sm:text-lg lg:mt-0">
-                    Ordenamos cómo trabaja tu empresa y automatizamos lo que hoy
-                    se hace a mano.
-                  </p>
-                </BlurFade>
-
-                <BlurFade inView delay={0.26}>
-                  <div className="mt-7 flex flex-col gap-3 sm:flex-row">
-                    <a
-                      href={whatsappHref}
-                      target="_blank"
-                      rel="noreferrer"
-                      className="inline-flex h-11 items-center justify-center gap-2 rounded-full border border-neutral-950 bg-neutral-950 px-6 text-sm font-medium text-white shadow-none transition-transform hover:-translate-y-0.5 hover:bg-neutral-800"
-                      style={{ color: "#ffffff" }}
-                    >
-                      <span style={{ color: "#ffffff" }}>Hablemos de tu negocio</span>
-                      <ArrowUpRight className="size-4 text-white" />
-                    </a>
-                    <a
-                      href="#servicios"
-                      className="inline-flex h-11 items-center justify-center gap-2 rounded-full border border-[var(--brand-border)] bg-white px-6 text-sm font-medium text-foreground transition-transform hover:-translate-y-0.5 hover:border-[var(--brand-strong)]"
-                    >
-                      Ver casos
-                      <ArrowRight className="size-4 text-[var(--brand-strong)]" />
-                    </a>
-                  </div>
-                </BlurFade>
-
-                <BlurFade inView delay={0.32}>
-                  <div className="mt-7 flex flex-wrap items-center gap-x-5 gap-y-2 text-[0.78rem] text-muted-foreground/80">
-                    <span>Primera conversación sin costo</span>
-                    <span className="size-1 rounded-full bg-border" />
-                    <span>Respondemos en menos de 24 h</span>
-                    <span className="size-1 rounded-full bg-border" />
-                    <span>Proyectos en toda la región</span>
-                  </div>
-                </BlurFade>
-
-              </div>
-            </div>
           </div>
         </section>
 
