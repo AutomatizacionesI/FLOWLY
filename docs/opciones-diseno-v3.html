@@ -1,0 +1,519 @@
+<title>Opciones Landing Spike</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600&family=Geist+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: catálogo de opciones — cada decisión en su bloque, variantes lado a lado, etiquetadas A/B/C */
+:root{
+  color-scheme: light;
+  --bg:#fbfcfd; --surface:#fff; --ink:#1b2230; --ink-soft:#5d6878; --ink-faint:#8b94a3;
+  --line:#e4e8ed; --line-soft:#eef1f5; --dark:#0e1116;
+  --brand:#63e28f; --brand-ink:#17894a; --brand-soft:rgba(99,226,143,.13); --brand-line:rgba(99,226,143,.38);
+  --sans:"Geist", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --mono:"Geist Mono", ui-monospace, Menlo, monospace;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased}
+.wrap{max-width:1180px;margin:0 auto;padding-inline:20px}
+h1,h2,h3,h4{margin:0;text-wrap:balance}
+p{margin:0}
+
+.bar{position:sticky;top:env(safe-area-inset-top,0px);z-index:50;background:rgba(251,252,253,.92);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+.bar .wrap{display:flex;align-items:center;gap:14px;padding-block:13px;flex-wrap:wrap}
+.bar strong{font-size:.9rem;font-weight:600}
+.bar span{font-size:.8rem;color:var(--ink-soft)}
+
+.lead{padding-block:42px 10px}
+.lead h1{font-size:clamp(1.9rem,4.4vw,2.8rem);font-weight:300;letter-spacing:-.05em;line-height:1.06}
+.lead p{margin-top:14px;max-width:64ch;color:var(--ink-soft)}
+
+.sec{margin-block:40px;border-top:1px solid var(--line);padding-top:32px}
+.sec > .top{display:flex;flex-wrap:wrap;align-items:baseline;gap:8px 14px;margin-bottom:6px}
+.sec .num{font-family:var(--mono);font-size:.74rem;color:var(--ink-faint)}
+.sec h2{font-size:1.35rem;font-weight:600;letter-spacing:-.035em}
+.sec .note{margin-top:10px;max-width:70ch;font-size:.9rem;color:var(--ink-soft)}
+.rec{display:inline-flex;align-items:center;border:1px solid var(--brand-line);background:var(--brand-soft);color:var(--brand-ink);border-radius:999px;padding:2px 9px;font-size:.64rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase}
+
+.opts{display:grid;gap:16px;margin-top:22px}
+@media(min-width:780px){.opts.two{grid-template-columns:repeat(2,minmax(0,1fr))}.opts.four{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(min-width:1050px){.opts.three{grid-template-columns:repeat(3,minmax(0,1fr))}.opts.four{grid-template-columns:repeat(4,minmax(0,1fr))}}
+.opt{border:1px solid var(--line);border-radius:22px;background:var(--surface);overflow:hidden;display:flex;flex-direction:column;min-width:0}
+.opt > .hd{display:flex;align-items:center;gap:9px;padding:12px 16px;border-bottom:1px solid var(--line-soft);background:var(--bg)}
+.opt .k{display:grid;place-items:center;width:21px;height:21px;border-radius:7px;background:var(--ink);color:#fff;font-size:.68rem;font-weight:600;flex:none}
+.opt .t{font-size:.84rem;font-weight:600;letter-spacing:-.015em}
+.opt .bd{padding:18px 16px;flex:1;display:flex;flex-direction:column;gap:12px;min-width:0}
+.opt .why{padding:0 16px 16px;font-size:.8rem;line-height:1.55;color:var(--ink-soft)}
+
+/* mini hero preview */
+.stage{border-radius:16px;background:var(--bg);border:1px solid var(--line-soft);padding:16px;min-height:220px;display:flex;align-items:center;justify-content:center;overflow:hidden}
+.stage.dark{background:var(--dark);border-color:rgba(255,255,255,.08)}
+
+/* ── opción 1: flujo de nodos ── */
+.flow{width:100%;max-width:300px}
+.flow .node{fill:#fff;stroke:#e4e8ed}
+.flow .lbl{font:500 9px var(--sans);fill:#5d6878}
+.flow .wire{stroke:#d7dde4;stroke-width:1.5;fill:none}
+.flow .pulse{stroke:#63e28f;stroke-width:2;fill:none;stroke-linecap:round;stroke-dasharray:14 150;animation:dash 3.2s linear infinite}
+@keyframes dash{to{stroke-dashoffset:-164}}
+
+/* ── opción 2: ventana de producto ── */
+.win{width:100%;max-width:290px;border-radius:14px;background:#fff;border:1px solid var(--line);box-shadow:0 34px 70px -40px rgba(15,23,42,.42);overflow:hidden;transform:perspective(900px) rotateY(-11deg) rotateX(5deg)}
+.win .chrome{display:flex;gap:5px;padding:9px 11px;border-bottom:1px solid var(--line-soft);background:#fafbfc}
+.win .chrome i{width:7px;height:7px;border-radius:99px;background:#dfe4ea;display:block}
+.win .in{padding:13px}
+.win .kpi{display:flex;gap:8px}
+.win .kpi div{flex:1;border:1px solid var(--line-soft);border-radius:9px;padding:7px 9px}
+.win .kpi small{display:block;font-size:.52rem;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-faint)}
+.win .kpi b{font-size:.92rem;font-weight:600;letter-spacing:-.03em}
+.win .chart{margin-top:10px;height:56px;display:flex;align-items:flex-end;gap:4px}
+.win .chart i{flex:1;background:#eaeef2;border-radius:2px 2px 0 0;display:block}
+.win .chart i.on{background:var(--brand)}
+
+/* ── opción 3: malla / gradiente ── */
+.mesh{position:relative;width:100%;height:210px;border-radius:16px;overflow:hidden;background:var(--dark)}
+.mesh .b{position:absolute;border-radius:50%;filter:blur(44px);opacity:.75}
+.mesh .b1{width:190px;height:190px;background:#63e28f;left:-30px;top:-40px;animation:drift 11s ease-in-out infinite alternate}
+.mesh .b2{width:160px;height:160px;background:#1f7a4d;right:-24px;bottom:-34px;animation:drift 9s ease-in-out infinite alternate-reverse}
+.mesh .grid{position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.07) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.07) 1px,transparent 1px);background-size:30px 30px}
+@keyframes drift{to{transform:translate(26px,18px) scale(1.12)}}
+
+/* ── opción 4: chat ── */
+.chat{width:100%;max-width:280px;display:flex;flex-direction:column;gap:7px}
+.cm{max-width:88%;padding:9px 12px;border-radius:14px;font-size:.78rem;line-height:1.45}
+.cm.a{align-self:flex-end;background:var(--brand-soft);border:1px solid var(--brand-line)}
+.cm.b{align-self:flex-start;background:#fff;border:1px solid var(--line)}
+
+/* ── franja de clientes ── */
+.strip{border:1px solid var(--line);border-radius:20px;background:linear-gradient(180deg,#fff,#f5f7f9);box-shadow:inset 0 1px 0 #fff, 0 24px 50px -46px rgba(15,23,42,.4);padding:22px 18px}
+.strip .row{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:16px 34px}
+.strip .lg{font-size:1.02rem;font-weight:600;letter-spacing:-.02em;color:#9aa3ae;filter:grayscale(1);transition:color .25s}
+.strip .lg:hover{color:#5d6878}
+.strip .lg.serif{font-family:Georgia,serif;font-weight:400;font-size:1.12rem}
+.strip .lg.wide{letter-spacing:.14em;font-size:.84rem}
+.strip .lg.boxed{border:2px solid #9aa3ae;padding:1px 7px;font-size:.84rem}
+.strip .lg.oval{border:1.5px solid #9aa3ae;border-radius:50%/60%;padding:3px 14px;font-family:Georgia,serif;font-weight:400}
+
+/* ── método cards ── */
+.mcard{border:1px solid var(--line);border-radius:18px;background:#fff;padding:16px;display:flex;flex-direction:column;gap:11px;min-width:0}
+.mcard .kk{font-family:var(--mono);font-size:.7rem;color:var(--ink-faint)}
+.mcard h4{font-size:1rem;font-weight:600;letter-spacing:-.03em}
+.mcard p{font-size:.82rem;color:var(--ink-soft);line-height:1.55}
+.mvis{height:86px;border-radius:12px;border:1px solid var(--line-soft);background:var(--bg);display:flex;align-items:center;justify-content:center;overflow:hidden;padding:10px}
+.mvis.dk{background:var(--dark);border-color:rgba(255,255,255,.08)}
+
+/* ── estilos de dashboard para casos ── */
+.dash{border-radius:16px;padding:14px;min-height:190px;display:flex;flex-direction:column;gap:9px}
+.dash.dk{background:var(--dark);border:1px solid rgba(255,255,255,.1);color:#fff}
+.dash.lt{background:#fff;border:1px solid var(--line);box-shadow:0 24px 50px -46px rgba(15,23,42,.4)}
+.dash.gl{background:linear-gradient(145deg,#eaf7ef,#f6f9fb);border:1px solid var(--brand-line)}
+.dash .hdr{display:flex;align-items:center;justify-content:between;gap:8px;font-size:.6rem;letter-spacing:.16em;text-transform:uppercase;opacity:.55}
+.dash .cell{border-radius:10px;padding:8px 10px;font-size:.76rem;display:flex;justify-content:space-between;gap:10px;align-items:center}
+.dash.dk .cell{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.09)}
+.dash.lt .cell{background:#fafbfc;border:1px solid var(--line-soft)}
+.dash.gl .cell{background:rgba(255,255,255,.72);border:1px solid rgba(255,255,255,.9)}
+.dash b{font-weight:600;letter-spacing:-.02em}
+.dash .big{font-size:1.5rem;font-weight:500;letter-spacing:-.045em;line-height:1}
+.g{color:var(--brand-ink)}
+.dash.dk .g{color:var(--brand)}
+.spark{height:40px;display:flex;align-items:flex-end;gap:3px;margin-top:4px}
+.spark i{flex:1;border-radius:2px 2px 0 0;display:block;background:currentColor;opacity:.22}
+.spark i.on{opacity:1;color:var(--brand)}
+
+/* ── layouts de caso ── */
+.lay{border:1px solid var(--line);border-radius:14px;background:#fff;padding:12px;display:grid;gap:9px}
+.lay .blk{border-radius:9px;background:var(--line-soft);height:30px}
+.lay .blk.v{background:var(--dark);height:84px}
+.lay .blk.t{background:#e9edf1;height:13px}
+.lay .blk.t.s{width:58%}
+
+/* ── faq layout ── */
+.faqgrid{display:grid;gap:22px}
+@media(min-width:880px){.faqgrid{grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:40px}}
+.q{border-bottom:1px solid var(--line);padding:13px 0;display:flex;justify-content:space-between;gap:14px;font-size:.92rem;font-weight:500}
+.q span{color:var(--ink-faint)}
+
+/* ── qué recibís ── */
+.recv{display:grid;gap:12px}
+@media(min-width:720px){.recv{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.rc{border:1px solid var(--line);border-radius:16px;padding:16px;background:#fff;display:flex;gap:12px}
+.rc .n{font-family:var(--mono);font-size:.72rem;color:var(--brand-ink);flex:none;padding-top:2px}
+.rc h4{font-size:.94rem;font-weight:600;letter-spacing:-.02em}
+.rc p{margin-top:5px;font-size:.82rem;color:var(--ink-soft);line-height:1.55}
+
+/* ── footer ── */
+.ft{border-top:1px solid var(--line);padding-top:16px;display:flex;flex-wrap:wrap;gap:12px 26px;align-items:center;font-size:.83rem;color:var(--ink-soft)}
+.ft .sp{flex:1;min-width:0}
+
+/* ── copy picker ── */
+.copy{border:1px solid var(--line);border-radius:18px;background:#fff;padding:20px;min-width:0}
+.copy .eye{font-size:.62rem;letter-spacing:.24em;text-transform:uppercase;color:var(--ink-faint)}
+.copy .big{margin-top:12px;font-size:clamp(1.7rem,3.3vw,2.4rem);font-weight:300;letter-spacing:-.065em;line-height:.98}
+.copy .big em{font-style:normal;color:var(--brand-ink)}
+.copy .sub{margin-top:12px;font-size:.88rem;color:var(--ink-soft);line-height:1.6}
+
+.end{margin-block:46px 70px;border:1px solid var(--line);border-radius:24px;padding:24px 20px;background:#fff}
+.end ul{margin:12px 0 0;padding-left:20px;color:var(--ink-soft);font-size:.9rem;display:flex;flex-direction:column;gap:8px}
+</style>
+
+<div class="bar"><div class="wrap">
+  <strong>Opciones de diseño — landing v3</strong>
+  <span>Elegí por número: "hero 2, método B, casos A"…</span>
+</div></div>
+
+<div class="wrap">
+
+<section class="lead">
+  <h1>Elegí y lo implemento</h1>
+  <p>Todo lo que sigue está renderizado de verdad, no son dibujos. Cada bloque tiene variantes numeradas y abajo por qué la recomiendo o no. Lo que no te guste de ninguna, me lo decís y lo rehago.</p>
+</section>
+
+<!-- 1. COPY DEL HERO -->
+<section class="sec">
+  <div class="top"><span class="num">01</span><h2>Hero · frase grande y bajada</h2></div>
+  <p class="note">Híbridos entre los tres. Minificando pone el dolor operativo, AtomLabs pone el verbo fuerte ("operan tu negocio"), Marvik pone la velocidad. La frase chiquita de arriba cambia en cada una.</p>
+  <div class="opts three">
+    <div class="opt">
+      <div class="hd"><span class="k">1</span><span class="t">Control</span><span class="rec">Mi voto</span></div>
+      <div class="bd"><div class="copy">
+        <p class="eye">Sistemas a medida · Uruguay</p>
+        <p class="big">Tu operación,<br><em>bajo control.</em></p>
+        <p class="sub">Construimos el sistema que ordena cómo trabaja tu empresa, y automatizamos lo que hoy se hace a mano.</p>
+      </div></div>
+      <p class="why">Corta, concreta, no dice IA. "Bajo control" es lo que el dueño realmente quiere. Funciona igual para una inmobiliaria que para una marca de ropa.</p>
+    </div>
+    <div class="opt">
+      <div class="hd"><span class="k">2</span><span class="t">Operar</span></div>
+      <div class="bd"><div class="copy">
+        <p class="eye">Estudio de automatización · Uruguay</p>
+        <p class="big">Sistemas que<br><em>operan</em> tu negocio.</p>
+        <p class="sub">No entregamos pilotos ni presentaciones. Entregamos software corriendo en tu operación de todos los días.</p>
+      </div></div>
+      <p class="why">La más AtomLabs. Verbo fuerte y promesa de producción. Suena más grande de lo que somos hoy, lo cual puede jugar a favor o en contra.</p>
+    </div>
+    <div class="opt">
+      <div class="hd"><span class="k">3</span><span class="t">Planillas</span></div>
+      <div class="bd"><div class="copy">
+        <p class="eye">Software y automatización a medida</p>
+        <p class="big">Menos planillas.<br><em>Más control.</em></p>
+        <p class="sub">Ordenamos tu operación en un solo sistema y automatizamos las tareas que hoy dependen de que alguien se acuerde.</p>
+      </div></div>
+      <p class="why">La más Minificando. Es la que más rápido se entiende, pero te encasilla en "ordenar planillas" y deja afuera los proyectos grandes.</p>
+    </div>
+  </div>
+</section>
+
+<!-- 2. VISUAL DEL HERO -->
+<section class="sec">
+  <div class="top"><span class="num">02</span><h2>Hero · visual de la derecha</h2></div>
+  <p class="note">Te propongo esto en vez de un Lottie de stock: las animaciones de catálogo son el camino más rápido a que la página parezca igual a otras diez. Estas cuatro están hechas a medida y pesan nada. Si igual querés Lottie, decime y lo sumo.</p>
+  <div class="opts four">
+    <div class="opt">
+      <div class="hd"><span class="k">1</span><span class="t">Flujo</span></div>
+      <div class="bd"><div class="stage">
+        <svg class="flow" viewBox="0 0 300 190" aria-label="Flujo de datos entre sistemas">
+          <path class="wire" d="M60 40 C130 40 130 95 180 95"/>
+          <path class="wire" d="M60 95 L180 95"/>
+          <path class="wire" d="M60 150 C130 150 130 95 180 95"/>
+          <path class="wire" d="M232 95 L268 95"/>
+          <path class="pulse" d="M60 40 C130 40 130 95 180 95"/>
+          <path class="pulse" d="M60 150 C130 150 130 95 180 95" style="animation-delay:1.1s"/>
+          <rect class="node" x="8" y="26" width="52" height="28" rx="9"/><text class="lbl" x="18" y="44">WhatsApp</text>
+          <rect class="node" x="8" y="81" width="52" height="28" rx="9"/><text class="lbl" x="25" y="99">Planilla</text>
+          <rect class="node" x="8" y="136" width="52" height="28" rx="9"/><text class="lbl" x="27" y="154">Correo</text>
+          <rect x="180" y="77" width="52" height="36" rx="11" fill="#0e1116"/><text class="lbl" x="196" y="99" fill="#63e28f">Spike</text>
+          <rect class="node" x="248" y="81" width="46" height="28" rx="9"/><text class="lbl" x="258" y="99">Sistema</text>
+        </svg>
+      </div></div>
+      <p class="why">Explica el negocio sin una palabra: todo lo disperso entra, sale ordenado. El pulso verde da vida sin molestar.</p>
+    </div>
+    <div class="opt">
+      <div class="hd"><span class="k">2</span><span class="t">Producto</span><span class="rec">Mi voto</span></div>
+      <div class="bd"><div class="stage">
+        <div class="win">
+          <div class="chrome"><i></i><i></i><i></i></div>
+          <div class="in">
+            <div class="kpi">
+              <div><small>Pedidos hoy</small><b>87</b></div>
+              <div><small>Pendientes</small><b class="g">4</b></div>
+            </div>
+            <div class="chart"><i style="height:38%"></i><i style="height:62%"></i><i style="height:48%"></i><i style="height:80%"></i><i style="height:66%"></i><i class="on" style="height:94%"></i><i style="height:58%"></i></div>
+          </div>
+        </div>
+      </div></div>
+      <p class="why">Mostrás producto, no una metáfora. Es lo que hace Linear y lo que más confianza genera: se ve que existe algo real.</p>
+    </div>
+    <div class="opt">
+      <div class="hd"><span class="k">3</span><span class="t">Malla</span></div>
+      <div class="bd"><div class="stage dark" style="padding:0">
+        <div class="mesh"><div class="b b1"></div><div class="b b2"></div><div class="grid"></div></div>
+      </div></div>
+      <p class="why">Elegante y moderno, pero no dice nada del negocio. Es el que más riesgo tiene de leerse como decoración genérica.</p>
+    </div>
+    <div class="opt">
+      <div class="hd"><span class="k">4</span><span class="t">Conversación</span></div>
+      <div class="bd"><div class="stage">
+        <div class="chat">
+          <div class="cm a">¿Qué contratos vencen este mes?</div>
+          <div class="cm b">Vencen 4. Dos ya tienen renovación enviada y uno está sin respuesta hace 9 días.</div>
+          <div class="cm a">Mandales recordatorio</div>
+          <div class="cm b">Listo. Y te dejé la tarea para el lunes.</div>
+        </div>
+      </div></div>
+      <p class="why">El más concreto de todos, pero te ata a "chatbot" y ya lo usamos dentro de los casos. Repetirlo en el hero le saca fuerza.</p>
+    </div>
+  </div>
+</section>
+
+<!-- 3. CLIENTES -->
+<section class="sec">
+  <div class="top"><span class="num">03</span><h2>Marcas que confían</h2><span class="rec">Como lo pediste</span></div>
+  <p class="note">Franja sólida con brillo arriba, sin carrusel, logos en gris que toman color al pasar el mouse. Dos filas si hacen falta. Esto es un placeholder con los nombres en texto: con los logos reales va a quedar bastante mejor.</p>
+  <div style="margin-top:20px" class="strip">
+    <div class="row">
+      <span class="lg serif">Castells</span>
+      <span class="lg">Blanco &amp; Etcheverry</span>
+      <span class="lg wide">MATCH CARRASCO</span>
+      <span class="lg oval">Kopel Sánchez</span>
+    </div>
+    <div class="row" style="margin-top:18px">
+      <span class="lg boxed">PITTALUGA</span>
+      <span class="lg wide">HIKE</span>
+      <span class="lg">Proz Recovery</span>
+      <span class="lg serif">Lunar Vintage</span>
+    </div>
+  </div>
+</section>
+
+<!-- 4. POR DONDE EMPEZAR -->
+<section class="sec">
+  <div class="top"><span class="num">04</span><h2>Por dónde empezar</h2></div>
+  <p class="note">Tenías razón: lo que hice quedó a mitad de camino. Dos caminos reales, fondo blanco liso en los dos.</p>
+  <div class="opts two">
+    <div class="opt">
+      <div class="hd"><span class="k">A</span><span class="t">Catálogo de ejemplos (AtomLabs)</span><span class="rec">Mi voto</span></div>
+      <div class="bd">
+        <div style="display:grid;gap:9px">
+          <div class="cell" style="border:1px solid var(--line);border-radius:12px;padding:11px 13px;display:flex;gap:11px;align-items:baseline">
+            <span style="font-family:var(--mono);font-size:.68rem;color:var(--ink-faint)">01</span>
+            <div><b style="font-size:.9rem;letter-spacing:-.02em">Agente de WhatsApp</b><p style="font-size:.78rem;color:var(--ink-soft);margin-top:2px">Atiende, responde y deriva solo lo que hace falta.</p></div>
+          </div>
+          <div class="cell" style="border:1px solid var(--line);border-radius:12px;padding:11px 13px;display:flex;gap:11px;align-items:baseline">
+            <span style="font-family:var(--mono);font-size:.68rem;color:var(--ink-faint)">02</span>
+            <div><b style="font-size:.9rem;letter-spacing:-.02em">Panel de operación</b><p style="font-size:.78rem;color:var(--ink-soft);margin-top:2px">Todo lo que hoy vive en planillas, en una pantalla.</p></div>
+          </div>
+          <div class="cell" style="border:1px solid var(--line);border-radius:12px;padding:11px 13px;display:flex;gap:11px;align-items:baseline">
+            <span style="font-family:var(--mono);font-size:.68rem;color:var(--ink-faint)">03</span>
+            <div><b style="font-size:.9rem;letter-spacing:-.02em">Cierre automático</b><p style="font-size:.78rem;color:var(--ink-soft);margin-top:2px">Conciliación y reportes sin tocar un Excel.</p></div>
+          </div>
+          <p style="font-size:.76rem;color:var(--ink-faint);text-align:center">+ 3 más (asistente interno, integraciones, migración de datos)</p>
+        </div>
+      </div>
+      <p class="why">Seis ejemplos numerados y cortos. El visitante escanea y encuentra el suyo en dos segundos. Jerarquía limpia: número, nombre, una línea. Nada más.</p>
+    </div>
+    <div class="opt">
+      <div class="hd"><span class="k">B</span><span class="t">Dolor grande + ejemplos (híbrido)</span></div>
+      <div class="bd">
+        <div style="border:1px solid var(--line);border-radius:14px;padding:16px">
+          <p style="font-size:1.25rem;font-weight:400;letter-spacing:-.045em;line-height:1.15">&ldquo;Tengo la información repartida en seis planillas.&rdquo;</p>
+          <p style="margin-top:10px;font-size:.84rem;color:var(--ink-soft);line-height:1.6">Lo unificamos en un sistema donde el dato se carga una vez.</p>
+          <div style="margin-top:12px;display:flex;flex-wrap:wrap;gap:6px">
+            <span style="border:1px solid var(--line);border-radius:99px;padding:4px 10px;font-size:.72rem;color:var(--ink-soft)">Panel único</span>
+            <span style="border:1px solid var(--line);border-radius:99px;padding:4px 10px;font-size:.72rem;color:var(--ink-soft)">Reportes solos</span>
+            <span style="border:1px solid var(--line);border-radius:99px;padding:4px 10px;font-size:.72rem;color:var(--ink-soft)">Sin doble carga</span>
+          </div>
+        </div>
+        <p style="font-size:.76rem;color:var(--ink-faint);text-align:center">Tres bloques así, uno abajo del otro</p>
+      </div>
+      <p class="why">Más emocional y más Minificando. Pega fuerte si el visitante se reconoce, pero ocupa tres veces más alto y solo cubre tres situaciones.</p>
+    </div>
+  </div>
+</section>
+
+<!-- 5. METODO -->
+<section class="sec">
+  <div class="top"><span class="num">05</span><h2>Método · visual por card</h2></div>
+  <p class="note">Mismo texto, letra más chica, y un visual chico arriba de cada paso. Tres tratamientos.</p>
+  <div class="opts three">
+    <div class="opt">
+      <div class="hd"><span class="k">A</span><span class="t">Mini-mockup por paso</span><span class="rec">Mi voto</span></div>
+      <div class="bd"><div class="mcard">
+        <div class="mvis">
+          <div style="width:100%;display:flex;flex-direction:column;gap:5px">
+            <div style="display:flex;gap:6px;align-items:center"><span style="width:9px;height:9px;border-radius:3px;border:1.5px solid var(--brand-ink);background:var(--brand-soft)"></span><span style="height:6px;flex:1;background:#e9edf1;border-radius:99px"></span></div>
+            <div style="display:flex;gap:6px;align-items:center"><span style="width:9px;height:9px;border-radius:3px;border:1.5px solid var(--brand-ink);background:var(--brand-soft)"></span><span style="height:6px;flex:1;background:#e9edf1;border-radius:99px"></span></div>
+            <div style="display:flex;gap:6px;align-items:center"><span style="width:9px;height:9px;border-radius:3px;border:1.5px solid #cbd3db"></span><span style="height:6px;width:60%;background:#eef1f5;border-radius:99px"></span></div>
+          </div>
+        </div>
+        <span class="kk">01 · 30-60 min</span>
+        <h4>Diagnóstico sin costo</h4>
+        <p>Miramos tu día a día y marcamos dónde se pierde tiempo.</p>
+      </div></div>
+      <p class="why">Cada paso con su propio mockup: checklist, interruptor que se enciende, barras que crecen, nodos conectándose. Coherente con los casos y nada genérico.</p>
+    </div>
+    <div class="opt">
+      <div class="hd"><span class="k">B</span><span class="t">Panel oscuro chico</span></div>
+      <div class="bd"><div class="mcard">
+        <div class="mvis dk">
+          <div style="width:100%;display:flex;justify-content:space-between;align-items:flex-end">
+            <div><div style="font-size:.5rem;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.42)">Detectado</div><div style="font-size:1.1rem;color:#fff;font-weight:500;letter-spacing:-.04em">6 h/sem</div></div>
+            <div class="spark" style="width:52px;color:#fff"><i style="height:40%"></i><i style="height:62%"></i><i style="height:52%"></i><i class="on" style="height:88%"></i></div>
+          </div>
+        </div>
+        <span class="kk">01 · 30-60 min</span>
+        <h4>Diagnóstico sin costo</h4>
+        <p>Miramos tu día a día y marcamos dónde se pierde tiempo.</p>
+      </div></div>
+      <p class="why">Mismo lenguaje oscuro que los casos. Queda muy unificado, pero cuatro paneles negros seguidos más los casos puede ser demasiado negro en la página.</p>
+    </div>
+    <div class="opt">
+      <div class="hd"><span class="k">C</span><span class="t">Geométrico abstracto</span></div>
+      <div class="bd"><div class="mcard">
+        <div class="mvis">
+          <svg viewBox="0 0 90 60" style="height:100%">
+            <circle cx="22" cy="30" r="15" fill="none" stroke="#cbd3db" stroke-width="1.5"/>
+            <circle cx="46" cy="30" r="15" fill="rgba(99,226,143,.18)" stroke="#63e28f" stroke-width="1.5"/>
+            <circle cx="70" cy="30" r="15" fill="none" stroke="#cbd3db" stroke-width="1.5"/>
+          </svg>
+        </div>
+        <span class="kk">01 · 30-60 min</span>
+        <h4>Diagnóstico sin costo</h4>
+        <p>Miramos tu día a día y marcamos dónde se pierde tiempo.</p>
+      </div></div>
+      <p class="why">Limpio y rápido de hacer, pero es el más decorativo: las formas no dicen nada. Lo pongo porque es una opción válida, no porque lo recomiende.</p>
+    </div>
+  </div>
+</section>
+
+<!-- 6. CASOS -->
+<section class="sec">
+  <div class="top"><span class="num">06</span><h2>Casos · estilo del dashboard</h2></div>
+  <p class="note">Referencias que miré: Linear (contención en oscuro), Vercel (casi monocromo, el color solo significa estado) y Stripe (la tabla como interfaz). Tres estilos, y después el cambio de layout.</p>
+  <div class="opts three">
+    <div class="opt">
+      <div class="hd"><span class="k">A</span><span class="t">Oscuro · Linear</span></div>
+      <div class="bd"><div class="dash dk">
+        <div class="hdr">Panel de alquileres</div>
+        <div class="cell"><span style="opacity:.7">Contratos activos</span><b class="big">148</b></div>
+        <div class="cell"><span style="opacity:.7">Vencen este mes</span><b class="big g">4</b></div>
+        <div class="cell"><span style="opacity:.7">Sin respuesta</span><b>1</b></div>
+      </div></div>
+      <p class="why">Es lo que hay hoy. Premium, pero si todos los casos usan el mismo molde se vuelve monótono. Sirve como uno de varios, no como el único.</p>
+    </div>
+    <div class="opt">
+      <div class="hd"><span class="k">B</span><span class="t">Claro · Stripe</span><span class="rec">Mi voto</span></div>
+      <div class="bd"><div class="dash lt">
+        <div class="hdr" style="color:var(--ink-faint)">Conciliación</div>
+        <div class="cell"><span>Movimientos</span><b>1.240</b></div>
+        <div class="cell"><span>Conciliados</span><b class="g">1.198</b></div>
+        <div class="spark" style="color:var(--ink)"><i style="height:40%"></i><i style="height:66%"></i><i style="height:50%"></i><i style="height:82%"></i><i class="on" style="height:96%"></i><i style="height:60%"></i></div>
+      </div></div>
+      <p class="why">Más liviano y más real: la mayoría de los sistemas que hacés son claros. Deja respirar la página y el verde resalta más sobre blanco.</p>
+    </div>
+    <div class="opt">
+      <div class="hd"><span class="k">C</span><span class="t">Vidrio con color</span></div>
+      <div class="bd"><div class="dash gl">
+        <div class="hdr" style="color:var(--brand-ink)">Centro de ventas</div>
+        <div class="cell"><span>Tienda online</span><b>48%</b></div>
+        <div class="cell"><span>Instagram y WhatsApp</span><b class="g">33%</b></div>
+        <div class="cell"><span>Local</span><b>19%</b></div>
+      </div></div>
+      <p class="why">El más colorido y el que mejor combina con la franja de clientes que elegiste. Riesgo: si se abusa, la página se va a "startup genérica".</p>
+    </div>
+  </div>
+
+  <p class="note" style="margin-top:28px"><b style="color:var(--ink)">Y el layout.</b> Hoy el visual va al costado del texto. Tu idea de ponerlo abajo:</p>
+  <div class="opts two">
+    <div class="opt">
+      <div class="hd"><span class="k">1</span><span class="t">Como está: al costado</span></div>
+      <div class="bd"><div class="lay" style="grid-template-columns:1fr 1fr">
+        <div><div class="blk t"></div><div class="blk t s" style="margin-top:6px"></div><div class="blk" style="margin-top:8px"></div></div>
+        <div class="blk v"></div>
+      </div></div>
+      <p class="why">Compacto, pero el visual queda angosto y los dashboards necesitan ancho para respirar. Por eso se sienten todos iguales.</p>
+    </div>
+    <div class="opt">
+      <div class="hd"><span class="k">2</span><span class="t">Texto arriba, visual abajo ancho</span><span class="rec">Mi voto</span></div>
+      <div class="bd"><div class="lay">
+        <div class="blk t"></div><div class="blk t s"></div>
+        <div class="blk v" style="height:100px"></div>
+      </div></div>
+      <p class="why">Tenías razón. El visual a lo ancho deja mostrar una tabla de verdad, un gráfico que se lee, varias columnas. Ahí cada caso puede verse distinto de verdad.</p>
+    </div>
+  </div>
+</section>
+
+<!-- 7. FAQ -->
+<section class="sec">
+  <div class="top"><span class="num">07</span><h2>Preguntas · título izquierda, preguntas derecha</h2><span class="rec">Como lo pediste</span></div>
+  <div class="faqgrid" style="margin-top:22px">
+    <div>
+      <p style="font-size:.62rem;letter-spacing:.24em;text-transform:uppercase;color:var(--ink-faint)">Preguntas</p>
+      <h3 style="margin-top:12px;font-size:1.8rem;font-weight:400;letter-spacing:-.055em;line-height:1.08">Lo que nos preguntan antes de empezar.</h3>
+      <p style="margin-top:12px;font-size:.88rem;color:var(--ink-soft);line-height:1.6">Si algo no está acá, escribinos y te lo contestamos sin vueltas.</p>
+    </div>
+    <div>
+      <div class="q">¿Cómo cobran?<span>+</span></div>
+      <div class="q">¿La primera charla incluye una demo?<span>+</span></div>
+      <div class="q">¿Cuánto tarda en estar funcionando?<span>+</span></div>
+      <div class="q">¿Tengo que cambiar lo que uso hoy?<span>+</span></div>
+      <div class="q">¿Qué pasa con nuestros datos?<span>+</span></div>
+      <div class="q">¿Y si mi equipo no es técnico?<span>+</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- 8. QUE RECIBIS -->
+<section class="sec">
+  <div class="top"><span class="num">08</span><h2>Qué recibís + equipo</h2></div>
+  <p class="note">Reemplaza la sección de equipo actual. Primero lo concreto que se llevan, con la capacitación bien al frente, y recién abajo las dos caras, chiquitas.</p>
+  <div class="recv" style="margin-top:22px">
+    <div class="rc"><span class="n">01</span><div><h4>El circuito funcionando</h4><p>No un prototipo. El proceso corriendo en tu operación, con tus datos reales.</p></div></div>
+    <div class="rc"><span class="n">02</span><div><h4>Tus datos migrados</h4><p>Lo que hoy vive en planillas y carpetas entra al sistema ordenado y sin duplicados.</p></div></div>
+    <div class="rc"><span class="n">03</span><div><h4>Tu equipo capacitado</h4><p>Nos sentamos con las personas que lo van a usar todos los días hasta que lo manejen sin nosotros. Si nadie lo usa, no sirvió de nada.</p></div></div>
+    <div class="rc"><span class="n">04</span><div><h4>Alguien del otro lado</h4><p>Nos escribís y te contestamos nosotros, no un ticket. Revisamos cómo viene funcionando y ajustamos lo que haga falta.</p></div></div>
+  </div>
+  <div style="margin-top:16px;border:1px solid var(--line);border-radius:16px;background:#fff;padding:18px;display:flex;flex-wrap:wrap;gap:18px;align-items:center">
+    <div style="display:flex;gap:10px">
+      <span style="width:44px;height:44px;border-radius:99px;background:var(--line-soft);display:block"></span>
+      <span style="width:44px;height:44px;border-radius:99px;background:var(--line-soft);display:block"></span>
+    </div>
+    <div style="flex:1;min-width:220px">
+      <p style="font-size:.94rem;font-weight:500;letter-spacing:-.02em">Somos Facundo y Gonzalo.</p>
+      <p style="margin-top:4px;font-size:.84rem;color:var(--ink-soft);line-height:1.55">El que te atiende en la primera reunión es el mismo que después escribe el código. No hay intermediarios.</p>
+    </div>
+  </div>
+  <p class="note" style="margin-top:14px">Tus fotos están en <code style="font-family:var(--mono);font-size:.82rem">legacy-landing/Personas/</code> y sirven: fondo neutro y de frente. Las recorto en redondo.</p>
+</section>
+
+<!-- 9. FOOTER -->
+<section class="sec">
+  <div class="top"><span class="num">09</span><h2>Footer compacto</h2><span class="rec">Como lo pediste</span></div>
+  <p class="note">Contacto en horizontal, sin el párrafo de relleno, sin la franja negra gigante.</p>
+  <div style="margin-top:20px;border:1px solid var(--line);border-radius:18px;background:#fff;padding:20px">
+    <div class="ft" style="border:0;padding:0">
+      <b style="color:var(--ink);font-weight:600;letter-spacing:-.02em">Spike AI</b>
+      <span>+598 91 315 670</span>
+      <span>hola@spikeai.com</span>
+      <span>Uruguay</span>
+      <span class="sp"></span>
+      <span>LinkedIn</span>
+      <span>Instagram</span>
+    </div>
+    <div class="ft" style="margin-top:16px;font-size:.76rem;color:var(--ink-faint)">
+      <span>© 2026 Spike AI</span>
+    </div>
+  </div>
+</section>
+
+<section class="end">
+  <h2 style="font-size:1.2rem;font-weight:600;letter-spacing:-.03em">Decisiones que ya tomé, decime si alguna no va</h2>
+  <ul>
+    <li><b style="color:var(--ink)">Integraciones se va.</b> Entendí que preferís sacarla antes que hacerla a medias. Cuando tengamos los logos reales la volvemos a meter bien hecha.</li>
+    <li><b style="color:var(--ink)">Menos texto en todo.</b> Voy a recortar descripciones largas, sacar los <i>result</i> repetidos de los casos y dejar una idea por bloque.</li>
+    <li><b style="color:var(--ink)">Cada caso con un visual distinto</b> de verdad: tabla, gráfico, chat, pipeline, calendario. No el mismo molde repintado.</li>
+    <li><b style="color:var(--ink)">Botón principal:</b> "Hablemos de tu negocio". El secundario sigue siendo "Ver casos".</li>
+    <li><b style="color:var(--ink)">Antes / Después:</b> no me dijiste nada, la dejo como está salvo que quieras tocarla.</li>
+  </ul>
+</section>
+
+</div>

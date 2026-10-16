@@ -29,12 +29,11 @@ import {
 import { Badge } from "@/components/ui/badge"
 import { BlurFade } from "@/components/ui/blur-fade"
 import { DotPattern } from "@/components/ui/dot-pattern"
-import { Marquee } from "@/components/ui/marquee"
 
 const navigation = [
   { label: "Cómo empezar", href: "#servicios" },
   { label: "Método", href: "#metodo" },
-  { label: "Equipo", href: "#equipo" },
+  { label: "Qué recibís", href: "#equipo" },
   { label: "Contacto", href: "#contacto" },
 ]
 
@@ -163,52 +162,68 @@ const caseStudies = [
 
 const startingPoints = [
   {
-    pain: "Tengo la información repartida en seis planillas.",
-    solution:
-      "Unificamos todo en un sistema donde cada dato se carga una sola vez y el reporte se arma solo.",
-    context: "En producción en una inmobiliaria",
+    step: "01",
+    title: "Agente de WhatsApp",
+    text: "Atiende, responde y deriva solo lo que necesita una persona.",
   },
   {
-    pain: "Perdemos la mañana en tareas que son siempre iguales.",
-    solution:
-      "Automatizamos la tarea completa: carga, control, aviso y registro. Corre sola y avisa solo si algo no cierra.",
-    context: "En producción en un estudio contable",
+    step: "02",
+    title: "Panel de operación",
+    text: "Lo que hoy vive en planillas, en una sola pantalla.",
   },
   {
-    pain: "Todo depende de que una persona se acuerde.",
-    solution:
-      "Un asistente conectado a tu operación responde consultas internas y dispara las acciones que hoy dependen de alguien.",
-    context: "En producción en una empresa de servicios",
+    step: "03",
+    title: "Cierre automático",
+    text: "Conciliación y reportes sin abrir un Excel.",
   },
-]
-
-const integrations = [
-  "WhatsApp Business API",
-  "n8n",
-  "Supabase",
-  "Google Sheets",
-  "Odoo",
-  "HubSpot",
-  "Bitrix24",
-  "Make",
-  "Mercado Libre",
-  "Notion",
-  "Gmail y Outlook",
-  "Power BI",
+  {
+    step: "04",
+    title: "Asistente interno",
+    text: "Responde sobre tus procesos y documentos al instante.",
+  },
+  {
+    step: "05",
+    title: "Sistemas conectados",
+    text: "Tus herramientas hablando entre sí, sin carga doble.",
+  },
+  {
+    step: "06",
+    title: "Migración de datos",
+    text: "Años de planillas sueltas en una base ordenada.",
+  },
 ]
 
 const team = [
   {
     name: "Facundo Etcheverry",
-    role: "Co-founder - Sistemas y automatización",
-    bio: "Arquitectura de automatizaciones, integraciones y agentes conectados a la operación de cada empresa.",
+    role: "Sistemas y automatización",
+    photo: "/equipo/facundo.jpeg",
     linkedin: "https://www.linkedin.com/in/REEMPLAZAR",
   },
   {
     name: "Gonzalo Pittaluga",
-    role: "Co-founder - Datos y estrategia",
-    bio: "Inteligencia de negocios, dashboards y modelos sobre los datos reales de cada operación.",
+    role: "Datos y estrategia",
+    photo: "/equipo/gonzalo.jpeg",
     linkedin: "https://www.linkedin.com/in/REEMPLAZAR",
+  },
+]
+
+const deliverables = [
+  {
+    title: "El circuito funcionando",
+    text: "En producción, con tus datos. No un prototipo.",
+  },
+  {
+    title: "Tus datos migrados",
+    text: "Lo que vive en planillas entra ordenado y sin duplicados.",
+  },
+  {
+    title: "Tu equipo capacitado",
+    text: "Los entrenamos hasta que lo manejen sin nosotros.",
+  },
+  {
+    title: "Alguien del otro lado",
+    text: "Nos escribís y te contestamos nosotros, no un ticket.",
   },
 ]
 
@@ -854,10 +869,8 @@ function SuccessCasesSection() {
                     ].join(" ")}
                     style={{ width: `${slideWidth}px` }}
                   >
-                    <div className="grid h-full gap-6 lg:grid-cols-[minmax(0,0.88fr)_minmax(340px,1.12fr)] lg:items-stretch">
-                      <Visual />
-
-                      <div className="flex h-full flex-col justify-between py-1">
+                    <div className="flex h-full flex-col gap-6">
+                      <div className="grid gap-x-10 gap-y-4 lg:grid-cols-[minmax(0,1.15fr)_minmax(0,0.85fr)] lg:items-end">
                         <div>
                           <p className="text-[0.7rem] uppercase tracking-[0.22em] text-slate-500">
                             {item.eyebrow}
@@ -868,28 +881,18 @@ function SuccessCasesSection() {
                               </span>
                             ) : null}
                           </p>
-                          <h3 className="mt-3 text-[2rem] font-medium leading-[0.98] tracking-[-0.07em] text-slate-900 lg:text-[2.35rem]">
+                          <h3 className="mt-3 text-[1.75rem] font-medium leading-[1] tracking-[-0.06em] text-slate-900 lg:text-[2.1rem]">
                             {item.title}
                           </h3>
-                          <p className="mt-4 text-[1rem] leading-7 text-slate-600 lg:text-[1.02rem]">
-                            {item.description}
-                          </p>
                         </div>
 
-                        <div className="mt-8 space-y-3">
-                          {item.bullets.slice(0, 3).map((bullet) => (
-                            <div key={`${item.title}-${loopIndex}-${bullet}`} className="flex items-start gap-2.5 text-sm leading-6 text-slate-700 lg:text-[0.96rem]">
-                              <CircleCheckBig className="mt-1 size-4 shrink-0 text-[var(--brand-strong)]" />
-                              <span>{bullet}</span>
-                            </div>
-                          ))}
-                        </div>
+                        <p className="text-[0.95rem] leading-7 text-slate-600">
+                          {item.description}
+                        </p>
+                      </div>
 
-                        <div className="mt-8 border-t border-slate-200/80 pt-4">
-                          <p className="text-sm leading-6 text-slate-500 lg:text-[0.96rem]">
-                            {item.result}
-                          </p>
-                        </div>
+                      <div className="min-h-0 flex-1">
+                        <Visual />
                       </div>
                     </div>
                   </article>
@@ -999,32 +1002,26 @@ function App() {
             <BlurFade inView delay={0.05}>
               <div>
                 <p className="text-[0.68rem] uppercase tracking-[0.28em] text-muted-foreground">
-                  Uruguay - Automatización y sistemas a medida
+                  Software y automatización a medida
                 </p>
-                <h1 className="mt-5 text-[3.4rem] font-light leading-[0.92] tracking-[-0.1em] text-foreground sm:text-7xl md:text-[5.6rem] xl:text-[6.6rem] xl:leading-[0.88]">
-                  Tu operación
+                <h1 className="mt-5 text-[3.2rem] font-light leading-[0.94] tracking-[-0.1em] text-foreground sm:text-[4.2rem] md:text-[5rem] xl:text-[5.8rem] xl:leading-[0.9]">
+                  Sistemas
                   <br />
-                  en un solo
+                  diseñados para
                   <br />
-                  <span className="text-[var(--brand-strong)]">lugar.</span>
+                  <span className="text-[var(--brand-strong)]">tu negocio.</span>
                 </h1>
               </div>
             </BlurFade>
 
             <div className="space-y-8 lg:pl-4">
               <div className="max-w-xl">
-                <BlurFade inView delay={0.14}>
-                  <h2 className="text-[2rem] font-medium tracking-[-0.08em] text-balance text-foreground sm:text-[2.4rem] lg:text-[2.7rem] lg:leading-[1]">
-                    Menos planillas sueltas. Menos tareas que dependen de una
-                    sola persona.
-                  </h2>
-                </BlurFade>
+                {/* Acá va la figura del hero (unDraw/Storyset) cuando este elegida */}
 
                 <BlurFade inView delay={0.2}>
-                  <p className="mt-4 text-base leading-8 text-muted-foreground sm:text-lg">
+                  <p className="text-base leading-8 text-muted-foreground sm:text-lg">
                     Ordenamos cómo trabaja tu empresa y automatizamos lo que hoy
-                    se hace a mano. Empezamos por una pieza concreta, no por un
-                    proyecto de un año.
+                    se hace a mano.
                   </p>
                 </BlurFade>
 
@@ -1037,7 +1034,7 @@ function App() {
                       className="inline-flex h-11 items-center justify-center gap-2 rounded-full border border-neutral-950 bg-neutral-950 px-6 text-sm font-medium text-white shadow-none transition-transform hover:-translate-y-0.5 hover:bg-neutral-800"
                       style={{ color: "#ffffff" }}
                     >
-                      <span style={{ color: "#ffffff" }}>Diagnóstico gratuito</span>
+                      <span style={{ color: "#ffffff" }}>Hablemos de tu negocio</span>
                       <ArrowUpRight className="size-4 text-white" />
                     </a>
                     <a
@@ -1065,104 +1062,63 @@ function App() {
           </div>
         </section>
 
-        <section className="mx-auto max-w-7xl py-14 sm:py-16">
+        <section className="relative left-1/2 w-screen -translate-x-1/2 border-y border-border/70 bg-[linear-gradient(180deg,#ffffff_0%,#f3f6f8_100%)] py-10 sm:py-12">
           <BlurFade inView>
-            <div className="text-center">
-              <p className="text-[0.68rem] uppercase tracking-[0.26em] text-muted-foreground">
-                Confían en nosotros
+            <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+              <p className="text-center text-[0.66rem] uppercase tracking-[0.26em] text-muted-foreground/70">
+                Empresas que ya confían en nosotros
               </p>
-              <h2 className="mx-auto mt-4 max-w-2xl text-2xl font-medium tracking-[-0.06em] text-balance text-foreground sm:text-[2.1rem] sm:leading-[1.05]">
-                Empresas que ya trabajan sobre sistemas que construimos.
-              </h2>
-            </div>
-          </BlurFade>
 
-          <BlurFade inView delay={0.1}>
-            <div className="relative mt-9 overflow-hidden">
-              <Marquee pauseOnHover className="[--duration:34s]">
+              <div className="mt-8 flex flex-wrap items-center justify-center gap-x-10 gap-y-6 sm:gap-x-14 lg:gap-x-16">
                 {clients.map((client) => (
-                  <div
+                  <span
                     key={client}
-                    className="rounded-full border border-border bg-white px-6 py-3 text-base font-medium tracking-[-0.02em] text-foreground/85 shadow-[0_18px_40px_-34px_rgba(15,23,42,0.3)]"
+                    className="text-[0.95rem] font-semibold tracking-[-0.01em] text-slate-400 transition-colors duration-300 hover:text-slate-600 sm:text-[1.05rem]"
                   >
                     {client}
-                  </div>
+                  </span>
                 ))}
-              </Marquee>
-              <div className="pointer-events-none absolute inset-y-0 left-0 w-24 bg-gradient-to-r from-background to-transparent" />
-              <div className="pointer-events-none absolute inset-y-0 right-0 w-24 bg-gradient-to-l from-background to-transparent" />
+              </div>
             </div>
-          </BlurFade>
-
-          <BlurFade inView delay={0.16}>
-            <p className="mx-auto mt-9 max-w-2xl text-center text-sm leading-7 text-muted-foreground">
-              Inmobiliarias, estudios contables, retail, forestal y servicios.
-              Más de 50 automatizaciones entregadas desde 2023.
-            </p>
           </BlurFade>
         </section>
 
         <section className="mx-auto max-w-7xl py-16 sm:py-20">
           <SectionIntro
             label="Por dónde empezar"
-            title="Casi siempre empieza por una de estas tres."
-            description="No hace falta tener claro qué automatizar. Alcanza con reconocer el problema."
+            title="Ejemplos de lo que construimos."
+            description="No hace falta tener claro qué automatizar. Casi siempre arranca por una de estas."
           />
 
-          <div className="mt-10 grid gap-4 lg:grid-cols-3">
+          <div className="mt-10 grid gap-x-10 gap-y-0 sm:grid-cols-2 lg:grid-cols-3">
             {startingPoints.map((item, index) => (
-              <BlurFade key={item.pain} inView delay={0.06 * index} className="h-full">
-                <div className="flex h-full flex-col rounded-[1.8rem] border border-border/80 bg-white p-6 shadow-[0_26px_70px_-60px_rgba(15,23,42,0.3)] transition-transform duration-300 hover:-translate-y-1">
-                  <p className="text-[1.05rem] font-medium leading-7 tracking-[-0.03em] text-foreground">
-                    &ldquo;{item.pain}&rdquo;
-                  </p>
-                  <p className="mt-4 text-sm leading-7 text-muted-foreground">
-                    {item.solution}
-                  </p>
-                  <div className="mt-6 flex items-center gap-2 border-t border-border/70 pt-4 text-[0.76rem] text-[var(--brand-strong)]">
-                    <CircleCheckBig className="size-3.5 shrink-0" />
-                    <span>{item.context}</span>
+              <BlurFade key={item.step} inView delay={0.05 * index}>
+                <div className="flex items-baseline gap-4 border-t border-border/70 py-6">
+                  <span className="font-mono text-[0.72rem] text-muted-foreground/60">
+                    {item.step}
+                  </span>
+                  <div>
+                    <h3 className="text-[1.08rem] font-medium tracking-[-0.03em] text-foreground">
+                      {item.title}
+                    </h3>
+                    <p className="mt-1.5 text-sm leading-6 text-muted-foreground">
+                      {item.text}
+                    </p>
                   </div>
                 </div>
               </BlurFade>
             ))}
           </div>
 
-          <BlurFade inView delay={0.24}>
-            <div className="mt-4 rounded-[1.8rem] border border-dashed border-border bg-muted/40 px-6 py-6 sm:px-8">
-              <h3 className="text-[1.05rem] font-medium tracking-[-0.03em] text-foreground">
-                ¿Y si tu caso es distinto?
-              </h3>
-              <p className="mt-2 max-w-3xl text-sm leading-7 text-muted-foreground">
-                Casi siempre lo es. Partimos del problema, no de la herramienta.
-                Contanos cómo trabajan hoy y te decimos si hay algo para hacer.
-              </p>
-            </div>
+          <BlurFade inView delay={0.32}>
+            <p className="mt-8 text-sm leading-7 text-muted-foreground">
+              Y si tu caso es otro, también. Partimos del problema, no de la
+              herramienta.
+            </p>
           </BlurFade>
         </section>
 
         <MethodSectionV2 />
-
-        <section className="mx-auto max-w-7xl py-16 sm:py-20">
-          <SectionIntro
-            label="Integraciones"
-            title="Trabajamos sobre las herramientas que ya usás."
-            description="No te pedimos cambiar todo para empezar. Conectamos lo que ya está funcionando y sumamos lo que falte."
-          />
-
-          <BlurFade inView delay={0.1}>
-            <div className="mt-10 flex flex-wrap gap-2.5">
-              {integrations.map((item) => (
-                <span
-                  key={item}
-                  className="rounded-full border border-border bg-white px-4 py-2 text-sm font-medium text-foreground/80 transition-colors duration-300 hover:border-[var(--brand-border)]"
-                >
-                  {item}
-                </span>
-              ))}
-            </div>
-          </BlurFade>
-        </section>
 
         <SuccessCasesSection />
 
@@ -1257,63 +1213,95 @@ function App() {
 
         <section id="equipo" className="mx-auto max-w-7xl py-16 sm:py-20">
           <SectionIntro
-            label="Equipo"
-            title="Hablás directo con quien construye tu sistema."
-            description="Sin gerentes de cuenta ni intermediarios. El que te atiende en la primera reunión es el que después escribe el código."
+            label="Qué recibís"
+            title="Lo que te llevás al final."
+            description="Siempre lo mismo, sea cual sea el proyecto."
           />
 
-          <div className="mt-10 grid gap-4 lg:grid-cols-2">
-            {team.map((person, index) => (
-              <BlurFade key={person.name} inView delay={0.08 * index} className="h-full">
-                <div className="flex h-full flex-col rounded-[1.8rem] border border-border/80 bg-white p-6 shadow-[0_26px_70px_-60px_rgba(15,23,42,0.3)] sm:p-7">
-                  <div className="size-16 rounded-full border border-dashed border-[var(--brand-border)] bg-[var(--brand-soft)]" />
-                  <h3 className="mt-5 text-[1.35rem] font-medium tracking-[-0.05em] text-foreground">
-                    {person.name}
-                  </h3>
-                  <p className="mt-1 text-[0.72rem] uppercase tracking-[0.18em] text-muted-foreground">
-                    {person.role}
-                  </p>
-                  <p className="mt-4 text-sm leading-7 text-muted-foreground">
-                    {person.bio}
-                  </p>
-                  <a
-                    href={person.linkedin}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="mt-6 inline-flex w-fit items-center gap-1.5 text-sm font-medium text-foreground transition-colors duration-300 hover:text-[var(--brand-strong)]"
-                  >
-                    LinkedIn
-                    <ArrowUpRight className="size-4" />
-                  </a>
+          <div className="mt-10 grid gap-x-10 gap-y-0 sm:grid-cols-2">
+            {deliverables.map((item, index) => (
+              <BlurFade key={item.title} inView delay={0.06 * index}>
+                <div className="flex items-start gap-3 border-t border-border/70 py-6">
+                  <CircleCheckBig className="mt-1 size-4 shrink-0 text-[var(--brand-strong)]" />
+                  <div>
+                    <h3 className="text-[1.02rem] font-medium tracking-[-0.03em] text-foreground">
+                      {item.title}
+                    </h3>
+                    <p className="mt-1.5 text-sm leading-6 text-muted-foreground">
+                      {item.text}
+                    </p>
+                  </div>
                 </div>
               </BlurFade>
             ))}
           </div>
+
+          <BlurFade inView delay={0.28}>
+            <div className="mt-10 flex flex-wrap items-center gap-x-6 gap-y-4 rounded-[1.8rem] border border-border/80 bg-white p-5 sm:p-6">
+              <div className="flex -space-x-3">
+                {team.map((person) => (
+                  <img
+                    key={person.name}
+                    src={person.photo}
+                    alt={person.name}
+                    loading="lazy"
+                    className="size-14 rounded-full border-2 border-white object-cover shadow-[0_10px_24px_-16px_rgba(15,23,42,0.5)]"
+                  />
+                ))}
+              </div>
+
+              <div className="min-w-[16rem] flex-1">
+                <p className="text-[1.02rem] font-medium tracking-[-0.03em] text-foreground">
+                  Somos Facundo y Gonzalo.
+                </p>
+                <p className="mt-1 text-sm leading-6 text-muted-foreground">
+                  El que te atiende en la primera reunión es el mismo que
+                  después escribe el código.
+                </p>
+              </div>
+
+              <div className="flex items-center gap-4">
+                {team.map((person) => (
+                  <a
+                    key={person.name}
+                    href={person.linkedin}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="text-sm font-medium text-muted-foreground transition-colors duration-300 hover:text-[var(--brand-strong)]"
+                  >
+                    {person.name.split(" ")[0]}
+                  </a>
+                ))}
+              </div>
+            </div>
+          </BlurFade>
         </section>
 
         <section className="mx-auto max-w-7xl py-16 sm:py-20">
-          <SectionIntro
-            label="Preguntas frecuentes"
-            title="Lo que nos preguntan antes de empezar."
-            description="Si algo no está acá, escribinos y te lo contestamos sin vueltas."
-          />
+          <div className="grid gap-10 lg:grid-cols-[minmax(0,0.85fr)_minmax(0,1.15fr)] lg:items-center lg:gap-16">
+            <SectionIntro
+              label="Preguntas frecuentes"
+              title="Lo que nos preguntan antes de empezar."
+              description="Si algo no está acá, escribinos y te lo contestamos sin vueltas."
+            />
 
-          <div className="mt-10 max-w-3xl space-y-2.5">
-            {faqs.map((item, index) => (
-              <BlurFade key={item.q} inView delay={0.04 * index}>
-                <details className="group rounded-[1.4rem] border border-border/80 bg-white px-5 py-4 transition-colors duration-300 open:border-[var(--brand-border)] sm:px-6">
-                  <summary className="flex cursor-pointer list-none items-center justify-between gap-4 text-[0.98rem] font-medium tracking-[-0.02em] text-foreground marker:hidden">
-                    {item.q}
-                    <span className="text-lg leading-none text-muted-foreground transition-transform duration-300 group-open:rotate-45">
-                      +
-                    </span>
-                  </summary>
-                  <p className="mt-3 text-sm leading-7 text-muted-foreground">
-                    {item.a}
-                  </p>
-                </details>
-              </BlurFade>
-            ))}
+            <div className="space-y-2.5">
+              {faqs.map((item, index) => (
+                <BlurFade key={item.q} inView delay={0.04 * index}>
+                  <details className="group rounded-[1.4rem] border border-border/80 bg-white px-5 py-4 transition-colors duration-300 open:border-[var(--brand-border)] sm:px-6">
+                    <summary className="flex cursor-pointer list-none items-center justify-between gap-4 text-[0.98rem] font-medium tracking-[-0.02em] text-foreground marker:hidden">
+                      {item.q}
+                      <span className="text-lg leading-none text-muted-foreground transition-transform duration-300 group-open:rotate-45">
+                        +
+                      </span>
+                    </summary>
+                    <p className="mt-3 text-sm leading-7 text-muted-foreground">
+                      {item.a}
+                    </p>
+                  </details>
+                </BlurFade>
+              ))}
+            </div>
           </div>
         </section>
 
@@ -1344,82 +1332,39 @@ function App() {
 
         <section
           id="contacto"
-          className="relative left-1/2 w-screen -translate-x-1/2 bg-neutral-950 py-14 text-white sm:py-16"
+          className="relative left-1/2 w-screen -translate-x-1/2 border-t border-border/70 bg-white py-10"
         >
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <div className="grid gap-10 border-b border-white/10 pb-10 lg:grid-cols-[minmax(0,1.2fr)_minmax(0,0.8fr)] lg:items-start">
-              <div>
-                <div className="text-[0.68rem] uppercase tracking-[0.22em] text-white/46">
-                  Contacto
-                </div>
-                <h2 className="mt-4 max-w-xl text-3xl font-medium tracking-[-0.07em] text-balance text-white sm:text-5xl">
-                  Hablemos de tu operación.
-                </h2>
-                <p className="mt-5 max-w-2xl text-base leading-8 text-white/68 sm:text-lg">
-                  Si ves fricción, tareas manuales o procesos que ya no escalan, escribinos y vemos por dónde conviene empezar.
-                </p>
-              </div>
+            <div className="flex flex-wrap items-center gap-x-8 gap-y-4">
+              <span className="text-[1.05rem] font-semibold tracking-[-0.03em] text-foreground">
+                Spike AI
+              </span>
 
-              <div className="grid gap-3 sm:grid-cols-3 lg:grid-cols-1">
-                {[
-                  {
-                    label: "WhatsApp",
-                    value: "+598 91 315 670",
-                    href: whatsappHref,
-                  },
-                  {
-                    label: "Email",
-                    value: "hola@spikeai.com",
-                    href: "mailto:hola@spikeai.com",
-                  },
-                  {
-                    label: "Base",
-                    value: "Uruguay - proyectos en toda la región",
-                    href: undefined,
-                  },
-                ].map((item) => {
-                  const content = (
-                    <div className="rounded-[1.5rem] border border-white/10 bg-white/6 px-4 py-4 transition-colors duration-300 hover:bg-white/9">
-                      <div className="text-[0.68rem] uppercase tracking-[0.2em] text-white/46">
-                        {item.label}
-                      </div>
-                      <div className="mt-2 text-sm font-medium leading-6 text-white/88">
-                        {item.value}
-                      </div>
-                    </div>
-                  )
+              <a
+                href={whatsappHref}
+                target="_blank"
+                rel="noreferrer"
+                className="text-sm text-muted-foreground transition-colors duration-300 hover:text-foreground"
+              >
+                +598 91 315 670
+              </a>
+              <a
+                href="mailto:hola@spikeai.com"
+                className="text-sm text-muted-foreground transition-colors duration-300 hover:text-foreground"
+              >
+                hola@spikeai.com
+              </a>
+              <span className="text-sm text-muted-foreground">Uruguay</span>
 
-                  return item.href ? (
-                    <a
-                      key={item.label}
-                      href={item.href}
-                      target={item.href.startsWith("http") ? "_blank" : undefined}
-                      rel={item.href.startsWith("http") ? "noreferrer" : undefined}
-                    >
-                      {content}
-                    </a>
-                  ) : (
-                    <div key={item.label}>{content}</div>
-                  )
-                })}
-              </div>
-            </div>
-
-            <div className="flex flex-col gap-5 pt-6 sm:flex-row sm:items-center sm:justify-between">
-              <div className="text-sm text-white/46">
-                <p>Spike AI</p>
-                <p className="mt-1">Sistemas a medida y automatización para empresas que necesitan ordenar su operación.</p>
-              </div>
-
-              <div className="flex items-center gap-3">
+              <div className="flex flex-1 items-center justify-start gap-4 sm:justify-end">
                 <a
                   href="https://www.linkedin.com/company/REEMPLAZAR"
                   target="_blank"
                   rel="noreferrer"
                   aria-label="LinkedIn"
-                  className="inline-flex size-10 items-center justify-center rounded-full border border-white/10 bg-white/6 text-white/72 transition-all duration-300 hover:-translate-y-0.5 hover:bg-white/10 hover:text-white"
+                  className="text-muted-foreground transition-colors duration-300 hover:text-foreground"
                 >
-                  <svg viewBox="0 0 24 24" className="size-4 fill-current" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" className="size-[18px] fill-current" aria-hidden="true">
                     <path d="M4.98 3.5C4.98 4.88 3.87 6 2.49 6S0 4.88 0 3.5 1.11 1 2.49 1s2.49 1.12 2.49 2.5ZM.5 8h4V24h-4V8Zm7 0h3.83v2.19h.05c.53-1.01 1.84-2.19 3.79-2.19 4.05 0 4.8 2.67 4.8 6.14V24h-4v-7.08c0-1.69-.03-3.86-2.35-3.86-2.35 0-2.71 1.84-2.71 3.73V24h-4V8Z" />
                   </svg>
                 </a>
@@ -1428,14 +1373,19 @@ function App() {
                   target="_blank"
                   rel="noreferrer"
                   aria-label="Instagram"
-                  className="inline-flex size-10 items-center justify-center rounded-full border border-white/10 bg-white/6 text-white/72 transition-all duration-300 hover:-translate-y-0.5 hover:bg-white/10 hover:text-white"
+                  className="text-muted-foreground transition-colors duration-300 hover:text-foreground"
                 >
-                  <svg viewBox="0 0 24 24" className="size-4 fill-current" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" className="size-[18px] fill-current" aria-hidden="true">
                     <path d="M7.75 2C4.57 2 2 4.57 2 7.75v8.5C2 19.43 4.57 22 7.75 22h8.5C19.43 22 22 19.43 22 16.25v-8.5C22 4.57 19.43 2 16.25 2h-8.5Zm0 1.8h8.5c2.19 0 3.95 1.76 3.95 3.95v8.5c0 2.19-1.76 3.95-3.95 3.95h-8.5A3.94 3.94 0 0 1 3.8 16.25v-8.5c0-2.19 1.76-3.95 3.95-3.95Zm9.05 1.35a1.1 1.1 0 1 0 0 2.2 1.1 1.1 0 0 0 0-2.2ZM12 6.86A5.14 5.14 0 1 0 17.14 12 5.15 5.15 0 0 0 12 6.86Zm0 1.8A3.34 3.34 0 1 1 8.66 12 3.35 3.35 0 0 1 12 8.66Z" />
                   </svg>
                 </a>
               </div>
             </div>
+
+            <p className="mt-6 text-[0.78rem] text-muted-foreground/70">
+              Sistemas a medida y automatización para empresas que necesitan
+              ordenar su operación.
+            </p>
           </div>
         </section>
       </div>
