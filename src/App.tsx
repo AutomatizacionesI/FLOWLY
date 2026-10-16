@@ -181,6 +181,21 @@ const startingPoints = [
   },
 ]
 
+const integrations = [
+  "WhatsApp Business API",
+  "n8n",
+  "Supabase",
+  "Google Sheets",
+  "Odoo",
+  "HubSpot",
+  "Bitrix24",
+  "Make",
+  "Mercado Libre",
+  "Notion",
+  "Gmail y Outlook",
+  "Power BI",
+]
+
 const process = [
   {
     step: "01",
@@ -1074,6 +1089,27 @@ function App() {
         </section>
 
         <MethodSectionV2 />
+
+        <section className="mx-auto max-w-7xl py-16 sm:py-20">
+          <SectionIntro
+            label="Integraciones"
+            title="Trabajamos sobre las herramientas que ya usas."
+            description="No te pedimos cambiar todo para empezar. Conectamos lo que ya esta funcionando y sumamos lo que falte."
+          />
+
+          <BlurFade inView delay={0.1}>
+            <div className="mt-10 flex flex-wrap gap-2.5">
+              {integrations.map((item) => (
+                <span
+                  key={item}
+                  className="rounded-full border border-border bg-white px-4 py-2 text-sm font-medium text-foreground/80 transition-colors duration-300 hover:border-[var(--brand-border)]"
+                >
+                  {item}
+                </span>
+              ))}
+            </div>
+          </BlurFade>
+        </section>
 
         <SuccessCasesSection />
 
