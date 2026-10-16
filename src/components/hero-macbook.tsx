@@ -143,11 +143,16 @@ const months = ["Nov", "Ene", "Mar", "May", "Jul", "Set"]
 const prev = [30, 34, 28, 38, 33, 42, 36]
 const curr = [44, 40, 52, 48, 58, 62, 70]
 
+const donutSegments = [
+  { value: 0.48, offset: 0, color: INDIGO },
+  { value: 0.33, offset: 0.48, color: TEAL },
+  { value: 0.19, offset: 0.81, color: AMBER },
+]
+
 const orders = [
   { id: "#2841", who: "Lucía Fernández", ch: "Instagram", st: "ok", amount: "$ 3.120" },
   { id: "#2840", who: "Martín Suárez", ch: "Tienda online", st: "ok", amount: "$ 1.890" },
   { id: "#2839", who: "Carolina Díaz", ch: "WhatsApp", st: "pe", amount: "$ 2.450" },
-  { id: "#2838", who: "Rodrigo Peña", ch: "Mayorista", st: "nu", amount: "$ 7.640" },
 ] as const
 
 const stLabel = { ok: "Pago", pe: "Pendiente", nu: "Preparando" } as const
@@ -429,20 +434,42 @@ function HeroDashboard() {
             </div>
 
             <div className="donut">
-              <motion.div
-                className="ring"
-                initial={{ scale: 0.75, opacity: 0 }}
-                whileInView={{ scale: 1, opacity: 1 }}
-                viewport={viewport}
-                transition={{ type: "spring", stiffness: 260, damping: 22, delay: 0.5 }}
-              >
-                <span>
+              <div className="ringwrap">
+                <svg viewBox="0 0 42 42" aria-hidden>
+                  <circle
+                    cx="21"
+                    cy="21"
+                    r="15.9155"
+                    fill="none"
+                    stroke="#eef1f5"
+                    strokeWidth="5"
+                  />
+                  {donutSegments.map((seg, i) => (
+                    <motion.circle
+                      key={seg.color}
+                      cx="21"
+                      cy="21"
+                      r="15.9155"
+                      fill="none"
+                      stroke={seg.color}
+                      strokeWidth="5"
+                      initial={{ pathLength: 0, pathOffset: seg.offset }}
+                      whileInView={{ pathLength: seg.value, pathOffset: seg.offset }}
+                      viewport={viewport}
+                      transition={{
+                        duration: 0.85,
+                        ease: [0.22, 1, 0.36, 1],
+                        delay: 0.5 + i * 0.12,
+                      }}
+                    />
+                  ))}
+                </svg>
+                <span className="ringnum">
                   <Counter value={872} />
                 </span>
-              </motion.div>
-            </div>
+              </div>
 
-            <div className="legs">
+              <div className="legs">
               <div>
                 <i style={{ background: INDIGO }} />
                 Tienda online<b>48%</b>
@@ -454,6 +481,7 @@ function HeroDashboard() {
               <div>
                 <i style={{ background: AMBER }} />
                 Local<b>19%</b>
+                </div>
               </div>
             </div>
           </motion.div>

@@ -1057,9 +1057,9 @@ function App() {
             </BlurFade>
 
             <div className="lg:pl-4">
-              <div className="flex max-w-xl flex-col">
+              <div className="flex max-w-xl flex-col lg:mx-auto">
                 <BlurFade inView delay={0.12} className="order-last lg:order-none">
-                  <div className="mx-auto mt-12 w-full max-w-[420px] sm:mt-14 lg:mb-8 lg:mt-0 lg:max-w-[460px]">
+                  <div className="mx-auto mt-12 w-full max-w-[340px] sm:mt-14 sm:max-w-[380px] lg:mb-8 lg:mt-0 lg:max-w-[400px]">
                     <HeroMacbook />
                   </div>
                 </BlurFade>
