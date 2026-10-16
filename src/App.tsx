@@ -311,14 +311,16 @@ const process = [
 
 const comparison = {
   before: [
-    "Tu equipo pierde tiempo en tareas repetitivas.",
-    "La operacion se mueve mas lento de lo que deberia.",
-    "Tu competencia gana ventaja mientras vos sostienes friccion.",
+    "El mismo dato se carga tres veces en tres lugares distintos.",
+    "El reporte del mes se arma a mano copiando de varias planillas.",
+    "Si falta la persona que sabe, el proceso se frena.",
+    "Los pedidos llegan por WhatsApp y se pierden entre conversaciones.",
   ],
   after: [
-    "Tu equipo recupera tiempo para pensar y decidir mejor.",
-    "La operacion gana velocidad, orden y claridad.",
-    "Te adelantas con una estructura mas inteligente.",
+    "El dato se carga una vez y aparece en todos lados.",
+    "El reporte se genera solo y llega el dia que tiene que llegar.",
+    "El proceso corre igual, este quien este.",
+    "Cada pedido entra al sistema con su estado y su responsable.",
   ],
 }
 
@@ -1168,7 +1170,7 @@ function App() {
             <SectionIntro
               label="Antes / Despues"
               title="Menos horas perdidas. Mas foco en lo que realmente mueve el negocio."
-              description="La diferencia no es tecnologica solamente. Cambia la forma en la que opera tu empresa."
+              description="No es solo tecnologia. Cambia la forma en la que se trabaja todos los dias."
             />
           </div>
 
@@ -1206,7 +1208,7 @@ function App() {
                     El equipo recupera tiempo para lo que realmente importa.
                   </h3>
                   <p className="mt-6 max-w-lg text-base leading-8 text-white/72 sm:text-lg">
-                    La IA libera capacidad para decidir mejor y ejecutar con mas claridad.
+                    El sistema sostiene la operacion y el equipo decide sobre informacion confiable.
                   </p>
 
                   <ul className="mt-10 max-w-lg space-y-5 text-left">
