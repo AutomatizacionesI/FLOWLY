@@ -28,6 +28,7 @@ import {
   RentalsVisual,
   SalesVisual,
 } from "@/components/case-visuals"
+import { HeroMacbook } from "@/components/hero-macbook"
 import { Badge } from "@/components/ui/badge"
 import { BlurFade } from "@/components/ui/blur-fade"
 import { DotPattern } from "@/components/ui/dot-pattern"
@@ -1058,15 +1059,8 @@ function App() {
             <div className="lg:pl-4">
               <div className="flex max-w-xl flex-col">
                 <BlurFade inView delay={0.12} className="order-last lg:order-none">
-                  <div className="mt-12 flex justify-start sm:mt-14 lg:mt-0 lg:mb-8">
-                    <span className="shape-green block">
-                      <Triangle
-                        index={0}
-                        size={260}
-                        noise
-                        className="h-auto w-[120px] sm:w-[160px] lg:w-[250px]"
-                      />
-                    </span>
+                  <div className="mt-12 sm:mt-14 lg:mb-9 lg:mt-0">
+                    <HeroMacbook />
                   </div>
                 </BlurFade>
 
