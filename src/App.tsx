@@ -32,8 +32,9 @@ import { DotPattern } from "@/components/ui/dot-pattern"
 import { Marquee } from "@/components/ui/marquee"
 
 const navigation = [
-  { label: "Servicios", href: "#servicios" },
+  { label: "Como empezar", href: "#servicios" },
   { label: "Metodo", href: "#metodo" },
+  { label: "Equipo", href: "#equipo" },
   { label: "Contacto", href: "#contacto" },
 ]
 
@@ -1254,7 +1255,7 @@ function App() {
           </section>
         ) : null}
 
-        <section className="mx-auto max-w-7xl py-16 sm:py-20">
+        <section id="equipo" className="mx-auto max-w-7xl py-16 sm:py-20">
           <SectionIntro
             label="Equipo"
             title="Hablas directo con quien construye tu sistema."
@@ -1368,8 +1369,8 @@ function App() {
                   },
                   {
                     label: "Email",
-                    value: "spike.automations@gmail.com",
-                    href: "mailto:spike.automations@gmail.com",
+                    value: "hola@spikeai.com",
+                    href: "mailto:hola@spikeai.com",
                   },
                   {
                     label: "Base",
@@ -1407,12 +1408,12 @@ function App() {
             <div className="flex flex-col gap-5 pt-6 sm:flex-row sm:items-center sm:justify-between">
               <div className="text-sm text-white/46">
                 <p>Spike AI</p>
-                <p className="mt-1">Automatizacion inteligente para empresas que quieren moverse antes.</p>
+                <p className="mt-1">Sistemas a medida y automatizacion para empresas que necesitan ordenar su operacion.</p>
               </div>
 
               <div className="flex items-center gap-3">
                 <a
-                  href="https://www.linkedin.com"
+                  href="https://www.linkedin.com/company/REEMPLAZAR"
                   target="_blank"
                   rel="noreferrer"
                   aria-label="LinkedIn"
@@ -1423,7 +1424,7 @@ function App() {
                   </svg>
                 </a>
                 <a
-                  href="https://www.instagram.com"
+                  href="https://www.instagram.com/REEMPLAZAR"
                   target="_blank"
                   rel="noreferrer"
                   aria-label="Instagram"
