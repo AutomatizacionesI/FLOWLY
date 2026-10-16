@@ -1038,8 +1038,8 @@ function App() {
           </div>
         </header>
 
-        <section className="relative mx-auto flex min-h-[calc(100vh-5.5rem)] max-w-7xl items-center pt-32 pb-16 sm:pt-36 sm:pb-20 lg:pt-40 lg:pb-24">
-          <div className="grid w-full gap-14 lg:grid-cols-[minmax(0,0.88fr)_minmax(340px,0.92fr)] lg:items-center">
+        <section className="relative mx-auto flex max-w-7xl items-start pt-28 pb-14 sm:pt-32 sm:pb-16 lg:pt-32 lg:pb-20">
+          <div className="grid w-full gap-12 lg:grid-cols-[minmax(0,0.92fr)_minmax(340px,0.88fr)] lg:items-start lg:gap-16">
             <BlurFade inView delay={0.05}>
               <div>
                 <p className="text-[0.68rem] uppercase tracking-[0.28em] text-muted-foreground">
@@ -1058,13 +1058,15 @@ function App() {
             <div className="space-y-8 lg:pl-4">
               <div className="max-w-xl">
                 <BlurFade inView delay={0.12}>
-                  <div className="mb-9 flex justify-start">
-                    <Triangle
-                      index={0}
-                      size={260}
-                      noise
-                      className="h-auto w-[200px] drop-shadow-[0_30px_60px_rgba(15,23,42,0.18)] sm:w-[240px] lg:w-[270px]"
-                    />
+                  <div className="mb-8 flex justify-start">
+                    <span className="shape-green block">
+                      <Triangle
+                        index={0}
+                        size={260}
+                        noise
+                        className="h-auto w-[190px] sm:w-[220px] lg:w-[250px]"
+                      />
+                    </span>
                   </div>
                 </BlurFade>
 
@@ -1261,70 +1263,113 @@ function App() {
           </section>
         ) : null}
 
-        <section id="equipo" className="mx-auto max-w-7xl py-16 sm:py-20">
-          <SectionIntro
-            label="Qué recibís"
-            title="Lo que te llevás al final."
-            description="Siempre lo mismo, sea cual sea el proyecto."
-          />
+        <section
+          id="equipo"
+          className="relative left-1/2 w-screen -translate-x-1/2 border-y border-border/70 bg-[linear-gradient(180deg,#ffffff_0%,#f4f7f5_100%)] py-20 sm:py-24"
+        >
+          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+            <div className="grid gap-12 lg:grid-cols-[minmax(0,0.95fr)_minmax(0,1.05fr)] lg:items-start lg:gap-20">
+              {/* quienes somos */}
+              <BlurFade inView>
+                <div>
+                  <p className="text-[0.68rem] uppercase tracking-[0.26em] text-muted-foreground">
+                    Quiénes somos
+                  </p>
 
-          <div className="mt-10 grid gap-x-10 gap-y-0 sm:grid-cols-2">
-            {deliverables.map((item, index) => (
-              <BlurFade key={item.title} inView delay={0.06 * index}>
-                <div className="flex items-start gap-3 border-t border-border/70 py-6">
-                  <CircleCheckBig className="mt-1 size-4 shrink-0 text-[var(--brand-strong)]" />
-                  <div>
-                    <h3 className="text-[1.02rem] font-medium tracking-[-0.03em] text-foreground">
-                      {item.title}
-                    </h3>
-                    <p className="mt-1.5 text-sm leading-6 text-muted-foreground">
-                      {item.text}
+                  <h2 className="mt-5 text-[2.3rem] font-medium leading-[1.02] tracking-[-0.07em] text-balance text-foreground sm:text-[2.9rem]">
+                    Somos Facundo{" "}
+                    <br />
+                    y Gonzalo.
+                  </h2>
+
+                  <div className="mt-7 flex items-center gap-4">
+                    {team.map((person) => (
+                      <a
+                        key={person.name}
+                        href={person.linkedin}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="group flex items-center gap-3"
+                      >
+                        <img
+                          src={person.photo}
+                          alt={person.name}
+                          loading="lazy"
+                          className="size-[72px] rounded-full object-cover shadow-[0_18px_40px_-26px_rgba(15,23,42,0.6)] transition-transform duration-300 group-hover:-translate-y-0.5 sm:size-[84px]"
+                        />
+                        <span className="hidden sm:block">
+                          <span className="block text-[0.92rem] font-medium tracking-[-0.02em] text-foreground">
+                            {person.name.split(" ")[0]}
+                          </span>
+                          <span className="block text-[0.76rem] text-muted-foreground">
+                            {person.role}
+                          </span>
+                        </span>
+                      </a>
+                    ))}
+                  </div>
+
+                  <div className="mt-8 max-w-lg space-y-4 text-[1rem] leading-8 text-muted-foreground">
+                    <p>
+                      Somos dos y trabajamos juntos en cada proyecto. El que te
+                      atiende en la primera reunión es el mismo que después
+                      escribe el código, así que no hay teléfono descompuesto
+                      entre lo que contás y lo que se construye.
                     </p>
+                    <p>
+                      Nos sentamos con la gente que va a usar el sistema todos
+                      los días y los acompañamos hasta que lo manejen sin
+                      nosotros. Si tu equipo no lo usa, no sirvió de nada.
+                    </p>
+                  </div>
+
+                  <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+                    <a
+                      href={whatsappHref}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="inline-flex h-11 items-center justify-center gap-2 rounded-full border border-neutral-950 bg-neutral-950 px-6 text-sm font-medium text-white transition-transform hover:-translate-y-0.5 hover:bg-neutral-800"
+                      style={{ color: "#ffffff" }}
+                    >
+                      <span style={{ color: "#ffffff" }}>Hablemos de tu negocio</span>
+                      <ArrowUpRight className="size-4 text-white" />
+                    </a>
                   </div>
                 </div>
               </BlurFade>
-            ))}
-          </div>
 
-          <BlurFade inView delay={0.28}>
-            <div className="mt-10 flex flex-wrap items-center gap-x-6 gap-y-4 rounded-[1.8rem] border border-border/80 bg-white p-5 sm:p-6">
-              <div className="flex -space-x-3">
-                {team.map((person) => (
-                  <img
-                    key={person.name}
-                    src={person.photo}
-                    alt={person.name}
-                    loading="lazy"
-                    className="size-14 rounded-full border-2 border-white object-cover shadow-[0_10px_24px_-16px_rgba(15,23,42,0.5)]"
-                  />
-                ))}
-              </div>
+              {/* que recibis */}
+              <BlurFade inView delay={0.12}>
+                <div className="rounded-[2rem] border border-border/80 bg-white p-6 shadow-[0_34px_90px_-70px_rgba(15,23,42,0.4)] sm:p-8">
+                  <p className="text-[0.68rem] uppercase tracking-[0.26em] text-muted-foreground">
+                    Qué recibís
+                  </p>
+                  <h3 className="mt-4 text-[1.5rem] font-medium tracking-[-0.05em] text-foreground sm:text-[1.7rem]">
+                    Lo mismo en todos los proyectos.
+                  </h3>
 
-              <div className="min-w-[16rem] flex-1">
-                <p className="text-[1.02rem] font-medium tracking-[-0.03em] text-foreground">
-                  Somos Facundo y Gonzalo.
-                </p>
-                <p className="mt-1 text-sm leading-6 text-muted-foreground">
-                  El que te atiende en la primera reunión es el mismo que
-                  después escribe el código.
-                </p>
-              </div>
-
-              <div className="flex items-center gap-4">
-                {team.map((person) => (
-                  <a
-                    key={person.name}
-                    href={person.linkedin}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="text-sm font-medium text-muted-foreground transition-colors duration-300 hover:text-[var(--brand-strong)]"
-                  >
-                    {person.name.split(" ")[0]}
-                  </a>
-                ))}
-              </div>
+                  <div className="mt-7 flex flex-col">
+                    {deliverables.map((item) => (
+                      <div
+                        key={item.title}
+                        className="flex items-start gap-3.5 border-t border-border/70 py-5 first:border-t-0 first:pt-0"
+                      >
+                        <CircleCheckBig className="mt-[3px] size-[18px] shrink-0 text-[var(--brand-strong)]" />
+                        <div>
+                          <h4 className="text-[1rem] font-medium tracking-[-0.03em] text-foreground">
+                            {item.title}
+                          </h4>
+                          <p className="mt-1 text-[0.92rem] leading-7 text-muted-foreground">
+                            {item.text}
+                          </p>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </BlurFade>
             </div>
-          </BlurFade>
+          </div>
         </section>
 
         <section className="mx-auto max-w-7xl py-16 sm:py-20">

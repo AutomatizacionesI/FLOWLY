@@ -47,7 +47,7 @@ function Window({
       >
         <div className="mb-3 flex items-center gap-2 px-1">
           <span
-            className="size-[18px] rounded-md"
+            className="cv-live size-[18px] rounded-md"
             style={{ background: dark ? "#22c55e" : INK }}
           />
           <span
@@ -110,7 +110,7 @@ function Kpi({
       </p>
       <div className="mt-1 flex items-baseline gap-1.5">
         <span
-          className="text-[1.15rem] font-semibold leading-none tracking-[-0.035em] tabular-nums"
+          className="cv-value text-[1.15rem] font-semibold leading-none tracking-[-0.035em] tabular-nums"
           style={{ color: dark ? "#f2f5f9" : INK }}
         >
           {value}
@@ -193,16 +193,21 @@ function Row({
   mid,
   right,
   dark = false,
+  delay = 0,
 }: {
   left: string
   mid?: ReactNode
   right: ReactNode
   dark?: boolean
+  delay?: number
 }) {
   return (
     <div
-      className="flex items-center justify-between gap-3 border-t py-[7px] first:border-t-0"
-      style={{ borderColor: dark ? "#232a36" : "#f1f3f7" }}
+      className="cv-row flex items-center justify-between gap-3 border-t py-[7px] first:border-t-0"
+      style={{
+        borderColor: dark ? "#232a36" : "#f1f3f7",
+        animationDelay: `${delay}ms`,
+      }}
     >
       <span
         className="min-w-0 flex-1 truncate text-[0.68rem]"
@@ -222,8 +227,12 @@ function Bars({ data }: { data: { h: number; c: string }[] }) {
       {data.map((b, i) => (
         <div key={i} className="flex min-w-0 flex-1 flex-col justify-end gap-[3px]">
           <div
-            className="w-full rounded-[3px]"
-            style={{ height: `${b.h}%`, background: b.c }}
+            className="cv-bar w-full rounded-[3px]"
+            style={{
+              height: `${b.h}%`,
+              background: b.c,
+              animationDelay: `${i * 90}ms`,
+            }}
           />
         </div>
       ))}
@@ -263,7 +272,7 @@ export function RentalsVisual() {
       </div>
 
       <Card title="Vencimientos próximos" action="Este mes">
-        <div className="flex flex-col">
+        <div className="cv-rows flex flex-col">
           <Row left="Pocitos - 2 amb." right={<Pill text="Renovado" tone="ok" />} />
           <Row left="Carrasco - casa" right={<Pill text="Renovado" tone="ok" />} />
           <Row left="Centro - oficina" right={<Pill text="Sin respuesta" tone="warn" />} />
@@ -301,7 +310,7 @@ export function ReconciliationVisual() {
         </Card>
 
         <Card title="Diferencias">
-          <div className="flex flex-col">
+          <div className="cv-rows flex flex-col">
             <Row left="Transferencia" right={<Pill text="Match" tone="ok" />} />
             <Row left="Débito automático" right={<Pill text="Match" tone="ok" />} />
             <Row left="Dif. $ 1.430" right={<Pill text="Revisar" tone="warn" />} />
@@ -333,6 +342,15 @@ export function AssistantVisual() {
             formulario.
           </div>
           <div className="flex items-center gap-1.5">
+            <span className="mr-1 flex items-center gap-[3px]">
+              {[0, 1, 2].map((d) => (
+                <span
+                  key={d}
+                  className="cv-dot size-[4px] rounded-full"
+                  style={{ background: "#5b5bd6", animationDelay: `${d * 180}ms` }}
+                />
+              ))}
+            </span>
             <span
               className="rounded-md px-1.5 py-[2px] text-[0.56rem] font-medium"
               style={{ background: "#eef1f5", color: MUTE }}
@@ -371,7 +389,7 @@ export function DatabaseVisual() {
         <p className="text-[0.7rem] leading-5" style={{ color: "#c7cfdb" }}>
           ¿Qué propiedades quedaron sin visita esta semana?
         </p>
-        <div className="mt-2 flex flex-col">
+        <div className="cv-rows mt-2 flex flex-col">
           <Row dark left="Pocitos - 2 amb." right={<Pill text="6 días" tone="warn" />} />
           <Row dark left="Carrasco - casa" right={<Pill text="8 días" tone="warn" />} />
           <Row dark left="Centro - oficina" right={<Pill text="11 días" tone="warn" />} />
@@ -413,7 +431,7 @@ export function DashboardVisual() {
         </Card>
 
         <Card title="Por area">
-          <div className="flex flex-col">
+          <div className="cv-rows flex flex-col">
             <Row left="Ventas" right={<span className="text-[0.66rem] font-semibold tabular-nums" style={{ color: INK }}>46%</span>} />
             <Row left="Deposito" right={<span className="text-[0.66rem] font-semibold tabular-nums" style={{ color: INK }}>31%</span>} />
             <Row left="Administración" right={<span className="text-[0.66rem] font-semibold tabular-nums" style={{ color: INK }}>23%</span>} />
@@ -435,7 +453,7 @@ export function DataVisual() {
       tone="dark"
     >
       <Card title="Migración" action="Completa" dark>
-        <div className="flex flex-col">
+        <div className="cv-rows flex flex-col">
           <Row dark left="planilla_v3.xlsx" right={<Pill text="Migrado" tone="ok" />} />
           <Row dark left="planilla_final.xlsx" right={<Pill text="Migrado" tone="ok" />} />
           <Row dark left="copia_2024.xlsx" right={<Pill text="Duplicado" tone="idle" />} />
@@ -490,7 +508,7 @@ export function SalesVisual() {
                   style={{ background: "#eef1f5" }}
                 >
                   <div
-                    className="h-full rounded-full"
+                    className="cv-fill h-full rounded-full"
                     style={{ width: `${ch.pct}%`, background: ch.c }}
                   />
                 </div>
@@ -500,7 +518,7 @@ export function SalesVisual() {
         </Card>
 
         <Card title="Stock" action="Sincronizado">
-          <div className="flex flex-col">
+          <div className="cv-rows flex flex-col">
             <Row left="Campera oversize" right={<Pill text="12" tone="ok" />} />
             <Row left="Buzo cuello alto" right={<Pill text="3" tone="warn" />} />
             <Row left="Pantalón cargo" right={<Pill text="27" tone="ok" />} />
