@@ -142,15 +142,15 @@ function Bubble({ from, children }: { from: "user" | "system"; children: ReactNo
 
 export function RentalsVisual() {
   return (
-    <Frame label="Panel de alquileres" meta="Simulacion">
+    <Frame label="Panel de alquileres" meta="Simulación">
       <div className="grid grid-cols-2 gap-2.5">
         <Stat label="Contratos activos" value="148" />
         <Stat label="Vencen este mes" value="4" tone="brand" />
       </div>
-      <Line left="Renovacion enviada" right="2" state="ok" />
-      <Line left="Sin respuesta hace 9 dias" right="1" state="warn" />
+      <Line left="Renovación enviada" right="2" state="ok" />
+      <Line left="Sin respuesta hace 9 días" right="1" state="warn" />
       <Line left="Sin contactar" right="1" state="idle" />
-      <Progress value={82} caption="Ocupacion 82% - alertas automaticas activas" />
+      <Progress value={82} caption="Ocupación 82% - alertas automáticas activas" />
     </Frame>
   )
 }
@@ -159,15 +159,15 @@ export function RentalsVisual() {
 
 export function ReconciliationVisual() {
   return (
-    <Frame label="Conciliacion bancaria" meta="Simulacion">
+    <Frame label="Conciliación bancaria" meta="Simulación">
       <div className="grid grid-cols-2 gap-2.5">
         <Stat label="Movimientos" value="1.240" />
         <Stat label="Conciliados" value="1.198" tone="brand" />
       </div>
       <Line left="Transferencia - proveedor" right="match" state="ok" />
-      <Line left="Debito automatico" right="match" state="ok" />
+      <Line left="Débito automático" right="match" state="ok" />
       <Line left="Diferencia de $ 1.430" right="revisar" state="warn" />
-      <Progress value={96} caption="42 movimientos para revision manual" />
+      <Progress value={96} caption="42 movimientos para revisión manual" />
     </Frame>
   )
 }
@@ -176,17 +176,17 @@ export function ReconciliationVisual() {
 
 export function AssistantVisual() {
   return (
-    <Frame label="Asistente interno" meta="Simulacion">
-      <Bubble from="user">Como se imputa una factura de exterior?</Bubble>
+    <Frame label="Asistente interno" meta="Simulación">
+      <Bubble from="user">¿Cómo se imputa una factura de exterior?</Bubble>
       <Bubble from="system">
-        Segun el procedimiento interno, va a la cuenta 6.2.1 con retencion.
+        Según el procedimiento interno, va a la cuenta 6.2.1 con retención.
         Te dejo el paso a paso y el formulario.
       </Bubble>
       <Bubble from="user">Generame el asiento</Bubble>
       <Bubble from="system">
-        Listo. Asiento borrador creado y asignado para revision.
+        Listo. Asiento borrador creado y asignado para revisión.
       </Bubble>
-      <Progress value={100} caption="Conectado a documentacion y procesos internos" />
+      <Progress value={100} caption="Conectado a documentación y procesos internos" />
     </Frame>
   )
 }
@@ -195,17 +195,17 @@ export function AssistantVisual() {
 
 export function DatabaseVisual() {
   return (
-    <Frame label="Consulta sobre la base" meta="Simulacion">
-      <Bubble from="user">Que propiedades quedaron sin visita esta semana?</Bubble>
+    <Frame label="Consulta sobre la base" meta="Simulación">
+      <Bubble from="user">¿Qué propiedades quedaron sin visita esta semana?</Bubble>
       <div className="rounded-xl border border-white/10 bg-white/[0.045] p-3">
         <p className="text-[0.6rem] uppercase tracking-[0.16em] text-white/40">
           Resultado
         </p>
         <div className="mt-2 space-y-1.5">
           {[
-            ["Pocitos - 2 amb.", "6 dias"],
-            ["Carrasco - casa", "8 dias"],
-            ["Centro - oficina", "11 dias"],
+            ["Pocitos - 2 amb.", "6 días"],
+            ["Carrasco - casa", "8 días"],
+            ["Centro - oficina", "11 días"],
           ].map(([a, b]) => (
             <div key={a} className="flex items-center justify-between gap-3">
               <span className="truncate text-[0.8rem] text-white/72">{a}</span>
@@ -228,14 +228,14 @@ export function DashboardVisual() {
   const bars = [52, 68, 44, 81, 73, 95, 62]
 
   return (
-    <Frame label="Panel de rendimiento" meta="Simulacion">
+    <Frame label="Panel de rendimiento" meta="Simulación">
       <div className="grid grid-cols-2 gap-2.5">
         <Stat label="Ingresos del mes" value="$ 1,24 M" />
         <Stat label="Vs. mes anterior" value="+14%" tone="brand" />
       </div>
       <div className="rounded-xl border border-white/10 bg-white/[0.045] px-3.5 py-3">
         <p className="text-[0.6rem] uppercase tracking-[0.16em] text-white/40">
-          Ultimos 7 dias
+          Últimos 7 días
         </p>
         <div className="mt-3 flex h-[72px] items-end gap-1.5">
           {bars.map((h, i) => (
@@ -250,7 +250,7 @@ export function DashboardVisual() {
           ))}
         </div>
       </div>
-      <Progress value={100} caption="Reportes automaticos, sin cargar una planilla" />
+      <Progress value={100} caption="Reportes automáticos, sin cargar una planilla" />
     </Frame>
   )
 }
@@ -259,7 +259,7 @@ export function DashboardVisual() {
 
 export function DataVisual() {
   return (
-    <Frame label="Base reestructurada" meta="Simulacion">
+    <Frame label="Base reestructurada" meta="Simulación">
       <div className="rounded-xl border border-white/10 bg-white/[0.045] px-3.5 py-3">
         <p className="text-[0.6rem] uppercase tracking-[0.16em] text-white/40">
           Antes
@@ -283,9 +283,9 @@ export function DataVisual() {
         </p>
         <div className="mt-2 space-y-1.5">
           {[
-            ["produccion", "trazable"],
+            ["producción", "trazable"],
             ["stock", "unificado"],
-            ["reportes", "automaticos"],
+            ["reportes", "automáticos"],
           ].map(([a, b]) => (
             <div key={a} className="flex items-center justify-between gap-3">
               <span className="text-[0.8rem] text-white/80">{a}</span>
@@ -294,7 +294,7 @@ export function DataVisual() {
           ))}
         </div>
       </div>
-      <Progress value={100} caption="Una sola fuente de verdad para toda la operacion" />
+      <Progress value={100} caption="Una sola fuente de verdad para toda la operación" />
     </Frame>
   )
 }
@@ -303,7 +303,7 @@ export function DataVisual() {
 
 export function SalesVisual() {
   return (
-    <Frame label="Centro de ventas" meta="Simulacion">
+    <Frame label="Centro de ventas" meta="Simulación">
       <div className="grid grid-cols-2 gap-2.5">
         <Stat label="Ventas del mes" value="312" />
         <Stat label="Ticket promedio" value="+9%" tone="brand" />

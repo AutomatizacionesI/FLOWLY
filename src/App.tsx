@@ -32,52 +32,52 @@ import { DotPattern } from "@/components/ui/dot-pattern"
 import { Marquee } from "@/components/ui/marquee"
 
 const navigation = [
-  { label: "Como empezar", href: "#servicios" },
-  { label: "Metodo", href: "#metodo" },
+  { label: "Cómo empezar", href: "#servicios" },
+  { label: "Método", href: "#metodo" },
   { label: "Equipo", href: "#equipo" },
   { label: "Contacto", href: "#contacto" },
 ]
 
 const caseStudies = [
   {
-    title: "Sistema de gestion de alquileres para inmobiliarias",
-    eyebrow: "Operacion centralizada",
+    title: "Sistema de gestión de alquileres para inmobiliarias",
+    eyebrow: "Operación centralizada",
     description:
       "Unificamos seguimiento comercial, contratos, vencimientos, estado de propiedades y tareas operativas en un solo sistema conectado con automatizaciones reales.",
     icon: Building2,
     visual: RentalsVisual,
-    result: "Menos seguimiento manual y mas control operativo",
+    result: "Menos seguimiento manual y más control operativo",
     bullets: [
       "Propiedades, contratos y vencimientos en un solo flujo",
       "Alertas y automatizaciones para tareas repetitivas",
       "Visibilidad completa para equipo comercial y operativo",
     ],
     visualLabel: "Inmobiliarias",
-    visualTitle: "Alquileres, seguimiento y operacion en un sistema vivo.",
+    visualTitle: "Alquileres, seguimiento y operación en un sistema vivo.",
     visualNodes: ["Leads", "Contratos", "Cobros", "Alertas"],
   },
   {
-    title: "IA para conciliacion bancaria y control financiero",
+    title: "IA para conciliación bancaria y control financiero",
     eyebrow: "Finanzas automatizadas",
     description:
       "Implementamos flujos con IA y reglas operativas para conciliar movimientos, detectar inconsistencias y acelerar cierres sin depender de revisiones eternas.",
     icon: Landmark,
     visual: ReconciliationVisual,
-    result: "Menos horas administrativas y mas precision financiera",
+    result: "Menos horas administrativas y más precisión financiera",
     bullets: [
       "Cruce de extractos, facturas y movimientos",
-      "Deteccion automatica de diferencias",
-      "Base lista para reporting y decision",
+      "Detección automática de diferencias",
+      "Base lista para reporting y decisión",
     ],
-    visualLabel: "Banca y administracion",
-    visualTitle: "Conciliar ya no deberia consumir a tu equipo.",
-    visualNodes: ["Bancos", "Facturas", "Validacion IA", "Reportes"],
+    visualLabel: "Banca y administración",
+    visualTitle: "Conciliar ya no debería consumir a tu equipo.",
+    visualNodes: ["Bancos", "Facturas", "Validación IA", "Reportes"],
   },
   {
     title: "Asistente de IA contable con contexto y procesos definidos",
     eyebrow: "IA interna para equipos",
     description:
-      "Creamos asistentes conectados a documentacion, criterios contables y procedimientos internos para ayudar al equipo en consultas, tareas y validaciones.",
+      "Creamos asistentes conectados a documentación, criterios contables y procedimientos internos para ayudar al equipo en consultas, tareas y validaciones.",
     icon: Workflow,
     visual: AssistantVisual,
     result: "Conocimiento operativo disponible en segundos",
@@ -87,73 +87,73 @@ const caseStudies = [
       "Reduce dependencia de pocas personas clave",
     ],
     visualLabel: "Estudios y empresas",
-    visualTitle: "Un asistente que entiende como trabaja tu empresa.",
+    visualTitle: "Un asistente que entiende cómo trabaja tu empresa.",
     visualNodes: ["Contexto", "Procesos", "Consultas", "Tareas"],
   },
   {
     title: "IA conectada a la base de una inmobiliaria para automatizar y asistir",
-    eyebrow: "Acceso inteligente a la informacion",
+    eyebrow: "Acceso inteligente a la información",
     description:
-      "Conectamos la IA a la base operativa de la inmobiliaria para responder consultas internas, disparar acciones y asistir al equipo con informacion confiable.",
+      "Conectamos la IA a la base operativa de la inmobiliaria para responder consultas internas, disparar acciones y asistir al equipo con información confiable.",
     icon: Database,
     visual: DatabaseVisual,
-    result: "La informacion correcta disponible al instante",
+    result: "La información correcta disponible al instante",
     bullets: [
       "Consultas internas con acceso a datos reales",
       "Automatizaciones disparadas desde la propia base",
       "Asistencia para empleados sin cambiar el flujo diario",
     ],
     visualLabel: "Base conectada",
-    visualTitle: "Datos operativos convertidos en acciones utiles.",
+    visualTitle: "Datos operativos convertidos en acciones útiles.",
     visualNodes: ["Base", "Consultas", "Automatizaciones", "Equipo"],
   },
   {
     title: "Dashboards de rendimiento automatizados para operaciones complejas",
     eyebrow: "BI accionable",
     description:
-      "Desarrollamos dashboards vivos para salones de eventos, depositos, barracas, inmobiliarias y empresas de limpieza, con reporting automatico y lectura simple.",
+      "Desarrollamos dashboards vivos para salones de eventos, depósitos, barracas, inmobiliarias y empresas de limpieza, con reporting automático y lectura simple.",
     icon: BarChart3,
     visual: DashboardVisual,
     result: "KPIs claros sin perseguir planillas",
     bullets: [
-      "Reportes automaticos para multiples areas",
+      "Reportes automáticos para múltiples áreas",
       "KPIs actualizados sin carga manual",
       "Lectura ejecutiva y operativa en el mismo sistema",
     ],
     visualLabel: "Performance",
-    visualTitle: "Tu negocio medido sin friccion operativa.",
-    visualNodes: ["Ventas", "Ocupacion", "Margen", "Alertas"],
+    visualTitle: "Tu negocio medido sin fricción operativa.",
+    visualNodes: ["Ventas", "Ocupación", "Margen", "Alertas"],
   },
   {
-    title: "Reestructuracion de base de datos y reporting para una forestal",
+    title: "Reestructuración de base de datos y reporting para una forestal",
     eyebrow: "Infraestructura de datos",
     description:
-      "Ordenamos una base compleja, redefinimos estructura, limpiamos criterios y montamos reporting automatizado para que la operacion deje de depender de parches.",
+      "Ordenamos una base compleja, redefinimos estructura, limpiamos criterios y montamos reporting automatizado para que la operación deje de depender de parches.",
     icon: TreePine,
     visual: DataVisual,
-    result: "Datos ordenados, trazables y utiles para decidir",
+    result: "Datos ordenados, trazables y útiles para decidir",
     bullets: [
-      "Limpieza y rediseno de estructura de datos",
-      "Reporting automatico sobre una base confiable",
+      "Limpieza y rediseño de estructura de datos",
+      "Reporting automático sobre una base confiable",
       "Menos dependencia de procesos manuales y archivos rotos",
     ],
     visualLabel: "Forestal",
-    visualTitle: "Cuando la base se ordena, la operacion cambia.",
-    visualNodes: ["Base nueva", "Criterios", "Reporting", "Decision"],
+    visualTitle: "Cuando la base se ordena, la operación cambia.",
+    visualNodes: ["Base nueva", "Criterios", "Reporting", "Decisión"],
   },
   {
     title: "Sistema completo de ventas para marcas con varios canales",
     eyebrow: "Retail y ecommerce",
     client: "HIKE y Lunar Vintage",
     description:
-      "Construimos un software propio que centraliza toda la venta en un solo lugar: pedidos de la tienda online, de Instagram y WhatsApp, y del local, con el stock sincronizado y la informacion de clientes unificada.",
+      "Construimos un software propio que centraliza toda la venta en un solo lugar: pedidos de la tienda online, de Instagram y WhatsApp, y del local, con el stock sincronizado y la información de clientes unificada.",
     icon: LayoutTemplate,
     visual: SalesVisual,
     result: "Toda la venta en un solo lugar, sin planillas paralelas",
     bullets: [
       "Pedidos de todos los canales en una sola bandeja",
       "Stock y precios sincronizados entre canales",
-      "Historial de cliente e informacion comercial centralizada",
+      "Historial de cliente e información comercial centralizada",
     ],
     visualLabel: "Retail multicanal",
     visualTitle: "Vender por todos lados sin perder el control de nada.",
@@ -163,22 +163,22 @@ const caseStudies = [
 
 const startingPoints = [
   {
-    pain: "Tengo la informacion repartida en seis planillas.",
+    pain: "Tengo la información repartida en seis planillas.",
     solution:
       "Unificamos todo en un sistema donde cada dato se carga una sola vez y el reporte se arma solo.",
-    context: "En produccion en una inmobiliaria",
+    context: "En producción en una inmobiliaria",
   },
   {
-    pain: "Perdemos la manana en tareas que son siempre iguales.",
+    pain: "Perdemos la mañana en tareas que son siempre iguales.",
     solution:
       "Automatizamos la tarea completa: carga, control, aviso y registro. Corre sola y avisa solo si algo no cierra.",
-    context: "En produccion en un estudio contable",
+    context: "En producción en un estudio contable",
   },
   {
     pain: "Todo depende de que una persona se acuerde.",
     solution:
-      "Un asistente conectado a tu operacion responde consultas internas y dispara las acciones que hoy dependen de alguien.",
-    context: "En produccion en una empresa de servicios",
+      "Un asistente conectado a tu operación responde consultas internas y dispara las acciones que hoy dependen de alguien.",
+    context: "En producción en una empresa de servicios",
   },
 ]
 
@@ -200,46 +200,46 @@ const integrations = [
 const team = [
   {
     name: "Facundo Etcheverry",
-    role: "Co-founder - Sistemas y automatizacion",
-    bio: "Arquitectura de automatizaciones, integraciones y agentes conectados a la operacion de cada empresa.",
+    role: "Co-founder - Sistemas y automatización",
+    bio: "Arquitectura de automatizaciones, integraciones y agentes conectados a la operación de cada empresa.",
     linkedin: "https://www.linkedin.com/in/REEMPLAZAR",
   },
   {
     name: "Gonzalo Pittaluga",
     role: "Co-founder - Datos y estrategia",
-    bio: "Inteligencia de negocios, dashboards y modelos sobre los datos reales de cada operacion.",
+    bio: "Inteligencia de negocios, dashboards y modelos sobre los datos reales de cada operación.",
     linkedin: "https://www.linkedin.com/in/REEMPLAZAR",
   },
 ]
 
 const faqs = [
   {
-    q: "Como cobran?",
-    a: "Cada proyecto se cotiza con alcance, entregables, precio cerrado y plazos definidos antes de empezar. No trabajamos por hora ni con presupuestos abiertos. Las necesidades nuevas que aparecen durante el proyecto se evaluan como cambios de alcance.",
+    q: "¿Cómo cobran?",
+    a: "Cada proyecto se cotiza con alcance, entregables, precio cerrado y plazos definidos antes de empezar. No trabajamos por hora ni con presupuestos abiertos. Las necesidades nuevas que aparecen durante el proyecto se evalúan como cambios de alcance.",
   },
   {
-    q: "La primera conversacion incluye un diagnostico o una demo?",
-    a: "La primera conversacion sirve para entender como trabajan hoy y evaluar si podemos ayudar. Si hace falta un diagnostico mas profundo o una demo, acordamos antes que incluye, que informacion necesitamos y en cuanto tiempo.",
+    q: "¿La primera conversación incluye un diagnóstico o una demo?",
+    a: "La primera conversación sirve para entender cómo trabajan hoy y evaluar si podemos ayudar. Si hace falta un diagnóstico más profundo o una demo, acordamos antes qué incluye, qué información necesitamos y en cuánto tiempo.",
   },
   {
-    q: "Cuanto tarda en estar funcionando?",
-    a: "La primera automatizacion suele estar corriendo entre dos y cuatro semanas. Los sistemas completos llevan mas, pero entregamos por partes para que veas resultados antes de terminar.",
+    q: "¿Cuánto tarda en estar funcionando?",
+    a: "La primera automatización suele estar corriendo entre dos y cuatro semanas. Los sistemas completos llevan más, pero entregamos por partes para que veas resultados antes de terminar.",
   },
   {
-    q: "Tengo que cambiar las herramientas que uso hoy?",
-    a: "Casi nunca. Trabajamos sobre lo que ya tenes y conectamos lo que haga falta. Si algo conviene reemplazar, te lo decimos con el motivo.",
+    q: "¿Tengo que cambiar las herramientas que uso hoy?",
+    a: "Casi nunca. Trabajamos sobre lo que ya tenés y conectamos lo que haga falta. Si algo conviene reemplazar, te lo decimos con el motivo.",
   },
   {
-    q: "Que pasa con nuestros datos?",
-    a: "Los datos son tuyos y quedan en infraestructura tuya o en servicios que vos controlas. Firmamos acuerdo de confidencialidad si lo necesitas.",
+    q: "¿Qué pasa con nuestros datos?",
+    a: "Los datos son tuyos y quedan en infraestructura tuya o en servicios que vos controlás. Firmamos acuerdo de confidencialidad si lo necesitás.",
   },
   {
-    q: "Que pasa si mi equipo no es tecnico?",
-    a: "Es el caso mas comun. Capacitamos al equipo y dejamos el sistema funcionando con la gente que ya trabaja ahi. Si nadie lo usa, no sirvio.",
+    q: "¿Qué pasa si mi equipo no es técnico?",
+    a: "Es el caso más común. Capacitamos al equipo y dejamos el sistema funcionando con la gente que ya trabaja ahí. Si nadie lo usa, no sirvió.",
   },
   {
-    q: "Trabajan fuera de Uruguay?",
-    a: "Si. Estamos en Uruguay y trabajamos con empresas de toda la region de forma remota.",
+    q: "¿Trabajan fuera de Uruguay?",
+    a: "Sí. Estamos en Uruguay y trabajamos con empresas de toda la región de forma remota.",
   },
 ]
 
@@ -250,60 +250,60 @@ const testimonials: { quote: string; name: string; role: string; stage: string }
 const process = [
   {
     step: "01",
-    title: "Diagnostico sin costo",
+    title: "Diagnóstico sin costo",
     headline: "Te escuchamos antes de proponer.",
     timing: "30-60 min",
     description:
-      "Nos sentamos a charlar sobre tu dia a dia. Analizamos donde estas perdiendo tiempo y dinero, y te proponemos mejoras logicas. Sin compromisos.",
+      "Nos sentamos a charlar sobre tu día a día. Analizamos dónde estás perdiendo tiempo y dinero, y te proponemos mejoras lógicas. Sin compromisos.",
     icon: Search,
     bullets: [
       "Detectamos cuellos de botella concretos",
       "Priorizamos oportunidades reales",
-      "Definimos por donde conviene empezar",
+      "Definimos por dónde conviene empezar",
     ],
     outcome: "Claridad sobre el primer paso",
   },
   {
     step: "02",
-    title: "Micro-implementaciones rapidas",
-    headline: "Arrancamos por lo que mas duele.",
+    title: "Micro-implementaciones rápidas",
+    headline: "Arrancamos por lo que más duele.",
     timing: "Resultados en semanas",
     description:
-      "No cambiamos toda tu estructura de golpe. Empezamos automatizando una sola tarea critica o mejorando tu web para captar clientes.",
+      "No cambiamos toda tu estructura de golpe. Empezamos automatizando una sola tarea crítica o mejorando tu web para captar clientes.",
     icon: Workflow,
     bullets: [
-      "Automatizamos una tarea critica",
-      "Entregamos algo usable rapido",
-      "Mostramos impacto sin friccion interna",
+      "Automatizamos una tarea crítica",
+      "Entregamos algo usable rápido",
+      "Mostramos impacto sin fricción interna",
     ],
     outcome: "Primer ROI visible",
   },
   {
     step: "03",
-    title: "Evolucion continua",
+    title: "Evolución continua",
     headline: "Escalamos cuando ves resultados.",
     timing: "Escala modular",
     description:
-      "A medida que ves los resultados y tu equipo se adapta de forma natural, seguimos escalando. Tu inversion acompana el crecimiento real del negocio.",
+      "A medida que ves los resultados y tu equipo se adapta de forma natural, seguimos escalando. Tu inversión acompaña el crecimiento real del negocio.",
     icon: RefreshCw,
     bullets: [
-      "Sumamos modulos solo cuando tiene sentido",
+      "Sumamos módulos solo cuando tiene sentido",
       "El equipo se adapta sin choque brusco",
-      "La inversion acompana el crecimiento real",
+      "La inversión acompaña el crecimiento real",
     ],
-    outcome: "Adopcion natural",
+    outcome: "Adopción natural",
   },
   {
     step: "04",
     title: "Ecosistema robusto",
     headline: "Tu empresa corre con IA propia.",
-    timing: "Sistema de elite",
+    timing: "Sistema de élite",
     description:
-      "Cuando tu empresa esta lista, conectamos todos los puntos. Lo que empieza como herramientas aisladas se unifica en un motor centralizado de IA robusto y seguro.",
+      "Cuando tu empresa está lista, conectamos todos los puntos. Lo que empieza como herramientas aisladas se unifica en un motor centralizado de IA robusto y seguro.",
     icon: Network,
     bullets: [
       "Unificamos herramientas y datos",
-      "Centralizamos la operacion inteligente",
+      "Centralizamos la operación inteligente",
       "Construimos una base lista para escalar",
     ],
     outcome: "Infraestructura conectada",
@@ -319,8 +319,8 @@ const comparison = {
   ],
   after: [
     "El dato se carga una vez y aparece en todos lados.",
-    "El reporte se genera solo y llega el dia que tiene que llegar.",
-    "El proceso corre igual, este quien este.",
+    "El reporte se genera solo y llega el día que tiene que llegar.",
+    "El proceso corre igual, esté quien esté.",
     "Cada pedido entra al sistema con su estado y su responsable.",
   ],
 }
@@ -527,14 +527,14 @@ function MethodSectionV2() {
             variant="outline"
             className="border-border bg-white px-3 py-1 text-[0.68rem] uppercase tracking-[0.22em] text-muted-foreground"
           >
-            Nuestro metodo
+            Nuestro método
           </Badge>
           <h2 className="mt-6 text-3xl font-medium tracking-[-0.07em] text-balance text-foreground sm:text-4xl lg:text-[3.05rem] lg:leading-[0.97]">
             La IA como un proceso, no como un salto al vacio.
           </h2>
           <p className="mt-5 text-base leading-8 text-muted-foreground sm:text-lg">
-            Empezamos por una mejora concreta, la hacemos funcionar rapido y
-            despues escalamos. Asi tu empresa adopta IA sin trauma y con
+            Empezamos por una mejora concreta, la hacemos funcionar rápido y
+            después escalamos. Así tu empresa adopta IA sin trauma y con
             resultados visibles desde etapas tempranas.
           </p>
         </div>
@@ -803,7 +803,7 @@ function SuccessCasesSection() {
               variant="outline"
               className="border-border bg-white px-3 py-1 text-[0.68rem] uppercase tracking-[0.22em] text-muted-foreground"
             >
-              Casos de exito
+              Casos de éxito
             </Badge>
             <h2 className="mx-auto max-w-4xl text-3xl font-medium tracking-[-0.07em] text-balance text-foreground sm:text-4xl md:text-5xl">
               Implementaciones reales de IA aplicadas a problemas concretos.
@@ -811,7 +811,7 @@ function SuccessCasesSection() {
             <p className="mx-auto max-w-3xl text-base leading-7 text-muted-foreground sm:text-lg">
               Un slider interactivo para recorrer algunos de los sistemas,
               asistentes y automatizaciones que ya construimos para distintos
-              tipos de operacion.
+              tipos de operación.
             </p>
           </BlurFade>
         </div>
@@ -999,10 +999,10 @@ function App() {
             <BlurFade inView delay={0.05}>
               <div>
                 <p className="text-[0.68rem] uppercase tracking-[0.28em] text-muted-foreground">
-                  Uruguay - Automatizacion y sistemas a medida
+                  Uruguay - Automatización y sistemas a medida
                 </p>
                 <h1 className="mt-5 text-[3.4rem] font-light leading-[0.92] tracking-[-0.1em] text-foreground sm:text-7xl md:text-[5.6rem] xl:text-[6.6rem] xl:leading-[0.88]">
-                  Tu operacion
+                  Tu operación
                   <br />
                   en un solo
                   <br />
@@ -1022,9 +1022,9 @@ function App() {
 
                 <BlurFade inView delay={0.2}>
                   <p className="mt-4 text-base leading-8 text-muted-foreground sm:text-lg">
-                    Ordenamos como trabaja tu empresa y automatizamos lo que hoy
+                    Ordenamos cómo trabaja tu empresa y automatizamos lo que hoy
                     se hace a mano. Empezamos por una pieza concreta, no por un
-                    proyecto de un ano.
+                    proyecto de un año.
                   </p>
                 </BlurFade>
 
@@ -1037,7 +1037,7 @@ function App() {
                       className="inline-flex h-11 items-center justify-center gap-2 rounded-full border border-neutral-950 bg-neutral-950 px-6 text-sm font-medium text-white shadow-none transition-transform hover:-translate-y-0.5 hover:bg-neutral-800"
                       style={{ color: "#ffffff" }}
                     >
-                      <span style={{ color: "#ffffff" }}>Diagnostico gratuito</span>
+                      <span style={{ color: "#ffffff" }}>Diagnóstico gratuito</span>
                       <ArrowUpRight className="size-4 text-white" />
                     </a>
                     <a
@@ -1052,11 +1052,11 @@ function App() {
 
                 <BlurFade inView delay={0.32}>
                   <div className="mt-7 flex flex-wrap items-center gap-x-5 gap-y-2 text-[0.78rem] text-muted-foreground/80">
-                    <span>Primera conversacion sin costo</span>
+                    <span>Primera conversación sin costo</span>
                     <span className="size-1 rounded-full bg-border" />
                     <span>Respondemos en menos de 24 h</span>
                     <span className="size-1 rounded-full bg-border" />
-                    <span>Proyectos en toda la region</span>
+                    <span>Proyectos en toda la región</span>
                   </div>
                 </BlurFade>
 
@@ -1069,7 +1069,7 @@ function App() {
           <BlurFade inView>
             <div className="text-center">
               <p className="text-[0.68rem] uppercase tracking-[0.26em] text-muted-foreground">
-                Confian en nosotros
+                Confían en nosotros
               </p>
               <h2 className="mx-auto mt-4 max-w-2xl text-2xl font-medium tracking-[-0.06em] text-balance text-foreground sm:text-[2.1rem] sm:leading-[1.05]">
                 Empresas que ya trabajan sobre sistemas que construimos.
@@ -1097,16 +1097,16 @@ function App() {
           <BlurFade inView delay={0.16}>
             <p className="mx-auto mt-9 max-w-2xl text-center text-sm leading-7 text-muted-foreground">
               Inmobiliarias, estudios contables, retail, forestal y servicios.
-              Mas de 50 automatizaciones entregadas desde 2023.
+              Más de 50 automatizaciones entregadas desde 2023.
             </p>
           </BlurFade>
         </section>
 
         <section className="mx-auto max-w-7xl py-16 sm:py-20">
           <SectionIntro
-            label="Por donde empezar"
+            label="Por dónde empezar"
             title="Casi siempre empieza por una de estas tres."
-            description="No hace falta tener claro que automatizar. Alcanza con reconocer el problema."
+            description="No hace falta tener claro qué automatizar. Alcanza con reconocer el problema."
           />
 
           <div className="mt-10 grid gap-4 lg:grid-cols-3">
@@ -1131,11 +1131,11 @@ function App() {
           <BlurFade inView delay={0.24}>
             <div className="mt-4 rounded-[1.8rem] border border-dashed border-border bg-muted/40 px-6 py-6 sm:px-8">
               <h3 className="text-[1.05rem] font-medium tracking-[-0.03em] text-foreground">
-                Y si tu caso es distinto?
+                ¿Y si tu caso es distinto?
               </h3>
               <p className="mt-2 max-w-3xl text-sm leading-7 text-muted-foreground">
                 Casi siempre lo es. Partimos del problema, no de la herramienta.
-                Contanos como trabajan hoy y te decimos si hay algo para hacer.
+                Contanos cómo trabajan hoy y te decimos si hay algo para hacer.
               </p>
             </div>
           </BlurFade>
@@ -1146,8 +1146,8 @@ function App() {
         <section className="mx-auto max-w-7xl py-16 sm:py-20">
           <SectionIntro
             label="Integraciones"
-            title="Trabajamos sobre las herramientas que ya usas."
-            description="No te pedimos cambiar todo para empezar. Conectamos lo que ya esta funcionando y sumamos lo que falte."
+            title="Trabajamos sobre las herramientas que ya usás."
+            description="No te pedimos cambiar todo para empezar. Conectamos lo que ya está funcionando y sumamos lo que falte."
           />
 
           <BlurFade inView delay={0.1}>
@@ -1169,9 +1169,9 @@ function App() {
         <section className="relative left-1/2 w-screen -translate-x-1/2 py-16 sm:py-20">
           <div className="mx-auto max-w-4xl px-4 text-center sm:px-6 lg:px-8">
             <SectionIntro
-              label="Antes / Despues"
-              title="Menos horas perdidas. Mas foco en lo que realmente mueve el negocio."
-              description="No es solo tecnologia. Cambia la forma en la que se trabaja todos los dias."
+              label="Antes / Después"
+              title="Menos horas perdidas. Más foco en lo que realmente mueve el negocio."
+              description="No es solo tecnología. Cambia la forma en la que se trabaja todos los días."
             />
           </div>
 
@@ -1183,7 +1183,7 @@ function App() {
                     Sin Spike AI
                   </div>
                   <h3 className="mt-6 max-w-md text-3xl font-medium tracking-[-0.07em] text-balance text-foreground sm:text-[2.6rem] lg:text-[2.85rem] lg:leading-[0.98]">
-                    La operacion se vuelve mas pesada de lo que deberia.
+                    La operación se vuelve más pesada de lo que debería.
                   </h3>
                   <p className="mt-6 max-w-lg text-base leading-8 text-foreground/68 sm:text-lg">
                     Todo depende de tareas manuales, seguimiento y desgaste operativo.
@@ -1209,7 +1209,7 @@ function App() {
                     El equipo recupera tiempo para lo que realmente importa.
                   </h3>
                   <p className="mt-6 max-w-lg text-base leading-8 text-white/72 sm:text-lg">
-                    El sistema sostiene la operacion y el equipo decide sobre informacion confiable.
+                    El sistema sostiene la operación y el equipo decide sobre información confiable.
                   </p>
 
                   <ul className="mt-10 max-w-lg space-y-5 text-left">
@@ -1231,7 +1231,7 @@ function App() {
             <SectionIntro
               label="Testimonios"
               title="Lo que dicen los que ya trabajan con nosotros."
-              description="Clientes con sistemas en produccion."
+              description="Clientes con sistemas en producción."
             />
 
             <div className="mt-10 grid gap-4 lg:grid-cols-3">
@@ -1258,8 +1258,8 @@ function App() {
         <section id="equipo" className="mx-auto max-w-7xl py-16 sm:py-20">
           <SectionIntro
             label="Equipo"
-            title="Hablas directo con quien construye tu sistema."
-            description="Sin gerentes de cuenta ni intermediarios. El que te atiende en la primera reunion es el que despues escribe el codigo."
+            title="Hablás directo con quien construye tu sistema."
+            description="Sin gerentes de cuenta ni intermediarios. El que te atiende en la primera reunión es el que después escribe el código."
           />
 
           <div className="mt-10 grid gap-4 lg:grid-cols-2">
@@ -1295,7 +1295,7 @@ function App() {
           <SectionIntro
             label="Preguntas frecuentes"
             title="Lo que nos preguntan antes de empezar."
-            description="Si algo no esta aca, escribinos y te lo contestamos sin vueltas."
+            description="Si algo no está acá, escribinos y te lo contestamos sin vueltas."
           />
 
           <div className="mt-10 max-w-3xl space-y-2.5">
@@ -1325,7 +1325,7 @@ function App() {
                   No hace falta empezar con un cambio enorme para empezar a usar IA bien.
                 </h2>
                 <p className="mt-5 text-base leading-8 text-neutral-950/72 sm:text-lg">
-                  A veces alcanza una charla para detectar donde tiene mas sentido automatizar, asistir a tu equipo o empezar a mejorar procesos paso a paso.
+                  A veces alcanza una charla para detectar dónde tiene más sentido automatizar, asistir a tu equipo o empezar a mejorar procesos paso a paso.
                 </p>
                 <a
                   href={whatsappHref}
@@ -1353,10 +1353,10 @@ function App() {
                   Contacto
                 </div>
                 <h2 className="mt-4 max-w-xl text-3xl font-medium tracking-[-0.07em] text-balance text-white sm:text-5xl">
-                  Hablemos de tu operacion.
+                  Hablemos de tu operación.
                 </h2>
                 <p className="mt-5 max-w-2xl text-base leading-8 text-white/68 sm:text-lg">
-                  Si ves friccion, tareas manuales o procesos que ya no escalan, escribinos y vemos por donde conviene empezar.
+                  Si ves fricción, tareas manuales o procesos que ya no escalan, escribinos y vemos por dónde conviene empezar.
                 </p>
               </div>
 
@@ -1374,7 +1374,7 @@ function App() {
                   },
                   {
                     label: "Base",
-                    value: "Uruguay - proyectos en toda la region",
+                    value: "Uruguay - proyectos en toda la región",
                     href: undefined,
                   },
                 ].map((item) => {
@@ -1408,7 +1408,7 @@ function App() {
             <div className="flex flex-col gap-5 pt-6 sm:flex-row sm:items-center sm:justify-between">
               <div className="text-sm text-white/46">
                 <p>Spike AI</p>
-                <p className="mt-1">Sistemas a medida y automatizacion para empresas que necesitan ordenar su operacion.</p>
+                <p className="mt-1">Sistemas a medida y automatización para empresas que necesitan ordenar su operación.</p>
               </div>
 
               <div className="flex items-center gap-3">
