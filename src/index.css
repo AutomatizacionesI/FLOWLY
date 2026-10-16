@@ -153,3 +153,7 @@ button {
     filter: saturate(0.92);
   }
 }
+
+summary::-webkit-details-marker {
+  display: none;
+}

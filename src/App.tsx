@@ -211,6 +211,37 @@ const team = [
   },
 ]
 
+const faqs = [
+  {
+    q: "Como cobran?",
+    a: "Cada proyecto se cotiza con alcance, entregables, precio cerrado y plazos definidos antes de empezar. No trabajamos por hora ni con presupuestos abiertos. Las necesidades nuevas que aparecen durante el proyecto se evaluan como cambios de alcance.",
+  },
+  {
+    q: "La primera conversacion incluye un diagnostico o una demo?",
+    a: "La primera conversacion sirve para entender como trabajan hoy y evaluar si podemos ayudar. Si hace falta un diagnostico mas profundo o una demo, acordamos antes que incluye, que informacion necesitamos y en cuanto tiempo.",
+  },
+  {
+    q: "Cuanto tarda en estar funcionando?",
+    a: "La primera automatizacion suele estar corriendo entre dos y cuatro semanas. Los sistemas completos llevan mas, pero entregamos por partes para que veas resultados antes de terminar.",
+  },
+  {
+    q: "Tengo que cambiar las herramientas que uso hoy?",
+    a: "Casi nunca. Trabajamos sobre lo que ya tenes y conectamos lo que haga falta. Si algo conviene reemplazar, te lo decimos con el motivo.",
+  },
+  {
+    q: "Que pasa con nuestros datos?",
+    a: "Los datos son tuyos y quedan en infraestructura tuya o en servicios que vos controlas. Firmamos acuerdo de confidencialidad si lo necesitas.",
+  },
+  {
+    q: "Que pasa si mi equipo no es tecnico?",
+    a: "Es el caso mas comun. Capacitamos al equipo y dejamos el sistema funcionando con la gente que ya trabaja ahi. Si nadie lo usa, no sirvio.",
+  },
+  {
+    q: "Trabajan fuera de Uruguay?",
+    a: "Si. Estamos en Uruguay y trabajamos con empresas de toda la region de forma remota.",
+  },
+]
+
 const process = [
   {
     step: "01",
@@ -1219,6 +1250,32 @@ function App() {
                     <ArrowUpRight className="size-4" />
                   </a>
                 </div>
+              </BlurFade>
+            ))}
+          </div>
+        </section>
+
+        <section className="mx-auto max-w-7xl py-16 sm:py-20">
+          <SectionIntro
+            label="Preguntas frecuentes"
+            title="Lo que nos preguntan antes de empezar."
+            description="Si algo no esta aca, escribinos y te lo contestamos sin vueltas."
+          />
+
+          <div className="mt-10 max-w-3xl space-y-2.5">
+            {faqs.map((item, index) => (
+              <BlurFade key={item.q} inView delay={0.04 * index}>
+                <details className="group rounded-[1.4rem] border border-border/80 bg-white px-5 py-4 transition-colors duration-300 open:border-[var(--brand-border)] sm:px-6">
+                  <summary className="flex cursor-pointer list-none items-center justify-between gap-4 text-[0.98rem] font-medium tracking-[-0.02em] text-foreground marker:hidden">
+                    {item.q}
+                    <span className="text-lg leading-none text-muted-foreground transition-transform duration-300 group-open:rotate-45">
+                      +
+                    </span>
+                  </summary>
+                  <p className="mt-3 text-sm leading-7 text-muted-foreground">
+                    {item.a}
+                  </p>
+                </details>
               </BlurFade>
             ))}
           </div>
