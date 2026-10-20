@@ -1,7 +1,14 @@
 import { PartnersOnly, Placeholder } from "../components/Screen"
 import type { NavItem } from "../nav"
 
+import { Asistente } from "./Asistente"
+import { Clientes } from "./Clientes"
+import { Conciliacion } from "./Conciliacion"
+import { Horas } from "./Horas"
+import { ReporteHoras } from "./ReporteHoras"
 import { Resumen } from "./Resumen"
+import { Tareas } from "./Tareas"
+import { TrabajemosJuntos } from "./TrabajemosJuntos"
 
 /**
  * Reparte cada ruta a su pantalla.
@@ -31,6 +38,18 @@ const notes: Record<string, string> = {
 /** Las pantallas ya construidas. El resto todavía muestra un marcador. */
 const built: Record<string, () => React.JSX.Element> = {
   resumen: Resumen,
+  clientes: Clientes,
+  tareas: Tareas,
+  horas: Horas,
+  conciliacion: Conciliacion,
+  "reporte-horas": ReporteHoras,
+  asistente: Asistente,
+  "trabajemos-juntos": TrabajemosJuntos,
+}
+
+/** true si esa pantalla ya está construida (la usa el recorrido guiado). */
+export function isBuilt(path: string): boolean {
+  return path in built
 }
 
 export function Screen({ item }: { item: NavItem }) {

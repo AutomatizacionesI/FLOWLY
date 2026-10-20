@@ -2,6 +2,7 @@ import { useEffect } from "react"
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom"
 
 import { Shell } from "./components/Shell"
+import { Tour } from "./components/Tour"
 import { WelcomeModal } from "./components/WelcomeModal"
 import { DEMO_BASE } from "./config"
 import { allNavItems } from "./nav"
@@ -50,6 +51,7 @@ export default function DemoApp() {
             </Routes>
           </Shell>
           <WelcomeModal />
+          <Tour />
         </BrowserRouter>
       </div>
     </DemoProvider>

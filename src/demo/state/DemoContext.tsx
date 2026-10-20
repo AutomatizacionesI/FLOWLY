@@ -52,6 +52,10 @@ type DemoState = {
   welcomeOpen: boolean
   setWelcomeOpen: (value: boolean) => void
 
+  /** Paso del recorrido guiado, o null si no está corriendo. */
+  tourStep: number | null
+  setTourStep: (value: number | null) => void
+
   toasts: Toast[]
   toast: (text: string) => void
 
@@ -95,6 +99,7 @@ export function DemoProvider({ children }: { children: ReactNode }) {
   const [welcomeOpen, setWelcomeOpen] = useState(
     () => new URLSearchParams(window.location.search).get("tour") !== "0",
   )
+  const [tourStep, setTourStep] = useState<number | null>(null)
 
   const toast = useCallback((text: string) => {
     const id = Date.now() + Math.random()
@@ -130,6 +135,8 @@ export function DemoProvider({ children }: { children: ReactNode }) {
       para,
       welcomeOpen,
       setWelcomeOpen,
+      tourStep,
+      setTourStep,
       toasts,
       toast,
       resetDemo,
@@ -143,6 +150,7 @@ export function DemoProvider({ children }: { children: ReactNode }) {
       reconciled,
       para,
       welcomeOpen,
+      tourStep,
       toasts,
       toast,
       resetDemo,

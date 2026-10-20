@@ -6,7 +6,7 @@ import { useDemo } from "../state/DemoContext"
  * recorrido guiado: eso se suma en la Fase 2.
  */
 export function WelcomeModal() {
-  const { welcomeOpen, setWelcomeOpen, para } = useDemo()
+  const { welcomeOpen, setWelcomeOpen, setTourStep, para } = useDemo()
 
   if (!welcomeOpen) return null
 
@@ -23,7 +23,10 @@ export function WelcomeModal() {
           <button
             type="button"
             className="d-btn d-btn--primary"
-            onClick={() => setWelcomeOpen(false)}
+            onClick={() => {
+              setWelcomeOpen(false)
+              setTourStep(0)
+            }}
           >
             {texts.welcomeStart}
           </button>

@@ -139,14 +139,14 @@ function UserMenu() {
 }
 
 export function TopbarExtras() {
-  const { para, setWelcomeOpen } = useDemo()
+  const { para, setTourStep } = useDemo()
 
   return (
     <>
       <button
         type="button"
         className="d-btn d-btn--ghost d-btn--sm"
-        onClick={() => setWelcomeOpen(true)}
+        onClick={() => setTourStep(0)}
         aria-label="Ver recorrido"
       >
         <PlayCircle size={14} />

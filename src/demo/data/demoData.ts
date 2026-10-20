@@ -477,14 +477,143 @@ export const activity: Activity[] = [
 
 /* ── Documentos de ejemplo (ficha de cliente y herramientas PDF) ───── */
 
-export type DemoDocument = { id: string; name: string; kind: string; size: string; day: string }
+export type DemoDocument = {
+  id: string
+  name: string
+  kind: string
+  size: string
+  day: string
+  clientId: string
+}
 
 export const documents: DemoDocument[] = [
-  { id: "doc1", name: "Balance 2025.pdf", kind: "Balance", size: "480 KB", day: isoDay(daysFromToday(-34)) },
-  { id: "doc2", name: "Extracto Itaú - mes pasado.pdf", kind: "Extracto", size: "212 KB", day: isoDay(daysFromToday(-12)) },
-  { id: "doc3", name: "Facturas proveedores.pdf", kind: "Comprobantes", size: "1,2 MB", day: isoDay(daysFromToday(-8)) },
-  { id: "doc4", name: "Nómina BPS.pdf", kind: "Sueldos", size: "96 KB", day: isoDay(daysFromToday(-5)) },
-  { id: "doc5", name: "Contrato de alquiler.pdf", kind: "Contrato", size: "320 KB", day: isoDay(daysFromToday(-60)) },
+  { id: "doc1", name: "Balance 2025.pdf", kind: "Balance", size: "480 KB", day: isoDay(daysFromToday(-34)), clientId: "c5" },
+  { id: "doc2", name: "Extracto Itaú del mes.pdf", kind: "Extracto", size: "212 KB", day: isoDay(daysFromToday(-12)), clientId: "c2" },
+  { id: "doc3", name: "Facturas de proveedores.pdf", kind: "Comprobantes", size: "1,2 MB", day: isoDay(daysFromToday(-8)), clientId: "c4" },
+  { id: "doc4", name: "Nómina BPS.pdf", kind: "Sueldos", size: "96 KB", day: isoDay(daysFromToday(-5)), clientId: "c1" },
+  { id: "doc5", name: "Contrato de alquiler.pdf", kind: "Contrato", size: "320 KB", day: isoDay(daysFromToday(-60)), clientId: "c7" },
+  { id: "doc6", name: "Balance 2025.pdf", kind: "Balance", size: "512 KB", day: isoDay(daysFromToday(-40)), clientId: "c6" },
+  { id: "doc7", name: "Carta poder DGI.pdf", kind: "Trámites", size: "88 KB", day: isoDay(daysFromToday(-120)), clientId: "c10" },
+  { id: "doc8", name: "Papeles de trabajo - cierre.xlsx", kind: "Balance", size: "740 KB", day: isoDay(daysFromToday(-19)), clientId: "c5" },
+]
+
+/** Documentos de un cliente; si no tiene, devuelve una lista corta igual. */
+export function documentsOf(clientId: string): DemoDocument[] {
+  const own = documents.filter((document) => document.clientId === clientId)
+  if (own.length > 0) return own
+  // Ningún cliente queda con la ficha vacía.
+  return [
+    { id: `${clientId}-a`, name: "Carpeta del año.pdf", kind: "Comprobantes", size: "1,8 MB", day: isoDay(daysFromToday(-15)), clientId },
+    { id: `${clientId}-b`, name: "Constancia DGI.pdf", kind: "Trámites", size: "74 KB", day: isoDay(daysFromToday(-52)), clientId },
+    { id: `${clientId}-c`, name: "Contrato de servicios.pdf", kind: "Contrato", size: "210 KB", day: isoDay(daysFromToday(-180)), clientId },
+  ]
+}
+
+/* ── Base de conocimiento del estudio ──────────────────────────────── */
+
+/**
+ * Lo que el asistente puede buscar además de los números: plantillas que el
+ * estudio reutiliza y procedimientos internos. Todo inventado.
+ */
+
+export type Template = {
+  id: string
+  name: string
+  kind: string
+  description: string
+  updated: string
+}
+
+export const templates: Template[] = [
+  {
+    id: "tpl1",
+    name: "Carta de presentación a cliente nuevo",
+    kind: "Documento",
+    description: "Machete para la primera carta, con los datos del estudio y el alcance del trabajo.",
+    updated: isoDay(daysFromToday(-48)),
+  },
+  {
+    id: "tpl2",
+    name: "Planilla de cierre mensual",
+    kind: "Planilla",
+    description: "Checklist del cierre: IVA, BPS, conciliación y papeles de trabajo.",
+    updated: isoDay(daysFromToday(-21)),
+  },
+  {
+    id: "tpl3",
+    name: "Modelo de carta poder ante DGI",
+    kind: "Documento",
+    description: "Para que el cliente firme y el estudio pueda hacer trámites en su nombre.",
+    updated: isoDay(daysFromToday(-96)),
+  },
+  {
+    id: "tpl4",
+    name: "Plantilla de papeles de trabajo del balance",
+    kind: "Planilla",
+    description: "Hojas de apertura, ajustes y cierre, ya vinculadas entre sí.",
+    updated: isoDay(daysFromToday(-12)),
+  },
+  {
+    id: "tpl5",
+    name: "Contrato de servicios profesionales",
+    kind: "Documento",
+    description: "Modelo de contrato con honorarios, alcance y plazos.",
+    updated: isoDay(daysFromToday(-150)),
+  },
+]
+
+export type Procedure = {
+  id: string
+  title: string
+  steps: string[]
+  owner: string
+}
+
+export const procedures: Procedure[] = [
+  {
+    id: "pr1",
+    title: "Alta de un empleado en BPS",
+    owner: "Sueldos",
+    steps: [
+      "Pedir al cliente la cédula, el contrato y la fecha de ingreso.",
+      "Entrar a Servicios en Línea de BPS con la clave del cliente.",
+      "Registrar el alta en la nómina y guardar el comprobante.",
+      "Cargar el comprobante en la carpeta del cliente y cerrar la tarea.",
+    ],
+  },
+  {
+    id: "pr2",
+    title: "Carga de una factura en dólares",
+    owner: "Contabilidad",
+    steps: [
+      "Tomar el tipo de cambio del día de la factura, no el del día de carga.",
+      "Registrar el importe en la moneda original y dejar el contravalor en pesos.",
+      "Revisar que el IVA quede en la cuenta que corresponde al proveedor.",
+      "Adjuntar el comprobante al asiento.",
+    ],
+  },
+  {
+    id: "pr3",
+    title: "Cierre mensual de un cliente",
+    owner: "Cierres",
+    steps: [
+      "Conciliar los bancos del mes y dejar los pendientes anotados.",
+      "Confirmar que todas las facturas del mes estén cargadas.",
+      "Liquidar el IVA y dejar el borrador para que lo revise un socio.",
+      "Marcar la tarea de cierre como hecha y avisar al cliente.",
+    ],
+  },
+  {
+    id: "pr4",
+    title: "Alta de un cliente nuevo en el estudio",
+    owner: "Administración",
+    steps: [
+      "Crear la ficha del cliente con RUT, rubro y responsable.",
+      "Pedir la carta poder ante DGI firmada.",
+      "Armar la carpeta de documentos y cargar el contrato de servicios.",
+      "Asignar el equipo y los tipos de trabajo que le corresponden.",
+    ],
+  },
 ]
 
 /* ── Formato ───────────────────────────────────────────────────────── */

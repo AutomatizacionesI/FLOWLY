@@ -542,6 +542,29 @@
   width: 100%;
 }
 
+/* ── Campos de formulario ──────────────────────────────────────────── */
+
+.d-input {
+  width: 100%;
+  padding: 9px 13px;
+  border: 1px solid var(--d-line);
+  border-radius: 11px;
+  background: var(--d-card);
+  color: var(--d-ink);
+  font: inherit;
+  font-size: 13px;
+  outline: none;
+  transition: border-color 0.14s ease;
+}
+
+.d-input:focus {
+  border-color: var(--d-ink);
+}
+
+select.d-input {
+  cursor: pointer;
+}
+
 /* ── Tarjetas ──────────────────────────────────────────────────────── */
 
 .d-card {
@@ -781,6 +804,116 @@
   background: var(--d-green);
 }
 
+/* ── Asistente ─────────────────────────────────────────────────────── */
+
+.d-chat {
+  display: flex;
+  min-height: 560px;
+  max-height: calc(100vh - 230px);
+  flex-direction: column;
+  overflow: hidden;
+  border-radius: var(--d-radius-lg);
+  background: var(--d-card);
+  box-shadow: var(--d-shadow);
+}
+
+.d-chat__notice {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  padding: 11px 18px;
+  background: var(--d-ai-soft);
+  color: #4c3fb0;
+  font-size: 12px;
+  line-height: 1.45;
+}
+
+.d-chat__log {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 13px;
+  overflow-y: auto;
+  padding: 20px 18px;
+}
+
+.d-msg {
+  max-width: 78%;
+  padding: 12px 15px;
+  border-radius: 16px;
+  font-size: 13.5px;
+}
+
+.d-msg--mine {
+  align-self: flex-end;
+  border-bottom-right-radius: 5px;
+  background: var(--d-ink);
+  color: #fff;
+}
+
+.d-msg--bot {
+  align-self: flex-start;
+  max-width: 90%;
+  border-bottom-left-radius: 5px;
+  background: var(--d-wash);
+}
+
+.d-msg--denied {
+  background: var(--d-warn-soft);
+  color: #8f610a;
+}
+
+.d-msg__steps {
+  display: grid;
+  gap: 9px;
+  margin-top: 12px;
+}
+
+.d-msg__steps li {
+  display: flex;
+  gap: 9px;
+  font-size: 13px;
+  line-height: 1.55;
+}
+
+.d-msg__num {
+  display: grid;
+  width: 19px;
+  height: 19px;
+  flex-shrink: 0;
+  place-items: center;
+  border-radius: 999px;
+  background: var(--d-ai);
+  color: #fff;
+  font-size: 10.5px;
+  font-weight: 700;
+}
+
+.d-chat__chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+  padding: 0 18px 12px;
+}
+
+.d-chat__composer {
+  display: flex;
+  gap: 9px;
+  padding: 14px 18px;
+  border-top: 1px solid var(--d-line);
+}
+
+.d-chat__composer .d-input {
+  flex: 1;
+  border-radius: 999px;
+  padding: 11px 17px;
+}
+
+.d-chat__composer .d-btn {
+  width: 42px;
+  padding: 0;
+}
+
 /* ── Modal y paneles ───────────────────────────────────────────────── */
 
 .d-overlay {
@@ -826,6 +959,77 @@
   flex-wrap: wrap;
   gap: 10px;
   margin-top: 22px;
+}
+
+/* ── Recorrido guiado ──────────────────────────────────────────────── */
+
+.d-tour {
+  position: fixed;
+  right: 22px;
+  bottom: 22px;
+  z-index: 85;
+  width: min(330px, calc(100% - 32px));
+  padding: 17px 18px 16px;
+  border-radius: 18px;
+  background: var(--d-rail);
+  color: #fff;
+  box-shadow: 0 26px 60px -24px rgba(20, 22, 28, 0.7);
+}
+
+.d-tour__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.d-tour__count {
+  color: rgba(255, 255, 255, 0.56);
+  font-size: 10.5px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.d-tour__close {
+  display: inline-flex;
+  padding: 3px;
+  border-radius: 7px;
+  color: rgba(255, 255, 255, 0.56);
+}
+
+.d-tour__close:hover {
+  color: #fff;
+}
+
+.d-tour__title {
+  margin-top: 10px;
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.d-tour__body {
+  margin-top: 6px;
+  color: rgba(255, 255, 255, 0.74);
+  font-size: 12.5px;
+  line-height: 1.55;
+}
+
+.d-tour__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 15px;
+}
+
+@media (max-width: 560px) {
+  .d-tour {
+    right: 16px;
+    left: 16px;
+    bottom: 16px;
+    width: auto;
+  }
 }
 
 /* ── Avisos flotantes ──────────────────────────────────────────────── */
