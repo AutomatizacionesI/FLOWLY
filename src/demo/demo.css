@@ -1224,6 +1224,16 @@ select.d-input {
   .d-kpi__value {
     font-size: 24px;
   }
+
+  /*
+   * En pantalla angosta las tablas se deslizan en vez de cortarse.
+   * Va acá, sobre .d-table, en lugar de envolver cada tabla a mano: así vale
+   * también para las que se agreguen después.
+   */
+  .d-table {
+    display: block;
+    overflow-x: auto;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {

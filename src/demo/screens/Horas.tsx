@@ -1,7 +1,8 @@
 import { ChevronLeft, ChevronRight, X } from "lucide-react"
-import { useRef, useState } from "react"
+import { useCallback, useRef, useState } from "react"
 
 import { PageHead } from "../components/Screen"
+import { useEscape } from "../components/useEscape"
 import {
   clientName,
   clients,
@@ -87,6 +88,7 @@ export function Horas() {
   const [clash, setClash] = useState<{ entry: Omit<HourEntry, "id">; editingId?: string } | null>(
     null,
   )
+  useEscape(useCallback(() => setClash(null), []))
 
   const commit = (entry: Omit<HourEntry, "id">, editingId?: string) => {
     setHours((list) =>
@@ -605,6 +607,7 @@ function EntryForm({
   onSave: (entry: Omit<HourEntry, "id">) => void
 }) {
   const { user } = useDemo()
+  useEscape(onClose)
   const [clientId, setClientId] = useState(draft.editing?.clientId ?? clients[0].id)
   const [workTypeId, setWorkTypeId] = useState(draft.editing?.workTypeId ?? workTypes[0].id)
   const [minutes, setMinutes] = useState(draft.minutes)

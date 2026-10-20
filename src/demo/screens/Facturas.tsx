@@ -1,9 +1,10 @@
-import { Check, FileDown, Sparkles } from "lucide-react"
+import { Camera, Check, FileDown, ImagePlus, Sparkles, Smartphone, X } from "lucide-react"
 import { useEffect, useRef, useState } from "react"
 
 import { texts } from "../config"
 import { FacturaPreview } from "../components/FacturaPreview"
 import { PageHead } from "../components/Screen"
+import { useEscape } from "../components/useEscape"
 import { clientName, formatMoney, type Invoice } from "../data/demoData"
 import { useDemo } from "../state/DemoContext"
 
@@ -32,6 +33,7 @@ type Draft = {
 export function Facturas() {
   const { invoices, setInvoices, toast } = useDemo()
   const [openId, setOpenId] = useState<string | null>(null)
+  const [uploading, setUploading] = useState(false)
 
   const open = invoices.find((invoice) => invoice.id === openId) ?? null
   const confirmed = invoices.filter((invoice) => invoice.status === "confirmada")
@@ -42,6 +44,22 @@ export function Facturas() {
         title="Facturas con IA"
         sub="Elegí una factura, dejá que la lea y confirmá · datos de ejemplo"
       />
+
+      <div className="d-card" style={{ padding: 14, marginBottom: 13 }}>
+        <div className="d-row" style={{ flexWrap: "wrap", gap: 10 }}>
+          <button
+            type="button"
+            className="d-btn d-btn--primary d-btn--sm"
+            onClick={() => setUploading(true)}
+          >
+            <Camera size={14} />
+            Cargar factura
+          </button>
+          <span className="d-muted" style={{ fontSize: 12.5 }}>
+            En tu sistema le sacás una foto desde el celular y se carga sola.
+          </span>
+        </div>
+      </div>
 
       <div
         className="d-grid"
@@ -89,6 +107,8 @@ export function Facturas() {
 
       {confirmed.length > 0 ? <Batch invoices={confirmed} /> : null}
 
+      {uploading ? <UploadNotice onClose={() => setUploading(false)} /> : null}
+
       {open ? (
         <Reader
           invoice={open}
@@ -118,6 +138,95 @@ export function Facturas() {
   )
 }
 
+/* ── Cargar factura ────────────────────────────────────────────────── */
+
+/**
+ * Muestra cómo se carga una factura en el sistema real: foto desde el celular,
+ * desde la galería o un archivo. En la demo no acepta nada: solo explica.
+ */
+function UploadNotice({ onClose }: { onClose: () => void }) {
+  useEscape(onClose)
+
+  const ways = [
+    {
+      icon: Camera,
+      title: "Sacarle una foto",
+      body: "Desde el celular, parado en el mostrador. La IA la lee y completa los campos.",
+    },
+    {
+      icon: ImagePlus,
+      title: "Elegirla de la galería",
+      body: "La foto que ya le sacaste, o la captura que te mandaron por WhatsApp.",
+    },
+    {
+      icon: Smartphone,
+      title: "Subir el PDF",
+      body: "El comprobante que llega por mail, arrastrado desde la computadora.",
+    },
+  ]
+
+  return (
+    <div className="d-overlay" onClick={onClose}>
+      <div
+        className="d-modal"
+        role="dialog"
+        aria-modal="true"
+        aria-label="Cargar factura"
+        onClick={(event) => event.stopPropagation()}
+      >
+        <div className="d-row" style={{ alignItems: "flex-start" }}>
+          <div style={{ flex: 1 }}>
+            <span className="d-chip d-chip--warn">Esto es una demo</span>
+            <h2 className="d-modal__title" style={{ marginTop: 11 }}>
+              Acá cargás tus facturas
+            </h2>
+            <p className="d-modal__body" style={{ marginTop: 8 }}>
+              En la demo no se suben archivos: probá con las facturas de ejemplo. En tu sistema,
+              las cargás de estas tres formas.
+            </p>
+          </div>
+          <button type="button" className="d-icon-btn" onClick={onClose} aria-label="Cerrar">
+            <X size={16} />
+          </button>
+        </div>
+
+        <ul style={{ display: "grid", gap: 10, marginTop: 20 }}>
+          {ways.map((way) => (
+            <li key={way.title} className="d-card d-card--flat d-row" style={{ alignItems: "flex-start" }}>
+              <span
+                style={{
+                  display: "grid",
+                  width: 32,
+                  height: 32,
+                  flexShrink: 0,
+                  placeItems: "center",
+                  borderRadius: 10,
+                  background: "var(--d-green-soft)",
+                  color: "var(--d-green)",
+                }}
+              >
+                <way.icon size={16} />
+              </span>
+              <div>
+                <div style={{ fontSize: 13.5, fontWeight: 600 }}>{way.title}</div>
+                <p className="d-muted" style={{ marginTop: 3, fontSize: 12.5, lineHeight: 1.55 }}>
+                  {way.body}
+                </p>
+              </div>
+            </li>
+          ))}
+        </ul>
+
+        <div className="d-modal__actions">
+          <button type="button" className="d-btn d-btn--primary" onClick={onClose}>
+            Probar con las de ejemplo
+          </button>
+        </div>
+      </div>
+    </div>
+  )
+}
+
 /* ── Lectura con IA ────────────────────────────────────────────────── */
 
 const readingSteps = ["Abriendo el documento…", "Reconociendo el texto…", "Ubicando los campos…"]
@@ -133,6 +242,8 @@ function Reader({
   onConfirm: (draft: Draft) => void
   onRead: () => void
 }) {
+  useEscape(onClose)
+
   const alreadyRead = invoice.status !== "sin_leer"
   const [reading, setReading] = useState(!alreadyRead)
   const [step, setStep] = useState(0)

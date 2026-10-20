@@ -2,6 +2,7 @@ import { Clock3, FileText, Search, X } from "lucide-react"
 import { useMemo, useState } from "react"
 
 import { PageHead } from "../components/Screen"
+import { useEscape } from "../components/useEscape"
 import {
   clients,
   documentsOf,
@@ -168,6 +169,7 @@ function ClientPanel({
 }) {
   const { tasks, hours, toast } = useDemo()
   const [tab, setTab] = useState<Tab>("resumen")
+  useEscape(onClose)
 
   const clientTasks = tasks.filter((task) => task.clientId === client.id)
   const clientHours = hours.filter((entry) => entry.clientId === client.id)

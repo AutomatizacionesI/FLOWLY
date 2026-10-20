@@ -3,6 +3,7 @@ import { useMemo, useState } from "react"
 
 import { texts } from "../config"
 import { PageHead } from "../components/Screen"
+import { useEscape } from "../components/useEscape"
 import {
   clientName,
   clients,
@@ -281,6 +282,7 @@ function NewTask({
   onCreate: (task: Task) => void
 }) {
   const { user } = useDemo()
+  useEscape(onClose)
   const [title, setTitle] = useState("")
   const [clientId, setClientId] = useState(clients[0].id)
   const [assigneeId, setAssigneeId] = useState(user.id)

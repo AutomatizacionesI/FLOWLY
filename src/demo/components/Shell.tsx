@@ -1,5 +1,5 @@
 import { Lock, Menu, Search, X } from "lucide-react"
-import { useEffect, useState, type ReactNode } from "react"
+import { useCallback, useEffect, useState, type ReactNode } from "react"
 import { Link, useLocation, useNavigate } from "react-router-dom"
 
 import { CONTACT_LABEL, texts, whatsappHref } from "../config"
@@ -8,6 +8,7 @@ import { useDemo } from "../state/DemoContext"
 
 import { RoleSwitch } from "./RoleSwitch"
 import { TopbarExtras } from "./TopbarExtras"
+import { useEscape } from "./useEscape"
 
 /* ── Cinta de aviso permanente ─────────────────────────────────────── */
 
@@ -138,6 +139,8 @@ export function Shell({ children }: { children: ReactNode }) {
   const { pathname } = useLocation()
   const [menuOpen, setMenuOpen] = useState(false)
   const [query, setQuery] = useState("")
+
+  useEscape(useCallback(() => setMenuOpen(false), []))
 
   // Al cambiar de pantalla, arriba de todo y cerrar el cajón.
   useEffect(() => {

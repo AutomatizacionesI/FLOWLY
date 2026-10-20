@@ -2,51 +2,39 @@ import { ArrowRight, Check } from "lucide-react"
 import { Link } from "react-router-dom"
 
 import { CONTACT_LABEL, texts, whatsappHref } from "../config"
-import { PageHead } from "../components/Screen"
 import { useDemo } from "../state/DemoContext"
 
 /*
- * Los tres pasos están escritos con la redacción de la landing de Spike
- * (diagnóstico sin costo, arrancar por lo que más duele, escalar cuando se ven
- * resultados), resumidos a tres como pidió Tatu.
+ * Página corta a propósito: se lee en menos de un minuto.
+ * La prueba va en el titular, no escondida en una tarjeta al pie.
+ * Los tres pasos usan la redacción de la landing de Spike.
  */
+
 const steps = [
   {
     step: "01",
     title: "Diagnóstico sin costo",
-    headline: "Te escuchamos antes de proponer.",
     timing: "30 a 60 minutos",
-    body: "Nos sentamos a charlar sobre el día a día del estudio. Analizamos dónde están perdiendo tiempo y te proponemos mejoras lógicas. Sin compromisos.",
+    body: "Te escuchamos antes de proponer. Sin compromisos.",
   },
   {
     step: "02",
     title: "Prototipo",
-    headline: "Arrancamos por lo que más duele.",
     timing: "Resultados en semanas",
-    body: "No cambiamos toda la estructura de golpe. Empezamos por un módulo, el que más trabajo repetitivo te saca, y lo ves funcionando con tus datos.",
+    body: "Arrancamos por lo que más duele y lo ves andando con tus datos.",
   },
   {
     step: "03",
     title: "Implementación",
-    headline: "Escalamos cuando ves resultados.",
     timing: "Escala modular",
-    body: "A medida que el equipo se adapta de forma natural, sumamos módulos. La inversión acompaña el crecimiento real del estudio.",
+    body: "Sumamos módulos a medida que el equipo se adapta.",
   },
 ]
 
 const blocks = [
-  {
-    title: "Escuchamos cómo trabajan hoy",
-    body: "Entendemos tu proceso antes de proponer nada. Cada estudio tiene su forma de llevar clientes, horas y cierres.",
-  },
-  {
-    title: "Lo adaptamos a tu estudio",
-    body: "Tu banco, el formato de tu sistema contable, tus roles y los módulos que necesites. Se empieza por un módulo a la vez.",
-  },
-  {
-    title: "Y si necesitás otra cosa, la armamos a medida",
-    body: "Cualquier sistema interno o automatización que te saque trabajo repetitivo, aunque no esté en esta demo.",
-  },
+  ["Escuchamos cómo trabajan hoy", "Entendemos tu proceso antes de proponer nada."],
+  ["Lo adaptamos a tu estudio", "Tu banco, tu sistema contable, tus roles. Un módulo a la vez."],
+  ["Y si necesitás otra cosa, la armamos", "Cualquier automatización que te saque trabajo repetitivo."],
 ]
 
 const questions = [
@@ -57,18 +45,9 @@ const questions = [
 ]
 
 const faq = [
-  {
-    q: "¿Estos datos son reales?",
-    a: "No: todo lo que viste es de ejemplo.",
-  },
-  {
-    q: "¿Dónde viven mis datos?",
-    a: "Lo definimos juntos al armar el sistema: dónde se alojan y quién accede.",
-  },
-  {
-    q: "¿Tengo que cambiar todo de una vez?",
-    a: "No: se arranca por el módulo que más te duele.",
-  },
+  ["¿Estos datos son reales?", "No: todo lo que viste es de ejemplo."],
+  ["¿Dónde viven mis datos?", "Lo definimos juntos: dónde se alojan y quién accede."],
+  ["¿Tengo que cambiar todo de una vez?", "No: se arranca por el módulo que más te duele."],
 ]
 
 export function TrabajemosJuntos() {
@@ -76,82 +55,115 @@ export function TrabajemosJuntos() {
 
   return (
     <>
-      <PageHead
-        title="Esto es una demo. Tu estudio tiene sus propios problemas: contanos cuáles."
-        sub="Lo que viste es un ejemplo. Lo que sigue es lo que podemos armar con vos."
-      />
+      {/* ── Titular: la prueba va acá ────────────────────────────── */}
+      <div className="d-card d-card--green" style={{ padding: "30px 28px" }}>
+        <span className="d-chip">Esto no es una maqueta</span>
+        <h1
+          style={{
+            marginTop: 14,
+            maxWidth: 740,
+            fontSize: 27,
+            fontWeight: 700,
+            letterSpacing: "-0.035em",
+            lineHeight: 1.22,
+          }}
+        >
+          {texts.proof}
+        </h1>
+        <p
+          style={{
+            marginTop: 12,
+            maxWidth: 580,
+            fontSize: 14,
+            lineHeight: 1.6,
+            color: "rgba(255,255,255,.8)",
+          }}
+        >
+          Lo que recorriste es un ejemplo con datos inventados. Tu estudio tiene sus propios
+          problemas: contanos cuáles.
+        </p>
 
-      <div className="d-grid d-grid--3" style={{ marginTop: 0 }}>
-        {blocks.map((block) => (
-          <div key={block.title} className="d-card">
-            <div className="d-card__title">{block.title}</div>
-            <p className="d-muted" style={{ marginTop: 8, fontSize: 13, lineHeight: 1.6 }}>
-              {block.body}
+        <a
+          className="d-btn d-btn--cta"
+          style={{ marginTop: 20 }}
+          href={whatsappHref(para)}
+          target="_blank"
+          rel="noreferrer"
+        >
+          {CONTACT_LABEL}
+          <ArrowRight size={14} />
+        </a>
+      </div>
+
+      {/* ── Qué hacemos ──────────────────────────────────────────── */}
+      <div className="d-grid d-grid--3">
+        {blocks.map(([title, body]) => (
+          <div key={title} className="d-card">
+            <div className="d-card__title">{title}</div>
+            <p className="d-muted" style={{ marginTop: 7, fontSize: 12.5, lineHeight: 1.6 }}>
+              {body}
             </p>
           </div>
         ))}
       </div>
 
-      {/* ── Cómo trabajamos ──────────────────────────────────────── */}
-      <div className="d-card" style={{ marginTop: 13 }}>
-        <div className="d-card__head">
-          <div>
-            <div className="d-card__title">Cómo trabajamos</div>
-            <div className="d-card__sub">Los mismos tres pasos de siempre</div>
-          </div>
-        </div>
-
-        <div className="d-grid d-grid--3" style={{ marginTop: 0 }}>
-          {steps.map((item) => (
-            <div key={item.step} className="d-card d-card--flat">
-              <div className="d-row">
-                <span
-                  className="d-num"
-                  style={{
-                    display: "grid",
-                    width: 28,
-                    height: 28,
-                    placeItems: "center",
-                    borderRadius: 9,
-                    background: "var(--d-green)",
-                    color: "#fff",
-                    fontSize: 11.5,
-                    fontWeight: 700,
-                  }}
-                >
-                  {item.step}
-                </span>
-                <span className="d-chip">{item.timing}</span>
-              </div>
-
-              <div style={{ marginTop: 13, fontSize: 14, fontWeight: 600 }}>{item.title}</div>
-              <div style={{ marginTop: 3, fontSize: 13, fontWeight: 500 }}>{item.headline}</div>
-              <p className="d-muted" style={{ marginTop: 8, fontSize: 12.5, lineHeight: 1.6 }}>
-                {item.body}
-              </p>
-            </div>
-          ))}
-        </div>
-      </div>
-
-      {/* ── Para la llamada + prueba ─────────────────────────────── */}
+      {/* ── Cómo trabajamos + para la llamada ────────────────────── */}
       <div className="d-grid d-grid--main">
         <div className="d-card">
           <div className="d-card__head">
+            <div className="d-card__title">Cómo trabajamos</div>
+          </div>
+
+          <div
+            className="d-grid"
+            style={{ marginTop: 0, gridTemplateColumns: "repeat(auto-fit, minmax(168px, 1fr))" }}
+          >
+            {steps.map((item) => (
+              <div key={item.step} className="d-card d-card--flat">
+                <div className="d-row">
+                  <span
+                    className="d-num"
+                    style={{
+                      display: "grid",
+                      width: 26,
+                      height: 26,
+                      placeItems: "center",
+                      borderRadius: 8,
+                      background: "var(--d-green)",
+                      color: "#fff",
+                      fontSize: 11,
+                      fontWeight: 700,
+                    }}
+                  >
+                    {item.step}
+                  </span>
+                  <span className="d-chip">{item.timing}</span>
+                </div>
+                <div style={{ marginTop: 11, fontSize: 13.5, fontWeight: 600 }}>{item.title}</div>
+                <p className="d-muted" style={{ marginTop: 5, fontSize: 12.5, lineHeight: 1.55 }}>
+                  {item.body}
+                </p>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <div className="d-card" style={{ alignSelf: "start" }}>
+          <div className="d-card__head">
             <div>
-              <div className="d-card__title">Para la llamada, tené a mano cuatro respuestas</div>
-              <div className="d-card__sub">No hace falta que llenes ningún formulario</div>
+              <div className="d-card__title">Para la llamada</div>
+              <div className="d-card__sub">Cuatro respuestas, sin formulario</div>
             </div>
           </div>
 
-          <ul style={{ display: "grid", gap: 11 }}>
+          <ul style={{ display: "grid", gap: 10 }}>
             {questions.map((question) => (
               <li key={question} className="d-row" style={{ alignItems: "flex-start", gap: 9 }}>
                 <span
                   style={{
                     display: "grid",
-                    width: 20,
-                    height: 20,
+                    width: 19,
+                    height: 19,
                     flexShrink: 0,
                     placeItems: "center",
                     borderRadius: 999,
@@ -159,54 +171,40 @@ export function TrabajemosJuntos() {
                     color: "var(--d-green)",
                   }}
                 >
-                  <Check size={12} />
+                  <Check size={11} />
                 </span>
-                <span style={{ fontSize: 13.5 }}>{question}</span>
+                <span style={{ fontSize: 13 }}>{question}</span>
               </li>
             ))}
           </ul>
-        </div>
-
-        <div className="d-card d-card--green" style={{ alignSelf: "start" }}>
-          <span className="d-chip" style={{ marginBottom: 12 }}>
-            Esto no es una maqueta
-          </span>
-          <div className="d-card__title" style={{ fontSize: 15, lineHeight: 1.5 }}>
-            {texts.proof}
-          </div>
-          <p style={{ marginTop: 10, fontSize: 12.5, lineHeight: 1.6, color: "rgba(255,255,255,.78)" }}>
-            Lo que acabás de recorrer es un ejemplo con datos inventados, pero el sistema del que
-            salió está funcionando todos los días, con clientes, horas y cierres reales. Tu estudio
-            tiene sus propios problemas: eso es lo que queremos escuchar.
-          </p>
         </div>
       </div>
 
       {/* ── Preguntas frecuentes ─────────────────────────────────── */}
       <div className="d-grid d-grid--3">
-        {faq.map((item) => (
-          <div key={item.q} className="d-card d-card--flat">
-            <div style={{ fontSize: 13.5, fontWeight: 600 }}>{item.q}</div>
-            <p className="d-muted" style={{ marginTop: 7, fontSize: 12.5, lineHeight: 1.6 }}>
-              {item.a}
+        {faq.map(([question, answer]) => (
+          <div key={question} className="d-card d-card--flat">
+            <div style={{ fontSize: 13, fontWeight: 600 }}>{question}</div>
+            <p className="d-muted" style={{ marginTop: 6, fontSize: 12.5, lineHeight: 1.55 }}>
+              {answer}
             </p>
           </div>
         ))}
       </div>
 
-      {/* ── Llamado a la acción ──────────────────────────────────── */}
+      {/* ── Cierre ───────────────────────────────────────────────── */}
       <div
         className="d-card"
-        style={{ marginTop: 13, display: "grid", justifyItems: "center", padding: 30, textAlign: "center" }}
+        style={{ marginTop: 13, display: "grid", justifyItems: "center", padding: 28, textAlign: "center" }}
       >
-        <h2 style={{ fontSize: 20, fontWeight: 700, letterSpacing: "-0.03em", maxWidth: 520 }}>
+        <h2 style={{ fontSize: 19, fontWeight: 700, letterSpacing: "-0.03em" }}>
           ¿Cómo se vería esto en tu estudio?
         </h2>
-        <p className="d-muted" style={{ marginTop: 9, maxWidth: 480, fontSize: 13.5, lineHeight: 1.6 }}>
-          Escribinos y lo charlamos. El diagnóstico no tiene costo y no te compromete a nada.
-        </p>
 
-        <div className="d-row" style={{ marginTop: 20, gap: 10, flexWrap: "wrap", justifyContent: "center" }}>
+        <div
+          className="d-row"
+          style={{ marginTop: 16, gap: 10, flexWrap: "wrap", justifyContent: "center" }}
+        >
           <a
             className="d-btn d-btn--cta"
             href={whatsappHref(para)}
@@ -221,7 +219,7 @@ export function TrabajemosJuntos() {
           </Link>
         </div>
 
-        <div className="d-muted" style={{ marginTop: 20, fontSize: 11.5 }}>
+        <div className="d-muted" style={{ marginTop: 18, fontSize: 11.5 }}>
           Hecho por <strong style={{ fontWeight: 600 }}>Spike</strong>
         </div>
       </div>

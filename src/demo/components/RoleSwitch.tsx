@@ -5,6 +5,8 @@ import { texts } from "../config"
 import type { Role } from "../data/demoData"
 import { useDemo } from "../state/DemoContext"
 
+import { useEscape } from "./useEscape"
+
 /** Qué ve y qué puede hacer cada rol. Es la tabla del panel "¿Qué cambia?". */
 const comparison: Array<{ area: string; socio: string; contador: string }> = [
   {
@@ -36,13 +38,7 @@ function roleLabel(role: Role) {
 /* ── Panel comparativo ─────────────────────────────────────────────── */
 
 function DiffPanel({ onClose }: { onClose: () => void }) {
-  useEffect(() => {
-    const onKey = (event: KeyboardEvent) => {
-      if (event.key === "Escape") onClose()
-    }
-    window.addEventListener("keydown", onKey)
-    return () => window.removeEventListener("keydown", onKey)
-  }, [onClose])
+  useEscape(onClose)
 
   return (
     <div className="d-overlay" onClick={onClose}>
