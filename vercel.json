@@ -1,0 +1,13 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "rewrites": [
+    { "source": "/democontable", "destination": "/index.html" },
+    { "source": "/democontable/(.*)", "destination": "/index.html" }
+  ],
+  "headers": [
+    {
+      "source": "/democontable(/(.*))?",
+      "headers": [{ "key": "X-Robots-Tag", "value": "noindex, nofollow" }]
+    }
+  ]
+}
