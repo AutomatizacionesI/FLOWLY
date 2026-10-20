@@ -46,15 +46,3 @@ export function PartnersOnly({ children }: { children: ReactNode }) {
     </div>
   )
 }
-
-/** Marcador de pantalla todavía no construida (se va en la Fase 3). */
-export function Placeholder({ title, note }: { title: string; note: string }) {
-  return (
-    <>
-      <PageHead title={title} sub="Datos de ejemplo" />
-      <div className="d-card">
-        <p className="d-muted">{note}</p>
-      </div>
-    </>
-  )
-}

@@ -168,11 +168,16 @@ export function TrabajemosJuntos() {
         </div>
 
         <div className="d-card d-card--green" style={{ alignSelf: "start" }}>
+          <span className="d-chip" style={{ marginBottom: 12 }}>
+            Esto no es una maqueta
+          </span>
           <div className="d-card__title" style={{ fontSize: 15, lineHeight: 1.5 }}>
             {texts.proof}
           </div>
-          <p style={{ marginTop: 10, fontSize: 12.5, lineHeight: 1.6, color: "rgba(255,255,255,.76)" }}>
-            No es un prototipo de laboratorio: es un sistema que se usa todos los días.
+          <p style={{ marginTop: 10, fontSize: 12.5, lineHeight: 1.6, color: "rgba(255,255,255,.78)" }}>
+            Lo que acabás de recorrer es un ejemplo con datos inventados, pero el sistema del que
+            salió está funcionando todos los días, con clientes, horas y cierres reales. Tu estudio
+            tiene sus propios problemas: eso es lo que queremos escuchar.
           </p>
         </div>
       </div>
