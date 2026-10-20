@@ -90,13 +90,17 @@ export function personName(id: string): string {
 
 export type WorkType = { id: string; name: string; color: string }
 
+/*
+ * Paleta corta y en la misma familia que el resto de la demo. El violeta no
+ * entra acá: queda reservado para lo que tiene que ver con IA.
+ */
 export const workTypes: WorkType[] = [
-  { id: "w1", name: "Liquidación de IVA", color: "#4F7A5C" },
-  { id: "w2", name: "Balance", color: "#6C5CE7" },
-  { id: "w3", name: "Sueldos y BPS", color: "#2E9D6B" },
-  { id: "w4", name: "Conciliación", color: "#E0A030" },
-  { id: "w5", name: "Asesoramiento", color: "#8C7BD8" },
-  { id: "w6", name: "Trámites DGI", color: "#7E96A8" },
+  { id: "w1", name: "Liquidación de IVA", color: "#33604a" },
+  { id: "w2", name: "Balance", color: "#5c8a6e" },
+  { id: "w3", name: "Sueldos y BPS", color: "#93b6a0" },
+  { id: "w4", name: "Conciliación", color: "#c2a878" },
+  { id: "w5", name: "Asesoramiento", color: "#7e96a8" },
+  { id: "w6", name: "Trámites DGI", color: "#bdb7a8" },
 ]
 
 export function workTypeName(id: string): string {
@@ -244,6 +248,13 @@ export type HourEntry = {
   note?: string
 }
 
+/**
+ * Carga de cada semana, de la más vieja a esta.
+ * El estudio no trabaja parejo todos los meses: cerca de los vencimientos se
+ * amontona. Sin esto, el gráfico de horas sale una línea plana.
+ */
+const weekLoad = [0.55, 0.8, 1.15, 0.7, 1.3, 0.95]
+
 /** Horas de las últimas 6 semanas, de lunes a viernes. */
 export const hourEntries: HourEntry[] = (() => {
   const entries: HourEntry[] = []
@@ -254,8 +265,11 @@ export const hourEntries: HourEntry[] = (() => {
     const weekday = date.getDay()
     if (weekday === 0 || weekday === 6) continue
 
+    const load = weekLoad[5 - Math.floor(back / 7)] ?? 1
+
     for (const person of people) {
-      const blocks = person.role === "socio" ? int(1, 2) : int(2, 3)
+      const base = person.role === "socio" ? int(1, 2) : int(2, 3)
+      const blocks = Math.max(0, Math.round(base * load))
       let start = 9 * 60
       for (let block = 0; block < blocks; block++) {
         const client = pick(clients)

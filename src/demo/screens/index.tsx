@@ -1,6 +1,8 @@
 import { PartnersOnly, Placeholder } from "../components/Screen"
 import type { NavItem } from "../nav"
 
+import { Resumen } from "./Resumen"
+
 /**
  * Reparte cada ruta a su pantalla.
  *
@@ -26,8 +28,17 @@ const notes: Record<string, string> = {
   "trabajemos-juntos": "La página de contacto se arma en la Fase 2.",
 }
 
+/** Las pantallas ya construidas. El resto todavía muestra un marcador. */
+const built: Record<string, () => React.JSX.Element> = {
+  resumen: Resumen,
+}
+
 export function Screen({ item }: { item: NavItem }) {
-  const screen = (
+  const Built = built[item.path]
+
+  const screen = Built ? (
+    <Built />
+  ) : (
     <Placeholder title={item.label} note={notes[item.path] ?? "Pantalla en construcción."} />
   )
 

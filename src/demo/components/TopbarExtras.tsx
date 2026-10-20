@@ -96,7 +96,13 @@ function UserMenu() {
       <button
         type="button"
         className="d-icon-btn"
-        style={{ background: "var(--d-accent-soft)", color: "var(--d-accent-ink)", fontSize: 12, fontWeight: 600 }}
+        style={{
+          background: "var(--d-green-soft)",
+          borderColor: "transparent",
+          color: "var(--d-green)",
+          fontSize: 11.5,
+          fontWeight: 700,
+        }}
         onClick={() => setOpen((value) => !value)}
         aria-label={`Usuario: ${user.name}`}
         aria-expanded={open}
@@ -150,7 +156,7 @@ export function TopbarExtras() {
       <Alerts />
 
       <a
-        className="d-btn d-btn--primary d-btn--sm"
+        className="d-btn d-btn--cta d-btn--sm"
         href={whatsappHref(para)}
         target="_blank"
         rel="noreferrer"

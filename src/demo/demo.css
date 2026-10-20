@@ -4,40 +4,60 @@
  * Todo cuelga de .demo-root y usa variables propias (--d-*), así no se mezcla
  * con los estilos de la landing de Spike ni al revés. Acá no entra ningún
  * color ni tipografía de la marca.
+ *
+ * El look sale de las dos referencias:
+ *  - lienzo cálido, tarjetas blancas muy redondeadas y una sola tarjeta verde
+ *    destacada (referencia 1);
+ *  - barra lateral etiquetada, fila de KPIs con chips, gráficos y panel de
+ *    asistente (referencia 2).
+ * El verde se usa con cuentagotas: si pinta todo, la pantalla se aplana.
  */
 
-@import "@fontsource-variable/inter";
+@import "@fontsource-variable/plus-jakarta-sans";
 
 .demo-root {
   /* Superficies */
-  --d-canvas: #f3f2ec;
+  --d-canvas: #f2f0e9;
   --d-card: #ffffff;
-  --d-ink: #1e2230;
-  --d-ink-soft: #6b7080;
-  --d-line: #e7e5dd;
+  --d-ink: #14161c;
+  --d-ink-soft: #70737c;
+  --d-line: #e6e3da;
+  --d-wash: #f7f5f0;
 
-  /* Acento principal: verde salvia */
-  --d-accent: #4f7a5c;
-  --d-accent-ink: #3c5e47;
-  --d-accent-soft: #dce7dd;
+  /* Barra lateral oscura, como el riel de la referencia 1 */
+  --d-rail: #16181e;
+  --d-rail-ink: rgba(255, 255, 255, 0.58);
+  --d-rail-hover: rgba(255, 255, 255, 0.08);
 
-  /* Acento secundario: violeta, solo para lo que es IA */
+  /* Verde: solo la tarjeta destacada, el medidor y una serie de los gráficos */
+  --d-green: #33604a;
+  --d-green-soft: #dde7e0;
+
+  /* Violeta: solo lo que tiene que ver con IA */
   --d-ai: #6c5ce7;
   --d-ai-soft: #ece9fd;
 
+  /*
+   * Naranja: solo el botón de contacto, para que no se confunda con nada.
+   * El texto va en tinta oscura, no en blanco: blanco sobre este naranja da
+   * 3:1 y no llega a AA. Con tinta da casi 6:1 y el naranja queda bien vivo.
+   */
+  --d-cta: #ff5c35;
+  --d-cta-ink: #231006;
+
   /* Semáforo */
-  --d-ok: #2e9d6b;
-  --d-warn: #e0a030;
-  --d-bad: #d9534f;
-  --d-ok-soft: #e3f4ec;
-  --d-warn-soft: #fbf0dd;
-  --d-bad-soft: #fae7e6;
+  --d-ok: #1f9254;
+  --d-warn: #c98a14;
+  --d-bad: #d14a43;
+  --d-ok-soft: #e2f2e9;
+  --d-warn-soft: #faf0da;
+  --d-bad-soft: #fae9e8;
 
-  --d-radius: 18px;
-  --d-radius-lg: 26px;
-  --d-shadow: 0 1px 2px rgba(30, 34, 48, 0.04), 0 8px 24px -16px rgba(30, 34, 48, 0.18);
+  --d-radius: 16px;
+  --d-radius-lg: 24px;
+  --d-shadow: 0 1px 2px rgba(20, 22, 28, 0.03), 0 10px 30px -22px rgba(20, 22, 28, 0.22);
 
-  --d-font: "Inter Variable", ui-sans-serif, system-ui, "Segoe UI", sans-serif;
+  --d-font: "Plus Jakarta Sans Variable", ui-sans-serif, system-ui, sans-serif;
 
   position: fixed;
   inset: 0;
@@ -48,6 +68,7 @@
   font-size: 14px;
   line-height: 1.5;
   font-feature-settings: "tnum" 1;
+  letter-spacing: -0.005em;
   -webkit-font-smoothing: antialiased;
 }
 
@@ -87,16 +108,16 @@
 }
 
 .demo-root :focus-visible {
-  outline: 2px solid var(--d-accent);
+  outline: 2px solid var(--d-ink);
   outline-offset: 2px;
-  border-radius: 6px;
+  border-radius: 8px;
 }
 
 /* ── Esqueleto ─────────────────────────────────────────────────────── */
 
 .d-shell {
   display: grid;
-  grid-template-columns: 248px minmax(0, 1fr);
+  grid-template-columns: 246px minmax(0, 1fr);
   min-height: 100%;
 }
 
@@ -108,22 +129,28 @@
 
 .d-content {
   flex: 1;
-  padding: 24px 28px 48px;
+  padding: 22px 26px 44px;
 }
 
 .d-page-head {
-  margin-bottom: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 14px;
+  margin-bottom: 18px;
 }
 
 .d-page-title {
-  font-size: 22px;
-  font-weight: 600;
-  letter-spacing: -0.02em;
+  font-size: 25px;
+  font-weight: 700;
+  letter-spacing: -0.035em;
 }
 
 .d-page-sub {
-  margin-top: 4px;
+  margin-top: 3px;
   color: var(--d-ink-soft);
+  font-size: 13.5px;
 }
 
 /* ── Cinta de aviso ────────────────────────────────────────────────── */
@@ -134,8 +161,8 @@
   justify-content: center;
   gap: 12px;
   padding: 7px 16px;
-  background: var(--d-ink);
-  color: #fff;
+  background: var(--d-rail);
+  color: rgba(255, 255, 255, 0.82);
   font-size: 12.5px;
   text-align: center;
 }
@@ -144,7 +171,7 @@
   display: inline-flex;
   padding: 2px;
   border-radius: 6px;
-  color: rgba(255, 255, 255, 0.65);
+  color: rgba(255, 255, 255, 0.5);
 }
 
 .d-banner__close:hover {
@@ -152,10 +179,10 @@
 }
 
 .d-banner--mini {
+  width: 100%;
   cursor: pointer;
   padding: 4px 16px;
   font-size: 11.5px;
-  background: #2b3040;
 }
 
 /* ── Barra lateral ─────────────────────────────────────────────────── */
@@ -163,30 +190,29 @@
 .d-side {
   display: flex;
   flex-direction: column;
-  gap: 4px;
-  padding: 18px 14px 16px;
-  border-right: 1px solid var(--d-line);
-  background: #faf9f5;
+  padding: 18px 12px 14px;
+  background: var(--d-rail);
+  color: #fff;
 }
 
 .d-side__brand {
   display: flex;
   align-items: center;
   gap: 10px;
-  padding: 0 8px 16px;
+  padding: 0 8px 18px;
 }
 
 .d-side__mark {
   display: grid;
-  width: 34px;
-  height: 34px;
+  width: 33px;
+  height: 33px;
   flex-shrink: 0;
   place-items: center;
-  border-radius: 11px;
-  background: var(--d-accent);
+  border-radius: 10px;
+  background: var(--d-green);
   color: #fff;
-  font-size: 13px;
-  font-weight: 600;
+  font-size: 12.5px;
+  font-weight: 700;
 }
 
 .d-side__name {
@@ -197,22 +223,23 @@
 
 .d-side__tag {
   margin-top: 2px;
-  color: var(--d-ink-soft);
-  font-size: 11px;
+  color: var(--d-rail-ink);
+  font-size: 10.5px;
 }
 
 .d-side__nav {
   flex: 1;
   overflow-y: auto;
+  scrollbar-width: thin;
 }
 
 .d-side__group {
-  margin-top: 14px;
-  padding: 0 10px 6px;
-  color: var(--d-ink-soft);
-  font-size: 10.5px;
-  font-weight: 600;
-  letter-spacing: 0.09em;
+  margin-top: 15px;
+  padding: 0 10px 7px;
+  color: rgba(255, 255, 255, 0.52);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
 }
 
@@ -221,55 +248,59 @@
   width: 100%;
   align-items: center;
   gap: 10px;
-  padding: 8px 10px;
+  margin-bottom: 1px;
+  padding: 8px 11px;
   border-radius: 11px;
-  color: var(--d-ink);
-  font-size: 13.5px;
+  color: var(--d-rail-ink);
+  font-size: 13px;
+  font-weight: 500;
   text-align: left;
   transition: background 0.14s ease, color 0.14s ease;
 }
 
 .d-side__link:hover {
-  background: #efeee7;
+  background: var(--d-rail-hover);
+  color: #fff;
 }
 
 .d-side__link.is-active {
-  background: var(--d-accent);
-  color: #fff;
-  font-weight: 500;
+  background: #fff;
+  color: var(--d-ink);
+  font-weight: 600;
 }
 
 .d-side__link.is-locked {
-  color: #a4a7b1;
+  color: rgba(255, 255, 255, 0.38);
   cursor: not-allowed;
 }
 
 .d-side__link.is-locked:hover {
   background: transparent;
+  color: rgba(255, 255, 255, 0.38);
 }
 
 .d-side__lock {
   margin-left: auto;
 }
 
+/* Tarjeta de contacto del pie de la barra */
 .d-side__cta {
   margin-top: 14px;
-  padding: 14px;
+  padding: 15px;
   border-radius: var(--d-radius);
-  background: var(--d-accent);
-  color: #fff;
+  background: rgba(255, 255, 255, 0.07);
 }
 
 .d-side__cta h4 {
-  font-size: 14px;
+  font-size: 13.5px;
   font-weight: 600;
 }
 
 .d-side__cta p {
   margin-top: 4px;
-  color: rgba(255, 255, 255, 0.78);
-  font-size: 12px;
-  line-height: 1.45;
+  color: var(--d-rail-ink);
+  font-size: 11.5px;
+  line-height: 1.5;
 }
 
 /* ── Barra superior ────────────────────────────────────────────────── */
@@ -286,7 +317,7 @@
    * contenedor y cualquier position:fixed de adentro (el panel "¿Qué cambia?")
    * queda anclado al header en vez de a la pantalla.
    */
-  background: #faf9f5;
+  background: var(--d-canvas);
   position: sticky;
   top: 0;
   z-index: 20;
@@ -296,10 +327,10 @@
   position: relative;
   display: flex;
   min-width: 110px;
-  flex: 0 1 210px;
+  flex: 0 1 215px;
   align-items: center;
   gap: 8px;
-  padding: 7px 14px;
+  padding: 8px 15px;
   border: 1px solid var(--d-line);
   border-radius: 999px;
   background: var(--d-card);
@@ -312,6 +343,7 @@
   background: none;
   color: var(--d-ink);
   font: inherit;
+  font-size: 13px;
   outline: none;
 }
 
@@ -321,34 +353,44 @@
 
 .d-icon-btn {
   display: grid;
-  width: 34px;
-  height: 34px;
+  width: 35px;
+  height: 35px;
   flex-shrink: 0;
   place-items: center;
   border: 1px solid var(--d-line);
   border-radius: 999px;
   background: var(--d-card);
   color: var(--d-ink-soft);
+  transition: color 0.14s ease, border-color 0.14s ease;
 }
 
 .d-icon-btn:hover {
+  border-color: #d6d2c6;
   color: var(--d-ink);
 }
 
 .d-icon-btn__dot {
   position: absolute;
-  top: -2px;
-  right: -2px;
+  top: -3px;
+  right: -3px;
   display: grid;
-  min-width: 16px;
-  height: 16px;
+  min-width: 17px;
+  height: 17px;
   place-items: center;
   padding: 0 4px;
+  border: 2px solid var(--d-canvas);
   border-radius: 999px;
   background: var(--d-bad);
   color: #fff;
   font-size: 10px;
-  font-weight: 600;
+  font-weight: 700;
+}
+
+/* Etiquetas que se esconden cuando la barra superior queda justa. */
+@media (max-width: 1280px) {
+  .d-hide-narrow {
+    display: none;
+  }
 }
 
 /* ── Interruptor de rol ────────────────────────────────────────────── */
@@ -365,23 +407,25 @@
 }
 
 .d-roleswitch__label {
-  padding: 0 8px 0 10px;
+  padding: 0 7px 0 10px;
   color: var(--d-ink-soft);
-  font-size: 12px;
+  font-size: 11.5px;
+  font-weight: 500;
 }
 
 .d-roleswitch button {
-  padding: 5px 13px;
+  padding: 6px 14px;
   border-radius: 999px;
   color: var(--d-ink-soft);
   font-size: 12.5px;
+  font-weight: 500;
   transition: background 0.16s ease, color 0.16s ease;
 }
 
 .d-roleswitch button.is-on {
-  background: var(--d-accent);
+  background: var(--d-ink);
   color: #fff;
-  font-weight: 500;
+  font-weight: 600;
 }
 
 /* Globo de ayuda de primera vez */
@@ -390,12 +434,12 @@
   top: calc(100% + 12px);
   right: 0;
   z-index: 60;
-  width: 272px;
-  padding: 14px 16px;
+  width: 274px;
+  padding: 15px 16px;
   border-radius: 16px;
-  background: var(--d-ink);
+  background: var(--d-rail);
   color: #fff;
-  box-shadow: 0 18px 44px -20px rgba(30, 34, 48, 0.5);
+  box-shadow: 0 20px 48px -22px rgba(20, 22, 28, 0.55);
 }
 
 .d-coach::before {
@@ -406,25 +450,18 @@
   width: 12px;
   height: 12px;
   transform: rotate(45deg);
-  background: var(--d-ink);
+  background: var(--d-rail);
 }
 
 .d-coach p {
   font-size: 13px;
-  line-height: 1.5;
+  line-height: 1.55;
 }
 
 .d-coach__actions {
   display: flex;
   justify-content: flex-end;
-  margin-top: 12px;
-}
-
-/* Etiquetas que se esconden cuando la barra superior queda justa. */
-@media (max-width: 1240px) {
-  .d-hide-narrow {
-    display: none;
-  }
+  margin-top: 13px;
 }
 
 /* ── Botones ───────────────────────────────────────────────────────── */
@@ -434,20 +471,25 @@
   align-items: center;
   justify-content: center;
   gap: 7px;
-  padding: 8px 15px;
+  padding: 9px 16px;
   border-radius: 999px;
   font-size: 13px;
-  font-weight: 500;
+  font-weight: 600;
   white-space: nowrap;
-  transition: filter 0.16s ease, background 0.16s ease;
+  transition: filter 0.16s ease, transform 0.16s ease, background 0.16s ease;
 }
 
 .d-btn:hover {
-  filter: brightness(0.96);
+  filter: brightness(0.95);
 }
 
 .d-btn--primary {
-  background: var(--d-accent);
+  background: var(--d-ink);
+  color: #fff;
+}
+
+.d-btn--green {
+  background: var(--d-green);
   color: #fff;
 }
 
@@ -456,22 +498,43 @@
   color: #fff;
 }
 
+/* El botón de contacto: el único naranja de toda la demo. */
+.d-btn--cta {
+  background: var(--d-cta);
+  color: var(--d-cta-ink);
+  box-shadow: 0 6px 18px -8px rgba(255, 92, 53, 0.75);
+}
+
+.d-btn--cta:hover {
+  filter: none;
+  background: #f04f29;
+  transform: translateY(-1px);
+}
+
 .d-btn--ghost {
   border: 1px solid var(--d-line);
   background: var(--d-card);
   color: var(--d-ink);
+  font-weight: 500;
+}
+
+.d-btn--ghost:hover {
+  filter: none;
+  border-color: #d6d2c6;
 }
 
 .d-btn--quiet {
   color: var(--d-ink-soft);
+  font-weight: 500;
 }
 
 .d-btn--quiet:hover {
+  filter: none;
   color: var(--d-ink);
 }
 
 .d-btn--sm {
-  padding: 5px 11px;
+  padding: 6px 13px;
   font-size: 12px;
 }
 
@@ -479,30 +542,27 @@
   width: 100%;
 }
 
-.d-btn--onaccent {
-  background: #fff;
-  color: var(--d-accent-ink);
-}
-
 /* ── Tarjetas ──────────────────────────────────────────────────────── */
 
 .d-card {
   padding: 18px;
-  border: 1px solid var(--d-line);
   border-radius: var(--d-radius-lg);
   background: var(--d-card);
   box-shadow: var(--d-shadow);
 }
 
-.d-card--accent {
-  border-color: transparent;
-  background: var(--d-accent);
+.d-card--green {
+  background: var(--d-green);
   color: #fff;
 }
 
 .d-card--ai {
-  border-color: #ddd6fb;
   background: var(--d-ai-soft);
+}
+
+.d-card--flat {
+  background: var(--d-wash);
+  box-shadow: none;
 }
 
 .d-card__head {
@@ -510,59 +570,98 @@
   align-items: flex-start;
   justify-content: space-between;
   gap: 12px;
-  margin-bottom: 14px;
+  margin-bottom: 15px;
 }
 
 .d-card__title {
   font-size: 14.5px;
   font-weight: 600;
+  letter-spacing: -0.015em;
 }
 
 .d-card__sub {
   margin-top: 2px;
   color: var(--d-ink-soft);
-  font-size: 12px;
+  font-size: 11.5px;
 }
 
-.d-card--accent .d-card__sub {
-  color: rgba(255, 255, 255, 0.74);
+.d-card--green .d-card__sub {
+  color: rgba(255, 255, 255, 0.72);
 }
 
 /* ── KPIs ──────────────────────────────────────────────────────────── */
 
+/*
+ * Los KPIs van en columnas fijas, no en auto-fit: con auto-fit, 6 tarjetas
+ * entran de a 5 y la sexta queda sola en una fila.
+ */
 .d-kpis {
   display: grid;
-  gap: 14px;
-  grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+  gap: 13px;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+}
+
+@media (max-width: 1400px) {
+  .d-kpis {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 760px) {
+  .d-kpis {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+.d-kpi {
+  padding: 16px 17px;
 }
 
 .d-kpi__top {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  gap: 9px;
   color: var(--d-ink-soft);
-  font-size: 12.5px;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.d-kpi__icon {
+  display: grid;
+  width: 27px;
+  height: 27px;
+  flex-shrink: 0;
+  place-items: center;
+  border-radius: 9px;
+  background: var(--d-wash);
+  color: var(--d-ink);
+}
+
+.d-card--green .d-kpi__icon {
+  background: rgba(255, 255, 255, 0.16);
+  color: #fff;
 }
 
 .d-kpi__value {
-  margin-top: 10px;
-  font-size: 27px;
-  font-weight: 600;
-  letter-spacing: -0.025em;
+  margin-top: 13px;
+  font-size: 28px;
+  font-weight: 700;
+  letter-spacing: -0.04em;
+  line-height: 1.1;
 }
 
 .d-kpi__foot {
-  margin-top: 8px;
+  margin-top: 9px;
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 7px;
   color: var(--d-ink-soft);
-  font-size: 11.5px;
+  font-size: 11px;
 }
 
-.d-card--accent .d-kpi__top,
-.d-card--accent .d-kpi__foot {
-  color: rgba(255, 255, 255, 0.76);
+.d-card--green .d-kpi__top,
+.d-card--green .d-kpi__foot {
+  color: rgba(255, 255, 255, 0.74);
 }
 
 /* ── Chips ─────────────────────────────────────────────────────────── */
@@ -570,29 +669,29 @@
 .d-chip {
   display: inline-flex;
   align-items: center;
-  gap: 4px;
-  padding: 2px 9px;
+  gap: 3px;
+  padding: 3px 9px;
   border-radius: 999px;
-  background: #f1f0ea;
+  background: var(--d-wash);
   color: var(--d-ink-soft);
-  font-size: 11.5px;
-  font-weight: 500;
+  font-size: 11px;
+  font-weight: 600;
   white-space: nowrap;
 }
 
 .d-chip--ok {
   background: var(--d-ok-soft);
-  color: #1d7a51;
+  color: #146b3d;
 }
 
 .d-chip--warn {
   background: var(--d-warn-soft);
-  color: #9a6a14;
+  color: #8f610a;
 }
 
 .d-chip--bad {
   background: var(--d-bad-soft);
-  color: #a8302c;
+  color: #a3332d;
 }
 
 .d-chip--ai {
@@ -600,12 +699,22 @@
   color: #4c3fb0;
 }
 
+.d-chip--green {
+  background: var(--d-green-soft);
+  color: #2a503e;
+}
+
+.d-card--green .d-chip {
+  background: rgba(255, 255, 255, 0.18);
+  color: #fff;
+}
+
 /* ── Rejillas ──────────────────────────────────────────────────────── */
 
 .d-grid {
   display: grid;
-  gap: 14px;
-  margin-top: 14px;
+  gap: 13px;
+  margin-top: 13px;
 }
 
 .d-grid--2 {
@@ -613,25 +722,36 @@
 }
 
 .d-grid--3 {
-  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(228px, 1fr));
+}
+
+/* Fila principal del resumen: gráfico grande + dos columnas angostas */
+.d-grid--main {
+  grid-template-columns: minmax(0, 1.9fr) minmax(0, 1fr);
+}
+
+@media (max-width: 1080px) {
+  .d-grid--main {
+    grid-template-columns: minmax(0, 1fr);
+  }
 }
 
 /* ── Tablas ────────────────────────────────────────────────────────── */
 
 .d-table th {
-  padding: 0 10px 9px;
+  padding: 0 10px 10px;
   border-bottom: 1px solid var(--d-line);
   color: var(--d-ink-soft);
-  font-size: 11px;
-  font-weight: 600;
-  letter-spacing: 0.05em;
+  font-size: 10.5px;
+  font-weight: 700;
+  letter-spacing: 0.07em;
   text-align: left;
   text-transform: uppercase;
 }
 
 .d-table td {
-  padding: 10px;
-  border-bottom: 1px solid #f2f1ea;
+  padding: 11px 10px;
+  border-bottom: 1px solid #f1efe8;
   font-size: 13px;
   vertical-align: middle;
 }
@@ -643,6 +763,22 @@
 .d-table .is-num {
   font-variant-numeric: tabular-nums;
   text-align: right;
+}
+
+/* ── Listas con barra de progreso ──────────────────────────────────── */
+
+.d-bar {
+  height: 6px;
+  margin-top: 7px;
+  overflow: hidden;
+  border-radius: 999px;
+  background: var(--d-wash);
+}
+
+.d-bar__fill {
+  height: 100%;
+  border-radius: 999px;
+  background: var(--d-green);
 }
 
 /* ── Modal y paneles ───────────────────────────────────────────────── */
@@ -659,8 +795,7 @@
   display: flex;
   overflow-y: auto;
   padding: 18px;
-  background: rgba(30, 34, 48, 0.42);
-  backdrop-filter: blur(2px);
+  background: rgba(20, 22, 28, 0.44);
 }
 
 .d-modal {
@@ -671,13 +806,13 @@
   padding: 26px;
   border-radius: var(--d-radius-lg);
   background: var(--d-card);
-  box-shadow: 0 30px 70px -30px rgba(30, 34, 48, 0.5);
+  box-shadow: 0 30px 70px -30px rgba(20, 22, 28, 0.5);
 }
 
 .d-modal__title {
-  font-size: 19px;
-  font-weight: 600;
-  letter-spacing: -0.02em;
+  font-size: 20px;
+  font-weight: 700;
+  letter-spacing: -0.03em;
 }
 
 .d-modal__body {
@@ -691,21 +826,6 @@
   flex-wrap: wrap;
   gap: 10px;
   margin-top: 22px;
-}
-
-.d-drawer {
-  position: fixed;
-  top: 0;
-  right: 0;
-  z-index: 80;
-  display: flex;
-  width: min(620px, 100%);
-  height: 100%;
-  flex-direction: column;
-  overflow: auto;
-  padding: 24px;
-  background: var(--d-card);
-  box-shadow: -24px 0 60px -36px rgba(30, 34, 48, 0.45);
 }
 
 /* ── Avisos flotantes ──────────────────────────────────────────────── */
@@ -723,26 +843,26 @@
 }
 
 .d-toast {
-  padding: 11px 15px;
+  padding: 12px 16px;
   border-radius: 14px;
-  background: var(--d-ink);
+  background: var(--d-rail);
   color: #fff;
   font-size: 13px;
   line-height: 1.45;
-  box-shadow: 0 18px 40px -22px rgba(30, 34, 48, 0.6);
+  box-shadow: 0 18px 40px -20px rgba(20, 22, 28, 0.65);
 }
 
 /* ── Pantalla bloqueada ────────────────────────────────────────────── */
 
 .d-locked {
   display: grid;
-  max-width: 420px;
-  margin: 64px auto;
+  max-width: 430px;
+  margin: 60px auto;
   justify-items: center;
-  padding: 32px;
-  border: 1px solid var(--d-line);
+  padding: 34px;
   border-radius: var(--d-radius-lg);
   background: var(--d-card);
+  box-shadow: var(--d-shadow);
   text-align: center;
 }
 
@@ -752,8 +872,8 @@
   height: 46px;
   place-items: center;
   border-radius: 999px;
-  background: var(--d-accent-soft);
-  color: var(--d-accent-ink);
+  background: var(--d-green-soft);
+  color: var(--d-green);
 }
 
 /* ── Pie ───────────────────────────────────────────────────────────── */
@@ -764,21 +884,10 @@
   align-items: center;
   justify-content: space-between;
   gap: 10px;
-  padding: 18px 28px 26px;
+  padding: 18px 26px 26px;
   border-top: 1px solid var(--d-line);
   color: var(--d-ink-soft);
   font-size: 11.5px;
-}
-
-.d-foot__by {
-  display: flex;
-  align-items: center;
-  gap: 7px;
-}
-
-.d-foot__by img {
-  height: 15px;
-  opacity: 0.55;
 }
 
 /* ── Utilidades chicas ─────────────────────────────────────────────── */
@@ -791,6 +900,10 @@
 
 .d-muted {
   color: var(--d-ink-soft);
+}
+
+.d-num {
+  font-variant-numeric: tabular-nums;
 }
 
 .d-sr {
@@ -818,7 +931,7 @@
     top: 0;
     left: 0;
     z-index: 70;
-    width: 268px;
+    width: 266px;
     height: 100%;
     transform: translateX(-100%);
     transition: transform 0.22s ease;
@@ -844,11 +957,15 @@
   }
 
   .d-search {
-    max-width: none;
+    flex: 1 1 140px;
+  }
+
+  .d-page-title {
+    font-size: 21px;
   }
 
   .d-kpi__value {
-    font-size: 23px;
+    font-size: 24px;
   }
 }
 

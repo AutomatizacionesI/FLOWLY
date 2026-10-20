@@ -101,7 +101,7 @@ function Sidebar({ open, onClose }: { open: boolean; onClose: () => void }) {
         <h4>{texts.sidebarCtaTitle}</h4>
         <p>{texts.sidebarCtaBody}</p>
         <a
-          className="d-btn d-btn--onaccent d-btn--sm d-btn--block"
+          className="d-btn d-btn--cta d-btn--sm d-btn--block"
           style={{ marginTop: 12 }}
           href={whatsappHref(para)}
           target="_blank"

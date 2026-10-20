@@ -150,7 +150,12 @@ export function RoleSwitch() {
           <div className="d-coach" role="note">
             <p>{texts.roleHint}</p>
             <div className="d-coach__actions">
-              <button type="button" className="d-btn d-btn--onaccent d-btn--sm" onClick={dismissCoach}>
+              <button
+                type="button"
+                className="d-btn d-btn--sm"
+                style={{ background: "#fff", color: "var(--d-ink)" }}
+                onClick={dismissCoach}
+              >
                 Entendido
               </button>
             </div>
