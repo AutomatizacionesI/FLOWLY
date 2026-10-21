@@ -1,5 +1,5 @@
 import { ArrowRight, Send, Sparkles } from "lucide-react"
-import { useEffect, useRef, useState } from "react"
+import { useCallback, useEffect, useRef, useState } from "react"
 import { Link } from "react-router-dom"
 
 import { answer, suggestions, type Answer } from "../assistant/answers"
@@ -15,18 +15,39 @@ export function Asistente() {
   const [messages, setMessages] = useState<Message[]>([])
   const [input, setInput] = useState("")
   const [thinking, setThinking] = useState(false)
-  const endRef = useRef<HTMLDivElement>(null)
+  const logRef = useRef<HTMLDivElement>(null)
   const nextId = useRef(1)
 
+  /*
+   * "Seguirlo abajo" es una marca, no una medición: la tabla de una respuesta
+   * aparece recién cuando termina de escribirse, y medir la distancia en ese
+   * momento daba un salto grande y cancelaba el seguimiento.
+   * La marca solo se apaga cuando el usuario sube a releer algo.
+   */
+  const stick = useRef(true)
+
+  const onLogScroll = useCallback(() => {
+    const log = logRef.current
+    if (!log) return
+    stick.current = log.scrollHeight - log.scrollTop - log.clientHeight < 60
+  }, [])
+
+  const followEnd = useCallback(() => {
+    const log = logRef.current
+    if (log && stick.current) log.scrollTop = log.scrollHeight
+  }, [])
+
   useEffect(() => {
-    // Sin mensajes no hay nada que seguir: si no, al entrar baja sola la página.
     if (messages.length === 0) return
-    endRef.current?.scrollIntoView({ behavior: "smooth", block: "end" })
-  }, [messages, thinking])
+    followEnd()
+  }, [messages, thinking, followEnd])
 
   const ask = (question: string) => {
     const text = question.trim()
     if (!text || thinking) return
+
+    // Preguntar algo es pedir ver la respuesta, aunque estuvieras leyendo arriba.
+    stick.current = true
 
     setMessages((list) => [...list, { id: nextId.current++, from: "persona", text }])
     setInput("")
@@ -57,7 +78,7 @@ export function Asistente() {
         sub="Preguntale por datos, documentos, plantillas o cómo se hace algo"
       />
 
-      <div className="d-chat">
+      <div className={`d-chat${messages.length > 0 ? " is-live" : ""}`}>
         <div className="d-chat__notice">
           <Sparkles size={14} style={{ flexShrink: 0 }} />
           <span>
@@ -66,7 +87,7 @@ export function Asistente() {
           </span>
         </div>
 
-        <div className="d-chat__log">
+        <div className="d-chat__log" ref={logRef} onScroll={onLogScroll}>
           {messages.length === 0 ? (
             <Welcome onPick={ask} />
           ) : (
@@ -76,7 +97,7 @@ export function Asistente() {
                   {message.text}
                 </div>
               ) : (
-                <AssistantMessage key={message.id} answer={message.answer} />
+                <AssistantMessage key={message.id} answer={message.answer} onGrow={followEnd} />
               ),
             )
           )}
@@ -86,8 +107,6 @@ export function Asistente() {
               Buscando en la información del estudio…
             </div>
           ) : null}
-
-          <div ref={endRef} />
         </div>
 
         {messages.length > 0 ? (
@@ -183,9 +202,20 @@ function Welcome({ onPick }: { onPick: (question: string) => void }) {
 
 /* ── Respuesta, con efecto de escritura ────────────────────────────── */
 
-function AssistantMessage({ answer: result }: { answer: Answer }) {
+function AssistantMessage({
+  answer: result,
+  onGrow,
+}: {
+  answer: Answer
+  /** Se llama en cada tecleo, para que el chat siga al texto que crece. */
+  onGrow: () => void
+}) {
   const [shown, setShown] = useState("")
   const done = shown.length >= result.text.length
+
+  useEffect(() => {
+    if (done) onGrow()
+  }, [done, onGrow])
 
   useEffect(() => {
     // Escribe de a pocos caracteres para que se vea como un chat de verdad.
@@ -193,10 +223,11 @@ function AssistantMessage({ answer: result }: { answer: Answer }) {
     const timer = window.setInterval(() => {
       index = Math.min(result.text.length, index + 3)
       setShown(result.text.slice(0, index))
+      onGrow()
       if (index >= result.text.length) window.clearInterval(timer)
     }, 16)
     return () => window.clearInterval(timer)
-  }, [result.text])
+  }, [result.text, onGrow])
 
   return (
     <div className={`d-msg d-msg--bot${result.denied ? " d-msg--denied" : ""}`}>

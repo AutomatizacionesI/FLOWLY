@@ -60,8 +60,8 @@ function Sidebar({ open, onClose }: { open: boolean; onClose: () => void }) {
 
       <nav className="d-side__nav" aria-label="Secciones del sistema">
         {navGroups.map((group) => (
-          <div key={group.title}>
-            <div className="d-side__group">{group.title}</div>
+          <div key={group.title ?? group.items[0].path}>
+            {group.title ? <div className="d-side__group">{group.title}</div> : null}
             {group.items.map((item) => {
               const locked = item.partnersOnly && role === "contador"
               const active = pathname.endsWith(`/${item.path}`)

@@ -878,9 +878,9 @@ select.d-input {
 /* ── Asistente ─────────────────────────────────────────────────────── */
 
 /*
- * El chat crece hacia abajo y scrollea la página, no una cajita interna:
- * dos barras de scroll (la de la página y la del chat) se sienten baratas.
- * El campo de texto queda pegado abajo para no tener que perseguirlo.
+ * Vacío, el chat mide lo que ocupa su contenido: una caja alta con una barra
+ * de scroll vacía se ve mal al entrar. En cuanto hay conversación pasa a
+ * altura fija y scrollea por dentro, como cualquier chat.
  */
 .d-chat {
   display: flex;
@@ -888,6 +888,16 @@ select.d-input {
   border-radius: var(--d-radius-lg);
   background: var(--d-card);
   box-shadow: var(--d-shadow);
+}
+
+.d-chat.is-live {
+  min-height: 520px;
+  max-height: calc(100vh - 215px);
+  overflow: hidden;
+}
+
+.d-chat.is-live .d-chat__log {
+  overflow-y: auto;
 }
 
 .d-chat__notice {
@@ -970,9 +980,6 @@ select.d-input {
 }
 
 .d-chat__composer {
-  position: sticky;
-  bottom: 0;
-  z-index: 5;
   display: flex;
   gap: 9px;
   padding: 14px 18px;

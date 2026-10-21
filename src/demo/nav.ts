@@ -26,9 +26,15 @@ export type NavItem = {
   highlight?: boolean
 }
 
-export type NavGroup = { title: string; items: NavItem[] }
+export type NavGroup = { title?: string; items: NavItem[] }
 
 export const navGroups: NavGroup[] = [
+  // Va primero y sin titulo de grupo: al pie del menu no lo encontraba nadie.
+  {
+    items: [
+      { path: "trabajemos-juntos", label: "Trabajemos juntos", icon: Handshake, highlight: true },
+    ],
+  },
   {
     title: "Gestión",
     items: [
@@ -69,12 +75,6 @@ export const navGroups: NavGroup[] = [
     title: "Administración",
     items: [
       { path: "administracion", label: "Administración", icon: Settings, partnersOnly: true },
-    ],
-  },
-  {
-    title: "Spike",
-    items: [
-      { path: "trabajemos-juntos", label: "Trabajemos juntos", icon: Handshake, highlight: true },
     ],
   },
 ]
