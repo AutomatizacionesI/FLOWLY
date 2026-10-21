@@ -22,6 +22,8 @@ export type NavItem = {
   icon: LucideIcon
   /** true cuando la pantalla es solo para socios. */
   partnersOnly?: boolean
+  /** true para el ítem que queremos que salte a la vista (el de contacto). */
+  highlight?: boolean
 }
 
 export type NavGroup = { title: string; items: NavItem[] }
@@ -71,7 +73,9 @@ export const navGroups: NavGroup[] = [
   },
   {
     title: "Spike",
-    items: [{ path: "trabajemos-juntos", label: "Trabajemos juntos", icon: Handshake }],
+    items: [
+      { path: "trabajemos-juntos", label: "Trabajemos juntos", icon: Handshake, highlight: true },
+    ],
   },
 ]
 

@@ -19,6 +19,8 @@ export function Asistente() {
   const nextId = useRef(1)
 
   useEffect(() => {
+    // Sin mensajes no hay nada que seguir: si no, al entrar baja sola la página.
+    if (messages.length === 0) return
     endRef.current?.scrollIntoView({ behavior: "smooth", block: "end" })
   }, [messages, thinking])
 
@@ -90,7 +92,7 @@ export function Asistente() {
 
         {messages.length > 0 ? (
           <div className="d-chat__chips">
-            {suggestions.slice(0, 4).map((item) => (
+            {suggestions.slice(0, 3).map((item) => (
               <button
                 key={item}
                 type="button"
@@ -134,47 +136,47 @@ export function Asistente() {
 /* ── Estado inicial, con las sugerencias agrupadas ─────────────────── */
 
 function Welcome({ onPick }: { onPick: (question: string) => void }) {
-  const groups: Array<[string, string[]]> = [
-    ["Sobre el trabajo del estudio", suggestions.slice(0, 4)],
-    ["Sobre plata y conciliación", suggestions.slice(4, 6)],
-    ["Buscar documentos y procedimientos", suggestions.slice(7, 10)],
-    ["Armar un reporte", suggestions.slice(10)],
-  ]
-
   return (
-    <div style={{ display: "grid", gap: 18, padding: "10px 2px" }}>
-      <div>
-        <h2 style={{ fontSize: 17, fontWeight: 700, letterSpacing: "-0.03em" }}>
-          Preguntale lo que necesites del estudio
+    <div style={{ display: "grid", gap: 16, padding: "22px 2px", placeContent: "center" }}>
+      <div style={{ maxWidth: 560, textAlign: "center", justifySelf: "center" }}>
+        <span
+          style={{
+            display: "grid",
+            width: 40,
+            height: 40,
+            margin: "0 auto 14px",
+            placeItems: "center",
+            borderRadius: 13,
+            background: "var(--d-ai)",
+            color: "#fff",
+          }}
+        >
+          <Sparkles size={19} />
+        </span>
+        <h2 style={{ fontSize: 18, fontWeight: 700, letterSpacing: "-0.03em" }}>
+          ¿Qué necesitás saber del estudio?
         </h2>
-        <p className="d-muted" style={{ marginTop: 5, fontSize: 13, lineHeight: 1.6 }}>
-          Conoce los clientes, las tareas, las horas, la conciliación, los documentos de cada
-          carpeta, las plantillas y los procedimientos internos. Y arma reportes.
+        <p className="d-muted" style={{ marginTop: 6, fontSize: 13, lineHeight: 1.6 }}>
+          Clientes, tareas, horas y conciliación. También busca documentos de cada carpeta,
+          plantillas y procedimientos internos, y arma reportes.
         </p>
       </div>
 
-      {groups.map(([title, list]) => (
-        <div key={title}>
-          <div
-            className="d-muted"
-            style={{ fontSize: 10.5, fontWeight: 700, letterSpacing: "0.08em", textTransform: "uppercase" }}
+      <div
+        className="d-chat__chips"
+        style={{ padding: 0, justifyContent: "center", maxWidth: 620, justifySelf: "center" }}
+      >
+        {suggestions.map((item) => (
+          <button
+            key={item}
+            type="button"
+            className="d-btn d-btn--ghost d-btn--sm"
+            onClick={() => onPick(item)}
           >
-            {title}
-          </div>
-          <div className="d-chat__chips" style={{ padding: "9px 0 0" }}>
-            {list.map((item) => (
-              <button
-                key={item}
-                type="button"
-                className="d-btn d-btn--ghost d-btn--sm"
-                onClick={() => onPick(item)}
-              >
-                {item}
-              </button>
-            ))}
-          </div>
-        </div>
-      ))}
+            {item}
+          </button>
+        ))}
+      </div>
     </div>
   )
 }

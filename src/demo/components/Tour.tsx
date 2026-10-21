@@ -30,7 +30,7 @@ const allSteps: Step[] = [
   {
     to: "resumen",
     title: "Socio o contador",
-    body: "Arriba está el interruptor de vista. Mirá cómo cambia lo que ve un socio frente a un contador.",
+    body: "Arriba está el interruptor de vista. Cambialo cuando quieras, en cualquier pantalla, y mirá cómo cambian los datos, los botones y hasta el menú.",
   },
   {
     to: "conciliacion",
@@ -91,8 +91,15 @@ export function Tour() {
           </button>
         </div>
 
-        <h3 className="d-tour__title">Eso fue un adelanto</h3>
-        <p className="d-tour__body">¿Cómo se vería esto en tu estudio?</p>
+        <h3 className="d-tour__title">Eso fue un adelanto… y hay mucho más</h3>
+        <p className="d-tour__body">
+          Quedaron sin recorrer los extractos, los asientos desde CFE, el reporte de horas, el
+          tablero de socios y las herramientas. Y acordate: el interruptor Socio / Contador de
+          arriba funciona en todas las pantallas, probá cambiarlo mientras mirás.
+        </p>
+        <p className="d-tour__body" style={{ marginTop: 9 }}>
+          ¿Cómo se vería esto en tu estudio?
+        </p>
 
         <div className="d-tour__actions">
           <a

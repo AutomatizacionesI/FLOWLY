@@ -86,7 +86,9 @@ function Sidebar({ open, onClose }: { open: boolean; onClose: () => void }) {
                   key={item.path}
                   to={item.path}
                   onClick={onClose}
-                  className={`d-side__link${active ? " is-active" : ""}`}
+                  className={`d-side__link${active ? " is-active" : ""}${
+                    item.highlight ? " is-cta" : ""
+                  }`}
                   aria-current={active ? "page" : undefined}
                 >
                   <Icon size={16} />

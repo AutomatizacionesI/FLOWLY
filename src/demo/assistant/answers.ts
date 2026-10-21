@@ -55,17 +55,17 @@ export type AssistantData = {
   movements: BankMovement[]
 }
 
-/** Preguntas sugeridas, agrupadas como las usaría alguien del estudio. */
+/**
+ * Preguntas sugeridas: seis, una por cada cosa distinta que sabe hacer.
+ * El asistente entiende bastante más (facturas, plantillas, quién atiende a un
+ * cliente, carga del equipo), pero llenar la pantalla de ejemplos lo hace ver
+ * como una lista de botones en vez de un asistente.
+ */
 export const suggestions = [
   "¿Qué tareas vencen esta semana?",
   "¿Cuántas horas se dedicaron a Textil Mirasol este mes?",
-  "¿Qué clientes consumen más horas?",
-  "¿Qué facturas quedaron sin confirmar?",
   "¿Qué movimientos quedaron pendientes de conciliar?",
-  "Resumime la carga de trabajo de cada persona",
-  "¿Quién atiende a Agro Cañada Verde?",
   "¿Dónde está el balance de Textil Mirasol?",
-  "Necesito la plantilla de carta poder",
   "¿Cómo se hace el alta de un empleado en BPS?",
   "Armame un reporte de horas del mes",
 ]
