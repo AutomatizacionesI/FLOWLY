@@ -60,16 +60,17 @@ export const navGroups: NavGroup[] = [
       { path: "tablero-socios", label: "Tablero de socios", icon: Gauge, partnersOnly: true },
     ],
   },
+  // El asistente va antes que las herramientas: es lo que mas impresiona de la demo.
+  {
+    title: "Asistente",
+    items: [{ path: "asistente", label: "Asistente del estudio", icon: Bot }],
+  },
   {
     title: "Herramientas",
     items: [
       { path: "herramientas/unir-pdfs", label: "Unir PDFs", icon: FileStack },
       { path: "herramientas/pdf-a-excel", label: "PDF a Excel", icon: FileSpreadsheet },
     ],
-  },
-  {
-    title: "Asistente",
-    items: [{ path: "asistente", label: "Asistente del estudio", icon: Bot }],
   },
   {
     title: "Administración",
