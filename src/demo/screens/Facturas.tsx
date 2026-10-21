@@ -273,8 +273,7 @@ function Reader({
       ),
     )
     return () => timers.current.forEach(window.clearTimeout)
-    // Solo al abrir.
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    // Corre una sola vez, al abrir la factura.
   }, [])
 
   const vat = draft.subtotal * (draft.vatRate / 100)

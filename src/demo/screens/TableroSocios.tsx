@@ -11,6 +11,7 @@ import {
 
 import { Kpi } from "../components/Kpi"
 import { PageHead } from "../components/Screen"
+import { chart } from "../chartColors"
 import { clientName, clients, formatHours, formatMoney, people } from "../data/demoData"
 import { hoursByClient, hoursThisMonth } from "../data/selectors"
 import { useDemo } from "../state/DemoContext"
@@ -144,7 +145,7 @@ export function TableroSocios() {
               />
               <Bar dataKey="horas" radius={[7, 7, 0, 0]} isAnimationActive={false}>
                 {byPerson.map((row, index) => (
-                  <Cell key={row.name} fill={index === 0 ? "#33604a" : "#b9ccbf"} />
+                  <Cell key={row.name} fill={index === 0 ? chart.green : chart.greenSoft} />
                 ))}
               </Bar>
             </BarChart>

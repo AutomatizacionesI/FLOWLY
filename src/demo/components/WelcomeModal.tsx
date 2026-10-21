@@ -2,8 +2,8 @@ import { texts } from "../config"
 import { useDemo } from "../state/DemoContext"
 
 /**
- * Modal de bienvenida. En la Fase 1 "Empezar recorrido" todavía no arranca el
- * recorrido guiado: eso se suma en la Fase 2.
+ * Modal de bienvenida: la primera pantalla de la demo.
+ * "Empezar recorrido" arranca el recorrido guiado; "Explorar yo" lo saltea.
  */
 export function WelcomeModal() {
   const { welcomeOpen, setWelcomeOpen, setTourStep, para } = useDemo()

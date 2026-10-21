@@ -25,6 +25,7 @@ import { Link } from "react-router-dom"
 import { Gauge } from "../components/Gauge"
 import { Kpi } from "../components/Kpi"
 import { PageHead } from "../components/Screen"
+import { chart } from "../chartColors"
 import {
   activity,
   clientName,
@@ -178,8 +179,8 @@ export function Resumen() {
             <AreaChart data={weekly} margin={{ top: 4, right: 6, bottom: 0, left: -18 }}>
               <defs>
                 <linearGradient id="d-area" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="0%" stopColor="#33604a" stopOpacity={0.26} />
-                  <stop offset="100%" stopColor="#33604a" stopOpacity={0.02} />
+                  <stop offset="0%" stopColor={chart.green} stopOpacity={0.26} />
+                  <stop offset="100%" stopColor={chart.green} stopOpacity={0.02} />
                 </linearGradient>
               </defs>
               <XAxis
@@ -198,10 +199,10 @@ export function Resumen() {
               <Area
                 type="monotone"
                 dataKey="horas"
-                stroke="#33604a"
+                stroke={chart.green}
                 strokeWidth={2.4}
                 fill="url(#d-area)"
-                dot={{ r: 3, fill: "#fff", stroke: "#33604a", strokeWidth: 2 }}
+                dot={{ r: 3, fill: "#fff", stroke: chart.green, strokeWidth: 2 }}
                 activeDot={{ r: 5 }}
                 /* Sin animación de entrada: en una demo conviene que el dato
                    esté dibujado desde el primer frame. */
@@ -461,7 +462,7 @@ function TopClients() {
               style={{
                 width: `${(row.horas / max) * 100}%`,
                 // El primero va en verde lleno; el resto, más suave.
-                background: index === 0 ? "var(--d-green)" : "#b9ccbf",
+                background: index === 0 ? "var(--d-green)" : chart.greenSoft,
               }}
             />
           </div>

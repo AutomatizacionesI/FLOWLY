@@ -8,7 +8,7 @@ import { useDemo } from "../state/DemoContext"
 
 type Message =
   | { id: number; from: "persona"; text: string }
-  | { id: number; from: "asistente"; answer: Answer; typed: boolean }
+  | { id: number; from: "asistente"; answer: Answer }
 
 export function Asistente() {
   const { role, user, tasks, hours, invoices, movements } = useDemo()
@@ -65,7 +65,7 @@ export function Asistente() {
       })
       setMessages((list) => [
         ...list,
-        { id: nextId.current++, from: "asistente", answer: result, typed: false },
+        { id: nextId.current++, from: "asistente", answer: result },
       ])
       setThinking(false)
     }, 620)

@@ -81,7 +81,3 @@ export const navGroups: NavGroup[] = [
 
 /** Todas las pantallas en una sola lista, para buscar y para los permisos. */
 export const allNavItems: NavItem[] = navGroups.flatMap((group) => group.items)
-
-export function isPartnersOnly(path: string): boolean {
-  return allNavItems.some((item) => item.path === path && item.partnersOnly)
-}

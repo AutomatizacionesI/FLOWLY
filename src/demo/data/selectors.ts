@@ -32,15 +32,6 @@ export function canEditClient(role: Role, personId: string, clientId: string) {
 
 /* ── Tareas ────────────────────────────────────────────────────────── */
 
-export function visibleTasks(tasks: Task[]) {
-  // Las dos vistas ven todas las tareas; lo que cambia es sobre cuáles se actúa.
-  return tasks
-}
-
-export function myTasks(tasks: Task[], personId: string) {
-  return tasks.filter((task) => task.assigneeId === personId)
-}
-
 export function openTasks(tasks: Task[]) {
   return tasks.filter((task) => task.status !== "hecha")
 }
@@ -103,15 +94,6 @@ export function hoursByWorkType(hours: HourEntry[], personId?: string) {
     }))
     .filter((row) => row.horas > 0)
     .sort((a, b) => b.horas - a.horas)
-}
-
-/** Horas por persona, para el tablero de socios y el asistente. */
-export function hoursByPerson(hours: HourEntry[]) {
-  const map = new Map<string, number>()
-  for (const entry of hours) {
-    map.set(entry.personId, (map.get(entry.personId) ?? 0) + entry.minutes)
-  }
-  return map
 }
 
 /** Horas por cliente, ordenadas de mayor a menor. */

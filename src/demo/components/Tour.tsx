@@ -10,8 +10,8 @@ import { useDemo } from "../state/DemoContext"
  * Recorrido guiado: lineal, se puede saltar en cualquier momento y se repite
  * desde "Ver recorrido". Cada paso lleva a su pantalla y explica qué mirar.
  *
- * Los pasos cuya pantalla todavía no está construida se saltan solos, así el
- * recorrido nunca deja a nadie frente a un cartel de "en construcción".
+ * Si alguna vez una ruta deja de existir, su paso se saltea solo: así el
+ * recorrido nunca lleva a una pantalla que no está.
  */
 
 type Step = {
