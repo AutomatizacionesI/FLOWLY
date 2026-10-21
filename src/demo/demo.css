@@ -1,0 +1,1283 @@
+/**
+ * Estilos de la demo contable.
+ *
+ * Todo cuelga de .demo-root y usa variables propias (--d-*), así no se mezcla
+ * con los estilos de la landing de Spike ni al revés. Acá no entra ningún
+ * color ni tipografía de la marca.
+ *
+ * El look sale de las dos referencias:
+ *  - lienzo cálido, tarjetas blancas muy redondeadas y una sola tarjeta verde
+ *    destacada (referencia 1);
+ *  - barra lateral etiquetada, fila de KPIs con chips, gráficos y panel de
+ *    asistente (referencia 2).
+ * El verde se usa con cuentagotas: si pinta todo, la pantalla se aplana.
+ */
+
+@import "@fontsource-variable/plus-jakarta-sans";
+
+.demo-root {
+  /* Superficies */
+  --d-canvas: #f2f0e9;
+  --d-card: #ffffff;
+  --d-ink: #14161c;
+  --d-ink-soft: #70737c;
+  --d-line: #e6e3da;
+  --d-wash: #f7f5f0;
+
+  /* Barra lateral oscura, como el riel de la referencia 1 */
+  --d-rail: #16181e;
+  --d-rail-ink: rgba(255, 255, 255, 0.58);
+  --d-rail-hover: rgba(255, 255, 255, 0.08);
+
+  /* Verde: solo la tarjeta destacada, el medidor y una serie de los gráficos */
+  --d-green: #33604a;
+  --d-green-soft: #dde7e0;
+
+  /* Violeta: solo lo que tiene que ver con IA */
+  --d-ai: #6c5ce7;
+  --d-ai-soft: #ece9fd;
+
+  /*
+   * Naranja: solo el botón de contacto, para que no se confunda con nada.
+   * El texto va en tinta oscura, no en blanco: blanco sobre este naranja da
+   * 3:1 y no llega a AA. Con tinta da casi 6:1 y el naranja queda bien vivo.
+   */
+  --d-cta: #ff5c35;
+  --d-cta-ink: #231006;
+
+  /* Semáforo */
+  --d-ok: #1f9254;
+  --d-warn: #c98a14;
+  --d-bad: #d14a43;
+  --d-ok-soft: #e2f2e9;
+  --d-warn-soft: #faf0da;
+  --d-bad-soft: #fae9e8;
+
+  --d-radius: 16px;
+  --d-radius-lg: 24px;
+  --d-shadow: 0 1px 2px rgba(20, 22, 28, 0.03), 0 10px 30px -22px rgba(20, 22, 28, 0.22);
+
+  --d-font: "Plus Jakarta Sans Variable", ui-sans-serif, system-ui, sans-serif;
+
+  position: fixed;
+  inset: 0;
+  overflow: auto;
+  background: var(--d-canvas);
+  color: var(--d-ink);
+  font-family: var(--d-font);
+  font-size: 14px;
+  line-height: 1.5;
+  font-feature-settings: "tnum" 1;
+  letter-spacing: -0.005em;
+  -webkit-font-smoothing: antialiased;
+}
+
+/*
+ * El reset va con :where() a propósito: así tiene especificidad cero y
+ * cualquier clase .d-* lo pisa sin pelear.
+ */
+:where(.demo-root *, .demo-root *::before, .demo-root *::after) {
+  box-sizing: border-box;
+}
+
+:where(.demo-root h1, .demo-root h2, .demo-root h3, .demo-root h4, .demo-root p, .demo-root figure, .demo-root ul, .demo-root ol) {
+  margin: 0;
+  padding: 0;
+}
+
+:where(.demo-root ul, .demo-root ol) {
+  list-style: none;
+}
+
+:where(.demo-root button) {
+  font: inherit;
+  color: inherit;
+  border: none;
+  background: none;
+  cursor: pointer;
+}
+
+:where(.demo-root a) {
+  color: inherit;
+  text-decoration: none;
+}
+
+:where(.demo-root table) {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+.demo-root :focus-visible {
+  outline: 2px solid var(--d-ink);
+  outline-offset: 2px;
+  border-radius: 8px;
+}
+
+/* ── Esqueleto ─────────────────────────────────────────────────────── */
+
+.d-shell {
+  display: grid;
+  grid-template-columns: 246px minmax(0, 1fr);
+  min-height: 100%;
+}
+
+.d-main {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+}
+
+.d-content {
+  flex: 1;
+  padding: 22px 26px 44px;
+}
+
+.d-page-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 14px;
+  margin-bottom: 18px;
+}
+
+.d-page-title {
+  font-size: 25px;
+  font-weight: 700;
+  letter-spacing: -0.035em;
+}
+
+.d-page-sub {
+  margin-top: 3px;
+  color: var(--d-ink-soft);
+  font-size: 13.5px;
+}
+
+/* ── Cinta de aviso ────────────────────────────────────────────────── */
+
+.d-banner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 7px 16px;
+  background: var(--d-rail);
+  color: rgba(255, 255, 255, 0.82);
+  font-size: 12.5px;
+  text-align: center;
+}
+
+.d-banner__close {
+  display: inline-flex;
+  padding: 2px;
+  border-radius: 6px;
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.d-banner__close:hover {
+  color: #fff;
+}
+
+.d-banner--mini {
+  width: 100%;
+  cursor: pointer;
+  padding: 4px 16px;
+  font-size: 11.5px;
+}
+
+/* ── Barra lateral ─────────────────────────────────────────────────── */
+
+.d-side {
+  display: flex;
+  flex-direction: column;
+  padding: 18px 12px 14px;
+  background: var(--d-rail);
+  color: #fff;
+}
+
+.d-side__brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 0 8px 18px;
+}
+
+.d-side__mark {
+  display: grid;
+  width: 33px;
+  height: 33px;
+  flex-shrink: 0;
+  place-items: center;
+  border-radius: 10px;
+  background: var(--d-green);
+  color: #fff;
+  font-size: 12.5px;
+  font-weight: 700;
+}
+
+.d-side__name {
+  font-size: 13.5px;
+  font-weight: 600;
+  line-height: 1.25;
+}
+
+.d-side__tag {
+  margin-top: 2px;
+  color: var(--d-rail-ink);
+  font-size: 10.5px;
+}
+
+.d-side__nav {
+  flex: 1;
+  overflow-y: auto;
+  scrollbar-width: thin;
+}
+
+.d-side__group {
+  margin-top: 15px;
+  padding: 0 10px 7px;
+  color: rgba(255, 255, 255, 0.52);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.d-side__link {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 1px;
+  padding: 8px 11px;
+  border-radius: 11px;
+  color: var(--d-rail-ink);
+  font-size: 13px;
+  font-weight: 500;
+  text-align: left;
+  transition: background 0.14s ease, color 0.14s ease;
+}
+
+.d-side__link:hover {
+  background: var(--d-rail-hover);
+  color: #fff;
+}
+
+.d-side__link.is-active {
+  background: #fff;
+  color: var(--d-ink);
+  font-weight: 600;
+}
+
+/* El ítem de contacto: el mismo naranja del botón, para que salte a la vista. */
+.d-side__link.is-cta {
+  margin-top: 2px;
+  background: rgba(255, 92, 53, 0.16);
+  color: #ffa98f;
+  font-weight: 600;
+}
+
+.d-side__link.is-cta:hover {
+  background: rgba(255, 92, 53, 0.26);
+  color: #ffc4b2;
+}
+
+.d-side__link.is-cta.is-active {
+  background: var(--d-cta);
+  color: var(--d-cta-ink);
+}
+
+.d-side__link.is-locked {
+  color: rgba(255, 255, 255, 0.38);
+  cursor: not-allowed;
+}
+
+.d-side__link.is-locked:hover {
+  background: transparent;
+  color: rgba(255, 255, 255, 0.38);
+}
+
+.d-side__lock {
+  margin-left: auto;
+}
+
+/* Tarjeta de contacto del pie de la barra */
+.d-side__cta {
+  margin-top: 14px;
+  padding: 15px;
+  border-radius: var(--d-radius);
+  background: rgba(255, 255, 255, 0.07);
+}
+
+.d-side__cta h4 {
+  font-size: 13.5px;
+  font-weight: 600;
+}
+
+.d-side__cta p {
+  margin-top: 4px;
+  color: var(--d-rail-ink);
+  font-size: 11.5px;
+  line-height: 1.5;
+}
+
+/* ── Barra superior ────────────────────────────────────────────────── */
+
+.d-top {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 24px;
+  border-bottom: 1px solid var(--d-line);
+  /*
+   * Fondo sólido a propósito: con backdrop-filter, el header pasa a ser bloque
+   * contenedor y cualquier position:fixed de adentro (el panel "¿Qué cambia?")
+   * queda anclado al header en vez de a la pantalla.
+   */
+  background: var(--d-canvas);
+  position: sticky;
+  top: 0;
+  z-index: 20;
+}
+
+.d-search {
+  position: relative;
+  display: flex;
+  min-width: 110px;
+  flex: 0 1 215px;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 15px;
+  border: 1px solid var(--d-line);
+  border-radius: 999px;
+  background: var(--d-card);
+  color: var(--d-ink-soft);
+}
+
+.d-search input {
+  width: 100%;
+  border: none;
+  background: none;
+  color: var(--d-ink);
+  font: inherit;
+  font-size: 13px;
+  outline: none;
+}
+
+.d-top__spacer {
+  flex: 1;
+}
+
+.d-icon-btn {
+  display: grid;
+  width: 35px;
+  height: 35px;
+  flex-shrink: 0;
+  place-items: center;
+  border: 1px solid var(--d-line);
+  border-radius: 999px;
+  background: var(--d-card);
+  color: var(--d-ink-soft);
+  transition: color 0.14s ease, border-color 0.14s ease;
+}
+
+.d-icon-btn:hover {
+  border-color: #d6d2c6;
+  color: var(--d-ink);
+}
+
+.d-icon-btn__dot {
+  position: absolute;
+  top: -3px;
+  right: -3px;
+  display: grid;
+  min-width: 17px;
+  height: 17px;
+  place-items: center;
+  padding: 0 4px;
+  border: 2px solid var(--d-canvas);
+  border-radius: 999px;
+  background: var(--d-bad);
+  color: #fff;
+  font-size: 10px;
+  font-weight: 700;
+}
+
+/* Etiquetas que se esconden cuando la barra superior queda justa. */
+@media (max-width: 1280px) {
+  .d-hide-narrow {
+    display: none;
+  }
+}
+
+/* ── Interruptor de rol ────────────────────────────────────────────── */
+
+.d-roleswitch {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  padding: 3px;
+  border: 1px solid var(--d-line);
+  border-radius: 999px;
+  background: var(--d-card);
+}
+
+.d-roleswitch__label {
+  padding: 0 7px 0 10px;
+  color: var(--d-ink-soft);
+  font-size: 11.5px;
+  font-weight: 500;
+}
+
+.d-roleswitch button {
+  padding: 6px 14px;
+  border-radius: 999px;
+  color: var(--d-ink-soft);
+  font-size: 12.5px;
+  font-weight: 500;
+  transition: background 0.16s ease, color 0.16s ease;
+}
+
+.d-roleswitch button.is-on {
+  background: var(--d-ink);
+  color: #fff;
+  font-weight: 600;
+}
+
+/* Globo de ayuda de primera vez */
+.d-coach {
+  position: absolute;
+  top: calc(100% + 12px);
+  right: 0;
+  z-index: 60;
+  width: 274px;
+  padding: 15px 16px;
+  border-radius: 16px;
+  background: var(--d-rail);
+  color: #fff;
+  box-shadow: 0 20px 48px -22px rgba(20, 22, 28, 0.55);
+}
+
+.d-coach::before {
+  content: "";
+  position: absolute;
+  top: -6px;
+  right: 56px;
+  width: 12px;
+  height: 12px;
+  transform: rotate(45deg);
+  background: var(--d-rail);
+}
+
+.d-coach p {
+  font-size: 13px;
+  line-height: 1.55;
+}
+
+.d-coach__actions {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 13px;
+}
+
+/* ── Botones ───────────────────────────────────────────────────────── */
+
+.d-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  padding: 9px 16px;
+  border-radius: 999px;
+  font-size: 13px;
+  font-weight: 600;
+  white-space: nowrap;
+  transition: filter 0.16s ease, transform 0.16s ease, background 0.16s ease;
+}
+
+.d-btn:hover {
+  filter: brightness(0.95);
+}
+
+.d-btn--primary {
+  background: var(--d-ink);
+  color: #fff;
+}
+
+.d-btn--green {
+  background: var(--d-green);
+  color: #fff;
+}
+
+.d-btn--ai {
+  background: var(--d-ai);
+  color: #fff;
+}
+
+/* El botón de contacto: el único naranja de toda la demo. */
+.d-btn--cta {
+  background: var(--d-cta);
+  color: var(--d-cta-ink);
+  box-shadow: 0 6px 18px -8px rgba(255, 92, 53, 0.75);
+}
+
+.d-btn--cta:hover {
+  filter: none;
+  background: #f04f29;
+  transform: translateY(-1px);
+}
+
+.d-btn--ghost {
+  border: 1px solid var(--d-line);
+  background: var(--d-card);
+  color: var(--d-ink);
+  font-weight: 500;
+}
+
+.d-btn--ghost:hover {
+  filter: none;
+  border-color: #d6d2c6;
+}
+
+.d-btn--quiet {
+  color: var(--d-ink-soft);
+  font-weight: 500;
+}
+
+.d-btn--quiet:hover {
+  filter: none;
+  color: var(--d-ink);
+}
+
+.d-btn--sm {
+  padding: 6px 13px;
+  font-size: 12px;
+}
+
+.d-btn--block {
+  width: 100%;
+}
+
+/* ── Campos de formulario ──────────────────────────────────────────── */
+
+.d-input {
+  width: 100%;
+  padding: 9px 13px;
+  border: 1px solid var(--d-line);
+  border-radius: 11px;
+  background: var(--d-card);
+  color: var(--d-ink);
+  font: inherit;
+  font-size: 13px;
+  outline: none;
+  transition: border-color 0.14s ease;
+}
+
+.d-input:focus {
+  border-color: var(--d-ink);
+}
+
+select.d-input {
+  cursor: pointer;
+}
+
+/* ── Tarjetas ──────────────────────────────────────────────────────── */
+
+.d-card {
+  padding: 18px;
+  border-radius: var(--d-radius-lg);
+  background: var(--d-card);
+  box-shadow: var(--d-shadow);
+}
+
+.d-card--green {
+  background: var(--d-green);
+  color: #fff;
+}
+
+.d-card--ai {
+  background: var(--d-ai-soft);
+}
+
+.d-card--flat {
+  background: var(--d-wash);
+  box-shadow: none;
+}
+
+.d-card__head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 15px;
+}
+
+.d-card__title {
+  font-size: 14.5px;
+  font-weight: 600;
+  letter-spacing: -0.015em;
+}
+
+.d-card__sub {
+  margin-top: 2px;
+  color: var(--d-ink-soft);
+  font-size: 11.5px;
+}
+
+.d-card--green .d-card__sub {
+  color: rgba(255, 255, 255, 0.72);
+}
+
+/* ── KPIs ──────────────────────────────────────────────────────────── */
+
+/*
+ * Los KPIs van en columnas fijas, no en auto-fit: con auto-fit, 6 tarjetas
+ * entran de a 5 y la sexta queda sola en una fila.
+ */
+.d-kpis {
+  display: grid;
+  gap: 13px;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+}
+
+@media (max-width: 1400px) {
+  .d-kpis {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 760px) {
+  .d-kpis {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+.d-kpi {
+  padding: 16px 17px;
+}
+
+.d-kpi__top {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  color: var(--d-ink-soft);
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.d-kpi__icon {
+  display: grid;
+  width: 27px;
+  height: 27px;
+  flex-shrink: 0;
+  place-items: center;
+  border-radius: 9px;
+  background: var(--d-wash);
+  color: var(--d-ink);
+}
+
+.d-card--green .d-kpi__icon {
+  background: rgba(255, 255, 255, 0.16);
+  color: #fff;
+}
+
+.d-kpi__value {
+  margin-top: 13px;
+  font-size: 28px;
+  font-weight: 700;
+  letter-spacing: -0.04em;
+  line-height: 1.1;
+}
+
+.d-kpi__foot {
+  margin-top: 9px;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  color: var(--d-ink-soft);
+  font-size: 11px;
+}
+
+.d-card--green .d-kpi__top,
+.d-card--green .d-kpi__foot {
+  color: rgba(255, 255, 255, 0.74);
+}
+
+/* ── Chips ─────────────────────────────────────────────────────────── */
+
+.d-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  padding: 3px 9px;
+  border-radius: 999px;
+  background: var(--d-wash);
+  color: var(--d-ink-soft);
+  font-size: 11px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.d-chip--ok {
+  background: var(--d-ok-soft);
+  color: #146b3d;
+}
+
+.d-chip--warn {
+  background: var(--d-warn-soft);
+  color: #8f610a;
+}
+
+.d-chip--bad {
+  background: var(--d-bad-soft);
+  color: #a3332d;
+}
+
+.d-chip--ai {
+  background: var(--d-ai-soft);
+  color: #4c3fb0;
+}
+
+.d-chip--green {
+  background: var(--d-green-soft);
+  color: #2a503e;
+}
+
+.d-card--green .d-chip {
+  background: rgba(255, 255, 255, 0.18);
+  color: #fff;
+}
+
+/* ── Rejillas ──────────────────────────────────────────────────────── */
+
+.d-grid {
+  display: grid;
+  gap: 13px;
+  margin-top: 13px;
+}
+
+.d-grid--2 {
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+}
+
+.d-grid--3 {
+  grid-template-columns: repeat(auto-fit, minmax(228px, 1fr));
+}
+
+/* Fila principal del resumen: gráfico grande + dos columnas angostas */
+.d-grid--main {
+  grid-template-columns: minmax(0, 1.9fr) minmax(0, 1fr);
+}
+
+@media (max-width: 1080px) {
+  .d-grid--main {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+/* ── Tablas ────────────────────────────────────────────────────────── */
+
+.d-table th {
+  padding: 0 10px 10px;
+  border-bottom: 1px solid var(--d-line);
+  color: var(--d-ink-soft);
+  font-size: 10.5px;
+  font-weight: 700;
+  letter-spacing: 0.07em;
+  text-align: left;
+  text-transform: uppercase;
+}
+
+.d-table td {
+  padding: 11px 10px;
+  border-bottom: 1px solid #f1efe8;
+  font-size: 13px;
+  vertical-align: middle;
+}
+
+.d-table tr:last-child td {
+  border-bottom: none;
+}
+
+.d-table .is-num {
+  font-variant-numeric: tabular-nums;
+  text-align: right;
+}
+
+/* ── Listas con barra de progreso ──────────────────────────────────── */
+
+.d-bar {
+  height: 6px;
+  margin-top: 7px;
+  overflow: hidden;
+  border-radius: 999px;
+  background: var(--d-wash);
+}
+
+.d-bar__fill {
+  height: 100%;
+  border-radius: 999px;
+  background: var(--d-green);
+}
+
+/* ── Factura de ejemplo ────────────────────────────────────────────── */
+
+.d-factura {
+  position: relative;
+  overflow: hidden;
+  padding: 13px 14px;
+  border: 1px solid var(--d-line);
+  border-radius: 10px;
+  background: #fdfdfb;
+  color: #2a2d36;
+  font-size: 9px;
+  line-height: 1.5;
+}
+
+.d-factura__head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.d-factura__rule {
+  height: 1px;
+  margin: 9px 0;
+  background: var(--d-line);
+}
+
+.d-factura__line {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+/* La línea que “escanea” mientras la IA lee. */
+.d-factura__scan {
+  position: absolute;
+  inset-inline: 0;
+  top: 0;
+  height: 34%;
+  background: linear-gradient(to bottom, rgba(108, 92, 231, 0), rgba(108, 92, 231, 0.22));
+  border-bottom: 2px solid var(--d-ai);
+  animation: d-scan 1.1s ease-in-out infinite;
+}
+
+@keyframes d-scan {
+  0% {
+    transform: translateY(-34%);
+  }
+  100% {
+    transform: translateY(300%);
+  }
+}
+
+/* ── Asistente ─────────────────────────────────────────────────────── */
+
+/*
+ * El chat crece hacia abajo y scrollea la página, no una cajita interna:
+ * dos barras de scroll (la de la página y la del chat) se sienten baratas.
+ * El campo de texto queda pegado abajo para no tener que perseguirlo.
+ */
+.d-chat {
+  display: flex;
+  flex-direction: column;
+  border-radius: var(--d-radius-lg);
+  background: var(--d-card);
+  box-shadow: var(--d-shadow);
+}
+
+.d-chat__notice {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  padding: 11px 18px;
+  background: var(--d-ai-soft);
+  color: #4c3fb0;
+  font-size: 12px;
+  line-height: 1.45;
+}
+
+.d-chat__log {
+  display: flex;
+  min-height: 300px;
+  flex: 1;
+  flex-direction: column;
+  gap: 13px;
+  padding: 20px 18px;
+}
+
+.d-msg {
+  max-width: 78%;
+  padding: 12px 15px;
+  border-radius: 16px;
+  font-size: 13.5px;
+}
+
+.d-msg--mine {
+  align-self: flex-end;
+  border-bottom-right-radius: 5px;
+  background: var(--d-ink);
+  color: #fff;
+}
+
+.d-msg--bot {
+  align-self: flex-start;
+  max-width: 90%;
+  border-bottom-left-radius: 5px;
+  background: var(--d-wash);
+}
+
+.d-msg--denied {
+  background: var(--d-warn-soft);
+  color: #8f610a;
+}
+
+.d-msg__steps {
+  display: grid;
+  gap: 9px;
+  margin-top: 12px;
+}
+
+.d-msg__steps li {
+  display: flex;
+  gap: 9px;
+  font-size: 13px;
+  line-height: 1.55;
+}
+
+.d-msg__num {
+  display: grid;
+  width: 19px;
+  height: 19px;
+  flex-shrink: 0;
+  place-items: center;
+  border-radius: 999px;
+  background: var(--d-ai);
+  color: #fff;
+  font-size: 10.5px;
+  font-weight: 700;
+}
+
+.d-chat__chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+  padding: 0 18px 12px;
+}
+
+.d-chat__composer {
+  position: sticky;
+  bottom: 0;
+  z-index: 5;
+  display: flex;
+  gap: 9px;
+  padding: 14px 18px;
+  border-top: 1px solid var(--d-line);
+  border-radius: 0 0 var(--d-radius-lg) var(--d-radius-lg);
+  background: var(--d-card);
+}
+
+.d-chat__composer .d-input {
+  flex: 1;
+  border-radius: 999px;
+  padding: 11px 17px;
+}
+
+.d-chat__composer .d-btn {
+  width: 42px;
+  padding: 0;
+}
+
+/* ── Modal y paneles ───────────────────────────────────────────────── */
+
+.d-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 80;
+  /*
+   * Flex con margin:auto en el hijo: centra el modal y, cuando el modal es más
+   * alto que la pantalla, no le corta la parte de arriba (cosa que sí pasa con
+   * place-items: center).
+   */
+  display: flex;
+  overflow-y: auto;
+  padding: 18px;
+  background: rgba(20, 22, 28, 0.44);
+}
+
+.d-modal {
+  width: min(520px, 100%);
+  max-height: calc(100vh - 36px);
+  margin: auto;
+  overflow: auto;
+  padding: 26px;
+  border-radius: var(--d-radius-lg);
+  background: var(--d-card);
+  box-shadow: 0 30px 70px -30px rgba(20, 22, 28, 0.5);
+}
+
+.d-modal__title {
+  font-size: 20px;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+}
+
+.d-modal__body {
+  margin-top: 10px;
+  color: var(--d-ink-soft);
+  line-height: 1.6;
+}
+
+.d-modal__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 22px;
+}
+
+/* ── Recorrido guiado ──────────────────────────────────────────────── */
+
+.d-tour {
+  position: fixed;
+  right: 22px;
+  bottom: 22px;
+  z-index: 85;
+  width: min(330px, calc(100% - 32px));
+  padding: 17px 18px 16px;
+  border-radius: 18px;
+  background: var(--d-rail);
+  color: #fff;
+  box-shadow: 0 26px 60px -24px rgba(20, 22, 28, 0.7);
+}
+
+.d-tour__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.d-tour__count {
+  color: rgba(255, 255, 255, 0.56);
+  font-size: 10.5px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.d-tour__close {
+  display: inline-flex;
+  padding: 3px;
+  border-radius: 7px;
+  color: rgba(255, 255, 255, 0.56);
+}
+
+.d-tour__close:hover {
+  color: #fff;
+}
+
+.d-tour__title {
+  margin-top: 10px;
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.d-tour__body {
+  margin-top: 6px;
+  color: rgba(255, 255, 255, 0.74);
+  font-size: 12.5px;
+  line-height: 1.55;
+}
+
+.d-tour__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 15px;
+}
+
+@media (max-width: 560px) {
+  .d-tour {
+    right: 16px;
+    left: 16px;
+    bottom: 16px;
+    width: auto;
+  }
+}
+
+/* ── Avisos flotantes ──────────────────────────────────────────────── */
+
+.d-toasts {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  z-index: 90;
+  display: flex;
+  width: min(440px, calc(100% - 32px));
+  transform: translateX(-50%);
+  flex-direction: column;
+  gap: 8px;
+}
+
+.d-toast {
+  padding: 12px 16px;
+  border-radius: 14px;
+  background: var(--d-rail);
+  color: #fff;
+  font-size: 13px;
+  line-height: 1.45;
+  box-shadow: 0 18px 40px -20px rgba(20, 22, 28, 0.65);
+}
+
+/* ── Pantalla bloqueada ────────────────────────────────────────────── */
+
+.d-locked {
+  display: grid;
+  max-width: 430px;
+  margin: 60px auto;
+  justify-items: center;
+  padding: 34px;
+  border-radius: var(--d-radius-lg);
+  background: var(--d-card);
+  box-shadow: var(--d-shadow);
+  text-align: center;
+}
+
+.d-locked__icon {
+  display: grid;
+  width: 46px;
+  height: 46px;
+  place-items: center;
+  border-radius: 999px;
+  background: var(--d-green-soft);
+  color: var(--d-green);
+}
+
+/* ── Pie ───────────────────────────────────────────────────────────── */
+
+.d-foot {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 18px 26px 26px;
+  border-top: 1px solid var(--d-line);
+  color: var(--d-ink-soft);
+  font-size: 11.5px;
+}
+
+/* ── Utilidades chicas ─────────────────────────────────────────────── */
+
+.d-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.d-muted {
+  color: var(--d-ink-soft);
+}
+
+.d-num {
+  font-variant-numeric: tabular-nums;
+}
+
+.d-sr {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+/* ── Celular ───────────────────────────────────────────────────────── */
+
+.d-side__toggle {
+  display: none;
+}
+
+@media (max-width: 900px) {
+  .d-shell {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .d-side {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 70;
+    width: 266px;
+    height: 100%;
+    transform: translateX(-100%);
+    transition: transform 0.22s ease;
+  }
+
+  .d-side.is-open {
+    transform: translateX(0);
+  }
+
+  .d-side__toggle {
+    display: grid;
+  }
+
+  .d-top,
+  .d-content,
+  .d-foot {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+
+  .d-roleswitch__label {
+    display: none;
+  }
+
+  /* El globo cuelga del interruptor: anclado a la derecha se sale de pantalla. */
+  .d-coach {
+    right: auto;
+    left: 0;
+    width: min(274px, calc(100vw - 32px));
+  }
+
+  .d-coach::before {
+    right: auto;
+    left: 42px;
+  }
+
+  .d-search {
+    flex: 1 1 140px;
+  }
+
+  .d-page-title {
+    font-size: 21px;
+  }
+
+  .d-kpi__value {
+    font-size: 24px;
+  }
+
+  /*
+   * En pantalla angosta las tablas se deslizan en vez de cortarse.
+   * Va acá, sobre .d-table, en lugar de envolver cada tabla a mano: así vale
+   * también para las que se agreguen después.
+   */
+  .d-table {
+    display: block;
+    overflow-x: auto;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .demo-root *,
+  .demo-root *::before,
+  .demo-root *::after {
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+  }
+}

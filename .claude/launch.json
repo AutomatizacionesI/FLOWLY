@@ -8,6 +8,12 @@
       "port": 5050
     },
     {
+      "name": "spike-dev",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": ["run", "dev"],
+      "port": 5173
+    },
+    {
       "name": "landing-redesign",
       "runtimeExecutable": "npm",
       "runtimeArgs": ["run", "dev", "--prefix", "landing-redesign"],
