@@ -576,7 +576,7 @@ function MethodSectionV2() {
       </BlurFade>
 
       <div className="mt-12 grid gap-10 lg:grid-cols-[minmax(0,0.34fr)_minmax(0,0.66fr)] lg:items-start">
-        <div className="lg:sticky lg:top-28 lg:self-start lg:py-4">
+        <div className="hidden lg:sticky lg:top-28 lg:block lg:self-start lg:py-4">
           <BlurFade inView delay={0.06}>
             <div className="flex min-h-[62vh] flex-col justify-between lg:min-h-[72vh]">
               {process.map((step, i) => {
@@ -657,7 +657,7 @@ function MethodSectionV2() {
                   </span>
                   <div className="pointer-events-none absolute -right-16 -top-16 h-52 w-52 rounded-full bg-gradient-to-br from-[var(--brand)]/8 to-transparent blur-3xl" />
 
-                  <div className="relative flex min-h-[calc(82vh-5rem)] items-center">
+                  <div className="relative flex items-center pb-8 lg:min-h-[calc(82vh-5rem)] lg:pb-0">
                     <div className="grid w-full items-center gap-10 lg:grid-cols-[minmax(0,1fr)_auto]">
                       <div className="max-w-2xl">
                         <p className="text-[0.72rem] font-medium uppercase tracking-[0.22em] text-[var(--brand-strong)]/65">
@@ -740,7 +740,7 @@ function SuccessCasesSection() {
   const slideWidth =
     viewportWidth > 1024
       ? Math.max(680, viewportWidth / 2 - slideGap)
-      : Math.max(360, viewportWidth - 40)
+      : Math.max(300, viewportWidth - 48)
 
   useEffect(() => {
     const updateViewportWidth = () => {
@@ -841,9 +841,9 @@ function SuccessCasesSection() {
   return (
     <section
       id="servicios"
-      className="relative left-1/2 min-h-[118vh] w-screen -translate-x-1/2 overflow-hidden bg-[#f4f4f1] py-18 sm:min-h-[126vh] sm:py-20"
+      className="relative left-1/2 min-h-0 w-screen -translate-x-1/2 overflow-hidden bg-[#f4f4f1] py-18 sm:min-h-[126vh] sm:py-20"
     >
-      <div className="flex min-h-[118vh] flex-col justify-start sm:min-h-[126vh]">
+      <div className="flex min-h-0 flex-col justify-start sm:min-h-[126vh]">
         <div className="mx-auto w-full max-w-4xl px-4 pt-8 text-center sm:px-6 sm:pt-10 lg:px-8 lg:pt-12">
           <BlurFade inView className="space-y-4">
             <Badge
@@ -898,7 +898,7 @@ function SuccessCasesSection() {
                     className={[
                       "relative w-[920px] flex-shrink-0 overflow-hidden rounded-[2rem] border border-border/70 bg-white p-6 text-slate-900 shadow-[0_30px_90px_-70px_rgba(15,23,42,0.25)] transition-all duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] select-none lg:min-h-[35rem] lg:p-7",
                       isActive
-                        ? "scale-[1.08] opacity-100"
+                        ? "scale-100 opacity-100 sm:scale-[1.08]"
                         : "scale-[0.84] opacity-100",
                     ].join(" ")}
                     style={{ width: `${slideWidth}px` }}
@@ -1040,9 +1040,9 @@ function App() {
         </header>
 
         <section className="relative mx-auto flex max-w-7xl items-center pt-24 pb-12 sm:pt-28 sm:pb-16 lg:min-h-[calc(100vh-5.5rem)] lg:pb-16 lg:pt-24">
-          <div className="grid w-full gap-10 sm:gap-12 lg:grid-cols-[minmax(0,1fr)_minmax(360px,0.85fr)] lg:items-center lg:gap-16">
+          <div className="grid w-full grid-cols-[minmax(0,1fr)] lg:grid-cols-[minmax(0,1fr)_minmax(360px,0.85fr)] lg:items-center lg:gap-16">
             {/* todo el texto, a la izquierda */}
-            <div className="flex max-w-xl flex-col lg:mt-14">
+            <div className="contents max-w-xl flex-col lg:mt-14 lg:flex">
               <BlurFade inView delay={0.05}>
                 <p className="text-[0.68rem] uppercase tracking-[0.28em] text-muted-foreground">
                   Software y automatización a medida
@@ -1063,7 +1063,7 @@ function App() {
                 </p>
               </BlurFade>
 
-              <BlurFade inView delay={0.2}>
+              <BlurFade inView delay={0.2} className="order-4 lg:order-none">
                 <div className="mt-7 flex flex-col gap-3 sm:flex-row">
                   <a
                     href={whatsappHref}
@@ -1087,8 +1087,8 @@ function App() {
             </div>
 
             {/* solo la MacBook, a la derecha */}
-            <BlurFade inView delay={0.16}>
-              <div className="mx-auto w-full max-w-[360px] sm:max-w-[420px] lg:max-w-[440px]">
+            <BlurFade inView delay={0.16} className="order-3 mt-8 lg:order-none lg:mt-0">
+              <div className="mx-auto w-full max-w-[280px] sm:max-w-[420px] lg:max-w-[440px]">
                 <HeroMacbook />
               </div>
             </BlurFade>
