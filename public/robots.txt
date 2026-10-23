@@ -1,4 +1,6 @@
 User-agent: *
 Allow: /
+Disallow: /admin
+Disallow: /democontable
 
 Sitemap: https://spikeai.com/sitemap.xml
