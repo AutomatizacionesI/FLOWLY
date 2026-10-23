@@ -1,0 +1,67 @@
+# ════════════════════════════════════════════════════════════════════════
+#  Build y headers para AWS Amplify
+#
+#  Ojo: desde que este archivo existe, Amplify usa estos pasos de build en
+#  vez de los que estén cargados en la consola. Si alguna vez hay que tocar
+#  cómo se construye el sitio, se toca acá y no allá.
+#
+#  Los rewrites NO van en este archivo: Amplify sólo los lee de la consola
+#  (Hosting → Rewrites and redirects). La regla que hace que /admin y
+#  /democontable anden al entrar directo con la URL está configurada ahí.
+#
+#  El vercel.json se queda en el repo por las dudas, pero Amplify no lo mira.
+# ════════════════════════════════════════════════════════════════════════
+
+version: 1
+
+frontend:
+  phases:
+    preBuild:
+      commands:
+        # npm ci y no npm install: respeta el package-lock y no lo reescribe.
+        - npm ci
+    build:
+      commands:
+        # El script ya corre tsc antes de vite build, así que un error de
+        # tipos frena el deploy en vez de subir algo roto.
+        - npm run build
+  artifacts:
+    baseDirectory: dist
+    files:
+      - '**/*'
+  cache:
+    paths:
+      - node_modules/**/*
+
+# ── Headers ─────────────────────────────────────────────────────────────
+# Los mismos que tenía el vercel.json. El panel y la demo no se indexan, y
+# el panel además no se puede meter en un iframe ni filtra la URL al salir.
+
+customHeaders:
+  - pattern: '/democontable'
+    headers:
+      - key: 'X-Robots-Tag'
+        value: 'noindex, nofollow'
+
+  - pattern: '/democontable/**'
+    headers:
+      - key: 'X-Robots-Tag'
+        value: 'noindex, nofollow'
+
+  - pattern: '/admin'
+    headers:
+      - key: 'X-Robots-Tag'
+        value: 'noindex, nofollow'
+      - key: 'X-Frame-Options'
+        value: 'DENY'
+      - key: 'Referrer-Policy'
+        value: 'no-referrer'
+
+  - pattern: '/admin/**'
+    headers:
+      - key: 'X-Robots-Tag'
+        value: 'noindex, nofollow'
+      - key: 'X-Frame-Options'
+        value: 'DENY'
+      - key: 'Referrer-Policy'
+        value: 'no-referrer'
