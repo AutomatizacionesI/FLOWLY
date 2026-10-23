@@ -28,6 +28,8 @@ SQL Editor → pegar todo el contenido de [`supabase/migrations/0001_panel_admin
 
 Eso crea las cuatro tablas (`perfiles`, `leads`, `lead_movimientos`, `tareas`), los triggers y las policies de RLS. Se puede volver a correr sin romper nada.
 
+Después, lo mismo con [`supabase/migrations/0002_panel_admin_seguridad.sql`](../supabase/migrations/0002_panel_admin_seguridad.sql), que son los ajustes que pidió el linter de Supabase: el `search_path` fijo en las dos funciones que no lo tenían, y sacar las cuatro funciones de trigger de la API pública. No cambia cómo funciona el panel.
+
 ### 3. Crear los dos usuarios
 
 **Authentication → Users → Add user → Create new user.** Uno para cada uno, con mail y contraseña. El perfil se crea solo por trigger.
