@@ -16,6 +16,8 @@ export type Lead = {
   origen: Origen
   estado: EstadoLead
   valor_estimado: number | null
+  /** Lo que paga por año de mantenimiento, aparte del valor del cierre. */
+  mantenimiento_anual: number | null
   moneda: string
   responsable_id: string | null
   notas: string | null
@@ -60,6 +62,7 @@ export type LeadForm = Pick<
   | "origen"
   | "estado"
   | "valor_estimado"
+  | "mantenimiento_anual"
   | "responsable_id"
   | "proximo_seguimiento"
   | "notas"

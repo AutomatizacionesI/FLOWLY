@@ -139,6 +139,11 @@ export function Resumen() {
       ganadosMes,
       pipeline: activos.reduce((s, l) => s + (l.valor_estimado ?? 0), 0),
       ganado: ganadosMes.reduce((s, l) => s + (l.valor_estimado ?? 0), 0),
+      // Los mantenimientos de todos los ganados, no sólo los del mes: es lo
+      // que entra todos los años sin tener que vender de nuevo.
+      recurrente: leads
+        .filter((l) => l.estado === "ganado")
+        .reduce((s, l) => s + (l.mantenimiento_anual ?? 0), 0),
     }
   }, [leads, tareas])
 
@@ -219,7 +224,11 @@ export function Resumen() {
                 icono={TrendingUp}
                 label="Ganado este mes"
                 valor={monto(datos.ganado)}
-                pie={`${datos.ganadosMes.length} cerrados`}
+                pie={
+                  datos.recurrente > 0
+                    ? `${datos.ganadosMes.length} cerrados · ${monto(datos.recurrente)} por año en mantenimientos`
+                    : `${datos.ganadosMes.length} cerrados`
+                }
                 tono={datos.ganadosMes.length > 0 ? "var(--a-verde)" : undefined}
               />
             </div>

@@ -14,6 +14,7 @@ const vacio: LeadForm = {
   origen: "whatsapp",
   estado: "nuevo",
   valor_estimado: null,
+  mantenimiento_anual: null,
   responsable_id: null,
   proximo_seguimiento: null,
   notas: "",
@@ -44,6 +45,7 @@ export function FormLead({
           origen: lead.origen,
           estado: lead.estado,
           valor_estimado: lead.valor_estimado,
+          mantenimiento_anual: lead.mantenimiento_anual,
           responsable_id: lead.responsable_id,
           proximo_seguimiento: lead.proximo_seguimiento,
           notas: lead.notas,
@@ -158,6 +160,20 @@ export function FormLead({
               set("valor_estimado", e.target.value === "" ? null : Number(e.target.value))
             }
             placeholder="2500"
+          />
+        </Campo>
+
+        <Campo label="Mantenimiento anual (US$)">
+          <input
+            className="a-input"
+            type="number"
+            min="0"
+            step="20"
+            value={form.mantenimiento_anual ?? ""}
+            onChange={(e) =>
+              set("mantenimiento_anual", e.target.value === "" ? null : Number(e.target.value))
+            }
+            placeholder="220"
           />
         </Campo>
 
