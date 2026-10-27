@@ -26,6 +26,7 @@ import { corta, cuando, enDias, hace, larga, monto, vencida } from "../lib/fecha
 import type { Lead, Movimiento } from "../lib/types"
 import { useDatos, useNombre } from "../state/DataContext"
 
+import { FormConfirmar } from "./FormConfirmar"
 import { FormLead } from "./FormLead"
 import { FormTarea } from "./FormTarea"
 import { Panel, Vacio } from "./piezas"
@@ -44,7 +45,8 @@ const iconoMov: Record<TipoMovimiento, typeof Phone> = {
 const aWhatsapp = (tel: string) => tel.replace(/\D/g, "")
 
 export function PanelLead({ lead, cerrar }: { lead: Lead; cerrar: () => void }) {
-  const { tareas, editarLead, borrarLead, movimientosDe, registrar, alternarTarea } = useDatos()
+  const { tareas, editarLead, borrarLead, movimientosDe, registrar, alternarTarea, modeloListo } =
+    useDatos()
   const nombreDe = useNombre()
 
   const [historia, setHistoria] = useState<Movimiento[] | null>(null)
@@ -53,6 +55,8 @@ export function PanelLead({ lead, cerrar }: { lead: Lead; cerrar: () => void }) 
   const [editando, setEditando] = useState(false)
   const [nuevaTarea, setNuevaTarea] = useState(false)
   const [confirmar, setConfirmar] = useState(false)
+  /** Pasar a ganado abre el alta del proyecto en vez de cambiar el estado solo. */
+  const [ganando, setGanando] = useState(false)
 
   const recargarHistoria = () => void movimientosDe(lead.id).then(setHistoria)
 
@@ -113,7 +117,13 @@ export function PanelLead({ lead, cerrar }: { lead: Lead; cerrar: () => void }) 
                 key={e.id}
                 type="button"
                 className={lead.estado === e.id ? "is-on" : ""}
-                onClick={() => void editarLead(lead.id, { estado: e.id as EstadoLead })}
+                onClick={() => {
+                  if (e.id === "ganado" && lead.estado !== "ganado" && modeloListo) {
+                    setGanando(true)
+                  } else {
+                    void editarLead(lead.id, { estado: e.id as EstadoLead })
+                  }
+                }}
               >
                 {e.corto}
               </button>
@@ -365,6 +375,7 @@ export function PanelLead({ lead, cerrar }: { lead: Lead; cerrar: () => void }) 
 
       {editando ? <FormLead lead={lead} cerrar={() => setEditando(false)} /> : null}
       {nuevaTarea ? <FormTarea leadId={lead.id} cerrar={() => setNuevaTarea(false)} /> : null}
+      {ganando ? <FormConfirmar lead={lead} cerrar={() => setGanando(false)} /> : null}
     </Panel>
   )
 }

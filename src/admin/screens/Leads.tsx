@@ -1,6 +1,7 @@
 import { Columns3, List, Plus, Search, Users } from "lucide-react"
 import { useMemo, useState } from "react"
 
+import { FormConfirmar } from "../components/FormConfirmar"
 import { FormLead } from "../components/FormLead"
 import { PanelLead } from "../components/PanelLead"
 import { Avatar, ChipEstado, Vacio } from "../components/piezas"
@@ -64,7 +65,7 @@ function Tarjeta({
 /* ── Pantalla ───────────────────────────────────────────────────────── */
 
 export function Leads() {
-  const { leads, cargando, moverLead } = useDatos()
+  const { leads, cargando, moverLead, modeloListo } = useDatos()
   const nombreDe = useNombre()
 
   const [vista, setVista] = useState<"kanban" | "lista">("kanban")
@@ -73,6 +74,8 @@ export function Leads() {
   const [abierto, setAbierto] = useState<string | null>(null)
   const [llevando, setLlevando] = useState<string | null>(null)
   const [destino, setDestino] = useState<EstadoLead | null>(null)
+  /** Lead que se soltó en "Ganado" y está esperando que le pongan monto. */
+  const [confirmando, setConfirmando] = useState<string | null>(null)
 
   const filtrados = useMemo(() => {
     const q = busca.trim().toLowerCase()
@@ -88,12 +91,20 @@ export function Leads() {
     filtrados.filter((l) => l.estado === id).sort((a, b) => a.orden - b.orden)
 
   function soltar(estado: EstadoLead) {
-    if (llevando) void moverLead(llevando, estado)
+    // Ganar no es sólo cambiar de columna: de ahí sale el proyecto, y sin
+    // proyecto el generado no se entera. Así que primero se pide el monto.
+    if (llevando && estado === "ganado" && modeloListo) {
+      const yaEstaba = leads.find((l) => l.id === llevando)?.estado === "ganado"
+      if (!yaEstaba) setConfirmando(llevando)
+    } else if (llevando) {
+      void moverLead(llevando, estado)
+    }
     setLlevando(null)
     setDestino(null)
   }
 
   const lead = leads.find((l) => l.id === abierto)
+  const aConfirmar = leads.find((l) => l.id === confirmando)
 
   return (
     <Shell
@@ -288,6 +299,9 @@ export function Leads() {
 
       {nuevo ? <FormLead estadoInicial={nuevo} cerrar={() => setNuevo(null)} /> : null}
       {lead ? <PanelLead lead={lead} cerrar={() => setAbierto(null)} /> : null}
+      {aConfirmar ? (
+        <FormConfirmar lead={aConfirmar} cerrar={() => setConfirmando(null)} />
+      ) : null}
     </Shell>
   )
 }

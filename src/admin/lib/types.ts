@@ -165,6 +165,7 @@ export type LeadForm = Pick<
   | "responsable_id"
   | "proximo_seguimiento"
   | "notas"
+  | "cliente_id"
 >
 
 export type TareaForm = Pick<

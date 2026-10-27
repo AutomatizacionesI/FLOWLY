@@ -4,8 +4,10 @@ import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom"
 
 import { ADMIN_BASE } from "./config"
 import { configurado } from "./lib/supabase"
+import { Clientes } from "./screens/Clientes"
 import { Leads } from "./screens/Leads"
 import { Login } from "./screens/Login"
+import { Proyectos } from "./screens/Proyectos"
 import { Resumen } from "./screens/Resumen"
 import { Setup } from "./screens/Setup"
 import { Tareas } from "./screens/Tareas"
@@ -79,6 +81,8 @@ function Rutas() {
           <Route index element={<Navigate to="resumen" replace />} />
           <Route path="resumen" element={<Resumen />} />
           <Route path="leads" element={<Leads />} />
+          <Route path="proyectos" element={<Proyectos />} />
+          <Route path="clientes" element={<Clientes />} />
           <Route path="tareas" element={<Tareas />} />
           <Route path="*" element={<Navigate to="resumen" replace />} />
         </Routes>

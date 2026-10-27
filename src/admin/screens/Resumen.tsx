@@ -1,7 +1,9 @@
 import {
+  AlertCircle,
   CheckSquare,
   Flame,
   Plus,
+  Repeat,
   Snowflake,
   Sparkles,
   Target,
@@ -96,7 +98,7 @@ function Embudo({ leads }: { leads: Lead[] }) {
 /* ── Pantalla ───────────────────────────────────────────────────────── */
 
 export function Resumen() {
-  const { leads, tareas, cargando, alternarTarea } = useDatos()
+  const { leads, tareas, cargando, alternarTarea, clientes, proyectos, modeloListo } = useDatos()
   const { perfil } = useAuth()
   const nombreDe = useNombre()
   const navegar = useNavigate()
@@ -132,6 +134,18 @@ export function Resumen() {
       (l) => l.estado === "ganado" && l.cerrado_en?.startsWith(mes),
     )
 
+    // Clientes a los que hay que volver a hablarles aunque no tengan nada
+    // abierto: el seguimiento posventa, que antes no existía.
+    const clientesHoy = clientes
+      .filter((c) => (diasHasta(c.proximo_seguimiento) ?? 1) <= 0)
+      .sort((a, b) => (a.proximo_seguimiento ?? "").localeCompare(b.proximo_seguimiento ?? ""))
+
+    // Ganados por una vía que no fue el alta de proyecto: quedarían sin sumar.
+    const conProyecto = new Set(proyectos.map((p) => p.lead_id).filter(Boolean))
+    const sinProyecto = modeloListo
+      ? leads.filter((l) => l.estado === "ganado" && !conProyecto.has(l.id))
+      : []
+
     return {
       activos,
       paraHoy,
@@ -139,15 +153,23 @@ export function Resumen() {
       pendientes,
       hoyTareas,
       ganadosMes,
+      clientesHoy,
+      sinProyecto,
       pipeline: activos.reduce((s, l) => s + (l.valor_estimado ?? 0), 0),
+      // Histórico y no del mes: el generado es todo lo que se confirmó.
+      // La vista ya resolvió qué cuenta (no cancelado, cliente comercial).
+      generado: proyectos.filter((p) => p.cuenta_generado).reduce((s, p) => s + p.monto_usd, 0),
+      cuentanGenerado: proyectos.filter((p) => p.cuenta_generado).length,
+      // El mantenimiento vigente. Va aparte: no es plata del mismo tipo.
+      arr: proyectos.filter((p) => p.cuenta_arr).reduce((s, p) => s + p.arr_usd, 0),
+      cuentanArr: proyectos.filter((p) => p.cuenta_arr).length,
+      // Sin el modelo nuevo se sigue mostrando lo de antes.
       ganado: ganadosMes.reduce((s, l) => s + (l.valor_estimado ?? 0), 0),
-      // Los mantenimientos de todos los ganados, no sólo los del mes: es lo
-      // que entra todos los años sin tener que vender de nuevo.
       recurrente: leads
         .filter((l) => l.estado === "ganado")
         .reduce((s, l) => s + (l.mantenimiento_anual ?? 0), 0),
     }
-  }, [leads, tareas])
+  }, [leads, tareas, clientes, proyectos, modeloListo])
 
   const saludo = (() => {
     const h = new Date().getHours()
@@ -197,6 +219,26 @@ export function Resumen() {
           </div>
         ) : (
           <>
+            {/* Un ganado sin proyecto no suma al generado y no se ve en ningún
+                lado: pasa cuando se cambia el estado por fuera del alta. */}
+            {datos.sinProyecto.length > 0 ? (
+              <div className="a-aviso" style={{ marginBottom: 14 }}>
+                <AlertCircle size={15} style={{ flexShrink: 0, marginTop: 1 }} />
+                <span style={{ flex: 1 }}>
+                  {datos.sinProyecto.length === 1
+                    ? `${datos.sinProyecto[0].empresa} figura como ganado pero no tiene proyecto, así que no suma al generado.`
+                    : `Hay ${datos.sinProyecto.length} leads ganados sin proyecto, así que no suman al generado.`}
+                </span>
+                <button
+                  type="button"
+                  className="a-btn a-btn--sm"
+                  onClick={() => setAbierto(datos.sinProyecto[0])}
+                >
+                  Completar
+                </button>
+              </div>
+            ) : null}
+
             <div className="a-grid a-grid--kpi" style={{ marginBottom: 14 }}>
               <Kpi
                 icono={Wallet}
@@ -222,17 +264,40 @@ export function Resumen() {
                 }
                 tono={datos.hoyTareas.length > 0 ? "var(--a-warn)" : undefined}
               />
-              <Kpi
-                icono={TrendingUp}
-                label="Ganado este mes"
-                valor={monto(datos.ganado)}
-                pie={
-                  datos.recurrente > 0
-                    ? `${datos.ganadosMes.length} cerrados · ${monto(datos.recurrente)} por año en mantenimientos`
-                    : `${datos.ganadosMes.length} cerrados`
-                }
-                tono={datos.ganadosMes.length > 0 ? "var(--a-verde)" : undefined}
-              />
+              {modeloListo ? (
+                <>
+                  <Kpi
+                    icono={TrendingUp}
+                    label="Generado"
+                    valor={monto(datos.generado)}
+                    pie={`${datos.cuentanGenerado} ${datos.cuentanGenerado === 1 ? "proyecto" : "proyectos"} · histórico`}
+                    tono={datos.generado > 0 ? "var(--a-verde)" : undefined}
+                  />
+                  <Kpi
+                    icono={Repeat}
+                    label="Mantenimientos"
+                    valor={monto(datos.arr)}
+                    pie={
+                      datos.cuentanArr > 0
+                        ? `por año · ${datos.cuentanArr} vigentes`
+                        : "ninguno vigente"
+                    }
+                    tono={datos.arr > 0 ? "var(--a-info)" : undefined}
+                  />
+                </>
+              ) : (
+                <Kpi
+                  icono={TrendingUp}
+                  label="Ganado este mes"
+                  valor={monto(datos.ganado)}
+                  pie={
+                    datos.recurrente > 0
+                      ? `${datos.ganadosMes.length} cerrados · ${monto(datos.recurrente)} por año en mantenimientos`
+                      : `${datos.ganadosMes.length} cerrados`
+                  }
+                  tono={datos.ganadosMes.length > 0 ? "var(--a-verde)" : undefined}
+                />
+              )}
             </div>
 
             <div className="a-grid a-grid--2">
@@ -289,6 +354,42 @@ export function Resumen() {
                       ))}
                     </div>
                   )}
+
+                  {/* Clientes a los que toca volver a hablarles aunque no
+                      tengan nada abierto. Es el seguimiento posventa. */}
+                  {datos.clientesHoy.length > 0 ? (
+                    <>
+                      <div className="a-lista__titulo" style={{ marginTop: 14 }}>
+                        Clientes
+                        <span className="a-col__cuenta">{datos.clientesHoy.length}</span>
+                      </div>
+                      <div className="a-lista">
+                        {datos.clientesHoy.slice(0, 4).map((c) => (
+                          <button
+                            key={c.id}
+                            type="button"
+                            className="a-lead"
+                            onClick={() => navegar("/clientes")}
+                          >
+                            <div className="a-lead__empresa">
+                              {vencida(c.proximo_seguimiento) ? <span className="a-frio" /> : null}
+                              {c.nombre}
+                            </div>
+                            <div className="a-lead__contacto">
+                              Último contacto: {hace(c.ultimo_contacto).toLowerCase()}
+                            </div>
+                            <div className="a-lead__pie">
+                              <span
+                                className={`a-chip${vencida(c.proximo_seguimiento) ? " a-chip--bad" : " a-chip--warn"}`}
+                              >
+                                {cuando(c.proximo_seguimiento)}
+                              </span>
+                            </div>
+                          </button>
+                        ))}
+                      </div>
+                    </>
+                  ) : null}
                 </div>
 
                 <div className="a-glass a-card">

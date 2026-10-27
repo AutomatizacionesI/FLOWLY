@@ -15,6 +15,7 @@ const vacio: LeadForm = {
   estado: "nuevo",
   valor_estimado: null,
   mantenimiento_anual: null,
+  cliente_id: null,
   responsable_id: null,
   proximo_seguimiento: null,
   notas: "",
@@ -33,7 +34,7 @@ export function FormLead({
   estadoInicial?: EstadoLead
   cerrar: () => void
 }) {
-  const { perfiles, crearLead, editarLead } = useDatos()
+  const { perfiles, crearLead, editarLead, clientes, modeloListo } = useDatos()
 
   const [form, setForm] = useState<LeadForm>(() =>
     lead
@@ -46,6 +47,7 @@ export function FormLead({
           estado: lead.estado,
           valor_estimado: lead.valor_estimado,
           mantenimiento_anual: lead.mantenimiento_anual,
+          cliente_id: lead.cliente_id ?? null,
           responsable_id: lead.responsable_id,
           proximo_seguimiento: lead.proximo_seguimiento,
           notas: lead.notas,
@@ -176,6 +178,25 @@ export function FormLead({
             placeholder="220"
           />
         </Campo>
+
+        {/* Un cliente que vuelve a pedir algo abre un lead nuevo, pero ligado
+            a su ficha: así su historia no se parte en dos. */}
+        {modeloListo && clientes.length > 0 ? (
+          <Campo label="¿Ya es cliente?" ancho>
+            <select
+              className="a-select"
+              value={form.cliente_id ?? ""}
+              onChange={(e) => set("cliente_id", e.target.value || null)}
+            >
+              <option value="">No, es nuevo</option>
+              {clientes.map((c) => (
+                <option key={c.id} value={c.id}>
+                  {c.nombre}
+                </option>
+              ))}
+            </select>
+          </Campo>
+        ) : null}
 
         <Campo label="Lo sigue">
           <select

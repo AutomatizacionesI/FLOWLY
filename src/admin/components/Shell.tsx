@@ -1,4 +1,13 @@
-import { CheckSquare, LayoutGrid, LogOut, Menu, Users, Zap } from "lucide-react"
+import {
+  Briefcase,
+  Building2,
+  CheckSquare,
+  LayoutGrid,
+  LogOut,
+  Menu,
+  Users,
+  Zap,
+} from "lucide-react"
 import { useEffect, useState, type ReactNode } from "react"
 import { Link, useLocation } from "react-router-dom"
 
@@ -12,6 +21,8 @@ import { Avatar } from "./piezas"
 export const secciones = [
   { path: "resumen", label: "Resumen", icono: LayoutGrid },
   { path: "leads", label: "Leads", icono: Users },
+  { path: "proyectos", label: "Proyectos", icono: Briefcase },
+  { path: "clientes", label: "Clientes", icono: Building2 },
   { path: "tareas", label: "Tareas", icono: CheckSquare },
 ] as const
 
@@ -20,7 +31,7 @@ export const secciones = [
 function Riel({ abierta, cerrar }: { abierta: boolean; cerrar: () => void }) {
   const { pathname } = useLocation()
   const { perfil, salir } = useAuth()
-  const { leads, tareas } = useDatos()
+  const { leads, tareas, clientes } = useDatos()
 
   // Lo que pide atención hoy, que es lo que justifica el número en el riel.
   const seguimientos = leads.filter((l) => {
@@ -34,8 +45,12 @@ function Riel({ abierta, cerrar }: { abierta: boolean; cerrar: () => void }) {
   const pendientes = tareas.filter((t) => !t.hecha).length
   const vencidas = tareas.filter((t) => !t.hecha && (diasHasta(t.vence) ?? 1) <= 0).length
 
+  // Clientes a los que toca volver a hablarles: el seguimiento posventa.
+  const porHablar = clientes.filter((c) => (diasHasta(c.proximo_seguimiento) ?? 1) <= 0).length
+
   const cuentas: Record<string, { n: number; urgente?: boolean }> = {
     leads: { n: seguimientos, urgente: seguimientos > 0 },
+    clientes: { n: porHablar, urgente: porHablar > 0 },
     tareas: { n: pendientes, urgente: vencidas > 0 },
   }
 
