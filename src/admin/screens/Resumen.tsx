@@ -125,9 +125,11 @@ export function Resumen() {
 
     const hoyTareas = pendientes.filter((t) => (diasHasta(t.vence) ?? 1) <= 0)
 
+    // Por la fecha de cierre y no por la de edición: si no, un trabajo viejo
+    // pasaba a contar como del mes apenas alguien le corregía una nota.
     const mes = new Date().toISOString().slice(0, 7)
     const ganadosMes = leads.filter(
-      (l) => l.estado === "ganado" && l.actualizado_en?.startsWith(mes),
+      (l) => l.estado === "ganado" && l.cerrado_en?.startsWith(mes),
     )
 
     return {

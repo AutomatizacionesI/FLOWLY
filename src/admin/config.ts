@@ -38,6 +38,28 @@ export const origenes: { id: Origen; label: string }[] = [
 
 export const origenLabel = (id: string) => origenes.find((o) => o.id === id)?.label ?? id
 
+export type EstadoProyecto = "en_curso" | "entregado" | "cancelado"
+
+export const estadosProyecto: { id: EstadoProyecto; label: string; tono: string }[] = [
+  { id: "en_curso", label: "En curso", tono: "#ffc46b" },
+  { id: "entregado", label: "Entregado", tono: "#63e28f" },
+  { id: "cancelado", label: "Cancelado", tono: "#8b93a7" },
+]
+
+export const estadoProyectoLabel = (id: string) =>
+  estadosProyecto.find((e) => e.id === id)?.label ?? id
+export const estadoProyectoTono = (id: string) =>
+  estadosProyecto.find((e) => e.id === id)?.tono ?? "#8b93a7"
+
+export type TipoCosto = "infra" | "licencia" | "terceros" | "otro"
+
+export const tiposCosto: { id: TipoCosto; label: string }[] = [
+  { id: "infra", label: "Infraestructura" },
+  { id: "licencia", label: "Licencia" },
+  { id: "terceros", label: "Terceros" },
+  { id: "otro", label: "Otro" },
+]
+
 export type TipoMovimiento =
   | "nota"
   | "llamada"

@@ -82,6 +82,33 @@ Entra por `src/main.tsx`, que mira el pathname y carga un chunk distinto para la
 
 ---
 
+## Clientes y proyectos (migración 0005)
+
+Modelo acordado el 2026-10-27. Separa tres cosas que antes vivían todas en el lead:
+
+| Entidad | Qué es |
+| --- | --- |
+| **Lead** | Una oportunidad. Si un cliente pide otra cosa, se abre un lead nuevo ligado a ese cliente (`leads.cliente_id`). |
+| **Cliente** | Quien persiste. Tiene proyectos, leads y su propio seguimiento posventa. Se crea al confirmar el primer proyecto, si todavía no existía. |
+| **Proyecto** | Lo que se confirmó. Su `monto_usd` y `confirmado_en` alimentan "Generado". |
+
+**Cómo se miden los números**
+- **Generado** = suma de `monto_usd` de los proyectos no cancelados de clientes comerciales, filtrable por `confirmado_en`. Es histórico y no depende de cuándo se cobra (los cobros son otro indicador, pendiente).
+- **ARR** = `arr_usd` de los proyectos con mantenimiento vigente (`arr_baja_en` vacío). No suma al generado.
+- Todo en USD. No hay columna de moneda en las tablas nuevas; si algo entra en pesos, se convierte al cargar.
+- Una **ampliación** es un proyecto nuevo cuyo monto es solo el extra (`proyecto_origen_id` lo liga al original).
+- Los clientes con `comercial = false` (internos, trabajos sin fin comercial) no entran en ninguna métrica.
+- `horas` y `costos_proyecto` dan el margen y los USD por hora de cada proyecto.
+
+**Cómo se usa**
+- `confirmar_lead(lead_id, monto_usd, nombre, arr_usd, confirmado_en)` convierte el lead en cliente (o lo liga a uno existente) y crea el proyecto en un solo paso. El front tiene que llamarla cuando un lead pasa a ganado.
+- Vista `proyectos_resumen`: proyecto con horas, costos, margen y las banderas `cuenta_generado` y `cuenta_arr`. Es la base de los números.
+- Vista `leads_ganados_sin_proyecto`: lo que está ganado pero falta confirmar con monto.
+
+**Pendiente de esta etapa:** pantallas de clientes y proyectos, llamar a `confirmar_lead` desde el kanban, y cargar el histórico (clientes y proyectos existentes) con los montos confirmados.
+
+---
+
 ## Cosas que quedaron afuera a propósito
 
 - No hay alta automática de leads: la landing no tiene formulario, los leads entran por WhatsApp y mail y se cargan a mano.

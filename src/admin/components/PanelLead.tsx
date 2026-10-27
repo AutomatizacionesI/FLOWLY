@@ -138,6 +138,12 @@ export function PanelLead({ lead, cerrar }: { lead: Lead; cerrar: () => void }) 
             <span>Valor estimado</span>
             <b>{monto(lead.valor_estimado, lead.moneda)}</b>
           </div>
+          {lead.cerrado_en ? (
+            <div className="a-dato">
+              <span>Cerrado el</span>
+              <b>{corta(lead.cerrado_en)}</b>
+            </div>
+          ) : null}
           {/* Sólo si tiene: al que no paga mantenimiento no le ocupamos una fila. */}
           {lead.mantenimiento_anual ? (
             <div className="a-dato">
