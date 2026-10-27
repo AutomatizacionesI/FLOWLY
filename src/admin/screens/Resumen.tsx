@@ -1,7 +1,6 @@
 import {
   AlertCircle,
   CheckSquare,
-  Flame,
   Plus,
   Repeat,
   Snowflake,
@@ -247,13 +246,6 @@ export function Resumen() {
                 pie={`${datos.activos.length} leads en juego`}
               />
               <Kpi
-                icono={Flame}
-                label="Para seguir hoy"
-                valor={String(datos.paraHoy.length)}
-                pie={datos.paraHoy.length === 0 ? "Nada vencido" : "Seguimientos vencidos o de hoy"}
-                tono={datos.paraHoy.length > 0 ? "var(--a-bad)" : undefined}
-              />
-              <Kpi
                 icono={CheckSquare}
                 label="Tareas pendientes"
                 valor={String(datos.pendientes.length)}
@@ -275,7 +267,7 @@ export function Resumen() {
                   />
                   <Kpi
                     icono={Repeat}
-                    label="Mantenimientos"
+                    label="ARR"
                     valor={monto(datos.arr)}
                     pie={
                       datos.cuentanArr > 0
