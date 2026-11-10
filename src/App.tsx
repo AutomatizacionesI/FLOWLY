@@ -34,7 +34,7 @@ import { BlurFade } from "@/components/ui/blur-fade"
 import { DotPattern } from "@/components/ui/dot-pattern"
 
 const navigation = [
-  { label: "Cómo empezar", href: "#servicios" },
+  { label: "Casos", href: "#servicios" },
   { label: "Método", href: "#metodo" },
   { label: "Qué recibís", href: "#equipo" },
   { label: "Contacto", href: "#contacto" },
@@ -160,39 +160,6 @@ const caseStudies = [
     visualLabel: "Retail multicanal",
     visualTitle: "Vender por todos lados sin perder el control de nada.",
     visualNodes: ["Canales", "Pedidos", "Stock", "Clientes"],
-  },
-]
-
-const startingPoints = [
-  {
-    step: "01",
-    title: "Agente de WhatsApp",
-    text: "Atiende, responde y deriva solo lo que necesita una persona.",
-  },
-  {
-    step: "02",
-    title: "Panel de operación",
-    text: "Lo que hoy vive en planillas, en una sola pantalla.",
-  },
-  {
-    step: "03",
-    title: "Cierre automático",
-    text: "Conciliación y reportes sin abrir un Excel.",
-  },
-  {
-    step: "04",
-    title: "Asistente interno",
-    text: "Responde sobre tus procesos y documentos al instante.",
-  },
-  {
-    step: "05",
-    title: "Sistemas conectados",
-    text: "Tus herramientas hablando entre sí, sin carga doble.",
-  },
-  {
-    step: "06",
-    title: "Migración de datos",
-    text: "Años de planillas sueltas en una base ordenada.",
   },
 ]
 
@@ -344,14 +311,15 @@ const comparison = {
 }
 
 const clients = [
-  "Castells",
-  "Blanco & Etcheverry",
-  "Match Carrasco",
-  "Kopel Sánchez",
-  "Estudio G Pittaluga",
-  "HIKE",
-  "Proz Recovery",
-  "Lunar Vintage",
+  { name: "Castells", logo: "/clients/castells-alt.png", href: "https://www.castells.com.uy/", theme: "castells" },
+  { name: "Blanco & Etcheverry", logo: "/clients/blanco-etcheverry.png", href: "https://blancoetcheverry.com/v2025/", theme: "blanco" },
+  { name: "Match Carrasco", logo: "/clients/match.svg", href: "https://match.com.uy/", theme: "match" },
+  { name: "Kopel Sánchez", logo: "/clients/kopel-sanchez.png", href: "https://ks.com.uy/", theme: "kopel" },
+  { name: "Estudio G Pittaluga", logo: "/clients/estudio-g-pittaluga.png", href: "https://estudiogpittaluga.com.uy/", theme: "pittaluga" },
+  { name: "HIKE", logo: "/clients/hike-1.svg", mark: "/clients/hike-0.svg", href: "https://hike.house/", theme: "hike" },
+  { name: "Proz Recovery", logo: "/clients/proz-recovery.jpeg", href: "https://linktr.ee/prozrecovery", theme: "proz" },
+  { name: "Lunar Vintage", logo: "/clients/lunar-icon.png", href: "https://www.lunarvintagee.com/", theme: "lunar" },
+  { name: "Redress", logo: "/clients/redress.png", href: "https://www.redress.com.uy/", theme: "redress" },
 ]
 
 const methodShapes = [
@@ -565,12 +533,11 @@ function MethodSectionV2() {
             Nuestro método
           </Badge>
           <h2 className="mt-6 text-3xl font-medium tracking-[-0.07em] text-balance text-foreground sm:text-4xl lg:text-[3.05rem] lg:leading-[0.97]">
-            La IA como un proceso, no como un salto al vacío.
+            Cómo trabajamos.
           </h2>
           <p className="mt-5 text-base leading-8 text-muted-foreground sm:text-lg">
-            Empezamos por una mejora concreta, la hacemos funcionar rápido y
-            después escalamos. Así tu empresa adopta IA sin trauma y con
-            resultados visibles desde etapas tempranas.
+            Primero entendemos cómo trabaja tu equipo. Acordamos una mejora
+            concreta, la ponemos a funcionar y avanzamos paso a paso.
           </p>
         </div>
       </BlurFade>
@@ -853,12 +820,11 @@ function SuccessCasesSection() {
               Casos de éxito
             </Badge>
             <h2 className="mx-auto max-w-4xl text-3xl font-medium tracking-[-0.07em] text-balance text-foreground sm:text-4xl md:text-5xl">
-              Implementaciones reales de IA aplicadas a problemas concretos.
+              Problemas concretos que ya resolvimos.
             </h2>
             <p className="mx-auto max-w-3xl text-base leading-7 text-muted-foreground sm:text-lg">
-              Un slider interactivo para recorrer algunos de los sistemas,
-              asistentes y automatizaciones que ya construimos para distintos
-              tipos de operación.
+              Sistemas, asistentes y automatizaciones que ya están funcionando
+              en operaciones reales.
             </p>
           </BlurFade>
         </div>
@@ -1095,59 +1061,35 @@ function App() {
           </div>
         </section>
 
-        <section className="relative left-1/2 w-screen -translate-x-1/2 border-y border-border/70 bg-white py-10 sm:py-12">
+        <section className="relative left-1/2 w-screen -translate-x-1/2 border-y border-border/70 bg-white py-12 sm:py-14" aria-labelledby="clients-title">
           <BlurFade inView>
             <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-              <p className="text-center text-[0.66rem] uppercase tracking-[0.26em] text-muted-foreground/70">
-                Empresas que ya usan nuestros sistemas
-              </p>
+              <div className="text-center">
+                <p className="text-[0.68rem] uppercase tracking-[0.24em] text-muted-foreground">Confían en nosotros</p>
+                <h2 id="clients-title" className="mt-3 text-2xl font-medium tracking-[-0.05em] text-foreground sm:text-3xl">
+                  Marcas con las que trabajamos.
+                </h2>
+              </div>
 
-              <div className="mt-8 flex flex-wrap items-center justify-center gap-x-10 gap-y-6 sm:gap-x-14 lg:gap-x-16">
+              <div className="client-grid mt-8">
                 {clients.map((client) => (
-                  <span
-                    key={client}
-                    className="text-[0.95rem] font-semibold tracking-[-0.01em] text-slate-400 transition-colors duration-300 hover:text-slate-600 sm:text-[1.05rem]"
+                  <a
+                    key={client.name}
+                    href={client.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={`Visitar el sitio de ${client.name}`}
+                    className={`client-card client-card--${client.theme}`}
                   >
-                    {client}
-                  </span>
+                    <span className="client-card__art">
+                      {client.mark && <img className="client-card__mark" src={client.mark} alt="" loading="lazy" />}
+                      <img className="client-card__logo" src={client.logo} alt={client.name} loading="lazy" />
+                    </span>
+                    <ArrowUpRight className="client-card__arrow" aria-hidden="true" />
+                  </a>
                 ))}
               </div>
             </div>
-          </BlurFade>
-        </section>
-
-        <section className="mx-auto max-w-7xl py-16 sm:py-20">
-          <SectionIntro
-            label="Por dónde empezar"
-            title="Ejemplos de lo que construimos."
-            description="No hace falta tener claro qué automatizar. Casi siempre arranca por una de estas."
-          />
-
-          <div className="mt-10 grid gap-x-10 gap-y-0 sm:grid-cols-2 lg:grid-cols-3">
-            {startingPoints.map((item, index) => (
-              <BlurFade key={item.step} inView delay={0.05 * index}>
-                <div className="flex items-baseline gap-4 border-t border-border/70 py-6">
-                  <span className="font-mono text-[0.72rem] text-muted-foreground/60">
-                    {item.step}
-                  </span>
-                  <div>
-                    <h3 className="text-[1.08rem] font-medium tracking-[-0.03em] text-foreground">
-                      {item.title}
-                    </h3>
-                    <p className="mt-1.5 text-sm leading-6 text-muted-foreground">
-                      {item.text}
-                    </p>
-                  </div>
-                </div>
-              </BlurFade>
-            ))}
-          </div>
-
-          <BlurFade inView delay={0.32}>
-            <p className="mt-8 text-sm leading-7 text-muted-foreground">
-              Y si tu caso es otro, también. Partimos del problema, no de la
-              herramienta.
-            </p>
           </BlurFade>
         </section>
 

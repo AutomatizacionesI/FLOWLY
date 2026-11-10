@@ -103,6 +103,117 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+.client-grid {
+  display: grid;
+  width: 100%;
+  max-width: 960px;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+  margin-inline: auto;
+}
+
+.client-card {
+  position: relative;
+  display: flex;
+  min-height: 128px;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  border: 1px solid rgba(15, 23, 42, 0.06);
+  border-radius: 16px;
+  background: var(--client-bg);
+  transition: transform 220ms ease, box-shadow 220ms ease;
+}
+
+.client-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 18px 35px -24px rgba(15, 23, 42, 0.34);
+}
+
+.client-card:focus-visible {
+  outline: 3px solid var(--brand-strong);
+  outline-offset: 3px;
+}
+
+.client-card__art {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 16px 22px;
+}
+
+.client-card__logo {
+  display: block;
+  max-width: 100%;
+  max-height: 70px;
+  object-fit: contain;
+  transition: transform 220ms ease;
+}
+
+.client-card:hover .client-card__logo,
+.client-card:hover .client-card__mark {
+  transform: scale(1.04);
+}
+
+.client-card__mark {
+  display: block;
+  width: 64px;
+  height: 58px;
+  object-fit: contain;
+  transition: transform 220ms ease;
+}
+
+.client-card__arrow {
+  position: absolute;
+  top: 11px;
+  right: 11px;
+  width: 14px;
+  height: 14px;
+  color: var(--client-arrow);
+  opacity: 0.55;
+}
+
+.client-card--castells { --client-bg: #f8f4e9; --client-arrow: #987b40; }
+.client-card--castells .client-card__logo { max-height: 76px; }
+.client-card--blanco { --client-bg: #f4f4f2; --client-arrow: #89172b; }
+.client-card--blanco .client-card__logo { width: 100%; max-width: 270px; max-height: 82px; }
+.client-card--match { --client-bg: #145c97; --client-arrow: #d5f948; }
+.client-card--match .client-card__logo { max-height: 84px; }
+.client-card--kopel { --client-bg: #f3f7ef; --client-arrow: #158b39; }
+.client-card--kopel .client-card__logo { max-width: 230px; }
+.client-card--pittaluga { --client-bg: #112c42; --client-arrow: #9bc7e7; }
+.client-card--pittaluga .client-card__logo { max-width: 230px; }
+.client-card--hike { --client-bg: #eeeae1; --client-arrow: #282820; }
+.client-card--hike .client-card__mark { width: 50px; height: 47px; }
+.client-card--hike .client-card__logo { width: 90px; height: 47px; }
+.client-card--proz { --client-bg: #0b0d11; --client-arrow: #2764cf; }
+.client-card--proz .client-card__logo { width: 96px; max-height: 96px; }
+.client-card--lunar { --client-bg: #111; --client-arrow: #fff; }
+.client-card--lunar .client-card__logo { width: 110px; max-height: 110px; }
+.client-card--redress { --client-bg: #faf8f5; --client-arrow: #8a847e; }
+.client-card--redress .client-card__logo { width: 110px; max-height: 110px; }
+
+@media (max-width: 900px) {
+  .client-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+@media (max-width: 560px) {
+  .client-grid { grid-template-columns: minmax(0, 1fr); }
+  .client-card { min-height: 120px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .client-card,
+  .client-card__logo,
+  .client-card__mark { transition: none; }
+  .client-card:hover,
+  .client-card:hover .client-card__logo,
+  .client-card:hover .client-card__mark { transform: none; }
+}
+
 section[id] {
   scroll-margin-top: 6rem;
 }
