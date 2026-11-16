@@ -40,7 +40,7 @@ export const institucionales: Pagina[] = [
       {
         titulo: "Dónde trabajamos",
         parrafos: [
-          "Estamos en Montevideo, Uruguay. Trabajamos con empresas de Uruguay y de toda la región, de forma remota.",
+          "Estamos en Montevideo, Uruguay, y trabajamos de forma remota.",
         ],
       },
       {

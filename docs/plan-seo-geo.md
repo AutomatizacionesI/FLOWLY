@@ -1,10 +1,10 @@
 # Plan de SEO y GEO: contenido indexable sin cambiar la landing
 
 - **Fecha:** 2026-11-16
-- **Estado:** propuesta. No hay nada implementado salvo el arreglo del dominio (commit `6830682`).
+- **Estado:** etapas 1 y 2 implementadas en commits locales (2026-11-16), pendientes de revisión de Gonzalo antes del push. Ver "Estado de la implementación" al final.
 - **Pedido:** Gonzalo quiere que la landing se vea igual que hoy, pero que Google y los agentes de IA encuentren todo el contenido de Spike, y sumar páginas nuevas "por atrás".
 - **Base:** auditoría SEO/GEO del 2026-11-16 (`El Pibe/06-operaciones/2026-11-16-auditoria-seo-geo-spike.md`, fuera del repo).
-- **Orden con RankIA:** RankIA mide primero la línea base de visibilidad de Spike. Las etapas 1 en adelante (prerender, páginas, datos estructurados) van **después** de esa medición, así queda el antes y el después. El dominio ya se corrigió antes porque era un error, no una mejora.
+- **Orden con RankIA:** el plan original dejaba las etapas 1 y 2 para después de la línea base de RankIA. Gonzalo decidió ejecutarlas antes; como no se pushean hasta que él las revise, la línea base todavía se puede medir sobre producción antes del deploy.
 
 ---
 
@@ -295,3 +295,26 @@ Esperado: `301` a la raíz, `404`, `200`.
 3. Dirección para los datos estructurados: ¿solo "Montevideo, Uruguay" o dirección completa?
 4. Nombre de marca único (Spike AI) y mail del dominio.
 5. Completar los bloques **[a completar]** de la sección 2.2.
+
+---
+
+## 7. Estado de la implementación (2026-11-16, commits locales)
+
+Decisiones de Gonzalo aplicadas: links discretos en el pie (único cambio visible), solo Lunar Vintage, ReDress y HIKE con nombre, dirección "Montevideo, Uruguay" sin calle, marca "Spike AI" con `alternateName` "Spike Automations", mail actual.
+
+**Cómo está armado**
+- `npm run build` = `tsc` → `vite build` → `vite build --ssr src/ssg/entry-server.tsx` → `node scripts/prerender.mjs`.
+- `scripts/prerender.mjs` mete el HTML de la landing en `dist/index.html` (React la hidrata con `hydrateRoot`), agrega el JSON-LD y escribe las páginas de contenido, `404.html`, `sitemap.xml`, `llms.txt` y `llms-full.txt`.
+- Contenido: `src/content/sitio.ts` (empresa, socios, FAQ: lo usan la landing y las páginas) y `src/content/paginas/*.ts` (una entrada por página, formato en `src/content/tipos.ts`). Plantillas en `src/ssg/paginas.tsx`, estilos en `public/paginas.css`, JSON-LD en `src/ssg/schema.ts`.
+- Para agregar una página: sumar una entrada al archivo que corresponda en `src/content/paginas/`. El build falla si enlaza a una ruta que no existe.
+- Las URLs llevan barra final (`/casos/hike/`), que es como se sirven los `index.html` por carpeta.
+
+**Quedó afuera a propósito**
+- Caso e industria "forestal": la ficha de El Pibe dice que ese proyecto no se ejecutó completo (quedó en prototipo), aunque la landing lo muestra como hecho. Hay que revisar la tarjeta de la landing.
+- Casos "IA conectada a la base de una inmobiliaria" y "Asistente de IA contable": ninguna ficha de El Pibe documenta que se hayan entregado (la landing sí los muestra). Las páginas de servicios e industrias los presentan como capacidad, no como casos.
+- Página del "sistema de ventas multicanal": la landing se la atribuye a HIKE y Lunar Vintage, pero las fichas describen una landing estática (HIKE) y una tienda con panel que cierra por WhatsApp, sin stock sincronizado (Lunar). Hay que revisar la tarjeta.
+
+**Antes de pushear (en la consola de Amplify, ver 2.5)**
+- Confirmar que las reglas de rewrite no tapan las carpetas nuevas: `/casos/hike/` tiene que servir `dist/casos/hike/index.html` y no la landing. Probar primero en una rama de preview.
+- Regla 404 (`/<*>` → `/404.html`, 404) y `www` → raíz (301).
+- Invalidar la caché de CloudFront después del deploy.

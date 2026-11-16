@@ -35,7 +35,7 @@ export const industrias: Pagina[] = [
       {
         titulo: "Casos",
         parrafos: [
-          "Hicimos un sistema de gestión de alquileres para una inmobiliaria y conectamos la IA a la base de otra para consultas internas y automatizaciones. En el área de datos desarrollamos dashboards de rendimiento para operaciones complejas, entre ellas inmobiliarias. Los clientes de estos trabajos no se nombran.",
+          "Hicimos un sistema de gestión de alquileres para una inmobiliaria. Sobre una base así podemos conectar IA para consultas internas y automatizaciones, y en el área de datos desarrollamos dashboards de rendimiento para negocios con operaciones complejas. El cliente no se nombra.",
         ],
       },
       {
@@ -57,7 +57,6 @@ export const industrias: Pagina[] = [
     ],
     relacionadas: [
       "/casos/sistema-gestion-alquileres-inmobiliaria/",
-      "/casos/ia-conectada-base-inmobiliaria/",
       "/casos/dashboards-de-rendimiento/",
       "/servicios/sistemas-a-medida/",
       "/servicios/inteligencia-artificial-para-empresas/",
@@ -86,7 +85,7 @@ export const industrias: Pagina[] = [
           "Facturas y comprobantes que se cargan a mano, uno por uno.",
           "Los criterios contables y los procedimientos internos viven en la cabeza de pocas personas.",
           "Clientes, tareas y equipos repartidos en planillas distintas, sin vista común.",
-          "Cada área, por ejemplo contable y legal, arma sus reportes por separado.",
+          "Cada área arma sus reportes por separado.",
         ],
       },
       {
@@ -94,19 +93,19 @@ export const industrias: Pagina[] = [
         parrafos: [
           "Flujos de conciliación con IA y reglas operativas que cruzan extractos, facturas y movimientos y detectan diferencias, para llegar al cierre con la base lista para reporting.",
           "Asistentes de IA conectados a la documentación, los criterios contables y los procedimientos internos del estudio, que ayudan al equipo en consultas, tareas y validaciones y reducen la dependencia de pocas personas clave.",
-          "Y sistemas internos a medida donde el estudio ve sus clientes, tareas y equipos en un solo lugar, con la revisión y aprobación final siempre en manos de las personas.",
+          "Y herramientas internas a medida para ordenar el trabajo del estudio, con la revisión y aprobación final siempre en manos de las personas.",
         ],
       },
       {
         titulo: "Casos",
         parrafos: [
-          "Implementamos conciliación bancaria con IA, creamos un asistente con contexto para un estudio contable y desarrollamos un sistema de gestión interno para un estudio. Los clientes no se nombran por una cuestión de confidencialidad.",
+          "Implementamos conciliación bancaria con IA para un estudio contable y desarrollamos herramientas internas para un estudio. Los clientes no se nombran por una cuestión de confidencialidad.",
         ],
       },
       {
         titulo: "Cómo empezar",
         parrafos: [
-          "Una charla sin costo para ver cómo trabajan hoy y qué tarea repetitiva pesa más. Normalmente empezamos por una sola, la dejamos corriendo y recién después sumamos otras. Los datos son tuyos y quedan en infraestructura tuya o en servicios que vos controlás, y firmamos acuerdo de confidencialidad si lo necesitás.",
+          "Una charla sin costo para ver cómo trabajan hoy y qué tarea repetitiva pesa más. Normalmente empezamos por una sola, la dejamos corriendo y recién después sumamos otras. Los datos son tuyos. Antes de empezar definimos dónde se alojan y quién administra las cuentas, y firmamos acuerdo de confidencialidad si lo necesitás.",
         ],
       },
     ],
@@ -117,7 +116,7 @@ export const industrias: Pagina[] = [
       },
       {
         q: "¿Qué pasa con la información de los clientes del estudio?",
-        a: "Los datos son tuyos y quedan en infraestructura tuya o en servicios que vos controlás. Firmamos acuerdo de confidencialidad si lo necesitás.",
+        a: "Los datos son tuyos. Antes de empezar definimos dónde se alojan y quién administra las cuentas, y firmamos acuerdo de confidencialidad si lo necesitás.",
       },
       {
         q: "¿Tenemos que cambiar el software contable que usamos?",
@@ -126,7 +125,6 @@ export const industrias: Pagina[] = [
     ],
     relacionadas: [
       "/casos/conciliacion-bancaria-con-ia/",
-      "/casos/asistente-ia-contable/",
       "/servicios/inteligencia-artificial-para-empresas/",
       "/servicios/automatizacion-de-procesos/",
       "/servicios/sistemas-a-medida/",
@@ -162,7 +160,7 @@ export const industrias: Pagina[] = [
         titulo: "Qué construimos",
         parrafos: [
           "Tiendas online con catálogo por rubros y categorías, y un panel donde el equipo carga productos y fotos por su cuenta. Plataformas con disponibilidad por fechas y reservas cuando el negocio es de alquiler. Landings de marca para mostrar una línea de productos con sus variantes.",
-          "Y, cuando hace falta, un sistema propio que centraliza toda la venta: pedidos de la tienda, de Instagram, de WhatsApp y del local en una sola bandeja, con stock y precios sincronizados y la información de clientes unificada.",
+          "Y, si el negocio lo pide, podemos sumar un sistema propio que ordene los pedidos de todos los canales.",
         ],
       },
       {

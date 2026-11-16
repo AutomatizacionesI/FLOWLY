@@ -59,7 +59,7 @@ export const servicios: Pagina[] = [
       },
       {
         q: "¿Los datos quedan en mi empresa?",
-        a: "Sí. Los datos son tuyos y quedan en infraestructura tuya o en servicios que vos controlás. Firmamos acuerdo de confidencialidad si lo necesitás.",
+        a: "Sí. Los datos son tuyos. Antes de empezar definimos dónde se alojan y quién administra las cuentas, y firmamos acuerdo de confidencialidad si lo necesitás.",
       },
       {
         q: "¿Se puede empezar con algo chico y ampliar después?",
@@ -116,21 +116,21 @@ export const servicios: Pagina[] = [
       {
         titulo: "Cómo lo hacemos",
         parrafos: [
-          "Nos sentamos a charlar sobre tu día a día, sin compromiso, y definimos por dónde conviene empezar. La primera automatización suele estar corriendo entre dos y cuatro semanas. Después sumamos módulos solo cuando tiene sentido, para que el equipo se adapte sin choques y la inversión acompañe el crecimiento real del negocio.",
+          "Nos sentamos a charlar sobre tu día a día, sin compromiso, y definimos por dónde conviene empezar. La primera automatización suele estar corriendo en pocas semanas. Después sumamos módulos solo cuando tiene sentido, para que el equipo se adapte sin choques y la inversión acompañe el crecimiento real del negocio.",
           "Cuando la empresa está lista, las herramientas que empezaron aisladas se pueden unificar en un solo circuito conectado. Pero no hace falta pensar en eso el primer día.",
         ],
       },
       {
         titulo: "Casos",
         parrafos: [
-          "En una inmobiliaria unificamos seguimiento comercial, contratos y tareas en un sistema con alertas y automatizaciones. En un caso de finanzas armamos flujos con reglas para cruzar extractos, facturas y movimientos y detectar diferencias.",
+          "En una inmobiliaria unificamos contratos y tareas en un solo sistema. Para un estudio contable armamos reglas que cruzan los extractos bancarios con los registros y marcan lo que hay que revisar.",
         ],
       },
     ],
     preguntas: [
       {
         q: "¿Cuánto tarda en estar funcionando?",
-        a: "La primera automatización suele estar corriendo entre dos y cuatro semanas. Los sistemas completos llevan más, pero entregamos por partes.",
+        a: "La primera automatización suele estar corriendo en pocas semanas. Los sistemas completos llevan más, pero entregamos por partes.",
       },
       {
         q: "¿Tengo que cambiar las herramientas que uso hoy?",
@@ -172,7 +172,7 @@ export const servicios: Pagina[] = [
       {
         titulo: "Qué construimos",
         puntos: [
-          "Asistentes internos que conocen tus criterios y procedimientos y ayudan al equipo en consultas, tareas y validaciones.",
+          "Asistentes internos conectados a tu documentación y tus procedimientos, que pueden ayudar al equipo en consultas, tareas y validaciones.",
           "IA conectada a la base operativa, para responder preguntas internas con datos reales y disparar acciones.",
           "Conciliación con IA: cruce de extractos, facturas y movimientos, con detección de diferencias.",
           "Reglas y controles para que una persona revise lo que importa y no todo.",
@@ -191,13 +191,13 @@ export const servicios: Pagina[] = [
         titulo: "Cómo lo hacemos",
         parrafos: [
           "Partimos del problema, no de la herramienta. Definimos con vos qué información debe usar la IA, qué puede hacer sola y qué tiene que pasar por una persona. Empezamos con un alcance acotado y lo ampliamos cuando el equipo ya lo usa.",
-          "Los datos son tuyos y quedan en infraestructura tuya o en servicios que vos controlás. Firmamos acuerdo de confidencialidad si lo necesitás.",
+          "Los datos son tuyos. Antes de empezar definimos dónde se alojan y quién administra las cuentas, y firmamos acuerdo de confidencialidad si lo necesitás.",
         ],
       },
       {
         titulo: "Casos",
         parrafos: [
-          "Creamos un asistente para un estudio contable, conectado a documentación, criterios y procedimientos internos. Conectamos IA a la base de una inmobiliaria para que el equipo consulte y dispare acciones sin cambiar su flujo diario. Y armamos flujos de conciliación bancaria con IA y reglas operativas.",
+          "Podemos armar asistentes conectados a la documentación y los procedimientos de tu empresa, o IA conectada a tu base operativa para que el equipo consulte sin cambiar su flujo diario. Y armamos flujos de conciliación bancaria con IA y reglas operativas.",
         ],
       },
     ],
@@ -208,7 +208,7 @@ export const servicios: Pagina[] = [
       },
       {
         q: "¿Mis datos se usan para entrenar modelos?",
-        a: "Los datos son tuyos y quedan en infraestructura tuya o en servicios que vos controlás. Antes de empezar definimos qué información se usa y cómo.",
+        a: "Los datos son tuyos. Antes de empezar definimos dónde se alojan y quién administra las cuentas, y firmamos acuerdo de confidencialidad si lo necesitás. También definimos qué información se usa y cómo.",
       },
       {
         q: "¿Mi equipo necesita saber de IA?",
@@ -216,8 +216,6 @@ export const servicios: Pagina[] = [
       },
     ],
     relacionadas: [
-      "/casos/asistente-ia-contable/",
-      "/casos/ia-conectada-base-inmobiliaria/",
       "/casos/conciliacion-bancaria-con-ia/",
       "/servicios/dashboards-y-datos/",
       "/industrias/estudios-contables/",
@@ -266,13 +264,13 @@ export const servicios: Pagina[] = [
         parrafos: [
           "Primero entendemos qué decisiones querés tomar con los datos y de dónde salen hoy. Después ordenamos lo necesario, definimos los criterios y montamos el reporting. Entregamos por partes: primero el indicador que más ayuda, después el resto.",
           "La idea es que, una vez armado, el dashboard sea de todos: que quien dirige mire el panorama general y quien opera vea el detalle de su área, sin pedirle a nadie que prepare una planilla. Si el equipo no lo abre todos los días, lo ajustamos hasta que sirva.",
-          "Los datos quedan en infraestructura tuya o en servicios que vos controlás.",
+          "Los datos son tuyos. Antes de empezar definimos dónde se alojan y quién administra las cuentas, y firmamos acuerdo de confidencialidad si lo necesitás.",
         ],
       },
       {
         titulo: "Casos",
         parrafos: [
-          "Desarrollamos dashboards de rendimiento para operaciones complejas como salones de eventos, depósitos, barracas, inmobiliarias y empresas de limpieza.",
+          "Desarrollamos dashboards de rendimiento para negocios con operaciones complejas.",
         ],
       },
     ],

@@ -29,7 +29,7 @@ const grupos: { titulo: string; filtro: (p: Pagina) => boolean }[] = [
 
 const cabecera = () => `# ${empresa.nombre}
 
-> ${empresa.nombre} (también Spike Automations) es una empresa de ${empresa.ciudad}, ${empresa.pais}, que construye sistemas a medida, automatizaciones e inteligencia artificial para empresas que necesitan ordenar su operación. Trabaja con empresas de Uruguay y de la región, en forma remota.
+> ${empresa.nombre} (también Spike Automations) es una empresa de ${empresa.ciudad}, ${empresa.pais}, que construye sistemas a medida, automatizaciones e inteligencia artificial para empresas que necesitan ordenar su operación. Trabaja de forma remota.
 
 - Sitio: ${empresa.url}/
 - Socios: ${team.map((p) => `${p.name} (${p.role})`).join(", ")}
