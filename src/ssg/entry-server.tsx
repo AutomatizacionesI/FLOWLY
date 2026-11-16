@@ -31,3 +31,6 @@ export function jsonLdLanding(): string {
     preguntasFrecuentes(`${empresa.url}/`, faqs),
   ])
 }
+
+export { llmsFullTxt, llmsTxt, sitemap } from "./archivos"
+export { paginas, render404, renderIndices, renderPagina, validarEnlaces } from "./paginas"

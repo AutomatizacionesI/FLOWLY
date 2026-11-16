@@ -1,0 +1,398 @@
+/*
+ * Estilos de las páginas de contenido (servicios, casos, industrias,
+ * institucionales y 404). Son HTML estático sin JS, aparte de la landing,
+ * con la misma identidad: Geist, charcoal y el verde de marca puntual.
+ */
+
+@font-face {
+  font-family: "Geist";
+  src: url("/brand/geist-latin-wght-normal.woff2") format("woff2-variations");
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  --fondo: #fbfcfd;
+  --tinta: #141a22;
+  --tinta-suave: #4f5864;
+  --borde: #e2e6ea;
+  --blanco: #ffffff;
+  --marca: #63e28f;
+  --marca-fuerte: #2f9d5b;
+  --marca-suave: rgba(99, 226, 143, 0.12);
+  --radio: 1.4rem;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--fondo);
+  color: var(--tinta);
+  font-family: "Geist", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  font-size: 1.0625rem;
+  line-height: 1.7;
+}
+
+a {
+  color: inherit;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+:focus-visible {
+  outline: 3px solid var(--marca);
+  outline-offset: 3px;
+}
+
+.contenedor {
+  width: 100%;
+  max-width: 64rem;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+@media (min-width: 640px) {
+  .contenedor {
+    padding: 0 1.5rem;
+  }
+}
+
+/* ── Encabezado ── */
+
+.encabezado {
+  border-bottom: 1px solid var(--borde);
+  background: var(--blanco);
+}
+
+.encabezado__fila {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  min-height: 4.25rem;
+}
+
+.marca img {
+  width: 5.5rem;
+}
+
+.encabezado__nav {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  font-size: 0.95rem;
+}
+
+.encabezado__nav a:not(.boton) {
+  text-decoration: none;
+  color: var(--tinta-suave);
+}
+
+.encabezado__nav a:not(.boton):hover {
+  color: var(--tinta);
+}
+
+@media (max-width: 560px) {
+  .encabezado__nav a:not(.boton) {
+    display: none;
+  }
+}
+
+.boton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 999px;
+  background: var(--tinta);
+  color: #ffffff;
+  font-weight: 500;
+  text-decoration: none;
+  padding: 0.8rem 1.5rem;
+  transition: background 0.2s ease;
+}
+
+.boton:hover {
+  background: #000000;
+}
+
+.boton--chico {
+  padding: 0.5rem 1.1rem;
+  font-size: 0.9rem;
+}
+
+/* ── Contenido ── */
+
+.contenido {
+  padding-top: 1.5rem;
+  padding-bottom: 4rem;
+}
+
+.contenido article,
+.contenido > .entrada,
+.contenido > h1 {
+  max-width: 46rem;
+}
+
+.migas ol {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+  margin: 0 0 2.5rem;
+  padding: 0;
+  list-style: none;
+  font-size: 0.85rem;
+  color: var(--tinta-suave);
+}
+
+.migas li + li::before {
+  content: "/";
+  margin-right: 0.35rem;
+  color: var(--borde);
+}
+
+.migas a {
+  text-decoration: none;
+}
+
+.migas a:hover {
+  text-decoration: underline;
+}
+
+.etiqueta {
+  display: inline-block;
+  margin: 0;
+  border: 1px solid rgba(99, 226, 143, 0.34);
+  border-radius: 999px;
+  background: var(--marca-suave);
+  padding: 0.2rem 0.8rem;
+  font-size: 0.72rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--marca-fuerte);
+}
+
+h1 {
+  margin: 1rem 0 0;
+  font-size: clamp(2.1rem, 6vw, 3.3rem);
+  font-weight: 500;
+  line-height: 1.05;
+  letter-spacing: -0.05em;
+  text-wrap: balance;
+}
+
+h2 {
+  margin: 0 0 0.75rem;
+  font-size: 1.55rem;
+  font-weight: 500;
+  line-height: 1.2;
+  letter-spacing: -0.03em;
+}
+
+h3 {
+  margin: 0 0 0.35rem;
+  font-size: 1.08rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+.entrada {
+  margin: 1.25rem 0 0;
+  font-size: 1.2rem;
+  line-height: 1.65;
+  color: var(--tinta-suave);
+}
+
+.cliente {
+  margin: 1rem 0 0;
+  font-size: 0.95rem;
+  color: var(--tinta-suave);
+}
+
+.cliente a {
+  color: var(--tinta);
+  font-weight: 500;
+}
+
+.seccion {
+  margin-top: 2.75rem;
+}
+
+.seccion p {
+  margin: 0 0 1rem;
+}
+
+.seccion ul {
+  margin: 0 0 1rem;
+  padding-left: 1.2rem;
+}
+
+.seccion li {
+  margin-bottom: 0.45rem;
+}
+
+.seccion li::marker {
+  color: var(--marca-fuerte);
+}
+
+.pregunta {
+  border-top: 1px solid var(--borde);
+  padding: 1.1rem 0 0.4rem;
+}
+
+.pregunta p {
+  color: var(--tinta-suave);
+}
+
+/* ── Tarjetas ── */
+
+.relacionadas {
+  margin-top: 4rem;
+}
+
+.tarjetas {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.9rem;
+  margin: 1.25rem 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+@media (min-width: 720px) {
+  .tarjetas {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 960px) {
+  .tarjetas--indice {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+.tarjetas--indice {
+  margin-top: 2.5rem;
+}
+
+.tarjeta {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  height: 100%;
+  border: 1px solid var(--borde);
+  border-radius: var(--radio);
+  background: var(--blanco);
+  padding: 1.25rem 1.4rem;
+  text-decoration: none;
+  transition: border-color 0.2s ease, transform 0.2s ease;
+}
+
+.tarjeta:hover {
+  border-color: rgba(99, 226, 143, 0.6);
+  transform: translateY(-2px);
+}
+
+.tarjeta strong {
+  font-weight: 500;
+  line-height: 1.3;
+  letter-spacing: -0.02em;
+}
+
+.tarjeta span {
+  font-size: 0.93rem;
+  line-height: 1.55;
+  color: var(--tinta-suave);
+}
+
+.tarjeta .tarjeta__etiqueta {
+  font-size: 0.7rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--marca-fuerte);
+}
+
+/* ── Llamado a la acción ── */
+
+.llamado {
+  margin-top: 4rem;
+  border-radius: var(--radio);
+  background: var(--tinta);
+  color: #ffffff;
+  padding: 2.25rem 1.75rem;
+}
+
+.llamado h2 {
+  max-width: 34rem;
+  font-size: clamp(1.5rem, 4vw, 2rem);
+}
+
+.llamado p {
+  max-width: 36rem;
+  margin: 0 0 1.5rem;
+  color: rgba(255, 255, 255, 0.72);
+}
+
+.llamado .boton {
+  background: var(--marca);
+  color: var(--tinta);
+}
+
+.llamado .boton:hover {
+  background: #7ce9a2;
+}
+
+/* ── Pie ── */
+
+.pie {
+  border-top: 1px solid var(--borde);
+  background: var(--blanco);
+  padding: 2.25rem 0;
+  font-size: 0.9rem;
+  color: var(--tinta-suave);
+}
+
+.pie__enlaces,
+.pie__datos {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem 1.5rem;
+}
+
+.pie__enlaces {
+  margin-bottom: 1.25rem;
+}
+
+.pie__datos strong {
+  color: var(--tinta);
+}
+
+.pie a {
+  text-decoration: none;
+}
+
+.pie a:hover {
+  color: var(--tinta);
+  text-decoration: underline;
+}
+
+.pie__frase {
+  margin: 1.25rem 0 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tarjeta {
+    transition: none;
+  }
+}
