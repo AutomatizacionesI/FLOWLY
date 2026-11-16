@@ -41,6 +41,15 @@ const navigation = [
   { label: "Contacto", href: "#contacto" },
 ]
 
+/* Links discretos del pie a las páginas de contenido (no están en el menú). */
+const footerLinks = [
+  { label: "Casos de éxito", href: "/casos/" },
+  { label: "Servicios", href: "/servicios/" },
+  { label: "Industrias", href: "/industrias/" },
+  { label: "Preguntas frecuentes", href: "/preguntas-frecuentes/" },
+  { label: "Sobre Spike", href: "/sobre-spike/" },
+]
+
 const caseStudies = [
   {
     title: "Sistema de gestión de alquileres para inmobiliarias",
@@ -1359,6 +1368,21 @@ function App() {
               Sistemas a medida y automatización para empresas que necesitan
               ordenar su operación.
             </p>
+
+            <nav
+              aria-label="Más de Spike"
+              className="mt-3 flex flex-wrap gap-x-5 gap-y-2 text-[0.78rem] text-muted-foreground/70"
+            >
+              {footerLinks.map((link) => (
+                <a
+                  key={link.href}
+                  href={link.href}
+                  className="transition-colors duration-300 hover:text-foreground"
+                >
+                  {link.label}
+                </a>
+              ))}
+            </nav>
           </div>
         </section>
       </div>
