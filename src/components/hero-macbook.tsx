@@ -82,7 +82,9 @@ function Counter({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [spring, reduced, value, decimals, prefix, suffix])
 
-  return <span ref={ref}>{reduced ? format(value) : format(0)}</span>
+  // Siempre arranca en 0 para que coincida con el HTML prerenderizado; con
+  // movimiento reducido, el efecto de arriba pone el valor final enseguida.
+  return <span ref={ref}>{format(0)}</span>
 }
 
 /* ── marco ── */

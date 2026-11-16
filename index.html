@@ -27,10 +27,20 @@
       content="Sistemas a medida y automatización para empresas que necesitan ordenar su operación."
     />
     <meta name="twitter:image" content="https://spikeai.com.uy/brand/spike-logo.png" />
+    <noscript>
+      <style>
+        /* Sin JS no corren las animaciones de entrada: todo visible. */
+        [data-blur-fade] { opacity: 1 !important; filter: none !important; transform: none !important; }
+      </style>
+    </noscript>
     <title>Spike AI - Sistemas a medida y automatización para empresas</title>
   </head>
   <body>
     <div id="root"></div>
+    <script>
+      /* El panel y la demo no usan el HTML prerenderizado de la landing. */
+      if (/^\/(admin|democontable)/.test(location.pathname)) document.getElementById("root").replaceChildren()
+    </script>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>
