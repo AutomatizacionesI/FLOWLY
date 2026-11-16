@@ -141,15 +141,45 @@ function Migas({ items }: { items: { nombre: string; ruta: string }[] }) {
   )
 }
 
+/**
+ * Cierre común de todas las páginas: diagnóstico sin costo y cómo
+ * acompañamos a la empresa después. Los textos salen de la landing (método
+ * de 4 pasos y "Qué recibís"); sin precios, plazos ni garantías.
+ */
+const acompanamiento = [
+  {
+    titulo: "Empezamos por algo acotado",
+    texto: "Arrancamos por lo que más duele y lo vamos haciendo crecer a medida que ves resultados.",
+  },
+  {
+    titulo: "Tu equipo capacitado",
+    texto: "Los entrenamos hasta que manejen el sistema sin nosotros.",
+  },
+  {
+    titulo: "Alguien del otro lado",
+    texto: "Si algo falla o surge algo nuevo, nos escribís y te contestamos nosotros, no un ticket.",
+  },
+]
+
 function Llamado() {
   return (
-    <section className="llamado">
-      <h2>¿Tu empresa trabaja con planillas y tareas a mano?</h2>
+    <section className="llamado" aria-labelledby="llamado-titulo">
+      <p className="llamado__etiqueta">Diagnóstico sin costo</p>
+      <h2 id="llamado-titulo">Empecemos por entender cómo trabajan hoy</h2>
       <p>
-        La primera conversación sirve para entender cómo trabajan hoy y ver si podemos ayudar. Sin compromiso.
+        Una charla de 30 a 60 minutos, sin costo y sin compromiso, para ver dónde se pierde tiempo y por dónde
+        conviene empezar. Después no te dejamos solo: te acompañamos mientras el sistema crece.
       </p>
+      <ul className="llamado__puntos">
+        {acompanamiento.map((a) => (
+          <li key={a.titulo}>
+            <strong>{a.titulo}</strong>
+            <span>{a.texto}</span>
+          </li>
+        ))}
+      </ul>
       <a href={empresa.whatsapp} className="boton" rel="noreferrer" target="_blank">
-        Hablemos de tu negocio
+        Agendar el diagnóstico
       </a>
     </section>
   )
@@ -406,6 +436,7 @@ export function render404(): string {
             </li>
           ))}
         </ul>
+        <Llamado />
       </main>
       <Pie />
     </>,

@@ -344,6 +344,48 @@ h3 {
   color: rgba(255, 255, 255, 0.72);
 }
 
+.llamado__etiqueta {
+  margin: 0 0 0.75rem;
+  font-size: 0.72rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--marca);
+}
+
+.llamado__puntos {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+  margin: 0 0 1.75rem;
+  padding: 0;
+  list-style: none;
+}
+
+@media (min-width: 720px) {
+  .llamado__puntos {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+.llamado__puntos li {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.16);
+  padding-top: 0.9rem;
+}
+
+.llamado__puntos strong {
+  font-weight: 500;
+  color: #ffffff;
+}
+
+.llamado__puntos span {
+  font-size: 0.93rem;
+  line-height: 1.55;
+  color: rgba(255, 255, 255, 0.72);
+}
+
 .llamado .boton {
   background: var(--marca);
   color: var(--tinta);

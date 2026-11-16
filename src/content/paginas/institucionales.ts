@@ -38,6 +38,14 @@ export const institucionales: Pagina[] = [
         ],
       },
       {
+        titulo: "Cómo acompañamos",
+        parrafos: [
+          "Empezamos con un diagnóstico sin costo: una charla de 30 a 60 minutos para entender cómo trabajan hoy y definir por dónde conviene empezar.",
+          "Nos sentamos con la gente que va a usar el sistema todos los días y los acompañamos hasta que lo manejen sin nosotros. Si tu equipo no lo usa, no sirvió de nada.",
+          "Después de la entrega seguimos cerca: si algo falla o surge algo nuevo, nos escribís y te contestamos nosotros, no un ticket. Y cuando ves resultados, sumamos lo que haga falta, paso a paso.",
+        ],
+      },
+      {
         titulo: "Dónde trabajamos",
         parrafos: [
           "Estamos en Montevideo, Uruguay, y trabajamos de forma remota.",
@@ -94,6 +102,18 @@ export const institucionales: Pagina[] = [
           "Tus datos migrados: lo que vive en planillas entra ordenado y sin duplicados.",
           "Tu equipo capacitado: lo entrenamos hasta que lo maneje sin nosotros.",
           "Alguien del otro lado: nos escribís y te contestamos nosotros, no un ticket.",
+        ],
+      },
+      {
+        titulo: "Después de la entrega",
+        parrafos: [
+          "Entregar no es irnos. El método está pensado para acompañar a la empresa mientras crece: empezamos por algo acotado, lo dejamos funcionando y lo vamos ampliando cuando tiene sentido.",
+        ],
+        puntos: [
+          "Tu equipo queda capacitado para manejar el sistema sin nosotros.",
+          "Si algo falla o surge algo nuevo, nos escribís y te contestamos nosotros, no un ticket.",
+          "Sumamos módulos a medida que ves resultados, sin cambiar todo de golpe.",
+          "Con el tiempo, las herramientas sueltas se conectan en una base común de datos y automatización.",
         ],
       },
       {
@@ -184,6 +204,14 @@ export const institucionales: Pagina[] = [
       {
         q: "¿Quién trabaja en mi proyecto?",
         a: "Somos dos socios, Facundo Etcheverry y Gonzalo Pittaluga, y trabajamos juntos en cada proyecto. Quien te atiende en la primera reunión es el mismo que después escribe el código.",
+      },
+      {
+        q: "¿El diagnóstico tiene costo?",
+        a: "No. Es una charla de 30 a 60 minutos para entender cómo trabajan hoy, detectar dónde se pierde tiempo y definir por dónde conviene empezar. Sin compromisos.",
+      },
+      {
+        q: "¿Qué pasa después de la entrega?",
+        a: "Seguimos acompañando. Tu equipo queda capacitado para manejar el sistema sin nosotros, y si algo falla o surge algo nuevo, nos escribís y te contestamos nosotros, no un ticket. A medida que ves resultados sumamos módulos cuando tiene sentido, hasta conectar las herramientas en una base común.",
       },
       {
         q: "¿Qué recibo al final del proyecto?",
