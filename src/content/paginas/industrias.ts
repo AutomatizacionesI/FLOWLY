@@ -41,7 +41,7 @@ export const industrias: Pagina[] = [
       {
         titulo: "Cómo empezar",
         parrafos: [
-          "Una charla de diagnóstico sin costo para entender cómo trabajan hoy. Si hay algo para hacer, lo cotizamos con alcance, entregables, precio cerrado y plazos definidos antes de empezar, y arrancamos por lo que más duele, por ejemplo el control de vencimientos. Sumamos módulos cuando el equipo ya lo está usando.",
+          "Una charla de diagnóstico sin costo para entender cómo trabajan hoy. Si hay algo para hacer, definimos alcance, entregables y plazos antes de empezar, y arrancamos por lo que más duele, por ejemplo el control de vencimientos. Sumamos módulos cuando el equipo ya lo está usando.",
         ],
       },
     ],
@@ -172,7 +172,7 @@ export const industrias: Pagina[] = [
       {
         titulo: "Cómo empezar",
         parrafos: [
-          "Una charla sin costo para entender cómo vendés hoy. Si podés mantener el cierre por WhatsApp, lo mantenemos: ordenamos todo lo demás. Cotizamos con precio cerrado y entregamos algo usable rápido, para ir sumando funciones a medida que las necesites.",
+          "Una charla sin costo para entender cómo vendés hoy. Si podés mantener el cierre por WhatsApp, lo mantenemos: ordenamos todo lo demás. Definimos el alcance antes de empezar y entregamos algo usable rápido, para ir sumando funciones a medida que las necesites.",
         ],
       },
     ],

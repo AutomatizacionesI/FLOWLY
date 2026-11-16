@@ -71,9 +71,9 @@ export const institucionales: Pagina[] = [
     ruta: "/como-trabajamos/",
     tipo: "institucional",
     titulo: "Cómo trabajamos: empezar chico, medir y escalar",
-    tituloSeo: "Cómo trabajamos: método en cuatro pasos y precio cerrado",
+    tituloSeo: "Cómo trabajamos: un método en cuatro pasos",
     descripcion:
-      "Nuestro método en cuatro pasos: diagnóstico sin costo, entregas rápidas, evolución por módulos y un ecosistema conectado. Precio cerrado y alcance definido.",
+      "Nuestro método en cuatro pasos: diagnóstico sin costo, entregas rápidas, evolución por módulos y un ecosistema conectado. Alcance definido antes de empezar.",
     etiqueta: "Método",
     entrada:
       "No cambiamos toda tu estructura de golpe. Empezamos por lo que más duele, entregamos algo usable rápido y escalamos cuando ves resultados. Así trabajamos en Spike AI.",
@@ -85,12 +85,6 @@ export const institucionales: Pagina[] = [
           "2. Micro-implementaciones rápidas. Arrancamos automatizando una sola tarea crítica o mejorando tu web para captar clientes. Entregamos algo usable en semanas.",
           "3. Evolución continua. A medida que ves resultados y tu equipo se adapta, sumamos módulos solo cuando tiene sentido. La inversión acompaña el crecimiento real del negocio.",
           "4. Ecosistema robusto. Cuando tu empresa está lista, conectamos los puntos: lo que empezó como herramientas aisladas se unifica en una base común de datos y automatización, pensada para crecer.",
-        ],
-      },
-      {
-        titulo: "Cómo cobramos",
-        parrafos: [
-          "Cada proyecto se cotiza con alcance, entregables, precio cerrado y plazos definidos antes de empezar. No trabajamos por hora ni con presupuestos abiertos. Las necesidades nuevas que aparecen durante el proyecto se evalúan como cambios de alcance.",
         ],
       },
       {
@@ -128,18 +122,18 @@ export const institucionales: Pagina[] = [
       "/sobre-spike/",
     ],
     resumen:
-      "Método en cuatro pasos, precio cerrado y alcance definido antes de empezar; empezamos por lo que más duele y escalamos con resultados.",
+      "Método en cuatro pasos y alcance definido antes de empezar; empezamos por lo que más duele y escalamos con resultados.",
   },
   {
     ruta: "/preguntas-frecuentes/",
     tipo: "institucional",
     titulo: "Preguntas frecuentes sobre Spike AI",
-    tituloSeo: "Preguntas frecuentes: precios, plazos, datos y equipo",
+    tituloSeo: "Preguntas frecuentes: plazos, datos, herramientas y equipo",
     descripcion:
-      "Respuestas directas sobre cómo cobramos, cuánto tarda, qué pasa con tus datos y si trabajamos fuera de Uruguay. Spike AI, Montevideo.",
+      "Respuestas directas sobre cuánto tarda, qué pasa con tus datos, qué herramientas usamos y si trabajamos fuera de Uruguay. Spike AI, Montevideo.",
     etiqueta: "Preguntas frecuentes",
     entrada:
-      "Lo que más nos preguntan antes de empezar a trabajar juntos: cómo cobramos, cuánto tarda, qué pasa con los datos y qué hace falta de tu lado. Si no encontrás tu duda, escribinos.",
+      "Lo que más nos preguntan antes de empezar a trabajar juntos: cuánto tarda, qué pasa con los datos y qué hace falta de tu lado. Si no encontrás tu duda, escribinos.",
     secciones: [
       {
         titulo: "Antes de escribirnos",
@@ -155,10 +149,6 @@ export const institucionales: Pagina[] = [
       },
     ],
     preguntas: [
-      {
-        q: "¿Cómo cobran?",
-        a: "Cada proyecto se cotiza con alcance, entregables, precio cerrado y plazos definidos antes de empezar. No trabajamos por hora ni con presupuestos abiertos. Las necesidades nuevas que aparecen durante el proyecto se evalúan como cambios de alcance.",
-      },
       {
         q: "¿La primera conversación incluye un diagnóstico o una demo?",
         a: "La primera conversación sirve para entender cómo trabajan hoy y evaluar si podemos ayudar. Si hace falta un diagnóstico más profundo o una demo, acordamos antes qué incluye, qué información necesitamos y en cuánto tiempo.",
@@ -208,6 +198,6 @@ export const institucionales: Pagina[] = [
       "/servicios/inteligencia-artificial-para-empresas/",
     ],
     resumen:
-      "Respuestas sobre precio cerrado, plazos, herramientas, datos, equipos no técnicos y trabajo remoto en la región.",
+      "Respuestas sobre plazos, herramientas, datos, equipos no técnicos y trabajo remoto en la región.",
   },
 ]

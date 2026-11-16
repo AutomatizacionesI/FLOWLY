@@ -7,7 +7,7 @@ export const servicios: Pagina[] = [
     titulo: "Sistemas a medida para empresas en Uruguay",
     tituloSeo: "Sistemas a medida para empresas en Uruguay",
     descripcion:
-      "Desarrollamos sistemas de gestión a medida en Montevideo: clientes, contratos, pedidos y tareas en un solo lugar, con precio cerrado y entrega por partes.",
+      "Desarrollamos sistemas de gestión a medida en Montevideo: clientes, contratos, pedidos y tareas en un solo lugar, con alcance definido y entrega por partes.",
     etiqueta: "Servicio · Software",
     entrada:
       "Un sistema a medida es una herramienta hecha para cómo trabaja tu empresa, no al revés. Reemplaza planillas sueltas, chats y carpetas por un solo lugar donde cada dato se carga una vez y lo ve quien lo necesita. Lo construimos en Spike AI, en Montevideo, con equipos que no son técnicos.",
@@ -42,7 +42,7 @@ export const servicios: Pagina[] = [
         titulo: "Cómo lo hacemos",
         parrafos: [
           "Primero una charla de diagnóstico sin costo para entender cómo trabajan hoy. Después arrancamos por lo que más duele y entregamos algo usable en semanas, no al final de un proyecto largo. Los sistemas completos llevan más tiempo, pero los entregamos por partes para que veas resultados antes de terminar.",
-          "Cada proyecto se cotiza con alcance, entregables, precio cerrado y plazos definidos antes de empezar. No trabajamos por hora. Y casi nunca hace falta cambiar las herramientas que ya usás: trabajamos sobre lo que tenés y conectamos lo que haga falta.",
+          "Antes de empezar definimos juntos el alcance, los entregables y los plazos. Y casi nunca hace falta cambiar las herramientas que ya usás: trabajamos sobre lo que tenés y conectamos lo que haga falta.",
         ],
       },
       {
@@ -74,7 +74,7 @@ export const servicios: Pagina[] = [
       "/industrias/inmobiliarias/",
     ],
     resumen:
-      "Sistemas de gestión hechos para tu operación: un solo lugar para clientes, contratos, pedidos y tareas, con precio cerrado y entrega por partes.",
+      "Sistemas de gestión hechos para tu operación: un solo lugar para clientes, contratos, pedidos y tareas, con alcance definido y entrega por partes.",
   },
   {
     ruta: "/servicios/automatizacion-de-procesos/",
@@ -138,7 +138,7 @@ export const servicios: Pagina[] = [
       },
       {
         q: "¿Qué pasa si surge algo nuevo durante el proyecto?",
-        a: "Se evalúa como un cambio de alcance, con el mismo criterio de precio cerrado: sabés cuánto cuesta antes de que lo hagamos.",
+        a: "Se evalúa como un cambio de alcance y lo acordamos antes de hacerlo.",
       },
     ],
     relacionadas: [
@@ -357,7 +357,7 @@ export const servicios: Pagina[] = [
       },
       {
         q: "¿Cuánto tarda?",
-        a: "Depende del alcance, que definimos antes de empezar junto con el precio cerrado. Entregamos por partes para que veas avances antes de terminar.",
+        a: "Depende del alcance, que definimos antes de empezar. Entregamos por partes para que veas avances antes de terminar.",
       },
     ],
     relacionadas: [
