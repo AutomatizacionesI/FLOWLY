@@ -26,7 +26,9 @@ if (!plantilla.includes(marcador)) {
 const landing = ssr.renderLanding()
 await writeFile(
   path.join(dist, "index.html"),
-  plantilla.replace(marcador, `<div id="root">${landing}</div>`),
+  plantilla
+    .replace("</head>", `  ${ssr.jsonLdLanding()}\n  </head>`)
+    .replace(marcador, `<div id="root">${landing}</div>`),
 )
 console.log(`prerender: landing (${Math.round(landing.length / 1024)} KB de HTML)`)
 

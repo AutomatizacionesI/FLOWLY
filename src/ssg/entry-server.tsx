@@ -2,6 +2,8 @@ import { StrictMode } from "react"
 import { renderToString } from "react-dom/server"
 
 import Landing from "../Landing"
+import { empresa, faqs } from "../content/sitio"
+import { organizacion, personas, preguntasFrecuentes, scriptJsonLd, sitioWeb } from "./schema"
 
 /**
  * Entrada del build de servidor (`vite build --ssr`). No se usa en el
@@ -18,4 +20,14 @@ export function renderLanding(): string {
       <Landing />
     </StrictMode>,
   )
+}
+
+/** JSON-LD de la landing: la organización, el sitio, los socios y las FAQ que se ven en la página. */
+export function jsonLdLanding(): string {
+  return scriptJsonLd([
+    organizacion(),
+    sitioWeb(),
+    ...personas(),
+    preguntasFrecuentes(`${empresa.url}/`, faqs),
+  ])
 }
