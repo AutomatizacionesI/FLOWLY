@@ -182,7 +182,7 @@ body {
 .client-card--blanco .client-card__logo { width: 100%; max-width: 270px; max-height: 82px; }
 .client-card--match { --client-bg: #145c97; --client-arrow: #d5f948; }
 .client-card--match .client-card__logo { max-height: 84px; }
-.client-card--kopel { --client-bg: #f3f7ef; --client-arrow: #158b39; }
+.client-card--kopel { --client-bg: #f4f4f2; --client-arrow: #4a4a45; }
 .client-card--kopel .client-card__logo { max-width: 230px; }
 .client-card--pittaluga { --client-bg: #112c42; --client-arrow: #9bc7e7; }
 .client-card--pittaluga .client-card__logo { max-width: 230px; }
