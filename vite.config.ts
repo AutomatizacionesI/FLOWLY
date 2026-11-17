@@ -11,6 +11,11 @@ export default defineConfig({
   ssr: {
     noExternal: true,
   },
+  // El manifest le dice al prerender qué CSS y JS usa la landing, para
+  // ponerlos en el <head> y que el HTML prerenderizado no se vea sin estilos.
+  build: {
+    manifest: true,
+  },
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "./src"),

@@ -37,13 +37,29 @@
         [data-blur-fade] { opacity: 1 !important; filter: none !important; transform: none !important; }
       </style>
     </noscript>
+    <!--estilos-landing-->
+    <script>
+      /* El panel y la demo no usan el HTML prerenderizado de la landing ni sus
+         estilos: se sacan los estilos, el HTML se oculta mientras se descarga y
+         se borra apenas termina (script después de #root). */
+      if (/^\/(admin|democontable)(\/|$)/.test(location.pathname)) {
+        document.documentElement.classList.add("sin-landing")
+        document.querySelectorAll("[data-landing]").forEach((el) => el.remove())
+      }
+    </script>
+    <style>
+      .sin-landing #root { visibility: hidden; }
+    </style>
     <title>Spike AI - Sistemas a medida y automatización para empresas</title>
   </head>
   <body>
     <div id="root"></div>
     <script>
       /* El panel y la demo no usan el HTML prerenderizado de la landing. */
-      if (/^\/(admin|democontable)/.test(location.pathname)) document.getElementById("root").replaceChildren()
+      if (document.documentElement.classList.contains("sin-landing")) {
+        document.getElementById("root").replaceChildren()
+        document.documentElement.classList.remove("sin-landing")
+      }
     </script>
     <script type="module" src="/src/main.tsx"></script>
   </body>

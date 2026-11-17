@@ -23,10 +23,24 @@ if (!plantilla.includes(marcador)) {
   throw new Error(`No encontré ${marcador} en dist/index.html`)
 }
 
+// Estilos y JS de la landing en el <head>: sin esto, el HTML prerenderizado se
+// pinta sin estilos hasta que carga el chunk. Llevan data-landing para que el
+// panel y la demo los saquen (ver index.html).
+const manifest = JSON.parse(await readFile(path.join(dist, ".vite", "manifest.json"), "utf8"))
+const chunkLanding = manifest["src/Landing.tsx"]
+if (!chunkLanding) throw new Error("No encontré src/Landing.tsx en el manifest de Vite")
+const recursosLanding = [
+  ...(chunkLanding.css ?? []).map((css) => `<link rel="stylesheet" href="/${css}" data-landing />`),
+  `<link rel="modulepreload" href="/${chunkLanding.file}" data-landing />`,
+].join("\n    ")
+const marcadorEstilos = "<!--estilos-landing-->"
+if (!plantilla.includes(marcadorEstilos)) throw new Error(`No encontré ${marcadorEstilos} en dist/index.html`)
+
 const landing = ssr.renderLanding()
 await writeFile(
   path.join(dist, "index.html"),
   plantilla
+    .replace(marcadorEstilos, recursosLanding)
     .replace("</head>", `  ${ssr.jsonLdLanding()}\n  </head>`)
     .replace(marcador, `<div id="root">${landing}</div>`),
 )
@@ -53,3 +67,4 @@ await writeFile(path.join(dist, "llms-full.txt"), ssr.llmsFullTxt())
 console.log("prerender: sitemap.xml, llms.txt y llms-full.txt")
 
 await rm(distSsr, { recursive: true, force: true })
+await rm(path.join(dist, ".vite"), { recursive: true, force: true })
