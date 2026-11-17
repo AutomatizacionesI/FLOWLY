@@ -60,6 +60,7 @@ export const industrias: Pagina[] = [
       "/casos/dashboards-de-rendimiento/",
       "/servicios/sistemas-a-medida/",
       "/servicios/inteligencia-artificial-para-empresas/",
+      "/casos/ia-conectada-base-inmobiliaria/",
     ],
     resumen:
       "Propiedades, contratos, vencimientos y seguimiento comercial en un solo sistema, con alertas, dashboards e IA conectada a la base.",
@@ -128,6 +129,7 @@ export const industrias: Pagina[] = [
       "/servicios/inteligencia-artificial-para-empresas/",
       "/servicios/automatizacion-de-procesos/",
       "/servicios/sistemas-a-medida/",
+      "/casos/asistente-ia-contable/",
     ],
     resumen:
       "Conciliación bancaria con IA, asistentes con los criterios del estudio y sistemas internos a medida, con revisión humana al final.",

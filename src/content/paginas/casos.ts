@@ -338,4 +338,152 @@ export const casos: Pagina[] = [
     resumen:
       "Dashboards con reportes automáticos para negocios con operaciones complejas, que reemplazan planillas por indicadores siempre actualizados.",
   },
+  {
+    ruta: "/casos/reestructuracion-datos-forestal/",
+    tipo: "caso",
+    titulo: "Reestructuración de base de datos y reporting para una forestal",
+    tituloSeo: "Base de datos y reporting para una forestal",
+    descripcion:
+      "Ordenamos la base de datos de una forestal: nueva estructura, criterios limpios y reporting automático para dejar de depender de parches.",
+    etiqueta: "Forestal · Datos",
+    entrada:
+      "Una empresa forestal tenía su información en una base compleja que se había ido armando con parches. Ordenamos la estructura, limpiamos los criterios y montamos reporting automático sobre una base confiable.",
+    secciones: [
+      {
+        titulo: "El punto de partida",
+        parrafos: [
+          "La base era compleja y se sostenía con parches. Cada necesidad nueva se resolvía con un arreglo puntual, los criterios no eran siempre los mismos y los reportes dependían de procesos manuales y archivos que se rompían.",
+        ],
+      },
+      {
+        titulo: "Qué hicimos",
+        parrafos: [
+          "Rediseñamos la estructura de los datos y definimos criterios claros para cargarlos y leerlos. Sobre esa base nueva armamos el reporting automático, para que los informes salgan de una base confiable.",
+        ],
+        puntos: [
+          "Limpieza y rediseño de la estructura de datos.",
+          "Criterios únicos para cargar y clasificar la información.",
+          "Reporting automático sobre una base confiable.",
+          "Menos dependencia de procesos manuales y archivos rotos.",
+        ],
+      },
+      {
+        titulo: "Qué cambió en la operación",
+        parrafos: [
+          "Los datos quedaron ordenados, trazables y útiles para decidir. La operación dejó de depender de parches.",
+        ],
+      },
+      {
+        titulo: "Para quién sirve algo así",
+        parrafos: [
+          "Para empresas cuya información creció en bases o planillas sin una estructura común, y que hoy pierden tiempo cada vez que necesitan un reporte.",
+        ],
+      },
+    ],
+    relacionadas: [
+      "/servicios/dashboards-y-datos/",
+      "/casos/dashboards-de-rendimiento/",
+      "/servicios/sistemas-a-medida/",
+    ],
+    resumen:
+      "Rediseño de la base de datos de una forestal y reporting automático sobre una estructura ordenada, para dejar de depender de parches.",
+  },
+  {
+    ruta: "/casos/asistente-ia-contable/",
+    tipo: "caso",
+    titulo: "Asistente de IA contable con contexto y procesos definidos",
+    tituloSeo: "Asistente de IA para un estudio contable",
+    descripcion:
+      "Un asistente de IA conectado a la documentación, los criterios contables y los procedimientos internos de un estudio, para consultas y validaciones.",
+    etiqueta: "Estudios contables · IA",
+    entrada:
+      "Creamos un asistente de IA conectado a la documentación, los criterios contables y los procedimientos internos de un estudio, para ayudar al equipo en consultas, tareas y validaciones.",
+    secciones: [
+      {
+        titulo: "El punto de partida",
+        parrafos: [
+          "Las dudas sobre normativa y procesos internos terminaban siempre en las mismas pocas personas. Cada consulta frenaba a quien preguntaba y a quien respondía, y el conocimiento del estudio dependía de quién estuviera disponible.",
+        ],
+      },
+      {
+        titulo: "Qué hicimos",
+        parrafos: [
+          "Conectamos el asistente al contexto real del estudio: su documentación, sus criterios y la forma en que hacen las cosas. Así responde con la documentación y los criterios del estudio.",
+        ],
+        puntos: [
+          "Responde sobre normativa y procesos internos.",
+          "Asiste en tareas repetitivas con contexto real.",
+          "Ayuda en validaciones siguiendo los criterios del estudio.",
+        ],
+      },
+      {
+        titulo: "Qué cambió en la operación",
+        parrafos: [
+          "El conocimiento operativo quedó disponible en segundos para todo el equipo, y el estudio depende menos de pocas personas clave para resolver las consultas del día a día.",
+        ],
+      },
+      {
+        titulo: "Para quién sirve algo así",
+        parrafos: [
+          "Para estudios y empresas con criterios y procedimientos propios, donde las mismas preguntas se repiten y el conocimiento está concentrado en pocas personas.",
+        ],
+      },
+    ],
+    relacionadas: [
+      "/servicios/inteligencia-artificial-para-empresas/",
+      "/industrias/estudios-contables/",
+      "/como-trabajamos/",
+    ],
+    resumen:
+      "Un asistente de IA con el contexto y los procedimientos de un estudio contable, que responde consultas y ayuda en tareas y validaciones.",
+  },
+  {
+    ruta: "/casos/ia-conectada-base-inmobiliaria/",
+    tipo: "caso",
+    titulo: "IA conectada a la base de una inmobiliaria para automatizar y asistir",
+    tituloSeo: "IA conectada a la base de una inmobiliaria",
+    descripcion:
+      "Conectamos la IA a la base operativa de una inmobiliaria para responder consultas internas, disparar acciones y asistir al equipo con datos confiables.",
+    etiqueta: "Inmobiliarias · IA",
+    entrada:
+      "Conectamos la IA a la base operativa de una inmobiliaria para responder consultas internas, disparar acciones y asistir al equipo con información confiable, sin cambiar su flujo diario.",
+    secciones: [
+      {
+        titulo: "El punto de partida",
+        parrafos: [
+          "La información de la operación estaba en la base, pero llegar a ella pedía saber dónde buscar o pedírsela a alguien. Las consultas internas y las tareas que salían de esos datos dependían de cada persona.",
+        ],
+      },
+      {
+        titulo: "Qué hicimos",
+        parrafos: [
+          "Conectamos la IA a la base operativa de la inmobiliaria, con acceso a sus datos reales. El equipo consulta sus datos y algunas acciones se disparan desde la propia base, sin cambiar su flujo diario.",
+        ],
+        puntos: [
+          "Consultas internas con acceso a datos reales.",
+          "Automatizaciones disparadas desde la propia base.",
+          "Asistencia para el equipo sin cambiar el flujo diario.",
+        ],
+      },
+      {
+        titulo: "Qué cambió en la operación",
+        parrafos: [
+          "La información correcta quedó disponible al instante. El equipo pregunta y obtiene respuestas desde los datos de la operación, en lugar de buscarlas o esperar a que alguien las encuentre.",
+        ],
+      },
+      {
+        titulo: "Para quién sirve algo así",
+        parrafos: [
+          "Para empresas que ya tienen su operación en una base de datos y quieren que el equipo la aproveche sin cambiar su flujo diario.",
+        ],
+      },
+    ],
+    relacionadas: [
+      "/servicios/inteligencia-artificial-para-empresas/",
+      "/industrias/inmobiliarias/",
+      "/servicios/automatizacion-de-procesos/",
+    ],
+    resumen:
+      "IA conectada a la base operativa de una inmobiliaria para responder consultas internas, disparar acciones y asistir al equipo.",
+  },
 ]

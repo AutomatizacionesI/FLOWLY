@@ -219,6 +219,8 @@ export const servicios: Pagina[] = [
       "/casos/conciliacion-bancaria-con-ia/",
       "/servicios/dashboards-y-datos/",
       "/industrias/estudios-contables/",
+      "/casos/asistente-ia-contable/",
+      "/casos/ia-conectada-base-inmobiliaria/",
     ],
     resumen:
       "Asistentes con el contexto de tu empresa, IA conectada a tus bases de datos y conciliación con IA, con controles y revisión humana.",
@@ -292,6 +294,7 @@ export const servicios: Pagina[] = [
       "/casos/dashboards-de-rendimiento/",
       "/servicios/inteligencia-artificial-para-empresas/",
       "/industrias/inmobiliarias/",
+      "/casos/reestructuracion-datos-forestal/",
     ],
     resumen:
       "Dashboards automáticos, bases de datos ordenadas y reportes que se generan solos, para ver el negocio sin perseguir planillas.",

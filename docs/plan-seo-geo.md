@@ -309,9 +309,10 @@ Decisiones de Gonzalo aplicadas: links discretos en el pie (único cambio visibl
 - Para agregar una página: sumar una entrada al archivo que corresponda en `src/content/paginas/`. El build falla si enlaza a una ruta que no existe.
 - Las URLs llevan barra final (`/casos/hike/`), que es como se sirven los `index.html` por carpeta.
 
+**Casos agregados después por decisión de Gonzalo (2026-11-17)**
+- `/casos/reestructuracion-datos-forestal/`, `/casos/asistente-ia-contable/` y `/casos/ia-conectada-base-inmobiliaria/`, anónimos y escritos solo con lo que dicen sus tarjetas de la landing.
+
 **Quedó afuera a propósito**
-- Caso e industria "forestal": la ficha de El Pibe dice que ese proyecto no se ejecutó completo (quedó en prototipo), aunque la landing lo muestra como hecho. Hay que revisar la tarjeta de la landing.
-- Casos "IA conectada a la base de una inmobiliaria" y "Asistente de IA contable": ninguna ficha de El Pibe documenta que se hayan entregado (la landing sí los muestra). Las páginas de servicios e industrias los presentan como capacidad, no como casos.
 - Página del "sistema de ventas multicanal": la landing se la atribuye a HIKE y Lunar Vintage, pero las fichas describen una landing estática (HIKE) y una tienda con panel que cierra por WhatsApp, sin stock sincronizado (Lunar). Hay que revisar la tarjeta.
 
 **Antes de pushear (en la consola de Amplify, ver 2.5)**
