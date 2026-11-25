@@ -1331,10 +1331,10 @@ function App() {
                 +598 91 315 670
               </a>
               <a
-                href="mailto:spike.automations@gmail.com"
+                href="mailto:contacto@spikeai.com.uy"
                 className="text-sm text-muted-foreground transition-colors duration-300 hover:text-foreground"
               >
-                spike.automations@gmail.com
+                contacto@spikeai.com.uy
               </a>
               <span className="text-sm text-muted-foreground">Uruguay</span>
 

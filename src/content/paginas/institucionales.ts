@@ -60,7 +60,7 @@ export const institucionales: Pagina[] = [
       {
         titulo: "Hablemos",
         parrafos: [
-          "Escribinos a spike.automations@gmail.com o por WhatsApp al +598 91 315 670. La primera conversación sirve para entender cómo trabajan hoy y evaluar si podemos ayudar.",
+          "Escribinos a contacto@spikeai.com.uy o por WhatsApp al +598 91 315 670. La primera conversación sirve para entender cómo trabajan hoy y evaluar si podemos ayudar.",
         ],
       },
     ],
@@ -164,7 +164,7 @@ export const institucionales: Pagina[] = [
       {
         titulo: "Contacto",
         parrafos: [
-          "Podés escribirnos a spike.automations@gmail.com o por WhatsApp al +598 91 315 670.",
+          "Podés escribirnos a contacto@spikeai.com.uy o por WhatsApp al +598 91 315 670.",
         ],
       },
     ],

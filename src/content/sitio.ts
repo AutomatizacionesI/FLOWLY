@@ -14,7 +14,7 @@ export const empresa = {
   pais: "Uruguay",
   paisCodigo: "UY",
   telefono: "+598 91 315 670",
-  email: "spike.automations@gmail.com",
+  email: "contacto@spikeai.com.uy",
   whatsapp:
     "https://wa.me/59891315670?text=Hola%20Spike%20AI%2C%20quiero%20automatizar%20mi%20negocio",
   linkedin: "https://www.linkedin.com/company/spike-automations/",
